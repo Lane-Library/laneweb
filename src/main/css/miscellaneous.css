@@ -4,324 +4,314 @@ select,
 input,
 button,
 textarea {
+    font-family: 'Source Sans Pro', sans-serif, Arial;
+}
 
-    body,
-    select,
-    input,
-    button,
-    textarea {
-        font-family: 'Source Sans Pro', sans-serif, Arial;
+/*pure grids sets this to sans-serif, needs to be 'Source Sans Pro'*/
+.pure-g [class^='pure-u'] {
+    font-family: 'Source Sans Pro', sans-serif, Arial;
+}
+
+.scaled-image {
+    width: auto;
+    height: auto;
+    margin-bottom: 12px;
+}
+
+/*.close is the X close box on popups and feedback*/
+.close {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    right: 3px;
+    top: 3px;
+    cursor: pointer;
+    font-size: 1.375em;
+}
+
+.close.fa:hover {
+    color: #79455c;
+}
+
+p {
+    margin-bottom: 12px;
+    font-size: 1em;
+    line-height: 1.5em;
+}
+
+strong {
+    font-weight: bold;
+}
+
+em {
+    font-style: italic;
+}
+
+.inputHint {
+    color: #808080;
+}
+
+
+.more a {
+    margin-right: 6px;
+    font-size: 0.875em;
+}
+
+.center {
+    text-align: center;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+.announce {
+    text-align: center;
+    background-color: #80982a;
+    border: none;
+    padding: 12px;
+    font-family: 'Fjord One', serif;
+    color: #fff;
+    font-size: 1.25em;
+    text-shadow: .07em #000;
+    margin-bottom: 12px;
+}
+
+/*scroll window on portals to display article feed, such as rheumatology*/
+.scroll-window {
+    height: 400px;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+/*styles for redesigned main elements on the landing pages*/
+.detailInfo {
+    font-size: 0.75em;
+}
+
+hr {
+    color: #dddddd;
+    border-top: 1px solid;
+    margin-bottom: 12px;
+}
+
+.nomodule {
+    margin: 12px 0 24px;
+    line-height: normal;
+    font-size: 1em;
+}
+
+/*to make a highlighted note on the right of the module, similar to history site*/
+.feature {
+    padding-left: 12px;
+}
+
+.feature h3 {
+    background-color: #556222;
+    background-image: none;
+    color: #ffffff;
+    font-size: 1.25em;
+    margin-bottom: 12px;
+    padding: 6px 6px 22px 6px;
+    text-transform: uppercase;
+}
+
+.feature-flex {
+    margin: 12px;
+    padding: 12px;
+    box-sizing: border-box;
+    line-height: 1.6em;
+    background-image: none;
+    text-transform: uppercase;
+}
+
+.feature-flex h3 {
+    margin-top: 24px;
+    font-size: 1.375em;
+    text-transform: uppercase;
+}
+
+/*hide IE, Edge bookmarklet instructions, made visible via javascript (lane-ie.js)*/
+.bookmarklet-ie,
+.bookmarklet-edge,
+#bookmarkletIE,
+.no-js {
+    display: none;
+}
+
+/*make text appear bigger in the main content, mostly for quotes. quote is for middle column, quote-med is for sides*/
+.quote,
+.quote-sig {
+    font-size: 170%;
+    line-height: 180%;
+}
+
+.quote-medium {
+    font-size: 130%;
+    line-height: 150%;
+}
+
+.quote-sig {
+    text-align: right;
+}
+
+/*the official SoM color palette */
+.backgr-white {
+    background-color: #ffffff;
+}
+
+.backgr-grey-ddd {
+    background-color: #dddddd;
+}
+
+.backgr-grey-ccc {
+    background-color: #cccccc;
+}
+
+.backgr-grey-999 {
+    background-color: #999999;
+}
+
+.backgr-grey-666 {
+    background-color: #666666;
+}
+
+.backgr-grey-333 {
+    background-color: #333;
+}
+
+.backgr-black {
+    background-color: #000000;
+}
+
+.backgr-blue-f0f {
+    background-color: #f0f4f5;
+}
+
+.backgr-blue-aab {
+    background-color: #aabec6;
+}
+
+.backgr-blue-009 {
+    background-color: #009abb;
+}
+
+.backgr-blue-007 {
+    background-color: #007c92;
+}
+
+.backgr-blue-094 {
+    background-color: #09425a;
+}
+
+.backgr-green-c7d {
+    background-color: #c7d1c6;
+}
+
+.backgr-green-809 {
+    background-color: #80982a;
+}
+
+.backgr-green-556 {
+    background-color: #556222;
+}
+
+.backgr-orange-b96 {
+    background-color: #b96d12;
+}
+
+.backgr-purple-532 {
+    background-color: #53284f;
+}
+
+.backgr-brown-5e3 {
+    background-color: #5e3032;
+}
+
+.backgr-red {
+    background-color: #8c1515;
+}
+
+.blur {
+    filter: blur(4px);
+}
+
+.zotero-metadata {
+    display: none;
+}
+
+.centered-text {
+    text-align: center;
+}
+
+.centered {
+    position: relative;
+    margin: 0 5%;
+}
+
+.centered-10 {
+    position: relative;
+    margin: 0 10%;
+}
+
+.centered-15 {
+    position: relative;
+    margin: 0 15%;
+}
+
+
+.centered-20 {
+    position: relative;
+    margin: 0 20%;
+}
+
+.centered-25 {
+    position: relative;
+    margin: 0 25%;
+}
+
+
+.centered-30 {
+    position: relative;
+    margin: 0 30%;
+}
+
+.centered-40 {
+    position: relative;
+    margin: 0 40%;
+}
+
+.centered-50 {
+    position: relative;
+    margin: 0 50%;
+}
+
+.bottom-line,
+.top-line {
+    position: relative
+}
+
+.bottom-line::before,
+.top-line::before {
+    content: " ";
+    position: absolute;
+    width: 78px;
+    border-top: 3px solid #8C1515;
+    bottom: -12px;
+    left: calc(50% - 39px);
+}
+
+.top-line::before {
+    bottom: 0;
+    top: -18px;
+}
+
+@media (max-width : 1100px) {
+
+    .centered-10,
+    .centered-20,
+    .centered-30,
+    .centered-40,
+    .centered-50 {
+        margin: 0 5%;
     }
-
-    /*pure grids sets this to sans-serif, needs to be 'Source Sans Pro'*/
-    .pure-g [class^='pure-u'] {
-        font-family: 'Source Sans Pro', sans-serif, Arial;
-    }
-
-    .scaled-image {
-        width: auto;
-        height: auto;
-        margin-bottom: 12px;
-    }
-
-    /*.close is the X close box on popups and feedback*/
-    .close {
-        width: 24px;
-        height: 24px;
-        position: absolute;
-        right: 3px;
-        top: 3px;
-        cursor: pointer;
-        font-size: 1.375em;
-    }
-
-    .close.fa:hover {
-        color: #79455c;
-    }
-
-    p {
-        margin-bottom: 12px;
-        font-size: 1em;
-        line-height: 1.5em;
-    }
-
-    strong {
-        font-weight: bold;
-    }
-
-    em {
-        font-style: italic;
-    }
-
-    .inputHint {
-        color: #808080;
-    }
-
-
-    .more a {
-        margin-right: 6px;
-        font-size: 0.875em;
-    }
-
-    .center {
-        text-align: center;
-        margin-top: 24px;
-        margin-bottom: 24px;
-    }
-
-    .announce {
-        text-align: center;
-        background-color: #80982a;
-        border: none;
-        padding: 12px;
-        font-family: 'Fjord One', serif;
-        color: #fff;
-        font-size: 1.25em;
-        text-shadow: .07em #000;
-        margin-bottom: 12px;
-    }
-
-    /*scroll window on portals to display article feed, such as rheumatology*/
-    .scroll-window {
-        height: 400px;
-        width: 100%;
-        overflow-x: hidden;
-        overflow-y: scroll;
-    }
-
-    /*styles for redesigned main elements on the landing pages*/
-    .detailInfo {
-        font-size: 0.75em;
-    }
-
-    hr {
-        color: #dddddd;
-        border-top: 1px solid;
-        margin-bottom: 12px;
-    }
-
-    .nomodule {
-        margin: 12px 0 24px;
-        line-height: normal;
-        font-size: 1em;
-    }
-
-    /*to make a highlighted note on the right of the module, similar to history site*/
-    .feature {
-        padding-left: 12px;
-    }
-
-    .feature h3 {
-        background-color: #556222;
-        background-image: none;
-        color: #ffffff;
-        font-size: 1.25em;
-        margin-bottom: 12px;
-        padding: 6px 6px 22px 6px;
-        text-transform: uppercase;
-    }
-
-    .feature-flex {
-        margin: 12px;
-        padding: 12px;
-        box-sizing: border-box;
-        line-height: 1.6em;
-        background-image: none;
-        text-transform: uppercase;
-    }
-
-    .feature-flex h3 {
-        margin-top: 24px;
-        font-size: 1.375em;
-        text-transform: uppercase;
-    }
-
-    /*hide Edge bookmarklet instructions, made visible via javascript (lane-bookmarklet.js)*/
-    .bookmarklet-edge,
-    .no-js {
-        display: none;
-    }
-
-    /*make text appear bigger in the main content, mostly for quotes. quote is for middle column, quote-med is for sides*/
-    .quote,
-    .quote-sig {
-
-        .quote,
-        .quote-sig {
-            font-size: 170%;
-            line-height: 180%;
-        }
-
-        .quote-medium {
-            font-size: 130%;
-            line-height: 150%;
-        }
-
-        .quote-sig {
-            text-align: right;
-        }
-
-
-        /*the official SoM color palette */
-        .backgr-white {
-            background-color: #ffffff;
-        }
-
-        .backgr-grey-ddd {
-            background-color: #dddddd;
-        }
-
-        .backgr-grey-ccc {
-            background-color: #cccccc;
-        }
-
-        .backgr-grey-999 {
-            background-color: #999999;
-        }
-
-        .backgr-grey-666 {
-            background-color: #666666;
-        }
-
-        .backgr-grey-333 {
-            background-color: #333;
-        }
-
-        .backgr-black {
-            background-color: #000000;
-        }
-
-        .backgr-blue-f0f {
-            background-color: #f0f4f5;
-        }
-
-        .backgr-blue-aab {
-            background-color: #aabec6;
-        }
-
-        .backgr-blue-009 {
-            background-color: #009abb;
-        }
-
-        .backgr-blue-007 {
-            background-color: #007c92;
-        }
-
-        .backgr-blue-094 {
-            background-color: #09425a;
-        }
-
-        .backgr-green-c7d {
-            background-color: #c7d1c6;
-        }
-
-        .backgr-green-809 {
-            background-color: #80982a;
-        }
-
-        .backgr-green-556 {
-            background-color: #556222;
-        }
-
-        .backgr-orange-b96 {
-            background-color: #b96d12;
-        }
-
-        .backgr-purple-532 {
-            background-color: #53284f;
-        }
-
-        .backgr-brown-5e3 {
-            background-color: #5e3032;
-        }
-
-        .backgr-red {
-            background-color: #8c1515;
-        }
-
-        .blur {
-            filter: blur(4px);
-        }
-
-        .zotero-metadata {
-            display: none;
-        }
-
-        .centered-text {
-            text-align: center;
-        }
-
-        .centered {
-            position: relative;
-            margin: 0 5%;
-        }
-
-        .centered-10 {
-            position: relative;
-            margin: 0 10%;
-        }
-
-        .centered-15 {
-            position: relative;
-            margin: 0 15%;
-        }
-
-
-        .centered-20 {
-            position: relative;
-            margin: 0 20%;
-        }
-
-        .centered-25 {
-            position: relative;
-            margin: 0 25%;
-        }
-
-
-        .centered-30 {
-            position: relative;
-            margin: 0 30%;
-        }
-
-        .centered-40 {
-            position: relative;
-            margin: 0 40%;
-        }
-
-        .centered-50 {
-            position: relative;
-            margin: 0 50%;
-        }
-
-        .bottom-line,
-        .top-line {
-            position: relative
-        }
-
-        .bottom-line::before,
-        .top-line::before {
-            content: " ";
-            position: absolute;
-            width: 78px;
-            border-top: 3px solid #8C1515;
-            bottom: -12px;
-            left: calc(50% - 39px);
-        }
-
-        .top-line::before {
-            bottom: 0;
-            top: -18px;
-        }
-
-        @media (max-width : 1100px) {
-
-            .centered-10,
-            .centered-20,
-            .centered-30,
-            .centered-40,
-            .centered-50 {
-                margin: 0 5%;
-            }
-
-
-        }
+}
