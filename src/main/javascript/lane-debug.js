@@ -63,11 +63,10 @@
         "clinical-toggle.js",
         "search-form-scroll.js",
         "message.js",
-        "navigation.js",
-        "course-reserves.js",
         "validation.js",
         "holdings-toggle.js",
         "table-hide-empty-columns.js",
+        "tables-search.js",
         "zotero.js",
         "altmetric.js"
 
