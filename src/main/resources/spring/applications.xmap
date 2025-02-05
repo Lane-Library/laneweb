@@ -143,7 +143,6 @@
         </map:match>
         <map:match type="wildcard" pattern="course-reserves/courses.xml">
             <map:generate type="courses"/>
-            <map:transform type="joost" src="classpath:/xsl/add-menuitem-active.stx"/>
             <map:serialize type="xml"/>
         </map:match>
         <map:match type="wildcard" pattern="course-reserves/item-list.xml">
