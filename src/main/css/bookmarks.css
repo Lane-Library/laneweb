@@ -190,7 +190,7 @@
     margin: 2px 0;
 }
 
-.bookmark-editor-content:hover {
+.yui3-bookmark-editor:hover {
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .12), 0 2px 4px 0 rgba(0, 0, 0, .24);
     transition: box-shadow .5s;
 }
@@ -203,9 +203,9 @@
     background: #f0f4f5;
 }
 
-.bookmark-editor-active label,
-.bookmark-editor-active input,
-.bookmark-editor-active button {
+.yui3-bookmark-editor-active label,
+.yui3-bookmark-editor-active input,
+.yui3-bookmark-editor-active button {
     display: inline;
 }
 
@@ -291,8 +291,8 @@ li.bookmark-editor-content {
     font-size: 1.125em;
 }
 
-.bookmark-editor-content.active a,
-.bookmark-editor-content.active .actions {
+.yui3-bookmark-editor-content.active a,
+.yui3-bookmark-editor-content.active .actions {
     display: none;
 }
 
@@ -313,12 +313,12 @@ li.bookmark-editor-content {
     width: 95px;
 }
 
-.bookmark-editor-content .editPanel {
+.yui3-bookmark-editor-content .editPanel {
     width: 69%;
     display: flex;
 }
 
-.bookmark-editor-content .editPanel .editItem:first-child {
+.yui3-bookmark-editor-content .editPanel .editItem:first-child {
     padding-left: 0;
 }
 
@@ -347,23 +347,23 @@ li.bookmark-editor-content {
     right: 37px;
 }
 
-.bookmark-editor-content .actions button,
-.bookmark-editor-content .close button {
+.yui3-bookmark-editor-content .actions button,
+.yui3-bookmark-editor-content .close button {
     margin: 0 15px;
     border-color: transparent;
     background-color: transparent;
     cursor: pointer;
 }
 
-.bookmark-editor-content .actions button i {
+.yui3-bookmark-editor-content .actions button i {
     color: #333;
 }
 
-.bookmark-editor-content .actions button i:hover {
+.yui3-bookmark-editor-content .actions button i:hover {
     color: #666;
 }
 
-.bookmark-editor-content .actions button i:active {
+.yui3-bookmark-editor-content .actions button i:active {
     color: #000;
 }
 
@@ -398,18 +398,18 @@ li.bookmark-editor-content {
         right: 10px;
     }
 
-    .bookmark-editor-content .editItem {
+    .yui3-bookmark-editor-content .editItem {
         width: 100%;
         padding-left: 0;
     }
 
-    .bookmark-editor-content .editPanel {
+    .yui3-bookmark-editor-content .editPanel {
         width: 55%;
         flex-wrap: wrap;
         margin-bottom: 10px;
     }
 
-    .bookmark-editor:hover {
+    .yui3-bookmark-editor:hover {
         box-shadow: none;
     }
 }

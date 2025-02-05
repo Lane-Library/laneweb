@@ -1,44 +1,186 @@
-table {
-    border-collapse: separate;
-    border-spacing: 0;
+.table {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
 }
 
-thead {
-    background: #09425a;
-    color: #fff;
-}
-
-tbody tr:nth-child(even) {
-    background: #fff;
-}
-
-tbody tr:nth-child(odd) {
-    background: #ddd;
-}
-
-th, td {
-    padding: 6px;
-}
-
-thead  th {
-    vertical-align: top;
-    padding-top: 12px;
-    padding-bottom: 12px;
-}
-
-td {
-    border-bottom: solid 1px #f0f4f5;
-    border-right: solid 1px #f0f4f5;
-}
-
-td:first-child {
-    border-left: 1px solid #d0d8da;
-}
-
-td:last-child {
-    border-right: 1px solid #d0d8da;
-}
-
-tbody tr:last-child {
+.table .header {
+    font-size: 20px;
+    font-weight: 600;
     border-bottom: 1px solid #d0d8da;
+}
+
+.table .row,
+.table .thead {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.table .cell,
+.table .header {
+    display: flex;
+    flex-flow: row nowrap;
+    flex-grow: 1;
+    flex-basis: 0;
+    padding: 11px;
+    word-break: break-word;
+}
+
+
+.table .cell {
+    border-bottom: 1px solid #d0d8da;
+    padding: 9px 28px 9px 11px;
+    align-items: center;
+}
+
+
+.table.shade .row:nth-child(even) {
+    background-color: #f0f4f5;
+}
+
+
+/* Here liaison  table */
+.liaisons-directory .table.phone-view *:nth-of-type(3),
+.liaisons-directory .table.phone-view *:nth-of-type(1) {
+    flex-grow: 1.5;
+}
+
+/* Here  table in page equipment.html */
+.table.phone-view.equipment div *:nth-of-type(1) {
+    flex-grow: 2.5;
+}
+
+/* Here  table in page lit-search-service.html */
+.table.phone-view.service-table div *:nth-of-type(3) {
+    flex-grow: 2;
+}
+
+.table.phone-view.service-table div *:nth-of-type(4) {
+    flex-grow: 0.5;
+}
+
+@media (max-width : 812px) {
+
+    .table.phone-view {
+        margin: 0;
+    }
+
+    .table.phone-view,
+    .table.phone-view .thead,
+    .table.phone-view .header,
+    .table.phone-view .cell,
+    .table.phone-view .row {
+        display: block;
+    }
+
+    .table.phone-view .thead .header {
+        display: none;
+    }
+
+    .table.phone-view .cell {
+        border: none;
+        min-height: 2.5em;
+    }
+
+    .table.phone-view .cell {
+        position: relative;
+        padding-left: 35%;
+    }
+
+    .table.phone-view .cell:before {
+        position: absolute;
+        left: 6px;
+        font-weight: 300;
+    }
+
+    .table.phone-view .row:nth-child(even) {
+        background-color: #f0f4f5;
+        border-top: 1px solid lightgrey;
+        border-bottom: 1px solid lightgrey;
+    }
+
+    .table.phone-view .row {
+        padding: 12px 0;
+    }
+
+
+    /* Specific for each tables need to set the row name */
+    /* Here course reserve table */
+    .table.phone-view.course-reserves .cell:nth-of-type(1):before {
+        content: "Course";
+    }
+
+    .table.phone-view.course-reserves .cell:nth-of-type(2):before {
+        content: "Instructors";
+    }
+
+    .table.phone-view.course-reserves .cell:nth-of-type(3):before {
+        content: "Department";
+    }
+
+    /* Here liaison  table */
+
+
+    .liaisons-directory .table.phone-view .cell:nth-of-type(1):before {
+        content: "Department";
+    }
+
+    .liaisons-directory .table.phone-view .cell:nth-of-type(2):before {
+        content: "Name";
+    }
+
+    .liaisons-directory .table.phone-view .cell:nth-of-type(3):before {
+        content: "Email";
+    }
+
+
+    .liaisons-directory .table.phone-view .cell:nth-of-type(4):before {
+        content: "Phone";
+    }
+
+    /* Here borrow table in page borrow.html */
+
+    .table.phone-view.borrow-table .cell:nth-of-type(1):before {
+        content: "Item Type";
+    }
+
+    .table.phone-view.borrow-table .cell:nth-of-type(2):before {
+        content: "Library User";
+    }
+
+    .table.phone-view.borrow-table .cell:nth-of-type(3):before {
+        content: "Loan Period";
+    }
+
+    /* Here  table in page equipment.html */
+
+    .table.phone-view.equipment .cell:nth-of-type(1):before {
+        content: "Item";
+    }
+
+    .table.phone-view.equipment .cell:nth-of-type(2):before {
+        content: "Status";
+    }
+
+    .table.phone-view.equipment .cell:nth-of-type(3):before {
+        content: "Checkout Period";
+    }
+
+    /* Here  table in page lit-search-service.html.html */
+    .table.phone-view.service-table .cell:nth-of-type(1):before {
+        content: "Service Level";
+    }
+
+    .table.phone-view.service-table .cell:nth-of-type(2):before {
+        content: "Librarian Authorship";
+    }
+
+    .table.phone-view.service-table .cell:nth-of-type(3):before {
+        content: "Deliverables";
+    }
+
+    .table.phone-view.service-table .cell:nth-of-type(4):before {
+        content: "Work (average)";
+    }
 }

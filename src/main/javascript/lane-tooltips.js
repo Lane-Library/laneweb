@@ -420,8 +420,9 @@
 
     //reinitialize when content has changed
     L.on("lane:new-content", function () {
-        L.ToolTips.destructor();
-        createTooltips();
-    });
+        L.on("lane:new-content", function () {
+            L.ToolTips.destructor();
+            createTooltips();
+        });
 
-})();
+    })();

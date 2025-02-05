@@ -1,4 +1,4 @@
-if (document.querySelector(".search-form")) {
+if (document.querySelector("#main-search")) {
 
 	(function () {
 

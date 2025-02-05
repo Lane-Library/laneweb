@@ -8,7 +8,7 @@
     padding: 3px 10px;
     right: 4.9%;
     top: -22px;
-    width: 9em;
+    inline-size: fit-content;
     transition: opacity .45s;
     color: #fff;
     visibility: hidden;
@@ -26,7 +26,8 @@
     padding-left: 25px;
 }
 
-@media ( max-width : 812px) {
+@media (max-width : 812px) {
+
     /* annoying that responsive.css changes margins to pixel specific */
     .back-to-top {
         right: 12px;

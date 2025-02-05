@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tr>
-   <td>
-      <a class="course-name" href="course-reserves-list.html?id=1">name</a>
-      <span class="course-number"> (number)</span>
-   </td>
-   <td>instructor</td>
-   <td>department</td>
-</tr>
+<div class="row">
+   <div class="cell">
+      <div>
+         <a class="course-name" href="course-reserves-list.html?id=1">name</a>
+         <span class="course-number"> (number)</span>
+      </div>
+   </div>
+   <div class="cell">instructor</div>
+   <div class="cell">department</div>
+</div>

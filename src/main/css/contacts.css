@@ -1,103 +1,135 @@
+#contacts {
+    max-width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#contacts>div {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
 #contacts fieldset:last-child {
-	margin-top: 12px;
+    margin-top: 12px;
 }
 
 #contacts ul.bulleted-list {
-	margin-top: 9px;
-	margin-bottom: 15px;
+    margin-top: 9px;
+    margin-bottom: 15px;
 }
 
 #contacts button {
-	width: 100%;
+    width: 100%;
 }
 
 .contacts-choice {
-	display: flex;
-	white-space: nowrap;
-	text-align: center;
-	margin-top: 6px;
-	margin-bottom: 24px;
+    display: flex;
+    white-space: nowrap;
+    text-align: center;
+    margin-top: 6px;
+    margin-bottom: 24px;
 }
 
-.contacts-choice li, .contacts-choice  li:last-child {
-	flex: 1 1 auto;
-	margin: 3px 2%;
-	padding: 0px;
-	border-radius: 9px;
+.contacts-choice li,
+.contacts-choice li:last-child {
+    flex: 1 1 auto;
+    margin: 3px 2%;
+    padding: 0px;
+    border-radius: 9px;
 }
 
 .contacts-choice li a {
-	padding: 10px 2px;
-	width: 100%;
+    padding: 10px 2px;
+    width: 100%;
 }
 
 .contacts-info>div {
-	margin-top: 9px;
+    margin-top: 9px;
 }
 
-#ejp, #sfp-book, #sfp-journal, #sfp-other {
-	display: none;
+
+#sfp-book,
+#sfp-journal,
+#sfp-other {
+    display: none;
 }
 
-:target ~ #laneaskus {
-	display: none;
+
+#sfp-book:target,
+#sfp-journal:target,
+#sfp-other:target {
+    display: block;
+    scroll-margin-top: 500px;
 }
 
-#ejp:target, #sfp-book:target, #sfp-journal:target, #sfp-other:target {
-	display: block;
-}
-
-#laneaskus .laneaskus-button a, #laneaskus .laneaskus-button .fa,
-	#laneaskus:target .laneaskus-button a, #laneaskus:target .laneaskus-button .fa,
-	#ejp:target .ejp-button a, #ejp:target .ejp-button .fa, #sfp-journal:target .sfp-journal-button,
-	#sfp-journal:target .sfp-journal-button  a, #sfp-journal:target .sfp-button a,
-	#sfp-journal:target .sfp-button a, #sfp-other:target .sfp-other-button a,
-	#sfp-other:target .sfp-other-button a, #sfp-other:target .sfp-button,
-	#sfp-other:target .sfp-button a, #sfp-book:target .sfp-book-button,
-	#sfp-book:target .sfp-book-button a, #sfp-book:target .sfp-button a,
-	#sfp-book:target .sfp-button a, #sfp-book:target .sfp-button i.icon,
-	#sfp-other:target .sfp-button i.icon, #sfp-journal:target .sfp-button i.icon
-	{
-	background-color: #007C92;
-	color: #F0F0F0;
-	cursor: not-allowed;
+#sfp-journal:target .sfp-journal-button,
+#sfp-journal:target .sfp-journal-button a,
+#sfp-journal:target .sfp-button a,
+#sfp-journal:target .sfp-button a,
+#sfp-other:target .sfp-other-button a,
+#sfp-other:target .sfp-other-button a,
+#sfp-other:target .sfp-button,
+#sfp-other:target .sfp-button a,
+#sfp-book:target .sfp-book-button,
+#sfp-book:target .sfp-book-button a,
+#sfp-book:target .sfp-button a,
+#sfp-book:target .sfp-button a,
+#sfp-book:target .sfp-button i.icon,
+#sfp-other:target .sfp-button i.icon,
+#sfp-journal:target .sfp-button i.icon {
+    background-color: #007C92;
+    color: #F0F0F0;
+    cursor: not-allowed;
 }
 
 /* Confirmation page */
 .contact-confirmation p {
-	font-size: 1.375em;
-	color: #707070;
+    font-size: 1.375em;
+    color: #707070;
 }
 
 .contact-confirmation div {
-	text-align: center;
+    text-align: center;
 }
 
 .contact-confirmation .thanks {
-	margin-top: 108px;
-	font-size: 3.4375em;
+    margin-top: 108px;
+    font-size: 3.4375em;
 }
 
 .contact-confirmation div.message {
-	margin: 30px 10%;
-	font-size: 1.875em;
-	color: #707070;
-	line-height: 1.3em;
+    margin: 30px 10%;
+    font-size: 1.875em;
+    color: #707070;
+    line-height: 1.3em;
 }
 
 .contact-confirmation div.message.ejp {
-	text-align: justify;
+    text-align: justify;
 }
 
 .contact-confirmation div .btn {
-	margin: 126px 0px 30px 0px;
+    margin: 126px 0px 30px 0px;
 }
 
-@media ( max-width : 812px) {
-	.content .contacts-choice {
-		display: block;
-	}
-	.content .contacts-choice a {
-		display: block;
-	}
+@media (max-width : 1100px) {
+    #contacts {
+        max-width: 100%;
+    }
+
+    #contacts>div {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+}
+
+@media (max-width : 812px) {
+    .content .contacts-choice {
+        display: block;
+    }
+
+    .content .contacts-choice a {
+        display: block;
+    }
 }

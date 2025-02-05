@@ -91,6 +91,14 @@
             <map:transform type="saxon" src="classpath:/xsl/laneblog-news-n-newresources-rss2html.xsl"/>
             <map:serialize type="xml"/>
         </map:match>
+        <map:match pattern="popular-resources/*/*" type="wildcard">
+            <map:generate type="popular-resources-list">
+                <map:parameter name="type" value="{1}"/>
+                <map:parameter name="limit" value="{2}"/>
+            </map:generate>
+            <map:transform type="link-without-cover"/>
+            <map:serialize type="xml"/>
+        </map:match>
         <map:match pattern="search-templates.xml" type="wildcard">
             <map:generate type="search-describe"/>
             <map:transform type="search-directory">

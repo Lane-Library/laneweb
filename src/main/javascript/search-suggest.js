@@ -19,41 +19,73 @@ if (document.querySelector(".search-form")) {
                 form.querySelector("input[name=source]").value),
 
             view = function () {
+                view = function () {
 
-                return {
-                    search: function (query) {
-                        queryInput.value = query;
-                        form.submit();
-                    }
-                };
+                    return {
+                        search: function (query) {
+                            queryInput.value = query;
+                            form.submit();
+                        }
+                    };
+                    return {
+                        search: function (query) {
+                            queryInput.value = query;
+                            form.submit();
+                        }
+                    };
 
+                }(),
             }(),
 
             controller = function () {
+                controller = function () {
 
-                return {
-                    sourceChange: function (event) {
-                        // default suggest limit is mesh-di
-                        let source = event.newVal,
-                            limit;
-                        if (source.match(/^(all|catalog)/)) {
-                            limit = "er-mesh";
-                        } else {
-                            limit = "";
+                    return {
+                        sourceChange: function (event) {
+                            // default suggest limit is mesh-di
+                            let source = event.newVal,
+                                limit;
+                            if (source.match(/^(all|catalog)/)) {
+                                limit = "er-mesh";
+                            } else {
+                                limit = "";
+                            }
+                            model.suggest.setLimit(limit);
+                            model.source = source;
+                        },
+                        suggestion: function (event) {
+                            L.fire("tracker:trackableEvent", {
+                                category: "lane:suggestSelect",
+                                action: model.source,
+                                label: event.suggestion
+                            });
+                            view.search(event.suggestion);
                         }
-                        model.suggest.setLimit(limit);
-                        model.source = source;
-                    },
-                    suggestion: function (event) {
-                        L.fire("tracker:trackableEvent", {
-                            category: "lane:suggestSelect",
-                            action: model.source,
-                            label: event.suggestion
-                        });
-                        view.search(event.suggestion);
-                    }
-                };
+                    };
+                    return {
+                        sourceChange: function (event) {
+                            // default suggest limit is mesh-di
+                            let source = event.newVal,
+                                limit;
+                            if (source.match(/^(all|catalog)/)) {
+                                limit = "er-mesh";
+                            } else {
+                                limit = "";
+                            }
+                            model.suggest.setLimit(limit);
+                            model.source = source;
+                        },
+                        suggestion: function (event) {
+                            L.fire("tracker:trackableEvent", {
+                                category: "lane:suggestSelect",
+                                action: model.source,
+                                label: event.suggestion
+                            });
+                            view.search(event.suggestion);
+                        }
+                    };
 
+                }();
             }();
 
         controller.sourceChange({ newVal: model.source });
@@ -63,4 +95,4 @@ if (document.querySelector(".search-form")) {
         L.on("search:sourceChange", controller.sourceChange);
     })();
 
-}
+

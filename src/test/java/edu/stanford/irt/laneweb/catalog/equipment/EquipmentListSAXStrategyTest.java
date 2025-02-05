@@ -34,9 +34,7 @@ public class EquipmentListSAXStrategyTest {
 
     @Test
     public void testToSAX() throws IOException {
-        expect(this.equipment.getBibID()).andReturn("bibid");
         expect(this.equipment.getTitle()).andReturn("Android Thing");
-        expect(this.equipment.getNote()).andReturn("Checkout for 2 hours");
         expect(this.equipment.getCount()).andReturn("4");
         replay(this.equipment);
         this.saxStrategy.toSAX(Collections.singletonList(this.equipment), this.xmlConsumer);

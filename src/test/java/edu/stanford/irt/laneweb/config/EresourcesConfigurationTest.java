@@ -5,7 +5,6 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
 import org.junit.Test;
 
-
 public class EresourcesConfigurationTest {
 
     private EresourcesConfiguration configuration;
@@ -51,6 +50,11 @@ public class EresourcesConfigurationTest {
     }
 
     @Test
+    public void testLinkWithoutCoverTransformer() {
+        assertNotNull(this.configuration.linkWithoutCoverTransformer(null));
+    }
+
+    @Test
     public void testPagingEresourceListHTMLSAXStrategy() {
         assertNotNull(this.configuration.pagingEresourceListHTMLSAXStrategy());
     }
@@ -59,8 +63,6 @@ public class EresourcesConfigurationTest {
     public void testSolrPagingEresourceSAXStrategy() {
         assertNotNull(this.configuration.solrPagingEresourceSAXStrategy());
     }
-
-   
 
     @Test
     public void testSolrSearchFacetsGenerator() {
@@ -71,5 +73,4 @@ public class EresourcesConfigurationTest {
     public void testSolrSearchGenerator() {
         assertNotNull(this.configuration.solrSearchGenerator(null));
     }
-   
 }

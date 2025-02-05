@@ -177,7 +177,7 @@
 
 	<!-- To get the Image source for bassettView.html and bassettLagerView.html -->
 
-	<xsl:template match="h:td[@id='image']/h:a/h:img/@src | h:td[@id='image']/h:img/@src">
+	<xsl:template match="h:div[@id='image']/h:a/h:img/@src | h:div[@id='image']/h:img/@src">
 		<xsl:attribute name="src">
         <xsl:choose>
             <xsl:when test="$type = 'largerView'">
@@ -190,14 +190,14 @@
     </xsl:attribute>
 	</xsl:template>
 
-	<xsl:template match="h:td[@id='diagram-image']/h:a/h:img/@src | h:td[@id='diagram-image']/h:img/@src">
+	<xsl:template match="h:div[@id='diagram-image']/h:a/h:img/@src | h:div[@id='diagram-image']/h:img/@src">
 		<xsl:attribute name="src">
         <xsl:value-of select="$image-directory" />
         <xsl:value-of select="/doc/b:bassetts/b:bassett/b:diagram_image" />
     </xsl:attribute>
 	</xsl:template>
 
-	<xsl:template match="h:td[@id='legend-image']/h:a/h:img/@src | h:td[@id='legend-image']/h:img/@src">
+	<xsl:template match="h:div[@id='legend-image']/h:a/h:img/@src | h:div[@id='legend-image']/h:img/@src">
 		<xsl:attribute name="src">
         <xsl:value-of select="$image-directory" />
         <xsl:value-of select="/doc/b:bassetts/b:bassett/b:legend_image" />
@@ -220,7 +220,7 @@
 		</xsl:copy>
 	</xsl:template>
 
-	<xsl:template match="h:td[@class='legend-description']">
+	<xsl:template match="h:div[@class='legend-description']">
 		<xsl:copy>
 			<xsl:apply-templates select="attribute::node()" />
 			<xsl:value-of select="/doc/b:bassetts/b:bassett/b:description" />
@@ -228,20 +228,17 @@
 	</xsl:template>
 
 
-	<xsl:template match="h:div[@id='english-legend']">
+	<xsl:template match="h:ol[@id='english-legend']">
+		<ol>
 		<xsl:for-each select="tokenize(/doc/b:bassetts/b:bassett/b:legend, '--')">
 			<xsl:if test="substring-before(.,'.') != ''">
-				<tr>
-					<td>
-						<xsl:value-of select="substring-before(.,'.')" />
-						.
-					</td>
-					<td>
+				<li>
 						<xsl:value-of select="substring-after(.,'.')" />
-					</td>
-				</tr>
+				</li>
+				
 			</xsl:if>
 		</xsl:for-each>
+		</ol>
 	</xsl:template>
 
 

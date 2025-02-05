@@ -19,8 +19,10 @@ Copyright (c) Nicolas Gallagher and Jonathan Neal
  */
 
 html {
-  line-height: 1.15; /* 1 */
-  -webkit-text-size-adjust: 100%; /* 2 */
+    line-height: 1.15;
+    /* 1 */
+    -webkit-text-size-adjust: 100%;
+    /* 2 */
 }
 
 /* Sections
@@ -31,7 +33,7 @@ html {
  */
 
 body {
-  margin: 0;
+    margin: 0;
 }
 
 /**
@@ -39,7 +41,7 @@ body {
  */
 
 main {
-  display: block;
+    display: block;
 }
 
 /**
@@ -48,8 +50,8 @@ main {
  */
 
 h1 {
-  font-size: 2em;
-  margin: 0.67em 0;
+    font-size: 2em;
+    margin: 0.67em 0;
 }
 
 /* Grouping content
@@ -61,9 +63,12 @@ h1 {
  */
 
 hr {
-  box-sizing: content-box; /* 1 */
-  height: 0; /* 1 */
-  overflow: visible; /* 2 */
+    box-sizing: content-box;
+    /* 1 */
+    height: 0;
+    /* 1 */
+    overflow: visible;
+    /* 2 */
 }
 
 /**
@@ -72,8 +77,10 @@ hr {
  */
 
 pre {
-  font-family: monospace, monospace; /* 1 */
-  font-size: 1em; /* 2 */
+    font-family: monospace, monospace;
+    /* 1 */
+    font-size: 1em;
+    /* 2 */
 }
 
 /* Text-level semantics
@@ -84,7 +91,7 @@ pre {
  */
 
 a {
-  background-color: transparent;
+    background-color: transparent;
 }
 
 /**
@@ -93,10 +100,13 @@ a {
  */
 
 abbr[title] {
-  border-bottom: none; /* 1 */
-  text-decoration: underline; /* 2 */
-  -webkit-text-decoration: underline dotted;
-          text-decoration: underline dotted; /* 2 */
+    border-bottom: none;
+    /* 1 */
+    text-decoration: underline;
+    /* 2 */
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+    /* 2 */
 }
 
 /**
@@ -105,7 +115,7 @@ abbr[title] {
 
 b,
 strong {
-  font-weight: bolder;
+    font-weight: bolder;
 }
 
 /**
@@ -116,8 +126,10 @@ strong {
 code,
 kbd,
 samp {
-  font-family: monospace, monospace; /* 1 */
-  font-size: 1em; /* 2 */
+    font-family: monospace, monospace;
+    /* 1 */
+    font-size: 1em;
+    /* 2 */
 }
 
 /**
@@ -125,7 +137,7 @@ samp {
  */
 
 small {
-  font-size: 80%;
+    font-size: 80%;
 }
 
 /**
@@ -135,18 +147,18 @@ small {
 
 sub,
 sup {
-  font-size: 75%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
 }
 
 sub {
-  bottom: -0.25em;
+    bottom: -0.25em;
 }
 
 sup {
-  top: -0.5em;
+    top: -0.5em;
 }
 
 /* Embedded content
@@ -157,7 +169,7 @@ sup {
  */
 
 img {
-  border-style: none;
+    border-style: none;
 }
 
 /* Forms
@@ -173,10 +185,14 @@ input,
 optgroup,
 select,
 textarea {
-  font-family: inherit; /* 1 */
-  font-size: 100%; /* 1 */
-  line-height: 1.15; /* 1 */
-  margin: 0; /* 2 */
+    font-family: inherit;
+    /* 1 */
+    font-size: 100%;
+    /* 1 */
+    line-height: 1.15;
+    /* 1 */
+    margin: 0;
+    /* 2 */
 }
 
 /**
@@ -185,8 +201,9 @@ textarea {
  */
 
 button,
-input { /* 1 */
-  overflow: visible;
+input {
+    /* 1 */
+    overflow: visible;
 }
 
 /**
@@ -195,8 +212,9 @@ input { /* 1 */
  */
 
 button,
-select { /* 1 */
-  text-transform: none;
+select {
+    /* 1 */
+    text-transform: none;
 }
 
 /**
@@ -207,7 +225,7 @@ button,
 [type="button"],
 [type="reset"],
 [type="submit"] {
-  -webkit-appearance: button;
+    -webkit-appearance: button;
 }
 
 /**
@@ -218,8 +236,8 @@ button::-moz-focus-inner,
 [type="button"]::-moz-focus-inner,
 [type="reset"]::-moz-focus-inner,
 [type="submit"]::-moz-focus-inner {
-  border-style: none;
-  padding: 0;
+    border-style: none;
+    padding: 0;
 }
 
 /**
@@ -230,7 +248,7 @@ button:-moz-focusring,
 [type="button"]:-moz-focusring,
 [type="reset"]:-moz-focusring,
 [type="submit"]:-moz-focusring {
-  outline: 1px dotted ButtonText;
+    outline: 1px dotted ButtonText;
 }
 
 /**
@@ -238,7 +256,7 @@ button:-moz-focusring,
  */
 
 fieldset {
-  padding: 0.35em 0.75em 0.625em;
+    padding: 0.35em 0.75em 0.625em;
 }
 
 /**
@@ -249,12 +267,18 @@ fieldset {
  */
 
 legend {
-  box-sizing: border-box; /* 1 */
-  color: inherit; /* 2 */
-  display: table; /* 1 */
-  max-width: 100%; /* 1 */
-  padding: 0; /* 3 */
-  white-space: normal; /* 1 */
+    box-sizing: border-box;
+    /* 1 */
+    color: inherit;
+    /* 2 */
+    display: table;
+    /* 1 */
+    max-width: 100%;
+    /* 1 */
+    padding: 0;
+    /* 3 */
+    white-space: normal;
+    /* 1 */
 }
 
 /**
@@ -262,7 +286,7 @@ legend {
  */
 
 progress {
-  vertical-align: baseline;
+    vertical-align: baseline;
 }
 
 /**
@@ -270,7 +294,7 @@ progress {
  */
 
 textarea {
-  overflow: auto;
+    overflow: auto;
 }
 
 /**
@@ -280,8 +304,10 @@ textarea {
 
 [type="checkbox"],
 [type="radio"] {
-  box-sizing: border-box; /* 1 */
-  padding: 0; /* 2 */
+    box-sizing: border-box;
+    /* 1 */
+    padding: 0;
+    /* 2 */
 }
 
 /**
@@ -290,7 +316,7 @@ textarea {
 
 [type="number"]::-webkit-inner-spin-button,
 [type="number"]::-webkit-outer-spin-button {
-  height: auto;
+    height: auto;
 }
 
 /**
@@ -299,8 +325,10 @@ textarea {
  */
 
 [type="search"] {
-  -webkit-appearance: textfield; /* 1 */
-  outline-offset: -2px; /* 2 */
+    -webkit-appearance: textfield;
+    /* 1 */
+    outline-offset: -2px;
+    /* 2 */
 }
 
 /**
@@ -308,7 +336,7 @@ textarea {
  */
 
 [type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none;
+    -webkit-appearance: none;
 }
 
 /**
@@ -317,8 +345,10 @@ textarea {
  */
 
 ::-webkit-file-upload-button {
-  -webkit-appearance: button; /* 1 */
-  font: inherit; /* 2 */
+    -webkit-appearance: button;
+    /* 1 */
+    font: inherit;
+    /* 2 */
 }
 
 /* Interactive
@@ -329,7 +359,7 @@ textarea {
  */
 
 details {
-  display: block;
+    display: block;
 }
 
 /*
@@ -337,7 +367,7 @@ details {
  */
 
 summary {
-  display: list-item;
+    display: list-item;
 }
 
 /* Misc
@@ -348,7 +378,7 @@ summary {
  */
 
 template {
-  display: none;
+    display: none;
 }
 
 /**
@@ -356,7 +386,7 @@ template {
  */
 
 [hidden] {
-  display: none;
+    display: none;
 }
 
 /*csslint important:false*/
@@ -395,8 +425,10 @@ html {
 /*csslint regex-selectors:false, known-properties:false, duplicate-properties:false*/
 
 .pure-g {
-    letter-spacing: -0.31em; /* Webkit: collapse white-space between units */
-    text-rendering: optimizespeed; /* Webkit: fixes text-rendering: optimizeLegibility */
+    letter-spacing: -0.31em;
+    /* Webkit: collapse white-space between units */
+    text-rendering: optimizespeed;
+    /* Webkit: fixes text-rendering: optimizeLegibility */
 
     /*
     Sets the font stack to fonts known to work properly with the above letter
@@ -418,17 +450,18 @@ html {
 
     /* Use flexbox when possible to avoid `letter-spacing` side-effects. */
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
 
     /* Prevents distributing space between rows */
     align-content: flex-start;
 }
 
 /* IE10 display: -ms-flexbox (and display: flex in IE 11) does not work inside a table; fall back to block and rely on font hack */
-@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-	table .pure-g {
-		display: block;
-	}
+@media all and (-ms-high-contrast: none),
+(-ms-high-contrast: active) {
+    table .pure-g {
+        display: block;
+    }
 }
 
 /* Opera as of 12 on Windows needs word-spacing.
@@ -452,7 +485,7 @@ html {
 Resets the font family back to the OS/browser's default sans-serif font,
 this the same font stack that Normalize.css sets for the `body`.
 */
-.pure-g [class *= "pure-u"] {
+.pure-g [class *="pure-u"] {
     font-family: sans-serif;
 }
 
@@ -638,6 +671,7 @@ this the same font stack that Normalize.css sets for the `body`.
 .pure-u-24-24 {
     width: 100%;
 }
+
 .pure-button {
     /* Structure */
     display: inline-block;
@@ -648,9 +682,9 @@ this the same font stack that Normalize.css sets for the `body`.
     cursor: pointer;
     -webkit-user-drag: none;
     -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     box-sizing: border-box;
 }
 
@@ -662,8 +696,10 @@ this the same font stack that Normalize.css sets for the `body`.
 
 /* Inherit .pure-g styles */
 .pure-button-group {
-    letter-spacing: -0.31em; /* Webkit: collapse white-space between units */
-    text-rendering: optimizespeed; /* Webkit: fixes text-rendering: optimizeLegibility */
+    letter-spacing: -0.31em;
+    /* Webkit: collapse white-space between units */
+    text-rendering: optimizespeed;
+    /* Webkit: fixes text-rendering: optimizeLegibility */
 }
 
 .opera-only :-o-prefocus,
@@ -684,10 +720,14 @@ this the same font stack that Normalize.css sets for the `body`.
     font-family: inherit;
     font-size: 100%;
     padding: 0.5em 1em;
-    color: #444; /* rgba not supported (IE 8) */
-    color: rgba(0, 0, 0, 0.80); /* rgba supported */
-    border: 1px solid #999;  /*IE 6/7/8*/
-    border: none rgba(0, 0, 0, 0);  /*IE9 + everything else*/
+    color: #444;
+    /* rgba not supported (IE 8) */
+    color: rgba(0, 0, 0, 0.80);
+    /* rgba supported */
+    border: 1px solid #999;
+    /*IE 6/7/8*/
+    border: none rgba(0, 0, 0, 0);
+    /*IE9 + everything else*/
     background-color: #E6E6E6;
     text-decoration: none;
     border-radius: 2px;
@@ -696,14 +736,16 @@ this the same font stack that Normalize.css sets for the `body`.
 .pure-button-hover,
 .pure-button:hover,
 .pure-button:focus {
-    background-image: linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.10));
+    background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.10));
 }
+
 .pure-button:focus {
     outline: 0;
 }
+
 .pure-button-active,
 .pure-button:active {
-    box-shadow: 0 0 0 1px rgba(0,0,0, 0.15) inset, 0 0 6px rgba(0,0,0, 0.20) inset;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15) inset, 0 0 6px rgba(0, 0, 0, 0.20) inset;
     border-color: #000;
 }
 
@@ -736,7 +778,8 @@ a.pure-button-selected {
 .pure-button-group .pure-button {
     margin: 0;
     border-radius: 0;
-    border-right: 1px solid #111;  /* fallback color for rgba() for IE7/8 */
+    border-right: 1px solid #111;
+    /* fallback color for rgba() for IE7/8 */
     border-right: 1px solid rgba(0, 0, 0, 0.2);
 
 }
@@ -745,6 +788,7 @@ a.pure-button-selected {
     border-top-left-radius: 2px;
     border-bottom-left-radius: 2px;
 }
+
 .pure-button-group .pure-button:last-child {
     border-top-right-radius: 2px;
     border-bottom-right-radius: 2px;
@@ -840,6 +884,7 @@ since IE8 won't execute CSS that contains a CSS3 selector.
     outline: thin solid #129FEA;
     outline: 1px auto #129FEA;
 }
+
 .pure-form .pure-checkbox,
 .pure-form .pure-radio {
     margin: 0.5em 0;
@@ -876,11 +921,14 @@ since IE8 won't execute CSS that contains a CSS3 selector.
     background-color: #eaeded;
     color: #cad2d3;
 }
+
 .pure-form input[readonly],
 .pure-form select[readonly],
 .pure-form textarea[readonly] {
-    background-color: #eee; /* menu hover bg color */
-    color: #777; /* menu text color */
+    background-color: #eee;
+    /* menu hover bg color */
+    color: #777;
+    /* menu text color */
     border-color: #ccc;
 }
 
@@ -890,28 +938,34 @@ since IE8 won't execute CSS that contains a CSS3 selector.
     color: #b94a48;
     border-color: #e9322d;
 }
+
 .pure-form input[type="file"]:focus:invalid:focus,
 .pure-form input[type="radio"]:focus:invalid:focus,
 .pure-form input[type="checkbox"]:focus:invalid:focus {
     outline-color: #e9322d;
 }
+
 .pure-form select {
     /* Normalizes the height; padding is not sufficient. */
     height: 2.25em;
     border: 1px solid #ccc;
     background-color: white;
 }
+
 .pure-form select[multiple] {
     height: auto;
 }
+
 .pure-form label {
     margin: 0.5em 0 0.2em;
 }
+
 .pure-form fieldset {
     margin: 0;
     padding: 0.35em 0 0.75em;
     border: 0;
 }
+
 .pure-form legend {
     display: block;
     width: 100%;
@@ -951,6 +1005,7 @@ since IE8 won't execute CSS that contains a CSS3 selector.
     display: block;
     margin: 0.25em 0;
 }
+
 .pure-form-aligned input,
 .pure-form-aligned textarea,
 .pure-form-aligned select,
@@ -958,6 +1013,7 @@ since IE8 won't execute CSS that contains a CSS3 selector.
     display: inline-block;
     vertical-align: middle;
 }
+
 .pure-form-aligned textarea {
     vertical-align: top;
 }
@@ -966,6 +1022,7 @@ since IE8 won't execute CSS that contains a CSS3 selector.
 .pure-form-aligned .pure-control-group {
     margin-bottom: 0.5em;
 }
+
 .pure-form-aligned .pure-control-group label {
     text-align: right;
     display: inline-block;
@@ -973,6 +1030,7 @@ since IE8 won't execute CSS that contains a CSS3 selector.
     width: 10em;
     margin: 0 1em 0 0;
 }
+
 .pure-form-aligned .pure-controls {
     margin: 1.5em 0 0 11em;
 }
@@ -988,6 +1046,7 @@ since IE8 won't execute CSS that contains a CSS3 selector.
 .pure-form .pure-group fieldset {
     margin-bottom: 10px;
 }
+
 .pure-form .pure-group input,
 .pure-form .pure-group textarea {
     display: block;
@@ -997,28 +1056,33 @@ since IE8 won't execute CSS that contains a CSS3 selector.
     position: relative;
     top: -1px;
 }
+
 .pure-form .pure-group input:focus,
 .pure-form .pure-group textarea:focus {
     z-index: 3;
 }
+
 .pure-form .pure-group input:first-child,
 .pure-form .pure-group textarea:first-child {
     top: 1px;
     border-radius: 4px 4px 0 0;
     margin: 0;
 }
+
 .pure-form .pure-group input:first-child:last-child,
 .pure-form .pure-group textarea:first-child:last-child {
     top: 1px;
     border-radius: 4px;
     margin: 0;
 }
+
 .pure-form .pure-group input:last-child,
 .pure-form .pure-group textarea:last-child {
     top: -2px;
     border-radius: 0 0 4px 4px;
     margin: 0;
 }
+
 .pure-form .pure-group button {
     margin: 0.35em 0;
 }
@@ -1026,18 +1090,23 @@ since IE8 won't execute CSS that contains a CSS3 selector.
 .pure-form .pure-input-1 {
     width: 100%;
 }
+
 .pure-form .pure-input-3-4 {
     width: 75%;
 }
+
 .pure-form .pure-input-2-3 {
     width: 66%;
 }
+
 .pure-form .pure-input-1-2 {
     width: 50%;
 }
+
 .pure-form .pure-input-1-3 {
     width: 33%;
 }
+
 .pure-form .pure-input-1-4 {
     width: 25%;
 }
@@ -1196,21 +1265,21 @@ since IE8 won't execute CSS that contains a CSS3 selector.
     width: inherit;
 }
 
-.pure-menu-allow-hover:hover > .pure-menu-children,
-.pure-menu-active > .pure-menu-children {
+.pure-menu-allow-hover:hover>.pure-menu-children,
+.pure-menu-active>.pure-menu-children {
     display: block;
     position: absolute;
 }
 
 /* Vertical Menus - show the dropdown arrow */
-.pure-menu-has-children > .pure-menu-link:after {
+.pure-menu-has-children>.pure-menu-link:after {
     padding-left: 0.5em;
     content: "\25B8";
     font-size: small;
 }
 
 /* Horizontal Menus - show the dropdown arrow */
-.pure-menu-horizontal .pure-menu-has-children > .pure-menu-link:after {
+.pure-menu-horizontal .pure-menu-has-children>.pure-menu-link:after {
     content: "\25BE";
 }
 
@@ -1248,7 +1317,7 @@ since IE8 won't execute CSS that contains a CSS3 selector.
 .pure-menu-horizontal .pure-menu-separator {
     width: 1px;
     height: 1.3em;
-    margin: 0 .3em ;
+    margin: 0 .3em;
 }
 
 /* Need to reset the separator since submenu is vertical */
@@ -1284,14 +1353,14 @@ since IE8 won't execute CSS that contains a CSS3 selector.
     background-color: transparent;
 }
 
-.pure-menu-active > .pure-menu-link,
+.pure-menu-active>.pure-menu-link,
 .pure-menu-link:hover,
 .pure-menu-link:focus {
     background-color: #eee;
 }
 
-.pure-menu-selected > .pure-menu-link,
-.pure-menu-selected > .pure-menu-link:visited {
+.pure-menu-selected>.pure-menu-link,
+.pure-menu-selected>.pure-menu-link:visited {
     color: #000;
 }
 
@@ -1312,12 +1381,15 @@ since IE8 won't execute CSS that contains a CSS3 selector.
 
 .pure-table td,
 .pure-table th {
-    border-left: 1px solid #cbcbcb;/*  inner column border */
+    border-left: 1px solid #cbcbcb;
+    /*  inner column border */
     border-width: 0 0 0 1px;
     font-size: inherit;
     margin: 0;
-    overflow: visible; /*to make ths where the title is really long work*/
-    padding: 0.5em 1em; /* cell padding */
+    overflow: visible;
+    /*to make ths where the title is really long work*/
+    padding: 0.5em 1em;
+    /* cell padding */
 }
 
 .pure-table thead {
@@ -1335,6 +1407,7 @@ striping:
 .pure-table td {
     background-color: transparent;
 }
+
 .pure-table-odd td {
     background-color: #f2f2f2;
 }
@@ -1348,7 +1421,8 @@ striping:
 .pure-table-bordered td {
     border-bottom: 1px solid #cbcbcb;
 }
-.pure-table-bordered tbody > tr:last-child > td {
+
+.pure-table-bordered tbody>tr:last-child>td {
     border-bottom-width: 0;
 }
 
@@ -1360,6 +1434,7 @@ striping:
     border-width: 0 0 1px 0;
     border-bottom: 1px solid #cbcbcb;
 }
-.pure-table-horizontal tbody > tr:last-child > td {
+
+.pure-table-horizontal tbody>tr:last-child>td {
     border-bottom-width: 0;
 }
