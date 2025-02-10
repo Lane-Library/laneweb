@@ -156,5 +156,4 @@ if (document.querySelector(".search-form")) {
         L.search = model;
 
     })();
-
 }
