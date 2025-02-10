@@ -16,7 +16,7 @@
                     suggest: suggest,
                     source: source
                 };
-            }(suggest,
+            }(new L.Suggest(queryInput),
                 form.querySelector("input[name=source]").value),
 
             view = function () {
