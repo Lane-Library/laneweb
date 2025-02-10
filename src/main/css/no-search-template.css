@@ -22,6 +22,10 @@
     width: 70%;
 }
 
+.no-search-content .search-reset {
+    top: 52px;
+}
+
 
 .no-search-content .search-help-link {
     text-align: center;

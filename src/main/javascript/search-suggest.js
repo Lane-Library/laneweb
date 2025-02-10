@@ -4,60 +4,63 @@ if (document.querySelector(".search-form")) {
 
         "use strict";
 
-        let form = document.querySelector(".search-form"),
-            queryInput = form.querySelector("input[name=q]"),
-            suggest = new L.Suggest(queryInput),
+        let form = document.querySelector(".search-form");
 
-            model = function (suggest, source) {
-                return {
-                    suggest: suggest,
-                    source: source
-                };
-            }(suggest,
-                form.querySelector("input[name=source]").value),
 
-            view = function () {
 
-                return {
-                    search: function (query) {
-                        queryInput.value = query;
-                        form.submit();
-                    }
-                };
+        // table search inputs (e.g. course reserves, liaisons, equipment) should not get solr suggestions: LANEWEB-11444
+        if (form && form.querySelector("input[name=q]:not(#table-search-input)")) {
+            let queryInput = form.querySelector("input[name=q]"),
+                model = function (suggest, source) {
+                    return {
+                        suggest: suggest,
+                        source: source
+                    };
+                }(suggest,
+                    form.querySelector("input[name=source]").value),
 
-            }(),
+                view = function () {
 
-            controller = function () {
-                return {
-                    sourceChange: function (event) {
-                        // default suggest limit is mesh-di
-                        let source = event.newVal,
-                            limit;
-                        if (source.match(/^(all|catalog)/)) {
-                            limit = "er-mesh";
-                        } else {
-                            limit = "";
+                    return {
+                        search: function (query) {
+                            queryInput.value = query;
+                            form.submit();
                         }
-                        model.suggest.setLimit(limit);
-                        model.source = source;
-                    },
-                    suggestion: function (event) {
-                        L.fire("tracker:trackableEvent", {
-                            category: "lane:suggestSelect",
-                            action: model.source,
-                            label: event.suggestion
-                        });
-                        view.search(event.suggestion);
-                    }
-                };
+                    };
 
-            }();
+                }(),
 
-        controller.sourceChange({ newVal: model.source });
-        L.addEventTarget(model.suggest);
-        model.suggest.on("suggest:select", controller.suggestion);
+                controller = function () {
+                    return {
+                        sourceChange: function (event) {
+                            // default suggest limit is mesh-di
+                            let source = event.newVal,
+                                limit;
+                            if (source.match(/^(all|catalog)/)) {
+                                limit = "er-mesh";
+                            } else {
+                                limit = "";
+                            }
+                            model.suggest.setLimit(limit);
+                            model.source = source;
+                        },
+                        suggestion: function (event) {
+                            L.fire("tracker:trackableEvent", {
+                                category: "lane:suggestSelect",
+                                action: model.source,
+                                label: event.suggestion
+                            });
+                            view.search(event.suggestion);
+                        }
+                    };
 
-        L.on("search:sourceChange", controller.sourceChange);
-    })();
+                }();
 
-}
+            controller.sourceChange({ newVal: model.source });
+            L.addEventTarget(model.suggest);
+            model.suggest.on("suggest:select", controller.suggestion);
+
+            L.on("search:sourceChange", controller.sourceChange);
+        }) ();
+
+    }
