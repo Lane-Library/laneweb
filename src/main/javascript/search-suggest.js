@@ -5,8 +5,8 @@
 
     let form = document.querySelector(".search-form");
 
-
-    if (form && form.querySelector("input[name=q]")) {
+    // table search inputs (e.g. course reserves, liaisons, equipment) should not get solr suggestions: LANEWEB-11444
+    if (form && form.querySelector("input[name=q]:not(#table-search-input)")) {
 
         let queryInput = form.querySelector("input[name=q]"),
             model = function (suggest, source) {

@@ -30,7 +30,7 @@
 
   if (tables && searchInput) {
     searchInput.addEventListener("keyup", filtertables);
-
+    L.on("searchReset:reset", filtertables);
   }
 
 })();

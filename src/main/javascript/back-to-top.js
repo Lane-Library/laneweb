@@ -36,9 +36,9 @@
     if (backToTop) {
         // respond to scroll events and decide if the backToTop node needs to be hidden or displayed
         document.addEventListener("scroll", function() {
-            if (window.pageYOffset > 270 && !backToTop.classList.contains("active")) {
+            if (window.scrollY > 270 && !backToTop.classList.contains("active")) {
                 fadeIn();
-            } else if (window.pageYOffset <= 270 && backToTop.classList.contains("active")){
+            } else if (window.scrollY <= 270 && backToTop.classList.contains("active")){
                 fadeOut();
             }
         });
