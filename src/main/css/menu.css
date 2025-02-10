@@ -9,12 +9,12 @@
     display: inline-block;
     width: 100%;
     padding: 9px 24px;
+    text-decoration: none !important;
 }
 
 .menu-container.hoverline li a:hover {
     color: white;
     background-color: #666;
-    text-decoration: none;
 }
 
 .menu-container li a.menuitem-active,
@@ -22,7 +22,6 @@
     background-color: #8c1515;
     color: white;
     cursor: default;
-    text-decoration: none;
 }
 
 .menu-container h2 i {
