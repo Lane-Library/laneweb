@@ -7,9 +7,13 @@ describe('lightbox', () => {
 
     it('test lightbox show', () => {
         cy.window().its('L.Lightbox').invoke('setContent', 'test');
+        cy.get('.lightboxbg').should('have.class', 'lightboxbg-hidden');
+        cy.get('.lightbox').should('have.class', 'lightbox-hidden');
         cy.window().its('L.Lightbox').invoke('show');
+        cy.get('.lightboxbg').should('not.have.class', 'lightboxbg-hidden');
+        cy.get('.lightbox').should('not.have.class', 'lightbox-hidden');
         cy.get('.lightbox').should('be.visible');
-        cy.get('.lightboxbg').should('be.visible');
+        cy.get('.lightbox').should('have.text', 'test');
     })
 
 
@@ -23,8 +27,8 @@ describe('lightbox', () => {
 
 
     it('test lightbox content', () => {
-        cy.window().its('L.Lightbox').invoke('setContent', 'Hree is the content');
+        cy.window().its('L.Lightbox').invoke('setContent', 'Here is the content');
         cy.window().its('L.Lightbox').invoke('show');
-        cy.get('.lightbox').should('have.text', 'Hree is the content');
+        cy.get('.lightbox').should('have.text', 'Here is the content');
     })
 });
