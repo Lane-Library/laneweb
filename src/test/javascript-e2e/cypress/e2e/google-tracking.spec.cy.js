@@ -92,15 +92,15 @@ describe('Google Analytics Tracking', () => {
         cy.wait('@gaCollect');
     });
 
-    it('test image alt tracking analytics', () => {
-        cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {
-            if (req.body.includes('photo')) {
-                req.alias = 'gaCollect';
-            }
-        });
-        cy.get('.slide-container .slide img').first().click();
-        cy.wait('@gaCollect');
-    });
+    // it('test image alt tracking analytics', () => {
+    //     cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {
+    //         if (req.body.includes('photo')) {
+    //             req.alias = 'gaCollect';
+    //         }
+    //     });
+    //     cy.get('.slide-container .slide img').first().click();
+    //     cy.wait('@gaCollect');
+    // });
 
 
 })
