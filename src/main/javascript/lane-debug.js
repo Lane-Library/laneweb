@@ -68,8 +68,8 @@
         "table-hide-empty-columns.js",
         "tables-search.js",
         "zotero.js",
-        "altmetric.js"
-
+        "altmetric.js",
+        "mobile-navigation.js"
     ];
 
     //Model doesn't exist yet, get basePath by hand:
