@@ -3,8 +3,7 @@ describe('lane bookmarklet selector', () => {
 
     it('test not ie and not edge', () => {
         cy.visit('/cypress-test/favorites.html');
-        cy.get('#bookmarkletNotIE').should('be.visible');
-        cy.get('#bookmarkletIE').should('not.be.visible');
+        cy.get('#bookmarklet').should('be.visible');
         cy.get('.bookmarklet-edge').should('not.be.visible');
     });
 
