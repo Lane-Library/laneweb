@@ -25,6 +25,7 @@
             hash = window.location.hash;
             if (hash == '') {
                 hash = defaultGuide;
+                this.document.querySelector("a[href='" + defaultGuide + "']").classList.add('menuitem-active');
             }
             openGuide(hash);
         }, false);
