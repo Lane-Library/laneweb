@@ -76,7 +76,6 @@ describe('Google Analytics Tracking', () => {
 
 
     it('test image src tracking analytics', () => {
-        cy.visit('/cypress-test/index.html');
         cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {
             if (req.body.includes('ep.event_label=laneblog.stanford.edu')) {
                 req.alias = 'gaCollect';
@@ -88,7 +87,6 @@ describe('Google Analytics Tracking', () => {
 
 
     it('test image alt tracking analytics', () => {
-        cy.visit('/cypress-test/index.html');
         cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {
             if (req.body.includes('photo')) {
                 req.alias = 'gaCollect';
