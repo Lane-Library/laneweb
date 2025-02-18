@@ -5,8 +5,8 @@ import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.laneweb.bookmarks.BookmarkService;
 import edu.stanford.irt.laneweb.trends.googleA4.GoogleA4Tracker;
@@ -19,7 +19,7 @@ public class BookmarkTrendsReporterTest {
 
     private GoogleA4Tracker ga4tracker;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.bookmarkService = mock(BookmarkService.class);
         this.ga4tracker = mock(GoogleA4Tracker.class);

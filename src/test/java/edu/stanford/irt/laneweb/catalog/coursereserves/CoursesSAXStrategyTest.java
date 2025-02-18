@@ -5,13 +5,14 @@ import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.util.Collections;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
@@ -27,7 +28,7 @@ public class CoursesSAXStrategyTest {
 
     private TestXMLConsumer xmlConsumer;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.saxStrategy = new CoursesSAXStrategy();
         this.xmlConsumer = new TestXMLConsumer();
@@ -47,12 +48,14 @@ public class CoursesSAXStrategyTest {
                 this.xmlConsumer.getStringValue());
     }
 
-    @Test(expected = LanewebException.class)
+    @Test()
     public void testToSAXThrowsException() throws SAXException {
         XMLConsumer mock = mock(XMLConsumer.class);
         mock.startDocument();
         expectLastCall().andThrow(new SAXException());
         replay(mock);
-        this.saxStrategy.toSAX(Collections.singletonList(this.course), mock);
+        assertThrows(LanewebException.class, () -> {
+            this.saxStrategy.toSAX(Collections.singletonList(this.course), mock);
+        });
     }
 }

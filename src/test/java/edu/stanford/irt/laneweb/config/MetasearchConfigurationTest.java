@@ -1,17 +1,17 @@
 package edu.stanford.irt.laneweb.config;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.net.URISyntaxException;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class MetasearchConfigurationTest {
 
     private MetasearchConfiguration configuration;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.configuration = new MetasearchConfiguration();
     }
@@ -73,7 +73,7 @@ public class MetasearchConfigurationTest {
 
     @Test
     public void testRestMetaSearchService() throws URISyntaxException {
-        assertNotNull(this.configuration.restMetaSearchService(null, null, null, 0 ,null));
+        assertNotNull(this.configuration.restMetaSearchService(null, null, null, 0, null));
     }
 
     @Test

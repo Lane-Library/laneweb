@@ -4,12 +4,12 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 import java.util.Collections;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.laneweb.bookcovers.BookCoverService;
 
@@ -19,7 +19,7 @@ public class BookCoverControllerTest {
 
     private BookCoverService service;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.service = mock(BookCoverService.class);
         this.controller = new BookCoverController(this.service);

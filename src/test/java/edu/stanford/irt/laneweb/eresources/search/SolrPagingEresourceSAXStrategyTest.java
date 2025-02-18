@@ -5,12 +5,12 @@ import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.hamcrest.text.IsEqualCompressingWhiteSpace.equalToCompressingWhiteSpace;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Collections;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Page;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
@@ -32,7 +32,7 @@ public class SolrPagingEresourceSAXStrategyTest {
 
     private TestXMLConsumer xmlConsumer;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.eresourceStrategy = mock(SAXStrategy.class);
         this.strategy = new SolrPagingEresourceSAXStrategy(this.eresourceStrategy);
@@ -57,7 +57,7 @@ public class SolrPagingEresourceSAXStrategyTest {
         this.xmlConsumer.endDocument();
         assertTrue(equalToCompressingWhiteSpace(
                 this.xmlConsumer.getExpectedResult(this, "SolrPagingEresourceSAXStrategyTest-testToSAX.xml"))
-                        .matches(this.xmlConsumer.getStringValue()));
+                .matches(this.xmlConsumer.getStringValue()));
         verify(this.page, this.result);
     }
 }

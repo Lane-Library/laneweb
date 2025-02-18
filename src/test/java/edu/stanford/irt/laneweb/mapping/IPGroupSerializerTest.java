@@ -3,12 +3,12 @@ package edu.stanford.irt.laneweb.mapping;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
@@ -25,7 +25,7 @@ public class IPGroupSerializerTest {
 
     private IPGroupSerializer serializer;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.serializer = new IPGroupSerializer();
         this.ipgroup = IPGroup.OTHER;

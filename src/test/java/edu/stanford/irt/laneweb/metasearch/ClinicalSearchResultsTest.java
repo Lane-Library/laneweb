@@ -1,13 +1,13 @@
 package edu.stanford.irt.laneweb.metasearch;
 
 import static org.easymock.EasyMock.mock;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.laneweb.resource.PagingList;
 import edu.stanford.irt.search.impl.Result;
@@ -22,7 +22,7 @@ public class ClinicalSearchResultsTest {
 
     private int total;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.resourceResults = Collections.emptyList();
         this.searchResults = mock(PagingList.class);

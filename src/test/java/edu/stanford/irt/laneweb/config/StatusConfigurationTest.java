@@ -1,18 +1,18 @@
 package edu.stanford.irt.laneweb.config;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.net.UnknownHostException;
 import java.util.Collections;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class StatusConfigurationTest {
 
     private StatusConfiguration configuration;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.configuration = new StatusConfiguration();
     }

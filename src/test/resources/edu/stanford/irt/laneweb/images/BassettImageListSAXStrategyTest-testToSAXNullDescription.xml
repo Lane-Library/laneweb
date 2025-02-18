@@ -9,9 +9,9 @@
    <image-number-up value="2"/>
    <bassett bassett_number="bn">
       <title>title</title>
-      <bassett_image>image</bassett_image>
-      <diagram_image>diagram</diagram_image>
-      <legend_image>legend</legend_image>
+      <bassett_image>src.L.jpg</bassett_image>
+      <diagram_image>src.D.jpg</diagram_image>
+      <legend_image>src.T.jpg</legend_image>
       <legend>legend</legend>
       <regions>sub region.</regions>
    </bassett>

@@ -1,16 +1,15 @@
 package edu.stanford.irt.laneweb.config;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import org.junit.Before;
-import org.junit.Test;
-
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class EresourcesConfigurationTest {
 
     private EresourcesConfiguration configuration;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.configuration = new EresourcesConfiguration();
     }
@@ -60,8 +59,6 @@ public class EresourcesConfigurationTest {
         assertNotNull(this.configuration.solrPagingEresourceSAXStrategy());
     }
 
-   
-
     @Test
     public void testSolrSearchFacetsGenerator() {
         assertNotNull(this.configuration.facetsGenerator(null));
@@ -71,5 +68,5 @@ public class EresourcesConfigurationTest {
     public void testSolrSearchGenerator() {
         assertNotNull(this.configuration.solrSearchGenerator(null));
     }
-   
+
 }

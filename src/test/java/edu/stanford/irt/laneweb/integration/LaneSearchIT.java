@@ -1,6 +1,6 @@
 package edu.stanford.irt.laneweb.integration;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.xpath;
@@ -10,8 +10,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -24,8 +24,6 @@ import org.springframework.web.context.WebApplicationContext;
 import edu.stanford.irt.laneweb.Laneweb;
 import jakarta.annotation.Resource;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
 @SpringBootTest(classes = Laneweb.class)
 public class LaneSearchIT {
 
@@ -38,7 +36,7 @@ public class LaneSearchIT {
         @Resource
         private WebApplicationContext webApplicationContext;
 
-        @Before
+        @BeforeEach
         public void setupFixture() {
                 this.mockMvc = webAppContextSetup(this.webApplicationContext).build();
                 this.ns = new HashMap<>();

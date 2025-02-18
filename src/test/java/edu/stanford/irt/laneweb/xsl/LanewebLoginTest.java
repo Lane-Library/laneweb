@@ -1,6 +1,6 @@
 package edu.stanford.irt.laneweb.xsl;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -13,8 +13,8 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.laneweb.model.Model;
 
@@ -24,7 +24,7 @@ public class LanewebLoginTest extends AbstractXSLTest {
 
     private Transformer transformer;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.transformer = TransformerFactory.newInstance()
                 .newTransformer(new StreamSource("src/main/xsl/laneweb.xsl"));
@@ -152,7 +152,6 @@ public class LanewebLoginTest extends AbstractXSLTest {
         assertEquals(getExpectedResult("TrueQuerySomethingElseProxyLinks.xml"), sw.toString());
     }
 
-    
     @Test
     public void testTrueZeroOther() throws TransformerException, IOException {
         StringWriter sw = new StringWriter();

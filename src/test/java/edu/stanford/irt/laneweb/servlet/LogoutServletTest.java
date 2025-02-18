@@ -16,8 +16,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class LogoutServletTest {
 
@@ -29,7 +29,7 @@ public class LogoutServletTest {
 
     private HttpSession session;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.servlet = new LogoutServlet();
     }

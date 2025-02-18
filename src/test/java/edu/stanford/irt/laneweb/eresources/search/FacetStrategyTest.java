@@ -1,6 +1,6 @@
 package edu.stanford.irt.laneweb.eresources.search;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -10,8 +10,8 @@ import java.util.Collection;
 import java.util.Map;
 
 import org.apache.commons.collections4.map.HashedMap;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import org.xml.sax.SAXException;
 
@@ -27,7 +27,7 @@ public class FacetStrategyTest {
 
     Map<String, Collection<FacetFieldEntry>> solrResult;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         solrResult = new HashedMap<String, Collection<FacetFieldEntry>>();
         Collection<FacetFieldEntry> typeResult = new ArrayList<FacetFieldEntry>();

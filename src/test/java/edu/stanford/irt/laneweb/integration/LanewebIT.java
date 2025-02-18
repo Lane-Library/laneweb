@@ -11,21 +11,16 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
 import edu.stanford.irt.laneweb.Laneweb;
 import jakarta.annotation.Resource;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
 @SpringBootTest(classes = Laneweb.class)
 public class LanewebIT {
 
@@ -41,7 +36,7 @@ public class LanewebIT {
         @Resource
         private WebApplicationContext webApplicationContext;
 
-        @Before
+        @BeforeEach
         public void setupFixture() {
                 this.mockMvc = webAppContextSetup(this.webApplicationContext).build();
         }

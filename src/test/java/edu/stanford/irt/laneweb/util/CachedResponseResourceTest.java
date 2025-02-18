@@ -4,14 +4,14 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.core.io.Resource;
 
 import edu.stanford.irt.cocoon.cache.CachedResponse;
@@ -24,7 +24,7 @@ public class CachedResponseResourceTest {
 
     private CachedResponseResource resource;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.cachedResponse = mock(CachedResponse.class);
         this.realResource = mock(Resource.class);

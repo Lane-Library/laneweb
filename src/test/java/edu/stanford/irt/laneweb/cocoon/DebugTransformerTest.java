@@ -8,8 +8,8 @@ import static org.easymock.EasyMock.verify;
 
 import java.util.Collections;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
@@ -20,11 +20,10 @@ public class DebugTransformerTest {
     private XMLConsumer consumer;
 
     private DebugTransformer transformer;
-    
-   
-    @Before
+
+    @BeforeEach
     public void setUp() {
-        
+
         this.consumer = mock(XMLConsumer.class);
         this.transformer = new DebugTransformer(Collections.emptyList());
         this.transformer.setXMLConsumer(this.consumer);

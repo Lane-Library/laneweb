@@ -4,14 +4,16 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.eresources.EresourceSearchService;
 import edu.stanford.irt.suggest.Suggestion;
 
@@ -20,10 +22,10 @@ public class SolrSuggestionManagerTest {
     private SolrSuggestionManager manager;
 
     private EresourceSearchService searchService;
-    
+
     Map<String, String> result;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.searchService = mock(EresourceSearchService.class);
         this.manager = new SolrSuggestionManager(this.searchService);
@@ -31,9 +33,11 @@ public class SolrSuggestionManagerTest {
         this.result.put("id", "title");
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testGetSuggestionsForNullTerm() {
-        this.manager.getSuggestionsForTerm(null);
+        assertThrows(IllegalArgumentException.class, () -> {
+            this.manager.getSuggestionsForTerm(null);
+        });
     }
 
     @Test
@@ -56,8 +60,6 @@ public class SolrSuggestionManagerTest {
 
     @Test
     public void testGetSuggestionsForTermWithPeriod() {
-        
-        
         expect(this.searchService.suggestFindAll("term")).andReturn(result);
         replay(this.searchService);
         Suggestion suggestion = this.manager.getSuggestionsForTerm("term").iterator().next();

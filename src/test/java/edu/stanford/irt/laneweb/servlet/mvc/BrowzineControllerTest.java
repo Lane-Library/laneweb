@@ -4,6 +4,8 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.verify;
 
 import java.io.IOException;
 import java.net.URI;
@@ -12,10 +14,11 @@ import java.text.MessageFormat;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.laneweb.BrowzineException;
+import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.rest.RESTException;
 import edu.stanford.irt.laneweb.rest.RESTService;
 
@@ -33,9 +36,8 @@ public class BrowzineControllerTest {
 
     private String brozinePath = "/apps/browzine/";
 
-    
-    @Before
-    public void setUp()  {
+    @BeforeEach
+    public void setUp() {
         this.restService = mock(RESTService.class);
         this.request = mock(HttpServletRequest.class);
         this.controller = new BrowzineController();
@@ -63,24 +65,30 @@ public class BrowzineControllerTest {
         this.controller.getDoi(this.request);
         verify(this.request, this.restService);
     }
-    
-    @Test(expected = BrowzineException.class)
+
+    @Test
     public void testNotFoundValue() throws URISyntaxException {
         expect(this.request.getRequestURL()).andReturn(new StringBuffer(brozinePath + "123456"));
         URI url = new URI(MessageFormat.format(browzineUrl, "123456", browzineKey));
-        expect(this.restService.getObject(url, String.class)).andThrow(new RESTException(new IOException("not found on browzine API server")));
+        expect(this.restService.getObject(url, String.class))
+                .andThrow(new RESTException(new IOException("not found on browzine API server")));
         replay(request, this.restService);
-        this.controller.getDoi(this.request);
+        assertThrows(BrowzineException.class, () -> {
+            this.controller.getDoi(this.request);
+        });
         verify(this.request, this.restService);
     }
-    
-    @Test(expected = RuntimeException.class)
+
+    @Test
     public void testOtherException() throws Exception {
         expect(this.request.getRequestURL()).andReturn(new StringBuffer(brozinePath + "123456"));
         URI url = new URI(MessageFormat.format(browzineUrl, "123456", browzineKey));
-        expect(this.restService.getObject(url, String.class)).andThrow(new RuntimeException("Should not throw a BrowzineException"));
+        expect(this.restService.getObject(url, String.class))
+                .andThrow(new RuntimeException("Should not throw a BrowzineException"));
         replay(request, this.restService);
-        this.controller.getDoi(this.request);
+        assertThrows(RuntimeException.class, () -> {
+            this.controller.getDoi(this.request);
+        });
         verify(this.request, this.restService);
     }
 }

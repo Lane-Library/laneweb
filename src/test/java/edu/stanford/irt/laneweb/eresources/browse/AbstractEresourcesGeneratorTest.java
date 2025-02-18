@@ -5,17 +5,17 @@ import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.cocoon.cache.Validity;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
@@ -23,7 +23,6 @@ import edu.stanford.irt.cocoon.xml.XMLConsumer;
 import edu.stanford.irt.laneweb.eresources.EresourceBrowseService;
 import edu.stanford.irt.laneweb.eresources.model.Eresource;
 import edu.stanford.irt.laneweb.model.Model;
-
 
 public class AbstractEresourcesGeneratorTest {
 
@@ -38,7 +37,7 @@ public class AbstractEresourcesGeneratorTest {
         }
 
         @Override
-        protected List<Eresource> getEresourceList(final  EresourceBrowseService restBrowseService) {
+        protected List<Eresource> getEresourceList(final EresourceBrowseService restBrowseService) {
             return this.eresourceList;
         }
 
@@ -60,14 +59,15 @@ public class AbstractEresourcesGeneratorTest {
 
     private XMLConsumer xmlConsumer;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.restBrowseService = mock(EresourceBrowseService.class);
         this.eresource = mock(Eresource.class);
         this.eresourceList = Collections.singletonList(this.eresource);
         this.saxStrategy = mock(SAXStrategy.class);
         this.xmlConsumer = mock(XMLConsumer.class);
-        this.generator = new TestAbstractEresourcesGenerator(this.restBrowseService, this.saxStrategy, this.eresourceList);
+        this.generator = new TestAbstractEresourcesGenerator(this.restBrowseService, this.saxStrategy,
+                this.eresourceList);
     }
 
     @Test

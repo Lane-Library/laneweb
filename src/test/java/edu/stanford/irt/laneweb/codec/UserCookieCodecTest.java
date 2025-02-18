@@ -4,13 +4,14 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.Clock;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.user.User;
@@ -21,7 +22,7 @@ public class UserCookieCodecTest {
 
     private UserCookieCodec codec;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.clock = mock(Clock.class);
         this.codec = new UserCookieCodec("key", this.clock);
@@ -37,9 +38,11 @@ public class UserCookieCodecTest {
         verify(this.clock);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testCreateLoginTokenNullUserId() {
-        this.codec.createLoginToken(null, 0);
+        assertThrows(NullPointerException.class, () -> {
+            this.codec.createLoginToken(null, 0);
+        });
     }
 
     @Test
@@ -47,13 +50,17 @@ public class UserCookieCodecTest {
         assertNotNull(new UserCookieCodec("keykeykeykeykeykeykeykeykeykeykeykeykeykeykey", this.clock));
     }
 
-    @Test(expected = LanewebException.class)
+    @Test
     public void testRestoreLoginTokenBadValue() {
-        this.codec.restoreLoginToken("abc", "def");
+        assertThrows(LanewebException.class, () -> {
+            this.codec.restoreLoginToken("abc", "def");
+        });
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testRestoreLoginTokenNullValue() {
-        this.codec.restoreLoginToken(null, null);
+        assertThrows(NullPointerException.class, () -> {
+            this.codec.restoreLoginToken(null, null);
+        });
     }
 }

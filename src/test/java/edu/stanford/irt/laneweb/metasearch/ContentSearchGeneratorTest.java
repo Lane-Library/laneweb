@@ -10,8 +10,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
@@ -28,7 +28,7 @@ public class ContentSearchGeneratorTest {
 
     private SAXStrategy<PagingSearchResultList> saxStrategy;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.metaSearchService = mock(MetaSearchService.class);
         this.saxStrategy = mock(SAXStrategy.class);

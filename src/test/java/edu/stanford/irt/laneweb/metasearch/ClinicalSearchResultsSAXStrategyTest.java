@@ -1,13 +1,13 @@
 package edu.stanford.irt.laneweb.metasearch;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.laneweb.TestXMLConsumer;
 import edu.stanford.irt.laneweb.resource.PagingData;
@@ -29,7 +29,7 @@ public class ClinicalSearchResultsSAXStrategyTest {
 
     private TestXMLConsumer xmlConsumer;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.strategy = new ClinicalSearchResultsSAXStrategy();
         this.xmlConsumer = new TestXMLConsumer();

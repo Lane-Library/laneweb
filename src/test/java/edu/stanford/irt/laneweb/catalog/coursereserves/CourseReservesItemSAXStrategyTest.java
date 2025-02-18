@@ -7,12 +7,13 @@ import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
@@ -30,7 +31,7 @@ public class CourseReservesItemSAXStrategyTest {
 
     private TestXMLConsumer xmlConsumer;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.saxStrategy = new CourseReservesItemSAXStrategy();
         this.item = mock(CourseReservesItem.class);
@@ -151,13 +152,15 @@ public class CourseReservesItemSAXStrategyTest {
                 this.xmlConsumer.getStringValue());
     }
 
-    @Test(expected = LanewebException.class)
+    @Test()
     public void testToSAXThrowsException() throws SAXException {
         XMLConsumer mock = mock(XMLConsumer.class);
         mock.startElement(eq("http://www.w3.org/1999/xhtml"), eq("li"), eq("li"), isA(Attributes.class));
         expectLastCall().andThrow(new SAXException());
         replay(mock, this.item);
-        this.saxStrategy.toSAX(this.item, mock);
+        assertThrows(LanewebException.class, () -> {
+            this.saxStrategy.toSAX(this.item, mock);
+        });
     }
 
     @Test

@@ -6,9 +6,9 @@ import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -17,8 +17,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Page;
 
 import edu.stanford.irt.cocoon.cache.Validity;
@@ -39,9 +39,7 @@ public class AtoZBrowseGeneratorTest {
 
     private XMLConsumer xmlConsumer;
 
-   
-   
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.eresourceBrowseService = mock(EresourceBrowseService.class);
         this.saxStrategy = mock(SAXStrategy.class);
@@ -54,14 +52,14 @@ public class AtoZBrowseGeneratorTest {
         Map<String, List<FacetFieldEntry>> facetpage = mock(Map.class);
         Iterator<FacetFieldEntry> it2 = mock(Iterator.class);
         Collection<List<FacetFieldEntry>> c1 = mock(Collection.class);
-        Iterator<List<FacetFieldEntry>> it1 =  mock(Iterator.class);
+        Iterator<List<FacetFieldEntry>> it1 = mock(Iterator.class);
         List<FacetFieldEntry> c2 = mock(List.class);
         FacetFieldEntry ffe = mock(FacetFieldEntry.class);
         this.generator.setParameters(Collections.singletonMap(Model.QUERY, "foo"));
         this.saxStrategy.toSAX(isA(List.class), eq(this.xmlConsumer));
         expect(this.eresourceBrowseService.facetByField("advanced:true recordType:bib AND isRecent:1",
                 "foo", "title_starts", 0, 200, 0, FacetSort.INDEX)).andReturn(facetpage);
-        expect(facetpage.values()).andReturn(c1);  
+        expect(facetpage.values()).andReturn(c1);
         expect(c1.iterator()).andReturn(it1);
         expect(it1.hasNext()).andReturn(true);
         expect(it1.next()).andReturn(c2);
@@ -72,9 +70,9 @@ public class AtoZBrowseGeneratorTest {
         expect(ffe.getValueCount()).andReturn(4);
         expect(it2.hasNext()).andReturn(false);
         expect(it1.hasNext()).andReturn(false);
-        replay(this.eresourceBrowseService, this.saxStrategy, this.xmlConsumer, facetpage, c1,c2, it1,  it2,  ffe);
+        replay(this.eresourceBrowseService, this.saxStrategy, this.xmlConsumer, facetpage, c1, c2, it1, it2, ffe);
         this.generator.doGenerate(this.xmlConsumer);
-        verify(this.eresourceBrowseService, this.saxStrategy, this.xmlConsumer, facetpage, c1, c2, it1,  it2,  ffe);
+        verify(this.eresourceBrowseService, this.saxStrategy, this.xmlConsumer, facetpage, c1, c2, it1, it2, ffe);
     }
 
     @Test

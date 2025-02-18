@@ -7,7 +7,9 @@ import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.verify;
 
 import java.io.Serializable;
 import java.net.URI;
@@ -15,8 +17,8 @@ import java.net.URISyntaxException;
 
 import javax.cache.Cache;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.CocoonException;
@@ -44,7 +46,7 @@ public class CachedXMLSourceResolverTest {
 
     private XMLByteStreamInterpreter xmlByteStreamInterpreter;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.cache = mock(Cache.class);
         this.sourceResolver = mock(SourceResolver.class);
@@ -70,13 +72,15 @@ public class CachedXMLSourceResolverTest {
         verify(this.cache, this.sourceResolver, this.saxParser, this.source, this.xmlByteStreamInterpreter);
     }
 
-    @Test(expected = LanewebException.class)
+    @Test
     public void testGetBytesFromSourceThrowsException() {
         this.saxParser.parse(eq(this.source), isA(XMLConsumer.class));
         expectLastCall().andThrow(new CocoonException("oops"));
         expect(this.source.getURI()).andReturn("uri");
         replay(this.cache, this.sourceResolver, this.saxParser, this.source, this.xmlByteStreamInterpreter);
-        assertNotNull(this.resolver.getBytesFromSource(this.source));
+        assertThrows(LanewebException.class, () -> {
+            assertNotNull(this.resolver.getBytesFromSource(this.source));
+        });
         verify(this.cache, this.sourceResolver, this.saxParser, this.source, this.xmlByteStreamInterpreter);
     }
 

@@ -6,13 +6,13 @@ import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Collections;
 import java.util.regex.Pattern;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.search.Query;
 import edu.stanford.irt.search.impl.ContentResult;
@@ -34,7 +34,7 @@ public class ContentResultConversionStrategyTest {
 
     private Result uberResult;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.scoreStrategy = mock(ScoreStrategy.class);
         this.conversionStrategy = new ContentResultConversionStrategy(this.scoreStrategy);

@@ -8,14 +8,15 @@ import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.hamcrest.text.IsEqualCompressingWhiteSpace.equalToCompressingWhiteSpace;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.util.Collections;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
@@ -39,7 +40,7 @@ public class ResourceResultSAXStrategyTest {
 
     private TestXMLConsumer xmlConsumer;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.contentSAXStrategy = mock(SAXStrategy.class);
         this.strategy = new ResourceResultSAXStrategy(this.contentSAXStrategy);
@@ -69,7 +70,7 @@ public class ResourceResultSAXStrategyTest {
                 this.xmlConsumer.getStringValue());
         assertTrue(equalToCompressingWhiteSpace(
                 this.xmlConsumer.getExpectedResult(this, "ResourceResultSAXStrategyTest-toSAX.xml"))
-                        .matches(this.xmlConsumer.getStringValue()));
+                .matches(this.xmlConsumer.getStringValue()));
         verify(this.result, this.contentSAXStrategy);
     }
 
@@ -94,11 +95,11 @@ public class ResourceResultSAXStrategyTest {
                 this.xmlConsumer.getStringValue());
         assertTrue(equalToCompressingWhiteSpace(
                 this.xmlConsumer.getExpectedResult(this, "ResourceResultSAXStrategyTest-toSAXNullStatus.xml"))
-                        .matches(this.xmlConsumer.getStringValue()));
+                .matches(this.xmlConsumer.getStringValue()));
         verify(this.result, this.contentSAXStrategy);
     }
 
-    @Test(expected = LanewebException.class)
+    @Test
     public void testToSAXThrowsException() throws SAXException, IOException {
         XMLConsumer c = mock(XMLConsumer.class);
         expect(this.result.getStatus()).andReturn(SearchStatus.SUCCESSFUL);
@@ -114,6 +115,8 @@ public class ResourceResultSAXStrategyTest {
         c.startElement(eq("http://irt.stanford.edu/search/2.0"), eq("resource"), eq("resource"), isA(Attributes.class));
         expectLastCall().andThrow(new SAXException());
         replay(this.result, this.contentSAXStrategy, c);
-        this.strategy.toSAX(this.result, c);
+        assertThrows(LanewebException.class, () -> {
+            this.strategy.toSAX(this.result, c);
+        });
     }
 }

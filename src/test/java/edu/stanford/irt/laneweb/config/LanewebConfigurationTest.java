@@ -4,15 +4,15 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ResourceLoader;
 
@@ -24,7 +24,7 @@ public class LanewebConfigurationTest {
 
     private LanewebConfiguration configuration;
 
-    @Before
+    @BeforeEach
     public void setUp() throws URISyntaxException {
         this.configuration = new LanewebConfiguration(new URI("libguide"), new URI("libcal"), new URI("content"), "rw",
                 mock(ServletContext.class), "version", "browzine-token");

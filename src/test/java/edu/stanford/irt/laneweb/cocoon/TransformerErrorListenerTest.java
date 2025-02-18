@@ -8,8 +8,8 @@ import static org.easymock.EasyMock.verify;
 import javax.xml.transform.SourceLocator;
 import javax.xml.transform.TransformerException;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
@@ -21,7 +21,7 @@ public class TransformerErrorListenerTest {
 
     private SourceLocator locator;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.listener = new TransformerErrorListener();
         this.exception = mock(TransformerException.class);

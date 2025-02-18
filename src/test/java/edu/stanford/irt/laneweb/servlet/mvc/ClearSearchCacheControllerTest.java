@@ -3,10 +3,10 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.laneweb.metasearch.MetaSearchService;
 
@@ -16,7 +16,7 @@ public class ClearSearchCacheControllerTest {
 
     private MetaSearchService metaSearchService;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.metaSearchService = mock(MetaSearchService.class);
         this.controller = new ClearSearchCacheController(this.metaSearchService);

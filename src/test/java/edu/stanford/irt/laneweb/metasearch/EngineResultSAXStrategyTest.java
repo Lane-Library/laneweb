@@ -7,13 +7,14 @@ import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.util.Collections;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
@@ -34,7 +35,7 @@ public class EngineResultSAXStrategyTest {
 
     private TestXMLConsumer xmlConsumer;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.resourceSAXStrategy = mock(SAXStrategy.class);
         this.strategy = new EngineResultSAXStrategy(this.resourceSAXStrategy);
@@ -86,7 +87,7 @@ public class EngineResultSAXStrategyTest {
         verify(this.result, this.resourceSAXStrategy);
     }
 
-    @Test(expected = LanewebException.class)
+    @Test
     public void testToSAXThrowsException() throws SAXException, IOException {
         XMLConsumer c = mock(XMLConsumer.class);
         expect(this.result.getChildren()).andReturn(Collections.singleton(this.result));
@@ -101,6 +102,8 @@ public class EngineResultSAXStrategyTest {
         c.startElement(eq("http://irt.stanford.edu/search/2.0"), eq("engine"), eq("engine"), isA(Attributes.class));
         expectLastCall().andThrow(new SAXException());
         replay(this.result, this.resourceSAXStrategy, c);
-        this.strategy.toSAX(this.result, c);
+        assertThrows(LanewebException.class, () -> {
+            this.strategy.toSAX(this.result, c);
+        });
     }
 }

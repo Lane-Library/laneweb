@@ -1,16 +1,16 @@
 package edu.stanford.irt.laneweb.user;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class UserTest {
 
     private User user;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.user = new User("id@domain", "name", "email", "hashkey");
     }

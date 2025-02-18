@@ -1,11 +1,11 @@
 package edu.stanford.irt.laneweb.mapping;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,7 +17,7 @@ public class ApplicationStatusDeserializerTest {
 
     private ObjectMapper objectMapper;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.objectMapper = new ObjectMapper();
         SimpleModule module = new SimpleModule("lane model", new Version(1, 0, 0, null, null, null));

@@ -6,14 +6,14 @@ import static org.easymock.EasyMock.gt;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.codec.PersistentLoginToken;
@@ -37,7 +37,7 @@ public class CookieUserFactoryTest {
 
     private String userIdHashKey;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.userIdHashKey = "key";
         this.codec = mock(UserCookieCodec.class);

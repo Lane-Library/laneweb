@@ -11,8 +11,8 @@ import java.util.List;
 
 import javax.xml.transform.sax.SAXResult;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.oxm.Marshaller;
 import org.springframework.oxm.XmlMappingException;
 import org.xml.sax.SAXException;
@@ -25,7 +25,7 @@ public class BookmarkGeneratorTest {
 
     private Marshaller marshaller;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.marshaller = mock(Marshaller.class);
         this.generator = new BookmarkGenerator(this.marshaller);

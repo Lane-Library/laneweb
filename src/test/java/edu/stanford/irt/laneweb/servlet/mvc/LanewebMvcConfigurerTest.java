@@ -5,14 +5,14 @@ import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -21,7 +21,7 @@ public class LanewebMvcConfigurerTest {
 
     private LanewebMvcConfigurer configuration;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.configuration = new LanewebMvcConfigurer(null, null);
     }
@@ -49,7 +49,6 @@ public class LanewebMvcConfigurerTest {
     public void testGetSitemapHandlerExceptionResolver() {
         assertNotNull(this.configuration.getSitemapHandlerExceptionResolver(null));
     }
-
 
     @Test
     public void testRedirectHandlerInterceptor() {

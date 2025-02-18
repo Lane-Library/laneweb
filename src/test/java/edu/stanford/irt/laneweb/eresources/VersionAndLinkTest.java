@@ -1,12 +1,12 @@
 package edu.stanford.irt.laneweb.eresources;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 import java.util.Collections;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.laneweb.eresources.model.Link;
 import edu.stanford.irt.laneweb.eresources.model.LinkType;
@@ -18,7 +18,7 @@ public class VersionAndLinkTest {
 
     private Version version;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         int[] itemCount = { 2, 1 };
         this.version = new Version();

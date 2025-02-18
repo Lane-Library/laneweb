@@ -8,8 +8,8 @@ import static org.easymock.EasyMock.verify;
 
 import java.io.IOException;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
@@ -29,7 +29,7 @@ public class AbstractResultSAXStrategyTest {
 
     private XMLConsumer xmlConsumer;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.strategy = new TestAbstractResultSAXStrategy();
         this.xmlConsumer = mock(XMLConsumer.class);
