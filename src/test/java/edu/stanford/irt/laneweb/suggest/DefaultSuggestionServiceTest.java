@@ -65,38 +65,10 @@ public class DefaultSuggestionServiceTest {
     }
 
     @Test
-    public void testInternalGetSuggestionsBassett() {
-        Suggestion suggestion = new Suggestion("1", "1");
-        Collection<Suggestion> collection = new ArrayList<>();
-        collection.add(suggestion);
-        expect(this.eresource.getSuggestionsForTerm("Bassett", "venous thrombosis"))
-                .andReturn(Collections.singleton(suggestion));
-        replay(this.eresource, this.mesh);
-        Collection<String> suggestions = this.service.getSuggestions("venous thrombosis", "Bassett");
-        assertTrue(suggestions.contains(suggestion.getSuggestionTitle()));
-        verify(this.eresource, this.mesh);
-    }
-
-    @Test
     public void testInternalGetSuggestionsBogusLimit() {
         replay(this.eresource, this.mesh);
         Collection<String> suggestions = this.service.getSuggestions("venous thrombosis", "bogus");
         assertEquals(0, suggestions.size());
-        verify(this.eresource, this.mesh);
-    }
-
-    @Test
-    public void testInternalGetSuggestionsEjMesh() {
-        Suggestion suggestion1 = new Suggestion("1", "1");
-        Suggestion suggestion2 = new Suggestion("2", "2");
-        Collection<Suggestion> collection = new ArrayList<>();
-        collection.add(suggestion1);
-        expect(this.eresource.getSuggestionsForTerm("ej", "venous thrombosis")).andReturn(collection);
-        expect(this.mesh.getSuggestionsForTerm("venous thrombosis")).andReturn(Collections.singleton(suggestion2));
-        replay(this.eresource, this.mesh);
-        Collection<String> suggestions = this.service.getSuggestions("venous thrombosis", "ej-mesh");
-        assertTrue(suggestions.contains(suggestion1.getSuggestionTitle()));
-        assertTrue(suggestions.contains(suggestion2.getSuggestionTitle()));
         verify(this.eresource, this.mesh);
     }
 
@@ -116,13 +88,13 @@ public class DefaultSuggestionServiceTest {
     }
 
     @Test
-    public void testInternalGetSuggestionsMeshI() {
-        Suggestion suggestion = new Suggestion("1", "1");
+    public void testInternalGetSuggestionsJournal() {
+        Suggestion suggestion = new Suggestion("1", "JAMA");
         Collection<Suggestion> collection = new ArrayList<>();
         collection.add(suggestion);
-        expect(this.mesh.getSuggestionsForTerm("i", "venous thrombosis")).andReturn(Collections.singleton(suggestion));
+        expect(this.eresource.getSuggestionsForTerm("Journal", "jama")).andReturn(Collections.singleton(suggestion));
         replay(this.eresource, this.mesh);
-        Collection<String> suggestions = this.service.getSuggestions("venous thrombosis", "mesh-i");
+        Collection<String> suggestions = this.service.getSuggestions("jama", "Journal");
         assertTrue(suggestions.contains(suggestion.getSuggestionTitle()));
         verify(this.eresource, this.mesh);
     }
