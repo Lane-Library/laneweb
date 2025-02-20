@@ -14,7 +14,7 @@ import java.util.Map;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-import org.junit.AfterClass;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.ui.Model;
@@ -29,7 +29,7 @@ import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 
 public class PatronRegistrationControllerTest {
 
-    @AfterClass
+    @AfterAll
     public static void tearDownAfterClass() throws Exception {
     }
 

@@ -9,16 +9,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.Collections;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.Rule;
+// import org.junit.Rule;
 import org.junit.jupiter.api.Test;
-import org.junit.rules.ExpectedException;
+// import org.junit.rules.ExpectedException;
 
 import edu.stanford.irt.laneweb.suggest.SuggestionService;
 
 public class SuggestionControllerTest {
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
+    // @Rule
+    // public ExpectedException thrown = ExpectedException.none();
 
     private SuggestionController controller;
 

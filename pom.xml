@@ -4,7 +4,7 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>168</version>
+        <version>170-SNAPSHOT</version>
     </parent>
     <artifactId>laneweb</artifactId>
     <version>3.14.3-SNAPSHOT</version>
@@ -28,7 +28,7 @@
     </developers>
     <scm>
         <developerConnection>scm:git:git@gitlab.med.stanford.edu:lane/laneweb.git</developerConnection>
-        <tag>laneweb-3.14.0</tag>
+        <tag>HEAD</tag>
     </scm>
     <properties>
         <sonar.sources>src/main/java,src/main/javascript,src/main/css</sonar.sources>
@@ -79,10 +79,8 @@
             <version>3.0.0</version>
         </dependency>
         <dependency>
-            <groupId>org.junit.vintage</groupId>
-            <artifactId>junit-vintage-engine</artifactId>
-            <version>5.11.4</version>
-            <scope>test</scope>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>            
         </dependency>
         <dependency>
             <groupId>org.easymock</groupId>
@@ -277,7 +275,7 @@
             <artifactId>testcontainers</artifactId>
             <version>1.20.4</version>
             <scope>test</scope>
-        </dependency>
+        </dependency> 
     </dependencies>
     <build>
         <defaultGoal>package</defaultGoal>

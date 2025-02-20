@@ -13,7 +13,6 @@ import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.eresources.EresourceSearchService;
 import edu.stanford.irt.suggest.Suggestion;
 
