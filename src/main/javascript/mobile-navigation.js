@@ -1,18 +1,15 @@
-(function() {
-
+(function () {
     "use strict";
-
     if (document.querySelector(".nav-menu")) {
-
         let superHeader = document.querySelector("header:first-of-type"),
             blurableNodes = document.querySelectorAll(".content, footer, .mobile-screen-menu.lrg-screen-hide"),
-            toggleSuperHeader = function(){
+            toggleSuperHeader = function () {
                 if (superHeader) {
                     superHeader.classList.toggle('medium-screen-hide');
                 }
             },
-            toggleBlur = function(action){
-                blurableNodes.forEach(function(node) {
+            toggleBlur = function (action) {
+                blurableNodes.forEach(function (node) {
                     if ("add" === action) {
                         node.classList.add('blur');
                     } else {
@@ -20,11 +17,10 @@
                     }
                 })
             };
-
-        document.querySelectorAll(".nav-menu").forEach(function(node) {
-            node.addEventListener("click", function(event) {
+        document.querySelectorAll(".nav-menu").forEach(function (node) {
+            node.addEventListener("click", function (event) {
                 let isSmallMedia = !window.matchMedia("(min-width: 1100px)").matches,
-                    nav = event.currentTarget, 
+                    nav = event.currentTarget,
                     clickTarget = event.target,
                     navContent = nav.querySelector('.dropdown-content');
                 if (isSmallMedia && navContent && !clickTarget.href) {
@@ -33,22 +29,18 @@
                 }
             });
         });
-
-        document.querySelectorAll(".menu-overlay, #nav-toggle-off").forEach(function(node) {
+        document.querySelectorAll(".menu-overlay, #nav-toggle-off").forEach(function (node) {
             node.addEventListener(
-                "click", function() {
+                "click", function () {
                     window.location.hash = "#";
                     toggleSuperHeader();
                     toggleBlur("remove");
-            }, false);
+                }, false);
         });
-
         document.querySelector("#nav-toggle-on").addEventListener(
-            "click", function() {
+            "click", function () {
                 toggleSuperHeader();
                 toggleBlur("add");
             }, false);
-
     }
-
 })();

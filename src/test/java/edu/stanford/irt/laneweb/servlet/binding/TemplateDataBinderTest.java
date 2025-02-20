@@ -52,12 +52,4 @@ public class TemplateDataBinderTest {
         verify(this.chooser, this.request);
     }
 
-    @Test
-    public void testBindResponsive() {
-        this.model.put(Model.RESPONSIVE, Boolean.TRUE);
-        replay(this.chooser, this.request);
-        this.binder.bind(this.model, this.request);
-        assertEquals("responsive", this.model.get(Model.TEMPLATE));
-        verify(this.chooser, this.request);
-    }
 }

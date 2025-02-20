@@ -1,258 +1,275 @@
 .hero-unit {
-	color: white;
-	background-color: #8c1515;
-	background-image: url('../images/hero-bkgrd.jpg');
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center bottom;
-	width: 100%;
-	padding-top: 67px;
-	min-height: 204px;
+    color: white;
+    width: 100%;
+    padding-top: 67px;
+    min-height: 204px;
+    background: url('../images/hero-gradient-bkgrd.jpg') no-repeat;
+    background-size: 100% 270px;
 }
 
 .hero-unit-front-page {
-	padding-top: 98px;
-	min-height: 264px;
+    padding-top: 98px;
+    min-height: 264px;
 }
 
 .search-form {
-	position: relative;
-	width: 50%;
-	margin: auto;
+    font-size: 1.125em;
+    position: relative;
+    width: 50%;
+    margin: auto;
 }
 
-.search-form  .search-field {
-	position: relative;
-	color: black;
-	padding: 0px;
-	display: flex;
-	background-color: white;
-	height: 46px;
+.search-form .search-field {
+    position: relative;
+    color: black;
+    padding: 0px;
+    display: flex;
+    background-color: white;
 }
 
 .search-form .search-dropdown {
-	height: 46px;
-	padding-top: 13px;
-	margin-left: 0;
-	border: none;
-	border-radius: 0;
-	display: inline-block;
-	border-right: 1px solid rgb(0 0 0/ 20%);
+    padding: 0 1.6875em;
+    line-height: 60px;
+    margin-left: 0;
+    border: none;
 }
 
 .search-form .search-input-container {
-	display: inline-block;
-	width: 100%;
-	position: relative;
+    display: inline-block;
+    width: 100%;
+    position: relative;
 }
 
 .search-form input {
-	font-size: 0.875em;
-	height: 46px;
-	padding-left: 30px;
-	border: 1px white;
-	outline: none;
-	width: 95%;
+    line-height: 59px;
+    padding-left: 45px;
+    padding-right: 45px;
+    border: 1px white;
+    outline: 0;
+    width: 100%;
 }
 
-.search-form .search-dropdown .fa-solid, .search-form .search-dropdown .fa-regular
-	{
-	color: black;
-	padding-top: 3px;
+.search-form .search-dropdown .fa-solid,
+.search-form .search-dropdown .fa-regular {
+    color: black;
+    padding-top: 3px;
 }
 
 .search-dropdown select {
-	position: absolute;
-	display: block;
-	top: -1px;
-	left: 0;
-	height: 46px;
-	outline: 0;
-	margin: 0;
-	opacity: 0;
-	filter: alpha(opacity = 0);
-	visibility: visible;
-	border: 0;
-	cursor: pointer;
+    position: absolute;
+    display: block;
+    top: -1px;
+    left: 0;
+    height: 60px;
+    outline: 0;
+    margin: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    visibility: visible;
+    border: 0;
+    cursor: pointer;
 }
 
 .search-help {
-	text-align: center;
-	padding-top: 6px;
+    text-align: center;
+    padding-top: 10px;
 }
 
-.search-pico.search-pico-active ~ .search-help {
-	display: none;
+.search-pico.search-pico-active~.search-help {
+    display: none;
 }
 
-.search-form .fa-solid, .search-form .fa-regular, .search-form a,
-	.search-form a:hover, .search-form a:visited, .search-form a:active {
-	color: white;
-	text-decoration: none;
+.search-form .fa-solid,
+.search-form .fa-regular,
+.search-form a,
+.search-form a:hover,
+.search-form a:visited,
+.search-form a:active {
+    color: white;
+}
+
+.search-form a:link {
+    text-decoration: underline;
+    text-underline-offset: 3px;
 }
 
 .search-pico {
-	cursor: default;
-	font-size: 1em;
-	width: 100%;
-	height: auto;
-	padding: 10px 0;
-	z-index: 1;
-	display: none;
+    cursor: default;
+    font-size: 1em;
+    width: 100%;
+    height: auto;
+    padding: 10px 0;
+    z-index: 1;
+    display: none;
 }
 
 .search-pico.search-pico-active {
-	display: block;
+    display: block;
 }
 
 .pico-toggle {
-	width: 60%;
-	margin: auto;
-	display: block;
+    width: 60%;
+    margin: auto;
+    display: block;
 }
 
 .pico-toggle span:last-child {
-	float: right;
+    float: right;
 }
 
-.pico-on, .pico-off {
-	display: none;
+.pico-on,
+.pico-off {
+    display: none;
+    text-decoration: underline;
+    text-underline-offset: 3px;
 }
 
-.pico-toggle-active, .pico-on-active, .pico-off-active {
-	display: inline;
-	cursor: pointer;
+.pico-toggle-active,
+.pico-on-active,
+.pico-off-active {
+    display: inline;
+    cursor: pointer;
+
 }
 
 /* see case 125259 */
 .search-form input[name='q']::-ms-clear {
-	display: none;
+    display: none;
 }
 
 .pico-fields {
-	display: none;
+    display: none;
 }
 
 .search-pico .pure-g>div:not(:first-child):not(:last-child) {
-	padding: 0 6px;
+    padding: 0 6px;
 }
 
 .search-pico .pure-g>div:first-child {
-	padding-right: 6px;
+    padding-right: 6px;
 }
 
 .search-pico .pure-g>div:last-child {
-	padding-left: 6px;
+    padding-left: 6px;
 }
 
 .pico-fields input {
-	position: static;
-	font-size: 0.875em;
-	width: 100%;
-	height: 46px;
-	padding-left: 10px;
-	box-sizing: border-box;
-	border: 0;
+    position: static;
+    font-size: 0.875em;
+    width: 100%;
+    height: 46px;
+    padding-left: 10px;
+    box-sizing: border-box;
+    border: 0;
 }
 
 .search-form .pico-fields-active {
-	display: block;
-	margin-bottom: 6px;
-	padding: 0;
+    display: block;
+    margin-bottom: 10px;
+    padding: 0;
 }
 
 .search-reset {
-	cursor: pointer;
-	border: none;
-	background-color: transparent;
-	position: absolute;
-	right: 15px;
-	top: 14px;
-	display: none;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    position: absolute;
+    right: 14px;
+    top: 14px;
+    display: none;
 }
 
 .search-reset .fa-solid {
-	color: #8c1515;
-	font-size: 1.125em;
+    color: #8c1515;
+    font-size: 1.125em;
 }
 
 .search-reset .fa-solid:hover {
-	color: #428bca;
+    color: #428bca;
 }
 
 .search-reset-active {
-	display: block;
+    display: block;
 }
 
 .search-button {
-	cursor: pointer;
-	border: none;
-	background-color: transparent;
-	position: absolute;
-	top: 14px;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    position: absolute;
+    top: 20px;
+    left: 14px;
 }
 
+
 .search-button .fa-solid.fa-magnifying-glass {
-	color: lightslategrey;
-	padding-left: 9px;
+    color: lightslategrey;
 }
 
 .search-indicator {
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	margin: -50px 0 0 -50px;
-	display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin: -50px 0 0 -50px;
+    display: none;
 }
 
 .search-indicator .fa-solid {
-	color: black;
-	font-size: 6.25em;
+    color: black;
+    font-size: 6.25em;
 }
 
 .search-indicator-active {
-	display: block;
+    display: block;
 }
 
-@media ( max-width : 1100px) {
-	.hero-unit-front-page, .hero-unit {
-		padding-top: 30px;
-		padding-bottom: 33px;
-		min-height: auto;
-		background-position: unset;
-		display: flex;
-	}
-	.search-form {
-		width: 70%;
-	}
-	.pico-fields .pure-u-1-4 {
-		width: 25%;
-	}
-}
+@media (max-width : 1100px) {
 
-@media ( max-width : 812px) {
+    .hero-unit-front-page,
+    .hero-unit {
+        padding-top: 30px;
+        padding-bottom: 33px;
+        min-height: auto;
+        background-position: unset;
+        display: flex;
+    }
+
     .search-form {
-		width: 100%;
-		margin: 20px 2em 0;
-	}
-	
-	.search-results .search-form {
-	    margin: 20px 12px 0;
-	}
-	
-	.pico-toggle {
-	    width: 100%;
-	    padding: 0 12px;
-	}
-	
+        width: 70%;
+    }
+
+    .pico-fields .pure-u-1-4 {
+        width: 25%;
+    }
+}
+
+@media (max-width : 812px) {
+    .search-form {
+        width: 100%;
+        margin: 20px 2em 0;
+    }
+
+    .search-form .general-dropdown.dropdown {
+        display: none
+    }
+
+    .search-results .search-form {
+        margin: 20px 12px 0;
+    }
+
+    .pico-toggle {
+        width: 100%;
+        padding: 0 12px;
+    }
+
     .pico-fields .pure-g {
         justify-content: space-between;
-	}
-	
-	.pico-fields .pure-g > div.pure-u-1-4 {
-	    width: 49%;
-	    padding: 0 !important;
-	    margin: 6px 0;
-	}
-	
+    }
+
+    .pico-fields .pure-g>div.pure-u-1-4 {
+        width: 49%;
+        padding: 0 !important;
+        margin: 6px 0;
+    }
+
 }

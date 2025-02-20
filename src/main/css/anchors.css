@@ -1,13 +1,33 @@
 /* these are the default anchor styles*/
-a, a .fa, a .fa-solid, a .fa-regular, a .fa-light, a .fa-thin {
+a,
+a .fa,
+a .fa-solid,
+a .fa-regular,
+a .fa-light,
+a .fa-thin {
     color: #007c92;
     text-decoration: none;
 }
-a:active, a:hover {
+
+a:active,
+a:hover {
     text-decoration: underline;
+    text-underline-offset: 3px;
 }
+
 a.disabled {
     color: #ccc;
     cursor: default;
     pointer-events: none;
+}
+
+.centered-basic-card a,
+.basic-card a,
+.basic-container a,
+.banner a,
+.bg-img-lagunita a,
+.no-search-content a,
+.su-design .content a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
 }

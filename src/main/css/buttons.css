@@ -2,134 +2,141 @@
 http://lane.stanford.edu/samples/button-css.html
  */
 .btn {
-	background-color: #8C1515;
-	border: 2px solid #8C1515;
-	padding: 8px 24px;
-	color: #F0F0F0;
-	cursor: pointer;
-	animation-duration: 0.3s;
-	font-size: 1.125em;
-	font-family: 'Source Sans Pro', serif;
-	line-height: 24px;
-	display: inline-block;
+    background-color: #8C1515;
+    border: 2px solid #8C1515;
+    padding: 8px 24px;
+    color: #F0F0F0;
+    cursor: pointer;
+    animation-duration: 0.3s;
+    font-size: 1.125em;
+    font-family: 'Source Sans Pro', serif;
+    line-height: 24px;
+    display: inline-block;
 }
 
 .btn:link {
-	text-decoration: none;
+    text-decoration: none !important;
 }
 
 .btn:hover {
-	background-color: #651C32;
-	border-color: #651C32;
+    background-color: #651C32;
+    border-color: #651C32;
 }
 
 
 .btn:active {
-	background-color: #42081B;
-	border-color: #42081B;
+    background-color: #42081B;
+    border-color: #42081B;
 }
 
 .btn.outline {
-	color: #8C1515;
-	background-color: transparent;
+    color: #8C1515;
+    background-color: transparent;
 }
 
 .btn.outline:hover {
-	color: #F0F0F0;
-	background-color: #8C1515;
+    color: #F0F0F0;
+    background-color: #8C1515;
 }
 
 
 .btn.outline:active {
-	background-color: #651C32;
+    background-color: #651C32;
 }
 
 .btn.alt {
-	background-color: #007C92;
-	border-color: #007C92;
+    background-color: #007C92;
+    border-color: #007C92;
 }
 
 .btn.alt:hover {
-	background-color: #005766;
-	border-color: #005766;
+    background-color: #005766;
+    border-color: #005766;
 }
 
 .btn.alt:active {
-	background-color: #002B33;
-	border-color: #002B33;
+    background-color: #002B33;
+    border-color: #002B33;
 }
 
 .btn.alt.outline {
-	color: #007C92;
-	background-color: #F0F0F0;
-	border-color: #007C92;
+    color: #007C92;
+    background-color: #F0F0F0;
+    border-color: #007C92;
 }
 
 .btn.alt.outline:hover {
-	color: #F0F0F0;
-	background-color: #007C92;
+    color: #F0F0F0;
+    background-color: #007C92;
 }
 
 
 .btn.alt.outline:active {
-	background-color: #005766;
+    background-color: #005766;
 }
 
 
 
 .btn.black {
-	color: #FFF;
-	background-color: #000;
-	border-color: #000;	
+    color: #FFF;
+    background-color: #000;
+    border-color: #000;
 }
 
 
 .btn.black.outline {
-	color: #000;
-	background-color: #FFF;
-	border-color: #000;
+    color: #000;
+    background-color: #FFF;
+    border-color: #000;
 }
 
 .btn.black.outline:hover {
-	color: #FFF;
-	background-color: #000;
+    color: #FFF;
+    background-color: #000;
 }
 
 
-.btn  .icon {
+.btn .icon {
     color: #F0F0F0;
     background-color: #8C1515;
     margin-right: 5px;
 }
 
-.btn:hover  .icon {
+.btn:hover .icon {
     background-color: #651C32;
 }
 
-.btn:active  .icon {
+.btn.angle-down::after {
+    content: "\f107";
+    font-family: FontAwesome, Arial, sans-serif;
+    font-size: 1em;
+    margin-left: 9px;
+}
+
+.btn:active .icon {
     background-color: #430A0A;
 }
 
-.btn.outline  .icon {
+.btn.outline .icon {
     color: #8C1515;
     background-color: #F0F0F0;
 }
 
-.btn.outline:hover  .icon {
+.btn.outline:hover .icon {
     color: #F0F0F0;
     background-color: #8C1515;
 }
 
-.btn.outline:active  .icon {
+.btn.outline:active .icon {
     background-color: #651C32;
 }
 
-.btn.alt  .icon {
+.btn.alt .icon {
     color: #F0F0F0;
     background-color: #007C92;
 }
 
-.btn.alt:hover  .icon {
+.btn.alt:hover .icon {
     color: #F0F0F0;
     background-color: #005766;
 }
@@ -138,93 +145,93 @@ http://lane.stanford.edu/samples/button-css.html
     background-color: #002B33;
 }
 
-.btn.alt.outline  .icon {
+.btn.alt.outline .icon {
     color: #007C92;
     background-color: #F0F0F0;
 }
 
-.btn.alt.outline:hover  .icon {
+.btn.alt.outline:hover .icon {
     color: #F0F0F0;
     background-color: #007C92;
 }
 
-.btn.alt.outline:active  .icon {
+.btn.alt.outline:active .icon {
     background-color: #005766;
 }
 
 
 
 /*  Alternate icon without background */
-.btn  .icon-alt {
-	border-radius: 12px;
-	font-size: 0.9375em;
-	height: 24px;
-	width: 24px;
-	padding: 4px;
-	box-sizing: border-box;
-	margin-right: 5px;
-	line-height: 15px;
-	vertical-align: text-top;
-	text-align: center;
+.btn .icon-alt {
+    border-radius: 12px;
+    font-size: 0.75em;
+    height: 24px;
+    width: 24px;
+    padding: 4px;
+    box-sizing: border-box;
+    margin-right: 5px;
+    line-height: 15px;
+    vertical-align: text-top;
+    text-align: center;
 }
 
 .btn .icon-alt {
-	color: #8C1515;
-	background-color: #F0F0F0;
+    color: #8C1515;
+    background-color: #F0F0F0;
 }
 
 .btn:hover .icon-alt {
-	color: #651C32;
+    color: #651C32;
 }
 
 .btn:active .icon-alt {
-	color: #430A0A;
+    color: #430A0A;
 }
 
-.btn.outline  .icon-alt {
-	color: #F0F0F0;
-	background-color: #8C1515;
+.btn.outline .icon-alt {
+    color: #F0F0F0;
+    background-color: #8C1515;
 }
 
-.btn.outline:hover  .icon-alt {
-	color: #8C1515;
-	background-color: #F0F0F0;
+.btn.outline:hover .icon-alt {
+    color: #8C1515;
+    background-color: #F0F0F0;
 }
 
-.btn.outline:active  .icon-alt {
-	color: #651C32;
+.btn.outline:active .icon-alt {
+    color: #651C32;
 }
 
-.btn.alt  .icon-alt {
-	color: #007C92;
-	background-color: #F0F0F0;
+.btn.alt .icon-alt {
+    color: #007C92;
+    background-color: #F0F0F0;
 }
 
-.btn.alt:hover  .icon-alt {
-	color: #005766;
+.btn.alt:hover .icon-alt {
+    color: #005766;
 }
 
-.btn.alt:active  .icon-alt {
-	color: #002B33;
+.btn.alt:active .icon-alt {
+    color: #002B33;
 }
 
-.btn.alt  .icon-alt {
-	color: #007C92;
-	background-color: #F0F0F0;
+.btn.alt .icon-alt {
+    color: #007C92;
+    background-color: #F0F0F0;
 }
 
-.btn.alt.outline  .icon-alt {
-	color: #F0F0F0;
-	background-color: #007C92;
+.btn.alt.outline .icon-alt {
+    color: #F0F0F0;
+    background-color: #007C92;
 }
 
-.btn.alt.outline:hover  .icon-alt {
-	color: #007C92;
-	background-color: #F0F0F0;
+.btn.alt.outline:hover .icon-alt {
+    color: #007C92;
+    background-color: #F0F0F0;
 }
 
-.btn.alt.outline:active  .icon-alt {
-	color: #005766;
+.btn.alt.outline:active .icon-alt {
+    color: #005766;
 }
 
 /* I do not like to use the !important but in this case I thought it is making sense  because it will
@@ -246,5 +253,5 @@ overwrite any other class ( outline, alt ) if the button is disabled */
 
 .btn.disabled .icon {
     color: #F0F0F0 !important;
-    background-color: #666666 !important;    
+    background-color: #666666 !important;
 }

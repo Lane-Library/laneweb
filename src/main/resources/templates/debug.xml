@@ -8,7 +8,6 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/googlefonts.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/fontawesome.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/fontawesome-local.css" />
-        <link rel="stylesheet" type="text/css" href="/resources/css/som-colors.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/main-body.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/header.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/nav.css" />
@@ -25,6 +24,7 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/tooltips.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/miscellaneous.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/events.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/no-search-template.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/buttons.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/forms.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/discovery-login.css" />
@@ -43,20 +43,20 @@
         <link rel="stylesheet" type="text/css" href="/resources/css/gutters.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/back-to-top.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/solr-facets.css" />
-        <link rel="stylesheet" type="text/css" href="/resources/css/equipment.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/clinical-search.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/newsfeed-item.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/calendar.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/password-table.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/portals.css" />
-        <link rel="stylesheet" type="text/css" href="/resources/css/course-reserves.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/bassett.css" />
-        <link rel="stylesheet" type="text/css" href="/resources/css/liaisons-directory.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/contacts.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/responsive.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/explore.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/IE.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/use-lane.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/container.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/som-colors.css" />
+        <link rel="stylesheet" type="text/css" href="/resources/css/spacings.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/subscription.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/altmetric.css" />
         <link rel="stylesheet" type="text/css" href="/resources/css/print.css" media="print" />

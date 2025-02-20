@@ -61,7 +61,8 @@ public class BindingConfiguration {
   }
 
   @Bean
-  public BookmarkingDataBinder bookmarkingDataBinder(@Value("${edu.stanford.irt.laneweb.bookmarking}") final String bookmarking) {
+  public BookmarkingDataBinder bookmarkingDataBinder(
+      @Value("${edu.stanford.irt.laneweb.bookmarking}") final String bookmarking) {
     return new BookmarkingDataBinder(bookmarking);
   }
 
@@ -85,7 +86,8 @@ public class BindingConfiguration {
   }
 
   @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder")
-  public DataBinder dataBinder(final UserDataBinder userDataBinder, final TicketDataBinder ticketDataBinder, final BookmarkDataBinder bookmarkDataBinder, final ModelDataBinder modelDataBinder,
+  public DataBinder dataBinder(final UserDataBinder userDataBinder, final TicketDataBinder ticketDataBinder,
+      final BookmarkDataBinder bookmarkDataBinder, final ModelDataBinder modelDataBinder,
       final LiveChatAvailabilityBinder liveChatAvailabilityBinder) {
     List<DataBinder> dataBinders = new ArrayList<>(19);
     dataBinders.add(userDataBinder);
@@ -165,11 +167,15 @@ public class BindingConfiguration {
   public TemplateChooser templateChooser() {
     Set<String> templateNames = new HashSet<>();
     templateNames.add("template");
+    templateNames.add("no-search");
     templateNames.add("bassettLargerView");
     templateNames.add("none");
     templateNames.add("history");
     Map<String, String> templateMap = new HashMap<>();
-    templateMap.put("^/biomed-resources/bassett/raw/bassettLargerView.html", "bassettLargerView");
+    templateMap.put("^/biomed-resources/(ej|eb|course-reserves|exam).html", "no-search");
+    templateMap.put("^/contacts/liaisons.html", "no-search");
+    templateMap.put("^/using-lib/equipment.html", "no-search");
+    templateMap.put("^/biomed-resources/bassett/raw/bassettLargerView.html", "none");
     templateMap.put("^/discoveryLoginPage.html", "none");
     templateMap.put("^/devDiscoveryLoginPage.html", "none");
     templateMap.put("^/beemap/beemap.html", "none");
@@ -192,12 +198,14 @@ public class BindingConfiguration {
   }
 
   @Bean
-  public UserCookieCodec userCookieCodec(@Value("${edu.stanford.irt.laneweb.useridcookiecodec.key}") final String userCookieKey) {
+  public UserCookieCodec userCookieCodec(
+      @Value("${edu.stanford.irt.laneweb.useridcookiecodec.key}") final String userCookieKey) {
     return new UserCookieCodec(userCookieKey);
   }
 
   @Bean
-  public UserDataBinder userDataBinder(@Value("${edu.stanford.irt.laneweb.useridhashkey}") final String userIdHashKey, final UserCookieCodec userCookieCodec) {
+  public UserDataBinder userDataBinder(@Value("${edu.stanford.irt.laneweb.useridhashkey}") final String userIdHashKey,
+      final UserCookieCodec userCookieCodec) {
     List<UserFactory> userFactories = new ArrayList<>(2);
     userFactories.add(new RequestAttributeUserFactory(userIdHashKey));
     userFactories.add(new CookieUserFactory(userCookieCodec, userIdHashKey));
@@ -205,7 +213,8 @@ public class BindingConfiguration {
   }
 
   @Bean(name = "edu.stanford.irt.laneweb.servlet.binding.DataBinder/userdata")
-  public DataBinder userDataDataBinder(final UserDataBinder userDataBinder, final TicketDataBinder ticketDataBinder, final BasePathDataBinder basePathDataBinder,
+  public DataBinder userDataDataBinder(final UserDataBinder userDataBinder, final TicketDataBinder ticketDataBinder,
+      final BasePathDataBinder basePathDataBinder,
       final BookmarkingDataBinder bookmarkingDataBinder, final BookmarkDataBinder bookmarkDataBinder) {
     List<DataBinder> dataBinders = new ArrayList<>(9);
     dataBinders.add(userDataBinder);

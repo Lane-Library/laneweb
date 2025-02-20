@@ -50,6 +50,11 @@ public class EresourcesConfigurationTest {
     }
 
     @Test
+    public void testLinkWithoutCoverTransformer() {
+        assertNotNull(this.configuration.linkWithoutCoverTransformer(null));
+    }
+
+    @Test
     public void testPagingEresourceListHTMLSAXStrategy() {
         assertNotNull(this.configuration.pagingEresourceListHTMLSAXStrategy());
     }

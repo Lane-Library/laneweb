@@ -112,7 +112,6 @@ footer:nth-of-type(3) {
 
 .footer-organization .brand a {
     background-size: 40%;
-    font-size: unset;
     padding: 7px 0 0 100px;
 }
 
@@ -229,10 +228,6 @@ footer:nth-of-type(3) {
         width: 100%;
     }
 
-    footer div {
-        font-size: 0.8125em;
-    }
-
     footer .brand {
         height: 55px;
     }
@@ -245,14 +240,8 @@ footer:nth-of-type(3) {
 
     .footer-organization .social-logos {
         padding-top: 10px;
-        position: absolute;
-        top: 16px;
-        right: 6px;
     }
 
-    .footer-organization .flex-container-nowrap div {
-        width: 50%;
-    }
 }
 
 @media (max-width : 360px) {

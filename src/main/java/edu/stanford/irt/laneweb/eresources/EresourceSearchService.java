@@ -33,6 +33,12 @@ public class EresourceSearchService extends AbstractRestService {
         return this.restService.getObject(this.getURI(path), Eresource.class);
     }
 
+    public Eresource getByLaneSearchId(final String id) {
+        String path = "search/id/" + this.urlEncode(id);
+        log.info("Lane Search Id resource service {}", path);
+        return this.restService.getObject(this.getURI(path), Eresource.class);
+    }
+
     public Map<String, Integer> searchCount(final String searchTerm) {
         URI path = this.getURI("search/count/" + this.urlEncode(searchTerm));
         log.info("count  Eresource service {}", path);

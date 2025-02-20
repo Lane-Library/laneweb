@@ -2,12 +2,13 @@ describe('Form submited Test Case', () => {
 
     beforeEach(() => {
         cy.viewport(1101, 1750);
-        cy.visit('/cypress-test/contacts/index.html#sfp-book');
-        cy.get("#sfp-book form").as('form');
+        cy.visit('/cypress-test/contacts/sfp.html#sfp-book');
+        cy.get("#sfp-book").as('form');
         cy.get("#sfp-book button[type='submit']").as('submit');
     });
 
     it('Form submited', () => {
+
         cy.get('@form').should('exist');
         cy.get('@submit').should('exist');
         cy.get('@submit').should('be.visible');

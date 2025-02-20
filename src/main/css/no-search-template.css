@@ -1,0 +1,64 @@
+.no-search-content {
+    background: url('../images/linear-gradient-bkgrd.jpg') no-repeat;
+    background-size: 100% 1050px;
+    padding: 88px 100px 24px;
+}
+
+.no-search-content>div {
+    margin: auto;
+}
+
+.no-search-content .ankle-footer {
+    margin: 98px -100px -90px;
+}
+
+.no-search-content .search-form fieldset {
+    position: relative;
+    padding: 0;
+}
+
+.no-search-content .search-form {
+    margin: 54px auto 82px;
+    width: 70%;
+}
+
+.no-search-content .search-help-link {
+    text-align: center;
+    padding-top: 10px;
+}
+
+
+
+@media (max-width : 1100px) {
+
+    .no-search-content {
+        padding: 0 30px 42px;
+    }
+
+    .no-search-content .ankle-footer {
+        margin: 42px -30px -90px;
+    }
+
+}
+
+
+@media (max-width: 812px) {
+    .no-search-content .search-form {
+        margin: 54px auto 82px;
+        width: 85%;
+    }
+
+    .no-search-content {
+        padding: 43px 20px 24px;
+    }
+
+    .no-search-content h1 {
+        margin-left: 7%;
+    }
+
+    .no-search-content .ankle-footer {
+        margin: 42px -20px -90px;
+    }
+
+
+}

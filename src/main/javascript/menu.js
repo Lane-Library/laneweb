@@ -1,35 +1,43 @@
-(function() {
+(function () {
 
     "use strict";
 
 
+
+    //For menu item with the hash in the url like in the guides.html and mobile-applications.html
+    let links = document.querySelectorAll(".menu-container.hoverline ul li a[href^='#']");
+    if (links) {
+        let hash = window.location.hash, selectedLink;
+        links.forEach(function (link) {
+            link.addEventListener('click', function (event) {
+                hash = event.target.hash;
+                links.forEach(function (l) { l.classList.remove('menuitem-active') });
+                L.fire("menu-changed", { hash: hash });
+                link.classList.add('menuitem-active');
+            })
+        });
+        selectedLink = document.querySelector('.menu-container.hoverline ul li a[href="' + hash + '"]');
+        if (selectedLink) {
+            selectedLink.classList.add('menuitem-active');
+        }
+    }
+
     //For regular mobile menu 
-    document.querySelectorAll('.menu-container.mobile h2, .menu-container.phone h2').forEach(function(menu) {
-        menu.addEventListener('click', function(event) {
+    document.querySelectorAll('.menu-container.mobile h2, .menu-container.phone h2').forEach(function (menu) {
+        menu.addEventListener('click', function (event) {
             event.preventDefault();
             menu.closest(".menu-container").classList.toggle('active');
         })
     });
 
 
-    document.querySelectorAll('.menu-container ul li a[href^="#"]').forEach(function(link) {
-        link.addEventListener('click', function(event) {
-           let clickTarget = event.target;
-           clickTarget.closest('ul').querySelectorAll('li a').forEach(function(anchor) {
-                anchor.classList.remove('menuitem-active');
-            });
-            clickTarget.classList.add('menuitem-active');    
-        })
+    // to select menu  from the header 
+    document.querySelectorAll("nav ul li.nav-menu span").forEach(function (span) {
+        span.parentElement.querySelectorAll("a").forEach(function (link) {
+            if (link.pathname == window.location.pathname && link.hash == window.location.hash) {
+                span.classList.add("red");
+                span.classList.add("btm-brdr-red");
+            }
+        });
     });
-
-    
-    window.addEventListener("load", function() {
-    let hash = window.location.hash;
-    document.querySelectorAll('.menu-container ul li a[href^="#"]').forEach(function(link) {
-        if(hash === link.hash){
-            link.classList.add('menuitem-active');
-        }       
-    });
-    });
-
 })();

@@ -1,0 +1,264 @@
+.su-design section.content>div.centered:first-of-type {
+    margin: 0;
+    padding: 0;
+}
+
+.su-design .footer-organizations {
+    margin-top: 0;
+}
+
+.basic-card,
+.centered-basic-card {
+    position: relative;
+}
+
+.basic-card img,
+.centered-basic-card img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 28px;
+}
+
+
+.basic-card i,
+.centered-basic-card i {
+    display: inline-block;
+    margin-bottom: 18px;
+}
+
+.basic-card p,
+.centered-basic-card p {
+    margin-bottom: 18px;
+}
+
+.basic-card div,
+.centered-basic-card div {
+    margin-bottom: 36px;
+}
+
+.basic-card>*:last-child,
+.centered-basic-card>*:last-child {
+    margin-bottom: 0;
+}
+
+
+.basic-card>*:not(h3, h2):first-child,
+.centered-basic-card>*:not(h3, h2):first-child {
+    margin-top: 0;
+}
+
+
+
+.basic-card .btn,
+.centered-basic-card .btn {
+    display: block;
+    width: fit-content;
+    margin-top: 12px;
+}
+
+.basic-card .inline-image {
+    display: flex;
+    align-items: center;
+}
+
+.basic-card .inline-image>img {
+    max-width: 21%;
+}
+
+.basic-card .inline-image>div {
+    margin-left: 38px;
+}
+
+.centered-basic-card,
+.centered-basic-card .btn,
+.centered-basic-card h2 {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* To set the button at the same level when the basic-card have the same-height */
+.same-height .basic-card,
+.same-height .centered-basic-card {
+    padding-bottom: 50px;
+    position: relative;
+}
+
+.same-height div div.basic-card {
+    height: 100%;
+}
+
+.same-height .basic-card .btn:last-of-type,
+.same-height .centered-basic-card .btn:last-of-type {
+    position: absolute;
+    bottom: 0;
+}
+
+.same-height .centered-basic-card .btn {
+    right: 50%;
+    left: 50%;
+    transform: translate(-50%);
+    white-space: nowrap;
+}
+
+
+.su-design .content>.centered .basic-container {
+    padding: 98px 11%;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.basic-container h2,
+.basic-container h3,
+.basic-container h4 {
+    margin-bottom: 26px;
+}
+
+.basic-container p {
+    margin-bottom: 12px;
+}
+
+.basic-container>div {
+    margin-bottom: 24px;
+}
+
+.basic-container>*:last-child {
+    margin-bottom: 0;
+}
+
+.basic-container>*:first-child {
+    margin-top: 0;
+}
+
+
+
+.basic-container.btn {
+    margin: 12px 0;
+}
+
+.basic-container.same-height {
+    height: calc(100% - 24px);
+}
+
+.banner {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 24px;
+}
+
+.banner>div {
+    display: block;
+}
+
+.banner div:first-of-type i {
+    width: 2px;
+}
+
+.banner div:first-of-type i.fa-2x {
+    width: 26px;
+}
+
+.banner div:first-of-type i.fa-3x {
+    width: 66px;
+}
+
+
+.banner div:first-of-type i.fa-4x {
+    width: 82px;
+}
+
+.banner div:first-of-type i.fa-5x {
+    width: 100px;
+}
+
+.banner div:first-of-type i.fa-6x {
+    width: 130px;
+}
+
+.banner div:first-of-type i.fa-7x {
+    width: 165px;
+}
+
+.banner>div:nth-child(2) {
+    width: 95%;
+}
+
+.service-page {
+    padding: 0 100px 98px;
+}
+
+.top-container {
+    margin-top: 24px;
+}
+
+
+.top-container>div:nth-child(1) {
+    flex-shrink: 0;
+}
+
+.top-container>div:nth-child(2) {
+    flex-grow: 1;
+}
+
+.callout {
+    padding: 20px 24px;
+    margin: 31px auto;
+    font-size: 21px;
+    text-align: center;
+    background-color: #E1E7E9;
+    width: fit-content;
+}
+
+
+@media (max-width : 1100px) {
+
+    .su-design .content>.centered .basic-container {
+        padding: 55px 5%;
+    }
+
+    .callout {
+        padding: 6px 12px;
+        margin: 15px 9px;
+        font-size: 18px;
+    }
+
+    .service-page {
+        padding: 0 30px 42px;
+        margin: 0 30px 42px
+    }
+
+    .banner .medium-screen-hide {
+        display: none;
+    }
+
+    .banner>div:nth-child(2) {
+        width: 100%;
+    }
+
+    .ankle-footer>div {
+        padding-bottom: 6em;
+    }
+
+}
+
+
+@media (max-width : 812px) {
+    .banner {
+        flex-flow: row wrap;
+    }
+
+    .su-design .content>.centered .basic-container {
+        padding: 35px 3%;
+    }
+
+    .service-page {
+        padding: 0 20px 42px;
+        margin: 0 20px 42px;
+    }
+
+    .ankle-footer>div {
+        padding-top: 3em;
+    }
+
+}

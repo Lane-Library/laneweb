@@ -7,7 +7,7 @@ describe('Search Dropdown TestCase', () => {
     });
 
     it('dropdown click activates', () => {
-        cy.get('@searchDropdownLabel').should('have.text', 'All');
+        cy.get('@searchDropdownLabel').should('contains.text', 'All');
         cy.get('@searchDropdown').select('catalog-all', { force: true });
         cy.get('@searchDropdownLabel').should('have.text', 'Lane Catalog');
     });

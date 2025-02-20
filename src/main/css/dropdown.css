@@ -9,15 +9,15 @@
     background: white;
 }
 
-.dropdown:hover .dropdown-content{
+.dropdown:hover .dropdown-content {
     display: block;
 }
 
-.general-dropdown{
+.general-dropdown {
     display: inline-block;
 }
 
-.general-dropdown-trigger{
+.general-dropdown-trigger {
     cursor: pointer;
     position: relative;
     padding: 4px 8px;
@@ -26,8 +26,12 @@
     white-space: nowrap;
 }
 
-.general-dropdown-trigger .fa-regular{
+.general-dropdown-trigger .fa-regular {
     margin-left: 8px;
+}
+
+.general-dropdown-trigger .fa {
+    margin-left: 18px;
 }
 
 .general-dropdown-content {

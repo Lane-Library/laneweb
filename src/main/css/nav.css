@@ -1,353 +1,426 @@
 #navigation {
-	flex: 1;
+    flex: 1;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0px 45px;
 }
 
 nav>ul {
-	display: flex;
-	justify-content: space-between;
-	padding-left: 5%;
+    display: flex;
+    justify-content: space-between;
 }
 
 /* Menu header */
 ul .nav-menu {
-	display: inline-block;
-	flex: 1 1 auto;
-	border: 0;
-	padding: 0;
+    display: inline-block;
+    flex: 1 1 auto;
 }
 
- ul .nav-login{
- 	display: flex;
- 	padding-left: 5%;
- }
-.nav-menu>span a {
-	color: black;
-}
-.nav-menu>span {
-	color: black;
-	display: block;
-	font-size: 1.125em;
-	text-align: center;
-	white-space: nowrap;
-	line-height: 64px;
-	font-weight: 600;
-}
 
-.nav-menu>span {
-	cursor: default;
+ul .nav-login {
+    display: flex;
+    padding-left: 5%;
 }
 
 .nav-menu>span a {
-	cursor: pointer;
+    color: black;
+    cursor: pointer;
 }
 
-.nav-menu:hover, .nav-menu:active, .nav-menu-active {
-	background-color: #f0f4f5;
-	border: none;
+.nav-menu>span {
+    display: block;
+    font-size: 18px;
+    text-align: center;
+    white-space: nowrap;
+    cursor: default;
+    line-height: 68px;
+    padding-top: 3px;
 }
 
-.nav-menu.nav-menu-active>span, .nav-menu:hover>span {
-	color: #8c1515;
+.nav-menu>span.btm-brdr-red label {
+    position: relative;
+}
+
+.nav-menu>span.btm-brdr-red label::before {
+    content: " ";
+    position: absolute;
+    width: 100%;
+    border-top: 4px solid #8C1515;
+    bottom: -23px;
+}
+
+.nav-menu:hover span.btm-brdr-red label::before {
+    opacity: 0;
+}
+
+.nav-menu:hover,
+.nav-menu:active,
+.nav-menu-active {
+    background-color: #f0f4f5;
+}
+
+.nav-menu.nav-menu-active>span,
+.nav-menu:hover>span {
+    color: #8c1515;
 }
 
 /* Icons close to the menu header */
-.nav-menu i.fa-angle-up, .nav-menu i.fa-angle-down {
-	text-align: center;
-	padding-left: 3px;
-	color: black;
-	vertical-align: middle;
+.nav-menu i.fa-angle-up,
+.nav-menu i.fa-angle-down {
+    text-align: center;
+    padding-left: 3px;
+    color: black;
+    vertical-align: middle;
 }
 
 .nav-menu i.fa-angle-up {
-	display: none;
+    display: none;
 }
 
 .nav-menu:hover i.fa-angle-up {
-	display: inline-block;
+    display: inline-block;
 }
 
 .nav-menu:hover i.fa-angle-down {
-	display: none;
+    display: none;
 }
 
 /* Menu content */
 .nav-menu .nav-menu-content {
-	background-color: #f0f4f5;
-	border-top: none;
-	left: 0;
-	padding: 12px 0 24px 14px;
-	z-index: 3;
-	font-family: 'Source Sans Pro', sans-serif;
+    background-color: #f0f4f5;
+    border-top: none;
+    left: 0;
+    padding: 12px 0 24px 14px;
+    z-index: 3;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 .nav-menu.dropdown:hover .dropdown-content-on-click {
-	display: none;
+    display: none;
 }
 
 .nav-menu-content li {
-	width: 260px;
-	margin: 12px 24px;
-	box-sizing: border-box;
+    width: 260px;
+    margin: 12px 24px;
+    box-sizing: border-box;
 }
 
 .content .nav-menu-content li {
-	border-bottom: none;
+    border-bottom: none;
 }
 
 .nav-menu-content a {
-	display: inline;
-	font-weight: normal;
-	font-size: 1em;
-	color: black;
+    display: inline;
+    font-weight: normal;
+    font-size: 1em;
+    color: black;
 }
 
 /* Menu multiple colunms */
 .dropdown:hover .dropdown-content.nav-cols-content {
-	display: flex;
+    display: flex;
 }
 
 .dropdown-content.nav-cols-content {
-	padding: 16px 0;
+    padding: 16px 0;
 }
+
 /* To place the "GET HELP" content menu to the right */
 .dropdown:hover .nav-open-right {
-	right: 0;
-	left: inherit;
+    right: 0;
+    left: inherit;
 }
 
 .nav-cols-content div:first-child {
-	flex: 1 1 50%;
-	border-right: 1px solid #ccc;
+    flex: 1 1 50%;
+    border-right: 1px solid #ccc;
 }
 
 .nav-cols-content div p {
-	padding: 12px 24px 6px;
-	font-weight: 800;
+    padding: 12px 24px 6px;
 }
 
-.content  .nav-menu-content.nav-cols-content li:last-child {
-	border: none;
+.nav-cols-content div p,
+.nav-cols-content div p a {
+    font-weight: 800;
+}
+
+.nav-cols-content div p a i {
+    color: black;
+}
+
+.content .nav-menu-content.nav-cols-content li:last-child {
+    border: none;
 }
 
 
 .nav-login .login {
-	display: flex;
-	justify-content: end;
+    display: flex;
+    justify-content: end;
 }
 
 #nav-toggle-off {
-	display: none;
+    display: none;
 }
 
 #nav-toggle-off span {
-	font-size: 1em;
+    font-size: 1em;
 }
 
-@media ( max-width :1100px) {
-	
-	.nav-menu.dropdown:hover .dropdown-content {
-		display: none;
-	}
-	.nav-menu.dropdown:hover .dropdown-content-on-click,
-		.nav-menu-active-on-click .dropdown-content-on-click, #navigation li.nav-menu,
-		#navigation:target nav {
-		display: block;
-	}
+@media (max-width :1100px) {
 
-
-	/* To hide bookmarks link when the navigation is clicked  */
-	#navigation:target .nav-login .login>li:first-of-type, #navigation:target .nav-login .login>li:last-of-type,
-		#navigation:target .nav-login .login  a.medium-screen-hide {
-		display: none;
-	}
-
-	#navigation:target .menu-overlay {
-		background-color: black;
-		width: 100%;
-		height: 100%;
-		position: fixed;
-		opacity: .65;
-		top: 0;
-	}
-	#navigation .nav-menu.nav-menu-active-on-click, #navigation .nav-menu.nav-menu-active {
-		background-color: #f0f4f5;
-	}
-	.nav-menu-active-on-click>span {
-		color: #8c1515;
-	}
-	.nav-menu>a, .nav-menu>a:visited {
-		text-align: left;
-	}
-	#navigation {
-		position: absolute;
-		z-index: 2;
-		right: 0px;
-		width: 100%;
-	}
-	#navigation nav {
-		display: none;
-		-webkit-font-smoothing: antialiased;
-	}
-	#navigation ul {
-		display: block;
-		margin: 0;
-		padding: 0;
-	}
-	#navigation .nav-menu {
-		border-bottom: 1px solid #f0f4f5;
-		background-color: white;
-		position: relative;
-	}
-	#navigation .nav-menu:hover {
-		background-color: #f0f4f5;
-	}
-	#navigation .nav-menu:last-child {
-		border-bottom: none;
-	}
-	#navigation .nav-menu.bookmarks {
-		border-bottom: none;
-	}
-	#navigation .nav-menu-content {
-		position: relative;
-		padding: 0 34px 20px;
-		border: none;
-	}
-	#navigation .nav-menu-content li {
-		padding: 6px 0;
-	}
-	#nav-toggle-on {
-		display: block;
-		position: inherit;
-		padding: 22px
-	}
-	#nav-toggle-off i {
-		margin: 30px 42px 0 0;
-		padding-left: 10px;
-	}
-	.menu-toggle span, .menu-toggle i, .menu-toggle i.fa-regular{
-    color: black;
-    display: initial;
+    .nav-menu.dropdown:hover .dropdown-content {
+        display: none;
     }
-	#nav-toggle-off span {
-	line-height: 50px; 
-	}
-	#navigation:target #nav-toggle-on {
-		display: none;
-	}
-	#navigation:target #nav-toggle-off {
-		display: block;
-		width: 100%;
-		z-index: 4;
-		position: relative;
-		text-align: right;
-		background-color: #f0f0f0;
-	}
-	.nav-menu i.fa-angle-up, .nav-menu i.fa-angle-down {
-		float: right;
-		margin: 30px 40px 0 0;
-	}
-	#nav-toggle-off i, #nav-toggle-on i {
-		text-align: center;
-	}
-	.nav-menu>span, .nav-menu.nav-menu-active>span {
-		text-align: left;
-		padding-left: 24px;
-	}
-	.nav-menu>span a {
-		text-align: left;
-	}
-	.nav-cols-content {
-		flex-wrap: wrap;
-	}
-	.nav-cols-content div p {
-		padding: 0 24px 0 0;
-	}
-	.nav-cols-content div:nth-child(2) p {
-		padding-top: 24px;
-	}
-	.nav-menu-content li {
-		padding: 0;
-		margin: 0;
-	}
-	.nav-cols-content div:first-child {
-		border-right: none;
-	}
 
-	/* Bookmarks for medium and smallscreen */
-	ul .nav-login {
-		display:block;
-		width: 100%;
-		padding-left:0;
-	}
-	.nav-login .favorites, .nav-login .favorites:hover {
-		background-color: #8c1515;
-		color: white;
-	}
-	.nav-login .login > li .favorites.dropdown i {
-		color: white;
-		padding: inherit;	
-	}
-	.nav-login .favorites span {
-		font-size: 1.125em;
-		font-weight: 600;
-		padding-left: 24px
-	}
-	
-	.nav-menu .favorites.dropdown:hover .dropdown-content {
-		display: none;
-	}
-	
-	.nav-menu .favorites.dropdown .dropdown-content.dropdown-content-on-click,
-	.nav-menu .favorites.dropdown:hover .dropdown-content.dropdown-content-on-click{
-		display: block;
-		width: 100%;
-	}
-	
-	.nav-login .favorites .dropdown-content>ul li {
-		margin: auto;
-		width: 203px;
-		text-align: center;
-		padding-bottom: 30px;
-	}
-	/* Menu for small and medium screen */
-	.mobile-screen-menu.lrg-screen-hide {
-		display: flex;
-		flex-flow: row;
-		justify-content: space-around;
-		width: 100%;
-		bottom: 0px;
-		padding: 9px 0 24px;
-		position: sticky;
-		top: auto;
-		z-index: 5;
-		background: white;
-		box-shadow: 0px -3px 7px rgb(200 200 200/ 97%);
-	}
-	.mobile-screen-menu div {
-		text-align: center;
-	}
-	.mobile-screen-menu a, .mobile-screen-menu a i, .mobile-screen-menu .login a i
-		{
-		color: black;
-		display: block;
-		padding-bottom: 3px;
-		line-height: normal;
-	}
-	/* END of menu for small and medium screen */
-	
-	/* Nav angle icon */
-	
-	.nav-menu:hover i.fa-angle-up{
-		display: none;
-	}	
+    .nav-menu.dropdown:hover .dropdown-content-on-click,
+    .nav-menu-active-on-click .dropdown-content-on-click,
+    #navigation li.nav-menu,
+    #navigation:target nav {
+        display: block;
+    }
 
-	.nav-menu.nav-menu-active-on-click i.fa-angle-up, .nav-menu:hover i.fa-angle-down {
-		display: inline-block;
-	}
 
-	.nav-menu.nav-menu-active-on-click i.fa-angle-down {
-		display: none;
-	}
+    /* To hide bookmarks link when the navigation is clicked  */
+    #navigation:target .nav-login .login>li:first-of-type,
+    #navigation:target .nav-login .login>li:last-of-type,
+    #navigation:target .nav-login .login a.medium-screen-hide {
+        display: none;
+    }
+
+    #navigation:target .menu-overlay {
+        background-color: black;
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        opacity: .65;
+        top: 0;
+    }
+
+    #navigation .nav-menu.nav-menu-active-on-click,
+    #navigation .nav-menu.nav-menu-active {
+        background-color: #f0f4f5;
+    }
+
+    .nav-menu-active-on-click>span {
+        color: #8c1515;
+    }
+
+    .nav-menu>a,
+    .nav-menu>a:visited {
+        text-align: left;
+    }
+
+    #navigation {
+        position: absolute;
+        z-index: 2;
+        right: 0px;
+        width: 100%;
+        padding: 0;
+        max-width: unset;
+    }
+
+    #navigation nav {
+        display: none;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    #navigation ul {
+        display: block;
+        margin: 0;
+        padding: 0;
+    }
+
+    #navigation .nav-menu {
+        border-bottom: 1px solid #f0f4f5;
+        background-color: white;
+        position: relative;
+    }
+
+    #navigation .nav-menu:hover {
+        background-color: #f0f4f5;
+    }
+
+    #navigation .nav-menu:last-child {
+        border-bottom: none;
+    }
+
+    #navigation .nav-menu.bookmarks {
+        border-bottom: none;
+    }
+
+    #navigation .nav-menu-content {
+        position: relative;
+        padding: 0 34px 20px;
+        border: none;
+    }
+
+    #navigation .nav-menu-content li {
+        padding: 6px 0;
+    }
+
+    #nav-toggle-on {
+        display: block;
+        position: inherit;
+        padding: 20px
+    }
+
+    #nav-toggle-off i {
+        margin: 30px 42px 0 0;
+        padding-left: 10px;
+    }
+
+    .menu-toggle span,
+    .menu-toggle i,
+    .menu-toggle i.fa-regular {
+        color: black;
+        display: initial;
+    }
+
+    #nav-toggle-off span {
+        line-height: 50px;
+    }
+
+    #navigation:target #nav-toggle-on {
+        display: none;
+    }
+
+    #navigation:target #nav-toggle-off {
+        display: block;
+        width: 100%;
+        z-index: 4;
+        position: relative;
+        text-align: right;
+        background-color: #f0f0f0;
+    }
+
+    .nav-menu i.fa-angle-up,
+    .nav-menu i.fa-angle-down {
+        float: right;
+        margin: 30px 40px 0 0;
+    }
+
+    #nav-toggle-off i,
+    #nav-toggle-on i {
+        text-align: center;
+    }
+
+    .nav-menu>span,
+    .nav-menu.nav-menu-active>span {
+        text-align: left;
+        padding-left: 24px;
+    }
+
+    .nav-menu>span a {
+        text-align: left;
+    }
+
+    .nav-cols-content {
+        flex-wrap: wrap;
+    }
+
+    .nav-cols-content div p {
+        padding: 0 24px 0 0;
+    }
+
+    .nav-cols-content div:nth-child(2) p {
+        padding-top: 24px;
+    }
+
+    .nav-menu-content li {
+        padding: 0;
+        margin: 0;
+    }
+
+    .nav-cols-content div:first-child {
+        border-right: none;
+    }
+
+    /* Bookmarks for medium and smallscreen */
+    ul .nav-login {
+        display: block;
+        width: 100%;
+        padding-left: 0;
+    }
+
+    .nav-login .favorites,
+    .nav-login .favorites:hover {
+        background-color: #8c1515;
+        color: white;
+    }
+
+    .nav-login .login>li .favorites.dropdown i {
+        color: white;
+        padding: inherit;
+    }
+
+    .nav-login .favorites span {
+        font-size: 1.125em;
+        font-weight: 600;
+        padding-left: 24px
+    }
+
+    .nav-menu .favorites.dropdown:hover .dropdown-content {
+        display: none;
+    }
+
+    .nav-menu .favorites.dropdown .dropdown-content.dropdown-content-on-click,
+    .nav-menu .favorites.dropdown:hover .dropdown-content.dropdown-content-on-click {
+        display: block;
+        width: 100%;
+    }
+
+    .nav-login .favorites .dropdown-content>ul li {
+        margin: auto;
+        width: 203px;
+        text-align: center;
+        padding-bottom: 30px;
+    }
+
+    /* Menu for small and medium screen */
+    .mobile-screen-menu.lrg-screen-hide {
+        display: flex;
+        flex-flow: row;
+        justify-content: space-around;
+        width: 100%;
+        bottom: 0px;
+        padding: 9px 0 24px;
+        position: sticky;
+        top: auto;
+        z-index: 5;
+        background: white;
+        box-shadow: 0px -3px 7px rgb(200 200 200/ 97%);
+    }
+
+    .mobile-screen-menu div {
+        text-align: center;
+    }
+
+    .mobile-screen-menu a,
+    .mobile-screen-menu a i,
+    .mobile-screen-menu .login a i {
+        color: black;
+        display: block;
+        padding-bottom: 3px;
+        line-height: normal;
+    }
+
+    /* END of menu for small and medium screen */
+
+    /* Nav angle icon */
+
+    .nav-menu:hover i.fa-angle-up {
+        display: none;
+    }
+
+    .nav-menu.nav-menu-active-on-click i.fa-angle-up,
+    .nav-menu:hover i.fa-angle-down {
+        display: inline-block;
+    }
+
+    .nav-menu.nav-menu-active-on-click i.fa-angle-down {
+        display: none;
+    }
 
 }
-

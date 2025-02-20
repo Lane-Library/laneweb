@@ -1,6 +1,6 @@
-if (document.querySelector(".search-form")) {
+if (document.querySelector("#main-search")) {
 
-	(function() {
+	(function () {
 
 		"use strict";
 
@@ -9,13 +9,13 @@ if (document.querySelector(".search-form")) {
 			dropdown = document.querySelector("#" + SEARCH_DROPDOWN),
 			options = dropdown.querySelectorAll("option"),
 			dropdown_label = document.querySelector('.search-form .general-dropdown-trigger span'),
-			model = function(source) {
+			model = function (source) {
 
 				let m = {
 					source: source
 				};
 
-				options.forEach(function(option) {
+				options.forEach(function (option) {
 					m[option.value] = {
 						placeholder: option.dataset.placeholder,
 						source: option.value,
@@ -29,12 +29,12 @@ if (document.querySelector(".search-form")) {
 
 			}(dropdown[dropdown.selectedIndex].value),
 
-			view = function() {
+			view = function () {
 				let v = {
-					change: function(label) {
+					change: function (label) {
 						dropdown_label.innerHTML = label;
 					},
-					click: function() {
+					click: function () {
 						view.fire(CHANGE, dropdown[dropdown.selectedIndex].value);
 					}
 				}
@@ -45,10 +45,10 @@ if (document.querySelector(".search-form")) {
 			}(),
 
 
-			controller = function() {
+			controller = function () {
 
 				return {
-					update: function(source) {
+					update: function (source) {
 						let prop, newVal = {};
 						for (prop in model) {
 							newVal[prop] = model[prop];

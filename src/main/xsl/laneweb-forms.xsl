@@ -29,8 +29,16 @@
     </xsl:template>
 
     <xsl:template match="h:input[@name='q' and ancestor::h:form[contains(@class,'search-form')]]/@placeholder">
+        <xsl:variable name="data-placeholder" select="ancestor::h:form[contains(@class,'search-form')]//h:option[@value = $search-source]/@data-placeholder"/>
         <xsl:attribute name="placeholder">
-            <xsl:value-of select="ancestor::h:form[contains(@class,'search-form')]//h:option[@value = $search-source]/@data-placeholder"/>
+            <xsl:choose>
+                <xsl:when test="$data-placeholder != ''">
+                    <xsl:value-of select="$data-placeholder"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="."/>
+                </xsl:otherwise>
+            </xsl:choose>            
         </xsl:attribute>
     </xsl:template>
 
