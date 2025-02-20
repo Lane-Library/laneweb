@@ -92,15 +92,19 @@ describe('Google Analytics Tracking', () => {
         cy.wait('@gaCollect');
     });
 
-    // it('test image alt tracking analytics', () => {
-    //     cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {
-    //         if (req.body.includes('photo')) {
-    //             req.alias = 'gaCollect';
-    //         }
-    //     });
-    //     cy.get('.slide-container .slide img').first().click();
-    //     cy.wait('@gaCollect');
-    // });
+    it('test image alt tracking analytics', () => {
+        cy.intercept('GET', 'https://profiles.stanford.edu/**', {
+            statusCode: 200
+        }).as('profile');
+        cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {
+            if (req.url.includes('photo')) {
+                req.alias = 'gaCollect';
+            }
+        });
+        cy.get('.slide-container .slide img').first().click();
+        cy.wait('@profile');
+        cy.wait('@gaCollect');
+    });
 
 
 })
