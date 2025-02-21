@@ -13,6 +13,7 @@
     class Suggest {
         constructor(input, minQueryLength, sourceBase) {
             this._input = input;
+            this._input.autocomplete = 'off';
             this._ac = [];
             this.selectedItem = null;
             this.limit = DEFAULT_LIMIT;
