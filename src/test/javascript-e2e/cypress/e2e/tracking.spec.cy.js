@@ -22,6 +22,7 @@ describe('Tracking', () => {
 
         cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {
             if (req.body.includes('searchResultClick') && req.body.includes('ep.event_label=bib-12%20-%3E%20Journal%20-%3E%20Lancet')) {
+                req.reply('OK');
                 req.alias = 'gaCollect';
             }
         });
@@ -45,8 +46,8 @@ describe('Tracking', () => {
         cy.get('@cmeLink').invoke('attr', 'href', '/redirect/cme?url=https://reportable-host4GA.com/contents/');
 
         cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {
-
             if (req.body.includes('event_label=reportable-host4GA.com')) {
+                req.reply('OK');
                 req.alias = 'gaCollect';
             }
         });
@@ -68,8 +69,8 @@ describe('Tracking', () => {
         cy.get('@proxyLink').invoke('attr', 'href', 'https://login.laneproxy.stanford.edu/login?url=http://www.ncbi.nlm.nih.gov/sites/entrez?otool=stanford&holding=F1000%2CF1000M');
 
         cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {
-
             if (req.body.includes('event_label=www.ncbi.nlm.nih.gov')) {
+                req.reply('OK');
                 req.alias = 'gaCollect';
             }
         });

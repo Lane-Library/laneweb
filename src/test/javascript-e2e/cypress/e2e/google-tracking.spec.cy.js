@@ -23,6 +23,7 @@ describe('Google Analytics Tracking', () => {
 
         cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {
             if (req.body.includes('OFFSITE-CLICK-EVENT')) {
+                req.reply('OK');
                 req.alias = 'gaCollect';
             }
         });
@@ -40,6 +41,7 @@ describe('Google Analytics Tracking', () => {
         cy.get('.btn.alt').first().as('popup');
         cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {
             if (req.body.includes('ONSITE')) {
+                req.reply('OK');
                 req.alias = 'gaCollect';
             }
         });
@@ -56,6 +58,7 @@ describe('Google Analytics Tracking', () => {
 
         cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {
             if (!(req.body.includes('dl=%2FONSITE') && !req.url.includes('en='))) {
+                req.reply('OK');
                 req.alias = 'gaCollect';
             }
         });
@@ -69,6 +72,7 @@ describe('Google Analytics Tracking', () => {
         cy.visit('/cypress-test/search.html?q=skin&source=clinical-all');
         cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {
             if (req.body.includes('en=lane%3AsearchResultClick')) {
+                req.reply('OK');
                 req.alias = 'gaCollect';
             }
         });
@@ -84,6 +88,7 @@ describe('Google Analytics Tracking', () => {
         }).as('blogImage');
         cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {
             if (req.body.includes('ep.event_label=laneblog.stanford.edu')) {
+                req.reply('OK');
                 req.alias = 'gaCollect';
             }
         });
@@ -98,6 +103,7 @@ describe('Google Analytics Tracking', () => {
         }).as('profile');
         cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {
             if (req.url.includes('photo')) {
+                req.reply('OK');
                 req.alias = 'gaCollect';
             }
         });

@@ -7,6 +7,7 @@ describe('Holdings Toggle', () => {
         // intercept the GA request and count the number of click events
         cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {
             const holdingsTriggerCount = (req.body.match(/hldgsTrigger/g) || []).length;
+            req.reply('OK');
             expect(holdingsTriggerCount).to.eq(2);
         });
 

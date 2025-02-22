@@ -93,6 +93,7 @@ describe('Bookmark editor', () => {
         ).as('addBookmark');
         cy.intercept('POST', 'https://www.google-analytics.com/g/collect*en=lane%3AbookmarkAdd*', (req) => {
             if (!(req.url.includes('ep.event_label=Test%20bookmark') && !req.url.includes('en=lane%3AbookmarkAdd'))) {
+                req.reply('OK');
                 req.alias = 'gaCollect';
             }
         });

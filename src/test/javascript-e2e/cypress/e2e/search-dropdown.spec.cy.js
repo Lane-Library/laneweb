@@ -15,6 +15,7 @@ describe('Search Dropdown TestCase', () => {
     it('tracking', () => {
         cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {
             if (req.body.includes('searchDropdown')) {
+                req.reply('OK');
                 req.alias = 'gaCollect';
             }
         });

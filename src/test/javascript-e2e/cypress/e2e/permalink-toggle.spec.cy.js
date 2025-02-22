@@ -5,6 +5,7 @@ describe('Permalink Toggle Test', () => {
         // intercept the GA POST and make sure "permalinkCopied" is present in the body (below)
         cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {
             if (req.body.includes('permalinkCopied')) {
+                req.reply('OK');
                 req.alias = 'gaCollect';
             }
         });
