@@ -14,6 +14,7 @@ module.exports = defineConfig({
       return config
     },
     baseUrl: 'http://localhost:8080/',
-    screenshotOnRunFailure: false
+    screenshotOnRunFailure: false,
+    supportFile: 'cypress/support/e2e.js'
   }
 });
