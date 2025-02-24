@@ -7,8 +7,11 @@ describe('Description Toggle', () => {
         // intercept the GA request and count the number of descriptionTrigger click events
         cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {
             const descriptionTriggerCount = (req.body.match(/descriptionTrigger/g) || []).length;
-            expect(descriptionTriggerCount).to.eq(2);
-        }).as('gaCollect');
+            if (2 == descriptionTriggerCount) {
+                req.reply('OK');
+                req.alias = 'gaCollect';
+            }
+        });
 
         cy.get('.descriptionTrigger').as('descriptionTrigger');
         cy.get('@descriptionTrigger').invoke('text').should('contain', 'Abstract');
