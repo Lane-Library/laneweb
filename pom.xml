@@ -35,7 +35,7 @@
         <sonar.exclusions>
             **/yui*,**/jquery*,**/*-test.js,**/fontawesome.css,**/googlefonts.css,**/pure-grids.css</sonar.exclusions>
         <sonar.javascript.lcov.reportPaths>
-            ${project.build.directory}/test-classes/e2e/coverage/lcov.info</sonar.javascript.lcov.reportPaths>
+            ${project.build.directory}/test-classes/e2e/coverage/lcov.info,${project.build.directory}/jest-coverage/lcov.info</sonar.javascript.lcov.reportPaths>
     </properties>
     <dependencies>
         <dependency>
@@ -388,6 +388,24 @@
                         </goals>
                         <configuration>
                             <arguments>run instrument --prefix ${project.basedir}/target/test-classes/e2e</arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>npm jest install</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>install --save-dev jest jest-environment-jsdom</arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>npm jest test</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>test -- --coverage --coverageDirectory=${project.build.directory}/jest-coverage</arguments>
                         </configuration>
                     </execution>
                 </executions>
