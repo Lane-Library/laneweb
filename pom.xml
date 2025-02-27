@@ -392,7 +392,7 @@
                     </execution>
                     <execution>
                         <id>npm jest install</id>
-                        <phase>validate</phase>
+                        <phase>test</phase>
                         <goals>
                             <goal>npm</goal>
                         </goals>
@@ -402,7 +402,7 @@
                     </execution>
                     <execution>
                         <id>npm jest test</id>
-                        <phase>validate</phase>
+                        <phase>test</phase>
                         <goals>
                             <goal>npm</goal>
                         </goals>
