@@ -17,7 +17,8 @@ describe('Google Analytics Tracking', () => {
         cy.get('@externalLink').then(($link) => {
             const externalLinkHref = $link.attr('href');
             cy.intercept(externalLinkHref, {
-                statusCode: 200
+                statusCode: 200,
+                body: 'OK'
             });
         });
 
@@ -99,7 +100,8 @@ describe('Google Analytics Tracking', () => {
 
     it('test image alt tracking analytics', () => {
         cy.intercept('GET', 'https://profiles.stanford.edu/**', {
-            statusCode: 200
+            statusCode: 200,
+            body: 'OK'
         }).as('profile');
         cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {
             if (req.url.includes('photo')) {
