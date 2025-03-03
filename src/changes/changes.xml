@@ -5,6 +5,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2025-03-03" version="3.14.4" description="bug fix and update release">
+            <action date="2025-03-03" dev="alainb" issue="LANEWEB-11460" type="fix">
+                In pico mode, patient Condition not displayed entirely
+            </action>
+            <action date="2025-03-03" dev="alainb" issue="LANEWEB-11457" type="update">
+                course reserves lists are crowded
+            </action>
+            <action date="2025-03-03" dev="alainb" issue="LANEWEB-11459" type="fix">
+                Search select not active if clicking on the arrow down
+            </action>
+        </release>
         <release date="2025-02-24" version="3.14.3" description="bug fix and update release">
             <action date="2025-02-18" dev="ryanmax" issue="LANEWEB-11447" type="update">
                 limit resource page search suggestions
