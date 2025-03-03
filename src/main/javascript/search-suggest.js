@@ -33,10 +33,14 @@
             controller = function () {
                 return {
                     sourceChange: function (event) {
-                        // default suggest limit is mesh-di
                         let source = event.newVal,
+                            suggestLimitInput = form.querySelector("input[name=suggest-limit]"),
                             limit;
-                        if (source.match(/^(all|catalog)/)) {
+                        // suggest-limit overrides source
+                        if (suggestLimitInput) {
+                            limit = suggestLimitInput.value;
+                        }
+                        else if (source.match(/^(all|catalog)/)) {
                             limit = "er-mesh";
                         } else {
                             limit = "";
