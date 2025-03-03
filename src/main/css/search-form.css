@@ -160,6 +160,7 @@
     width: 100%;
     height: 46px;
     padding-left: 10px;
+    padding-right: 0;
     box-sizing: border-box;
     border: 0;
 }
