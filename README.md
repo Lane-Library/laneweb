@@ -80,4 +80,3 @@ LaneWeb uses [Cypress](https://www.cypress.io/) for end-to-end integration testi
 
 Use the property `cypress.tests.disable=true` to disable Cypress testing. This is useful, for example, to skip Cypress at Maven `release` time.
 
-
