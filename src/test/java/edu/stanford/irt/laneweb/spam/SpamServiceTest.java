@@ -13,7 +13,6 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.easymock.Mock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
