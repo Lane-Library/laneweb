@@ -18,7 +18,6 @@ import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.coursereserves.CourseReservesItemList;
 import edu.stanford.irt.laneweb.rest.BasicAuthRESTService;
-import edu.stanford.irt.laneweb.rest.RESTService;
 import edu.stanford.irt.laneweb.rest.TypeReference;
 
 public class RESTCourseReservesServiceTest {

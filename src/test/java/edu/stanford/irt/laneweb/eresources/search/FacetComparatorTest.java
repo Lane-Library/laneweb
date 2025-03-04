@@ -11,7 +11,6 @@ import java.util.TreeSet;
 
 import org.junit.jupiter.api.Test;
 import edu.stanford.irt.laneweb.eresources.model.solr.Field;
-import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.eresources.model.solr.FacetFieldEntry;
 
 public class FacetComparatorTest {

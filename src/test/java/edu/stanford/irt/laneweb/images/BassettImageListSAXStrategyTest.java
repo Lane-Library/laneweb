@@ -4,7 +4,6 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
-// import static org.easymock.EasyMock.verify;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
@@ -23,8 +22,6 @@ import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.TestXMLConsumer;
 
 public class BassettImageListSAXStrategyTest {
-
-    private static final String NAMESPACE = "http://lane.stanford.edu/bassett/ns";
 
     private Page<BassettImage> facetPage;
 

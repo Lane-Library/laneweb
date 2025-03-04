@@ -18,7 +18,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.CookieName;
 
 public class LoginExpirationCookieDataBinderTest {

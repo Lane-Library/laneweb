@@ -5,7 +5,6 @@ import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.verify;
 
 import java.io.IOException;
 import java.net.URI;
@@ -18,7 +17,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.laneweb.BrowzineException;
-import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.rest.RESTException;
 import edu.stanford.irt.laneweb.rest.RESTService;
 

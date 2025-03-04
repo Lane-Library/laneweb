@@ -14,7 +14,6 @@ import java.net.URISyntaxException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.rest.RESTException;
 import edu.stanford.irt.laneweb.rest.RESTService;
 import edu.stanford.irt.status.ApplicationStatus;

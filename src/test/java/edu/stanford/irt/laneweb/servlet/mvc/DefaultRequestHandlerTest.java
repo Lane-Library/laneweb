@@ -6,7 +6,6 @@ import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.verify;
 
 import java.io.IOException;
 
@@ -15,8 +14,6 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import edu.stanford.irt.laneweb.LanewebException;
 
 public class DefaultRequestHandlerTest {
 

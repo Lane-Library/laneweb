@@ -9,7 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.time.Duration;
 
 import org.junit.jupiter.api.Test;
-import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.user.User;
 
