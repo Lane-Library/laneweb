@@ -247,7 +247,7 @@ hr {
 
 .resource.course-reserves-item>div:first-child {
     margin-right: 24px;
-    align-self: center;
+    margin-top: 6px;
 }
 
 .resource.course-reserves-item img {
