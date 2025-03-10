@@ -4,6 +4,8 @@
 
     "use strict";
 
+    let userAgent = L.getUserAgent();
+
     if (/.*\/search\.html/.test(location.pathname)) {
         let i = 0,
             // adjust scroll based on device width
@@ -19,7 +21,7 @@
                 window.scroll(0, offset);
             }
         }
-        if (/Edge/.test(window.navigator.userAgent)) {
+        if (/Edge/.test(userAgent)) {
             edgeDelay();
         } else if (window.scrollY < offset) {
             window.scroll(0, offset);
