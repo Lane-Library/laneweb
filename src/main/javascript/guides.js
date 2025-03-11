@@ -19,16 +19,18 @@
                 if (hash != allGuidesClosed) {
                     document.querySelector(hash).classList.add('menuitem-active');
                 }
+                L.fire("content-changed", { hash: hash });
             };
 
         window.addEventListener("load", function () {
             hash = window.location.hash;
             if (hash == '') {
                 hash = defaultGuide;
-                this.document.querySelector("a[href='" + defaultGuide + "']").classList.add('menuitem-active');
+                L.fire("content-changed", { hash: hash });
             }
             openGuide(hash);
         }, false);
+
 
         L.on("menu-changed", function (event) {
             closeAllGuides();
