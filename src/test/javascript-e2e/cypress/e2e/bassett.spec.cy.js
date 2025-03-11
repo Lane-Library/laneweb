@@ -29,6 +29,19 @@ describe('Bassett', () => {
         cy.get('#abdomen li:visible').should('have.length.lt', 10);
     })
 
+    it('toggles the Abdomen Overview checkbox', () => {
+        cy.viewport(1101, 750);
+        cy.visit('/cypress-test/biomed-resources/bassett/index.html');
+
+        cy.get('#abdomen a[href="/biomed-resources/bassett/bassettsView.html?r=Abdomen--Overview"]').as('abdomenOverview');
+
+        cy.get('@abdomenOverview').find('i').should('have.class', 'fa-square');
+
+        cy.get('@abdomenOverview').click();
+
+        cy.get('@abdomenOverview').find('i').should('have.class', 'fa-square-check');
+    })
+
     it('shows diagrams instead of images', () => {
         cy.viewport(1101, 750);
         cy.visit('/cypress-test/biomed-resources/bassett/index.html');
