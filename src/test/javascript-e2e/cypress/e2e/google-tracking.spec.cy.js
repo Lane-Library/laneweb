@@ -109,6 +109,7 @@ describe('Google Analytics Tracking', () => {
                 req.alias = 'gaCollect';
             }
         });
+        cy.wait(1000);
         cy.get('.slide-container .slide img').first().click();
         cy.wait('@profile');
         cy.wait('@gaCollect');
