@@ -1,14 +1,23 @@
 describe('Holdings Toggle', () => {
 
-    it('should show/hide holdings info and report the clicks to GA', () => {
+    it('should show and then hide holdings info and report the clicks to GA', () => {
 
         cy.visit('/cypress-test/search.html?q=12&source=all-all&facets=recordType:"bib"');
 
-        // intercept the GA request and count the number of click events
-        cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {
-            const holdingsTriggerCount = (req.body.match(/hldgsTrigger/g) || []).length;
+        cy.intercept('/apps/*', {
+            statusCode: 200,
+            body: '{}'
+        });
+
+        cy.intercept('https://www.google-analytics.com/g/collect*', (req) => {
+            const urlAndBody = req.url + req.body;
+            if (urlAndBody.match(/hldgsTrigger.*close/g)) {
+                req.alias = 'gaCollectClose';
+            }
+            if (urlAndBody.match(/hldgsTrigger.*open/g)) {
+                req.alias = 'gaCollectOpen';
+            }
             req.reply('OK');
-            expect(holdingsTriggerCount).to.eq(2);
         });
 
         cy.get('.hldgsTrigger').first().as('hldgsTrigger');
@@ -16,8 +25,9 @@ describe('Holdings Toggle', () => {
         expect(cy.get('@tableMain').should('be.visible'));
         cy.get('@hldgsTrigger').click();
         expect(cy.get('@tableMain').should('not.be.visible'));
+        cy.wait('@gaCollectClose');
         cy.get('@hldgsTrigger').click();
         expect(cy.get('@tableMain').should('be.visible'));
+        cy.wait('@gaCollectOpen');
     })
-
 })
