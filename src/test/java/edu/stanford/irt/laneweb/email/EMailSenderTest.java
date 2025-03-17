@@ -17,18 +17,13 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 
 import org.junit.jupiter.api.BeforeEach;
-// import org.junit.Rule;
 import org.junit.jupiter.api.Test;
-// import org.junit.rules.ExpectedException;
 import org.springframework.mail.MailSendException;
 import org.springframework.mail.javamail.JavaMailSender;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
 public class EMailSenderTest {
-
-    // @Rule
-    // public ExpectedException thrown = ExpectedException.none();
 
     private EMailSender eMailSender;
 
