@@ -5,6 +5,36 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2025-03-17" version="3.14.5" description="bug fix and update release">
+            <action date="2025-02-21" dev="alainb" issue="LANEWEB-11455" type="update">
+                Clean up email controller
+            </action>
+            <action date="2025-03-03" dev="alainb" issue="LANEWEB-11457" type="update">
+                Course reserves lists are crowded
+            </action>
+            <action date="2025-03-10" dev="alainb" issue="LANEWEB-11465" type="fix">
+               When a guide is opened the matching menu is not selected
+            </action>
+        </release> 
+        <release date="2025-03-03" version="3.14.4" description="bug fix and update release">
+            <action date="2025-03-03" dev="alainb" issue="LANEWEB-11460" type="fix">
+                In pico mode, patient Condition not displayed entirely
+            </action>
+            <action date="2025-03-03" dev="alainb" issue="LANEWEB-11457" type="update">
+                course reserves lists are crowded
+            </action>
+            <action date="2025-03-03" dev="alainb" issue="LANEWEB-11459" type="fix">
+                Search select not active if clicking on the arrow down
+            </action>
+        </release>
+        <release date="2025-02-24" version="3.14.3" description="bug fix and update release">
+            <action date="2025-02-18" dev="ryanmax" issue="LANEWEB-11447" type="update">
+                limit resource page search suggestions
+            </action>
+            <action date="2025-02-21" dev="ryanmax" issue="" type="update">
+                spring-6.2.3, spring-boot-3.4.3
+            </action>
+        </release>
         <release date="2025-02-14" version="3.14.2" description="bug fix and update release">
             <action date="2025-02-12" dev="alainb" issue="LANEWEB-11450" type="fix"> 
                 Menu in ipad format doesn't fit the full width of the screen

@@ -53,6 +53,5 @@ public class PopularListSAXStrategyTest {
         assertThrows(LanewebException.class, () -> {
             this.saxStrategy.toSAX(Collections.singletonList(this.resource), mock);
         });
-
     }
 }

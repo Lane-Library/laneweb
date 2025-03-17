@@ -24,6 +24,7 @@ import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 import edu.stanford.irt.laneweb.spam.SpamService;
 
 public class EMailControllerTest {
+
         private static final String DOCXPRESS_ADDRESS = "docxpress@lists.stanford.edu";
 
         private RedirectAttributes atts;

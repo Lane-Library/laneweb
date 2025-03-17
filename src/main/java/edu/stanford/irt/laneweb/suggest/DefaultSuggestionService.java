@@ -13,13 +13,9 @@ import edu.stanford.irt.suggest.Suggestion;
 
 public class DefaultSuggestionService implements SuggestionService {
 
-    private static final Pattern ER_PATTERN = Pattern.compile("^(Book|Journal|Bassett)$");
+    private static final Pattern ER_PATTERN = Pattern.compile("^(Book|Journal|Database|Exam Prep)$");
 
     private static final int MAX_QUERY_LENGTH = 100;
-
-    private static final String MESH_PREFIX = "mesh-";
-
-    private static final int MESH_PREFIX_LENGTH = MESH_PREFIX.length();
 
     private static final int MIN_QUERY_LENGTH = 3;
 
@@ -63,16 +59,10 @@ public class DefaultSuggestionService implements SuggestionService {
             } else if ("er-mesh".equals(limit)) {
                 suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm(query);
                 suggestions.addAll(this.meshSuggestionManager.getSuggestionsForTerm(query));
-            } else if (limit.indexOf(MESH_PREFIX) == 0) {
-                suggestions = this.meshSuggestionManager.getSuggestionsForTerm(limit.substring(MESH_PREFIX_LENGTH),
-                        query);
             } else if (ER_PATTERN.matcher(limit).matches()) {
                 suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm(limit, query);
             } else if ("mesh".equals(limit)) {
                 suggestions = this.meshSuggestionManager.getSuggestionsForTerm(query);
-            } else if ("ej-mesh".equals(limit)) {
-                suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm("ej", query);
-                suggestions.addAll(this.meshSuggestionManager.getSuggestionsForTerm(query));
             }
         }
         return suggestions == null ? NO_SUGGESTIONS : suggestions;
