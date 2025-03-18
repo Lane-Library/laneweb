@@ -1,13 +1,13 @@
 package edu.stanford.irt.laneweb.servlet.binding;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.laneweb.ipgroup.IPGroup;
 import edu.stanford.irt.laneweb.model.Model;
@@ -19,7 +19,7 @@ public class BaseProxyURLDataBinderTest {
 
     private Map<String, Object> model;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.binder = new BaseProxyURLDataBinder();
         this.model = new HashMap<>();

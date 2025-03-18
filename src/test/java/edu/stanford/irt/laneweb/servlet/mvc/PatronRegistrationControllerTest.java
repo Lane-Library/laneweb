@@ -5,7 +5,7 @@ import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -14,9 +14,9 @@ import java.util.Map;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -29,7 +29,7 @@ import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
 
 public class PatronRegistrationControllerTest {
 
-    @AfterClass
+    @AfterAll
     public static void tearDownAfterClass() throws Exception {
     }
 
@@ -53,7 +53,7 @@ public class PatronRegistrationControllerTest {
 
     private UserDataBinder userDataBinder;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.folioUserService = mock(UserService.class);
         this.sender = mock(EMailSender.class);

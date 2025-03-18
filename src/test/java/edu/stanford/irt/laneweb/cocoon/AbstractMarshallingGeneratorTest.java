@@ -7,15 +7,16 @@ import static org.easymock.EasyMock.newCapture;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.same;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 
 import javax.xml.transform.sax.SAXResult;
 
 import org.easymock.Capture;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.oxm.Marshaller;
 import org.springframework.oxm.MarshallingFailureException;
 import org.springframework.oxm.XmlMappingException;
@@ -42,7 +43,7 @@ public class AbstractMarshallingGeneratorTest {
 
     private XMLConsumer xmlConsumer;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.marshaller = mock(Marshaller.class);
         this.generator = new TestGenerator(this.marshaller);
@@ -60,23 +61,28 @@ public class AbstractMarshallingGeneratorTest {
         assertSame(this.xmlConsumer, capture.getValue().getHandler());
     }
 
-    @Test(expected = LanewebException.class)
+    @Test
     public void testMarshallThrowIOException() throws XmlMappingException, IOException {
         Capture<SAXResult> capture = newCapture();
         Object obj = new Object();
         this.marshaller.marshal(same(obj), capture(capture));
         expectLastCall().andThrow(new IOException());
         replay(this.marshaller, this.xmlConsumer);
-        this.generator.marshal(obj, this.xmlConsumer);
+        assertThrows(LanewebException.class, () -> {
+            this.generator.marshal(obj, this.xmlConsumer);
+        });
+
     }
 
-    @Test(expected = LanewebException.class)
+    @Test
     public void testMarshallThrowXmlMappingException() throws XmlMappingException, IOException {
         Capture<SAXResult> capture = newCapture();
         Object obj = new Object();
         this.marshaller.marshal(same(obj), capture(capture));
         expectLastCall().andThrow(new MarshallingFailureException("oopsie"));
         replay(this.marshaller, this.xmlConsumer);
-        this.generator.marshal(obj, this.xmlConsumer);
+        assertThrows(LanewebException.class, () -> {
+            this.generator.marshal(obj, this.xmlConsumer);
+        });
     }
 }

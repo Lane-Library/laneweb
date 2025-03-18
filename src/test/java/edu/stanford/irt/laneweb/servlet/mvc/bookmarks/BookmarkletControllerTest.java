@@ -4,7 +4,7 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -15,8 +15,8 @@ import java.util.Map;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.ui.Model;
 
 import edu.stanford.irt.laneweb.bookmarks.Bookmark;
@@ -42,7 +42,7 @@ public class BookmarkletControllerTest {
 
     private UserDataBinder userBinder;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.userBinder = mock(UserDataBinder.class);
         this.service = mock(BookmarkService.class);

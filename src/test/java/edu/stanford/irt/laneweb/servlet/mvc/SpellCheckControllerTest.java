@@ -4,15 +4,15 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.net.SocketTimeoutException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.laneweb.eresources.EresourceSearchService;
 import edu.stanford.irt.spell.SpellCheckException;
@@ -27,7 +27,7 @@ public class SpellCheckControllerTest {
 
     private SpellChecker spellChecker;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.searchService = mock(EresourceSearchService.class);
         this.spellChecker = mock(SpellChecker.class);

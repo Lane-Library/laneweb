@@ -1,14 +1,14 @@
 package edu.stanford.irt.laneweb.cocoon;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class NekoHTMLConfigurationTest {
 
@@ -16,7 +16,7 @@ public class NekoHTMLConfigurationTest {
 
     private NekoHTMLConfiguration configuration;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         Map<String, String> properties = new HashMap<>();
         properties.put("http://cyberneko.org/html/properties/default-encoding", UTF_8);

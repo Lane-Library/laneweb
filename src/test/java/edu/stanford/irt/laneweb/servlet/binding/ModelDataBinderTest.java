@@ -6,6 +6,7 @@ import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -15,8 +16,8 @@ import java.util.Map;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -38,7 +39,7 @@ public class ModelDataBinderTest {
 
     private HttpServletRequest request;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.mapper = mock(ObjectMapper.class);
         this.binder = new ModelDataBinder(Collections.singleton("foo"), this.mapper);
@@ -70,11 +71,13 @@ public class ModelDataBinderTest {
         verify(this.request, this.mapper, this.factory, this.generator);
     }
 
-    @Test(expected = LanewebException.class)
+    @Test
     public void testBindThrowsException() throws IOException {
         expect(this.mapper.getFactory()).andReturn(this.factory);
         expect(this.factory.createGenerator(isA(StringWriter.class))).andThrow(new IOException());
         replay(this.request, this.mapper, this.factory, this.generator);
-        this.binder.bind(this.model, this.request);
+        assertThrows(LanewebException.class, () -> {
+            this.binder.bind(this.model, this.request);
+        });
     }
 }

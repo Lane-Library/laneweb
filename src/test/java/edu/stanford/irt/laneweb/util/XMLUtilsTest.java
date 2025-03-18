@@ -6,8 +6,8 @@ import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
@@ -18,7 +18,7 @@ public class XMLUtilsTest {
 
     private ContentHandler contentHandler;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.contentHandler = mock(ContentHandler.class);
         this.atts = mock(AttributesImpl.class);

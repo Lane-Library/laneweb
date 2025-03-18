@@ -11,8 +11,8 @@ import java.util.List;
 
 import jakarta.servlet.http.HttpSession;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.stanford.irt.laneweb.bookmarks.Bookmark;
@@ -37,7 +37,7 @@ public class HTMLBookmarkControllerTest {
 
     private UserDataBinder userDataBinder;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.bookmarkService = mock(BookmarkService.class);
         this.bookmarkDataBinder = mock(BookmarkDataBinder.class);

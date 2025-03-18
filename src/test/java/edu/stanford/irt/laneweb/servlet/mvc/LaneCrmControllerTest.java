@@ -4,14 +4,14 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.ui.Model;
 
 import edu.stanford.irt.laneweb.email.EMailSender;
@@ -36,13 +36,14 @@ public class LaneCrmControllerTest {
 
   private static final String ERROR_URL = "redirect:/error.html";
 
-  @Before
+  @BeforeEach
   public void setUp() {
     this.emailDataBinder = mock(DataBinder.class);
     this.emailSender = mock(EMailSender.class);
     this.model = mock(Model.class);
     this.spamService = mock(SpamService.class);
-    this.controller = new LaneCrmController(this.emailDataBinder, this.emailSender, "email@address.com", this.spamService);
+    this.controller = new LaneCrmController(this.emailDataBinder, this.emailSender, "email@address.com",
+        this.spamService);
     emailContent = new HashMap<String, Object>();
     emailContent.put("title", "title");
   }

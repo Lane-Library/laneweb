@@ -5,8 +5,8 @@ import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 
@@ -14,8 +14,8 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class PersistentLoginHandlerInterceptorTest {
 
@@ -29,7 +29,7 @@ public class PersistentLoginHandlerInterceptorTest {
 
     private HttpServletResponse response;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.interceptor = new PersistentLoginHandlerInterceptor();
         this.request = mock(HttpServletRequest.class);
@@ -107,7 +107,7 @@ public class PersistentLoginHandlerInterceptorTest {
         assertFalse(this.interceptor.preHandle(this.request, this.response, this.handler));
         verify(this.request, this.response, this.cookie);
     }
-    
+
     @Test
     public void testPreHandleCmeUrl() throws IOException {
         expect(this.request.getRequestURI()).andReturn("/redirect/cme/uri");
@@ -122,9 +122,7 @@ public class PersistentLoginHandlerInterceptorTest {
         assertFalse(this.interceptor.preHandle(this.request, this.response, this.handler));
         verify(this.request, this.response, this.cookie);
     }
-    
-   
-    
+
     @Test
     public void testPreHandleNotCookie() throws IOException {
         expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });

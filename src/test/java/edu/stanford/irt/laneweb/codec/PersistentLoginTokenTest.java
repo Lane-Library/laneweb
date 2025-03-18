@@ -1,13 +1,14 @@
 package edu.stanford.irt.laneweb.codec;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.Duration;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.laneweb.user.User;
 
@@ -43,13 +44,17 @@ public class PersistentLoginTokenTest {
         assertFalse(new PersistentLoginToken(this.user, 0L, 0, "encryptedValue").isValidFor(twoWeeksAndADay, 0));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testNullEncryptedValue() {
-        new PersistentLoginToken(this.user, 0L, 0, null);
+        assertThrows(NullPointerException.class, () -> {
+            new PersistentLoginToken(this.user, 0L, 0, null);
+        });
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testNullUser() {
-        new PersistentLoginToken(null, 0L, 0, "");
+        assertThrows(NullPointerException.class, () -> {
+            new PersistentLoginToken(null, 0L, 0, "");
+        });
     }
 }

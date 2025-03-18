@@ -5,27 +5,24 @@ import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.reset;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.suggest.MeshSuggestionManager;
 import edu.stanford.irt.suggest.Suggestion;
 
 public class DefaultSuggestionServiceTest {
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     private SolrSuggestionManager eresource;
 
@@ -33,7 +30,7 @@ public class DefaultSuggestionServiceTest {
 
     private DefaultSuggestionService service;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.eresource = mock(SolrSuggestionManager.class);
         this.mesh = mock(MeshSuggestionManager.class);
@@ -110,10 +107,12 @@ public class DefaultSuggestionServiceTest {
         String oneOone = ninetyNineChars + "01";
         expect(this.eresource.getSuggestionsForTerm(oneOone)).andReturn(Collections.emptyList());
         replay(this.eresource);
-        this.thrown.expect(AssertionError.class);
-        this.thrown.expectMessage("expected: 1, actual: 0");
-        this.service.getSuggestions(oneOone, null);
-        verify(this.eresource);
+        AssertionError ex = assertThrows(AssertionError.class, () -> {
+            this.service.getSuggestions(oneOone, null);
+            verify(this.eresource);
+        });
+        assertTrue(ex.getMessage().endsWith("expected: 1, actual: 0"));
+
     }
 
     @Test

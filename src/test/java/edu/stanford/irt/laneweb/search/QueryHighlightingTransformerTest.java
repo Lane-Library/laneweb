@@ -9,8 +9,8 @@ import static org.easymock.EasyMock.verify;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
@@ -28,7 +28,7 @@ public class QueryHighlightingTransformerTest {
 
     private XMLConsumer xmlConsumer;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.model = new HashMap<>();
         this.xmlConsumer = mock(XMLConsumer.class);

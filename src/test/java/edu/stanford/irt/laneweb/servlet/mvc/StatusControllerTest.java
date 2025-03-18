@@ -4,12 +4,12 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.strictMock;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Collections;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.laneweb.status.LanewebStatusService;
 import edu.stanford.irt.status.ApplicationStatus;
@@ -22,7 +22,7 @@ public class StatusControllerTest {
 
     private LanewebStatusService statusService;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.statusService = strictMock(LanewebStatusService.class);
         this.controller = new StatusController(this.statusService);

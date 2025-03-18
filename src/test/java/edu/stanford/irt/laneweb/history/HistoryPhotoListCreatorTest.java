@@ -3,15 +3,16 @@ package edu.stanford.irt.laneweb.history;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
@@ -26,16 +27,18 @@ public class HistoryPhotoListCreatorTest {
 
     private Object photo;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.creator = new HistoryPhotoListCreator(getClass().getResource("history-photos.json").toExternalForm());
         this.photo = mock(HistoryPhoto.class);
     }
 
-    @Test(expected = LanewebException.class)
+    @Test
     public void testMain() {
         String[] args = { "file:/foo/hm.txt" };
-        HistoryPhotoListCreator.main(args);
+        assertThrows(LanewebException.class, () -> {
+            HistoryPhotoListCreator.main(args);
+        });
     }
 
     @Test
