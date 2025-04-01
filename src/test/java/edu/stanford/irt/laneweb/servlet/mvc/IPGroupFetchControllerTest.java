@@ -4,59 +4,43 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
+import java.util.stream.Stream;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.ui.Model;
 
 import edu.stanford.irt.laneweb.ipgroup.IPGroup;
 import edu.stanford.irt.laneweb.servlet.binding.RemoteProxyIPDataBinder;
 
-@RunWith(Parameterized.class)
 public class IPGroupFetchControllerTest {
 
-    @Parameters
-    public static Collection<Object[]> data() {
-        return Arrays.asList(new Object[][] {
+    public static Stream<Arguments> data() {
+        return Stream.of(
                 // get ip with callback
-                { IPGroup.OTHER, "callback", "callback('OTHER');" },
+                Arguments.of(IPGroup.OTHER, "callback", "callback('OTHER');"),
                 // malicious callback
-                { IPGroup.OTHER, "LANE.Tracker.setIpGroup71907%3balert(1)%2f%2f734", "OTHER" },
+                Arguments.of(IPGroup.OTHER, "LANE.Tracker.setIpGroup71907%3balert(1)%2f%2f734", "OTHER"),
                 // no callback
-                { IPGroup.OTHER, null, "OTHER" } });
+                Arguments.of(IPGroup.OTHER, null, "OTHER"));
     }
 
     private RemoteProxyIPDataBinder binder;
 
-    private String callback;
-
     private IPGroupFetchController controller;
-
-    private String expected;
-
-    private IPGroup ipGroup;
 
     private Model model;
 
     private HttpServletRequest request;
 
-    public IPGroupFetchControllerTest(final IPGroup ipGroup, final String callback, final String expected) {
-        this.ipGroup = ipGroup;
-        this.callback = callback;
-        this.expected = expected;
-    }
-
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.binder = mock(RemoteProxyIPDataBinder.class);
         this.controller = new IPGroupFetchController(this.binder);
@@ -64,16 +48,18 @@ public class IPGroupFetchControllerTest {
         this.request = mock(HttpServletRequest.class);
     }
 
-    @Test
-    public void shouldReturnExpectedString() {
+    @ParameterizedTest
+    @MethodSource("data")
+    public void shouldReturnExpectedString(final IPGroup ipGroup, final String callback, final String expected) {
         replay(this.binder, this.model, this.request);
-        String actual = this.controller.getIPGroup(this.ipGroup, this.callback);
-        assertEquals(actual, this.expected);
+        String actual = this.controller.getIPGroup(ipGroup, callback);
+        assertEquals(actual, expected);
         verify(this.binder, this.model, this.request);
     }
 
-    @Test
-    public void testBind() {
+    @ParameterizedTest
+    @MethodSource("data")
+    public void testBind(final IPGroup ipGroup, final String callback, final String expected) {
         expect(this.model.asMap()).andReturn(Collections.emptyMap());
         this.binder.bind(Collections.emptyMap(), this.request);
         replay(this.binder, this.model, this.request);

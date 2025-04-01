@@ -1,6 +1,6 @@
 package edu.stanford.irt.laneweb.config;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.Collections;
 
@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 class RESTClientConfigurationTest {
 
     private RESTClientConfiguration configuration = new RESTClientConfiguration();
-    
+
     @Test
     void testClientHttpRequestFactory() {
         assertNotNull(this.configuration.getRequestFactory());

@@ -12,8 +12,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class LanewebHTTPSFilterTest {
 
@@ -25,7 +25,7 @@ public class LanewebHTTPSFilterTest {
 
     private HttpServletResponse response;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.filter = new LanewebHTTPSFilter();
         this.chain = mock(FilterChain.class);

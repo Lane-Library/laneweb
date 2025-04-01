@@ -4,15 +4,15 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.net.URI;
 import java.util.HashMap;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.laneweb.rest.RESTException;
 import edu.stanford.irt.laneweb.rest.RESTService;
@@ -24,13 +24,13 @@ public class LiveChatAvailabilityServiceTest {
     private LiveChatAvailabilityService service;
 
     private URI uri;
-    
+
     private HashMap<String, Object> chatAvailalibity;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
-    	this.chatAvailalibity = new HashMap<>();
-    	this.chatAvailalibity.put("online", true);
+        this.chatAvailalibity = new HashMap<>();
+        this.chatAvailalibity.put("online", true);
         this.uri = new URI("/");
         this.restService = mock(RESTService.class);
         this.service = new LiveChatAvailabilityService();
@@ -51,9 +51,9 @@ public class LiveChatAvailabilityServiceTest {
 
     @Test
     public final void testIsAvailableAndThenIsNot() throws Exception {
-    	HashMap<String, Object> chatNotAvailalibity = new HashMap<>();
-    	chatNotAvailalibity.put("online", false);
-    	expect(this.restService.getObject(this.uri, HashMap.class)).andReturn(this.chatAvailalibity);
+        HashMap<String, Object> chatNotAvailalibity = new HashMap<>();
+        chatNotAvailalibity.put("online", false);
+        expect(this.restService.getObject(this.uri, HashMap.class)).andReturn(this.chatAvailalibity);
         expect(this.restService.getObject(this.uri, HashMap.class)).andReturn(chatNotAvailalibity);
         replay(this.restService);
         assertTrue(this.service.isAvailable());
@@ -64,7 +64,8 @@ public class LiveChatAvailabilityServiceTest {
 
     @Test
     public final void testIsAvailableRESTException() throws Exception {
-        expect(this.restService.getObject(this.uri, HashMap.class)).andThrow(new RESTException(new IOException("oops")));
+        expect(this.restService.getObject(this.uri, HashMap.class))
+                .andThrow(new RESTException(new IOException("oops")));
         replay(this.restService);
         assertFalse(this.service.isAvailable());
         verify(this.restService);

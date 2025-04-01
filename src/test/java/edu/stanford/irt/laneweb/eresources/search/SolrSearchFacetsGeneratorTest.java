@@ -12,8 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Page;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
@@ -27,7 +27,7 @@ public class SolrSearchFacetsGeneratorTest {
 
     Collection<Page<FacetFieldEntry>> facetPages;
 
-    private Map<String,List<FacetFieldEntry>> eresourcesPage;
+    private Map<String, List<FacetFieldEntry>> eresourcesPage;
 
     private FacetsGenerator generator;
 
@@ -36,12 +36,10 @@ public class SolrSearchFacetsGeneratorTest {
     private List<FacetFieldEntry> pageFieldFacet;
 
     private EresourceFacetService service;
-    
-   
-    
+
     SAXStrategy<Map<String, Collection<FacetFieldEntry>>> facetSAXStrategy;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.service = mock(EresourceFacetService.class);
         this.facetSAXStrategy = mock(SAXStrategy.class);
@@ -63,12 +61,13 @@ public class SolrSearchFacetsGeneratorTest {
         expect(this.service.facetByManyFields("skin", "", 5)).andReturn(this.eresourcesPage);
         expect(this.eresourcesPage.get("publicationType")).andReturn(this.pageFieldFacet);
         expect(this.pageFieldFacet).andReturn(Arrays.asList(new FacetFieldEntry(field, "Required1", 100)));
-        expect(this.service.facetByField("skin", "","publicationType",1000, 1, FacetSort.COUNT)).andReturn(this.eresourcesPage);
+        expect(this.service.facetByField("skin", "", "publicationType", 1000, 1, FacetSort.COUNT))
+                .andReturn(this.eresourcesPage);
         replay(this.service, this.eresourcesPage);
         this.generator.generate();
         verify(this.service, this.eresourcesPage);
     }
-    
+
     @Test
     public final void testNotEnoughtPublicationResult() throws Exception {
         Collection<String> facets = Arrays.asList("type", "publicationType");
@@ -81,19 +80,19 @@ public class SolrSearchFacetsGeneratorTest {
         List<FacetFieldEntry> resultFromSolr = new ArrayList<FacetFieldEntry>();
         resultFromSolr.add(new FacetFieldEntry(fieldType, "index", 10));
         resultFromSolr.add(new FacetFieldEntry(fieldPublicationType, "requiredIndex", 100));
-        
+
         expect(this.service.facetByManyFields("skin", "", 5)).andReturn(this.eresourcesPage);
         expect(this.eresourcesPage.get("type")).andReturn(this.pageFieldFacet);
         expect(this.eresourcesPage.get("publicationType")).andReturn(this.pageFieldFacet);
-        
-        //Second call to the facetService
-        expect(this.service.facetByField("skin", "","publicationType", 1000, 1, FacetSort.COUNT)).andReturn(this.eresourcesPage);
+
+        // Second call to the facetService
+        expect(this.service.facetByField("skin", "", "publicationType", 1000, 1, FacetSort.COUNT))
+                .andReturn(this.eresourcesPage);
         expect(this.eresourcesPage.get("publicationType")).andReturn(this.pageFieldFacet);
-        
+
         replay(this.service, this.eresourcesPage);
         this.generator.generate();
         verify(this.service, this.eresourcesPage);
     }
-    
-    
+
 }

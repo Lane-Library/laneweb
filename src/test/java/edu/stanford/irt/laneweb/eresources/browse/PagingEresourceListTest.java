@@ -4,13 +4,13 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Arrays;
 import java.util.Collection;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.eresources.model.Eresource;
@@ -26,7 +26,7 @@ public class PagingEresourceListTest {
 
     private PagingData pagingData;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.eresources = mock(Collection.class);
         this.eresource = mock(Eresource.class);

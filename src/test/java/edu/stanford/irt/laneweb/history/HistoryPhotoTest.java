@@ -1,15 +1,15 @@
 package edu.stanford.irt.laneweb.history;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class HistoryPhotoTest {
 
     private HistoryPhoto photo;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.photo = new HistoryPhoto("page", "thumbnail", "title");
     }

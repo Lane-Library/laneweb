@@ -5,7 +5,8 @@ import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -15,8 +16,8 @@ import java.util.Collections;
 import javax.xml.transform.Result;
 import javax.xml.transform.sax.TransformerHandler;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
 public class HTML5SerializerTest {
@@ -25,7 +26,7 @@ public class HTML5SerializerTest {
 
     private TransformerHandler transformerHandler;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.transformerHandler = mock(TransformerHandler.class);
         this.serializer = new HTML5Serializer(null, this.transformerHandler, Collections.emptyMap());
@@ -43,14 +44,16 @@ public class HTML5SerializerTest {
         verify(this.transformerHandler);
     }
 
-    @Test(expected = SAXException.class)
+    @Test
     public void testStartDocumentThrowsIOException() throws SAXException, IOException {
-        this.transformerHandler.setResult(isA(Result.class));
-        OutputStream output = mock(OutputStream.class);
-        output.write(isA(byte[].class));
-        expectLastCall().andThrow(new IOException());
-        replay(this.transformerHandler, output);
-        this.serializer.setOutputStream(output);
-        this.serializer.startDocument();
+        assertThrows(SAXException.class, () -> {
+            this.transformerHandler.setResult(isA(Result.class));
+            OutputStream output = mock(OutputStream.class);
+            output.write(isA(byte[].class));
+            expectLastCall().andThrow(new IOException());
+            replay(this.transformerHandler, output);
+            this.serializer.setOutputStream(output);
+            this.serializer.startDocument();
+        });
     }
 }

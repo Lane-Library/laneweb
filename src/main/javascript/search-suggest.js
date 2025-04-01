@@ -5,8 +5,8 @@
 
     let form = document.querySelector(".search-form");
 
-
-    if (form && form.querySelector("input[name=q]")) {
+    // table search inputs (e.g. course reserves, liaisons, equipment) should not get solr suggestions: LANEWEB-11444
+    if (form && form.querySelector("input[name=q]:not(#table-search-input)")) {
 
         let queryInput = form.querySelector("input[name=q]"),
             model = function (suggest, source) {
@@ -32,10 +32,14 @@
 
                 return {
                     sourceChange: function (event) {
-                        // default suggest limit is mesh-di
                         let source = event.newVal,
+                            suggestLimitInput = form.querySelector("input[name=suggest-limit]"),
                             limit;
-                        if (source.match(/^(all|catalog)/)) {
+                        // suggest-limit overrides source
+                        if (suggestLimitInput) {
+                            limit = suggestLimitInput.value;
+                        }
+                        else if (source.match(/^(all|catalog)/)) {
                             limit = "er-mesh";
                         } else {
                             limit = "";

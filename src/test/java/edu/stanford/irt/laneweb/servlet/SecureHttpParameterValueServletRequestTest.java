@@ -4,16 +4,16 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class SecureHttpParameterValueServletRequestTest {
 
@@ -27,7 +27,7 @@ public class SecureHttpParameterValueServletRequestTest {
 
   private static final String[] FORBIDDEN_ARRAY_VALUE = { "hel\0lo", "\0you" };
 
-  @Before
+  @BeforeEach
   public void setUp() {
     this.request = mock(HttpServletRequest.class);
     this.secureServletRequest = new SecureHttpParameterValueServletRequest(request);

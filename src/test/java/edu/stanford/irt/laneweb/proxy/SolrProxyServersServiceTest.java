@@ -4,7 +4,7 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.nio.charset.StandardCharsets;
@@ -13,8 +13,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.laneweb.eresources.EresourceFacetService;
 import edu.stanford.irt.laneweb.eresources.model.solr.FacetFieldEntry;
@@ -33,22 +33,22 @@ public class SolrProxyServersServiceTest {
 
     private EresourceFacetService solrService;
 
-    private Map<String,List<FacetFieldEntry>> fps;
-    
-    @Before
+    private Map<String, List<FacetFieldEntry>> fps;
+
+    @BeforeEach
     public void setUp() throws Exception {
         this.solrService = mock(EresourceFacetService.class);
         this.proxyService = new SolrProxyServersService(this.solrService);
         FacetFieldEntry ffe = new FacetFieldEntry(null, "foo", 443);
         List<FacetFieldEntry> list = Collections.singletonList(ffe);
-        this.fps =  new HashMap<>();
+        this.fps = new HashMap<>();
         this.fps.put("proxyHosts", list);
     }
 
     @Test
     public final void testWrite() throws Exception {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-         expect(this.solrService.facetByField("*", null, "proxyHosts", 100000, 1, FacetSort.INDEX)).andReturn(this.fps);
+        expect(this.solrService.facetByField("*", null, "proxyHosts", 100000, 1, FacetSort.INDEX)).andReturn(this.fps);
         replay(this.solrService);
         this.proxyService.write(baos);
         assertEquals(this.expectedOutput, baos.toString(StandardCharsets.UTF_8.name()));

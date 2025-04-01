@@ -2,7 +2,7 @@ describe('Course Reserves List', () => {
 
     it('should show/hide results as search input is typed', () => {
 
-        cy.visit('/biomed-resources/course-reserves.html');
+        cy.visit('/cypress-test/biomed-resources/course-reserves.html');
 
         cy.get('#table-search-input').as('searchInput');
 

@@ -6,9 +6,9 @@ import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.newCapture;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -21,8 +21,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import org.easymock.Capture;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.laneweb.codec.PersistentLoginToken;
 import edu.stanford.irt.laneweb.codec.UserCookieCodec;
@@ -52,7 +52,7 @@ public class PersistentLoginControllerTest {
 
     private UserDataBinder userSource;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.userSource = mock(UserDataBinder.class);
         this.codec = mock(UserCookieCodec.class);
@@ -129,8 +129,9 @@ public class PersistentLoginControllerTest {
         Capture<Cookie> cookie2 = newCapture();
         this.response.addCookie(capture(cookie1));
         this.response.addCookie(capture(cookie2));
-        expect(this.response.getHeaders("Set-Cookie")).andReturn(Collections.singleton( CookieName.EXPIRATION.toString()+"cookie"));
-        this.response.setHeader("Set-Cookie", CookieName.EXPIRATION.toString()+"cookie; SameSite=Lax");
+        expect(this.response.getHeaders("Set-Cookie"))
+                .andReturn(Collections.singleton(CookieName.EXPIRATION.toString() + "cookie"));
+        this.response.setHeader("Set-Cookie", CookieName.EXPIRATION.toString() + "cookie; SameSite=Lax");
         expect(this.request.getHeader("User-Agent")).andReturn("firefox");
         expect(this.codec.createLoginToken(this.user, "firefox".hashCode())).andReturn(this.token);
         expect(this.token.getEncryptedValue()).andReturn("encryptedValue");
@@ -153,12 +154,12 @@ public class PersistentLoginControllerTest {
         this.response.addCookie(capture(cookie1));
         this.response.addCookie(capture(cookie2));
         Collection<String> cookieFromHttpResponse = new ArrayList<String>();
-        cookieFromHttpResponse.add(CookieName.EXPIRATION.toString()+"_cookie");
-        cookieFromHttpResponse.add(CookieName.USER.toString()+"_cookie");
+        cookieFromHttpResponse.add(CookieName.EXPIRATION.toString() + "_cookie");
+        cookieFromHttpResponse.add(CookieName.USER.toString() + "_cookie");
         cookieFromHttpResponse.add("SESSION_cookie");
         expect(this.response.getHeaders("Set-Cookie")).andReturn(cookieFromHttpResponse);
-        this.response.setHeader("Set-Cookie", CookieName.EXPIRATION.toString()+"_cookie; SameSite=Lax");
-        this.response.addHeader("Set-Cookie", CookieName.USER.toString()+"_cookie; SameSite=Lax");
+        this.response.setHeader("Set-Cookie", CookieName.EXPIRATION.toString() + "_cookie; SameSite=Lax");
+        this.response.addHeader("Set-Cookie", CookieName.USER.toString() + "_cookie; SameSite=Lax");
         this.response.addHeader("Set-Cookie", "SESSION_cookie");
         expect(this.request.getHeader("User-Agent")).andReturn("firefox");
         expect(this.codec.createLoginToken(this.user, "firefox".hashCode())).andReturn(this.token);

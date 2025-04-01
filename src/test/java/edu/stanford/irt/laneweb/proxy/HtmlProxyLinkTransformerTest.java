@@ -9,8 +9,8 @@ import static org.easymock.EasyMock.verify;
 
 import java.util.Collections;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
@@ -27,7 +27,7 @@ public class HtmlProxyLinkTransformerTest {
 
     private XMLConsumer xmlConsumer;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.proxyHostManager = mock(ProxyHostManager.class);
         this.transformer = new HtmlProxyLinkTransformer(this.proxyHostManager);

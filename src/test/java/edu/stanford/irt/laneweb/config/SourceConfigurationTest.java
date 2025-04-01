@@ -6,10 +6,10 @@ import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.BeanFactory;
 
 import edu.stanford.irt.cocoon.sitemap.Sitemap;
@@ -21,7 +21,7 @@ public class SourceConfigurationTest {
 
     private SourceConfiguration configuration;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.beanFactory = mock(BeanFactory.class);
         this.configuration = new SourceConfiguration(this.beanFactory, null, null, null, null);

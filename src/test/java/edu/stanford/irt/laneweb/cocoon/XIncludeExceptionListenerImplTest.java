@@ -5,8 +5,8 @@ import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.Locator;
 
 public class XIncludeExceptionListenerImplTest {
@@ -15,7 +15,7 @@ public class XIncludeExceptionListenerImplTest {
 
     private Locator locator;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.listener = new XIncludeExceptionListenerImpl();
         this.locator = mock(Locator.class);

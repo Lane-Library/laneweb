@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.eresources;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.laneweb.eresources.model.Eresource;
 

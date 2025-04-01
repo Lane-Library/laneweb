@@ -9,8 +9,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -35,7 +35,7 @@ public class BassettImageGeneratorTest {
 
     private XMLConsumer xmlConsumer;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.service = mock(BassettImageService.class);
         this.saxStrategy = mock(SAXStrategy.class);
@@ -56,7 +56,7 @@ public class BassettImageGeneratorTest {
 
     @Test
     public void testDoGenerateQueryRegion() {
-        expect(this.service.findBassettByRegion( "region", this.page)).andReturn(null);
+        expect(this.service.findBassettByRegion("region", this.page)).andReturn(null);
         this.saxStrategy.toSAX(null, this.xmlConsumer);
         replay(this.service, this.xmlConsumer, this.saxStrategy);
         Map<String, Object> model = new HashMap<>();

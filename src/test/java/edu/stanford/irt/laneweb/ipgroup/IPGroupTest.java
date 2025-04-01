@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.ipgroup;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -11,7 +11,7 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class IPGroupTest {
 
@@ -112,7 +112,7 @@ public class IPGroupTest {
                 new InputStreamReader(getClass().getResourceAsStream("lpch-ips.txt")));
         String ip = null;
         while ((ip = lpchIps.readLine()) != null) {
-            assertEquals(ip, IPGroup.LPCH, IPGroup.getGroupForIP(ip));
+            assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP(ip));
         }
     }
 
@@ -140,7 +140,7 @@ public class IPGroupTest {
                 new InputStreamReader(getClass().getResourceAsStream("som-shc-ips.txt")));
         String ip = null;
         while ((ip = shcIps.readLine()) != null) {
-            assertEquals(ip, IPGroup.SHC, IPGroup.getGroupForIP(ip));
+            assertEquals(IPGroup.SHC, IPGroup.getGroupForIP(ip));
         }
     }
 

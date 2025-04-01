@@ -4,15 +4,15 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.Collections;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -34,7 +34,7 @@ public class ProxyCredentialControllerTest {
 
     private UserDataBinder userBinder;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.ticketBinder = mock(TicketDataBinder.class);
         this.userBinder = mock(UserDataBinder.class);

@@ -16,19 +16,14 @@ import jakarta.mail.Message.RecipientType;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.mail.MailSendException;
 import org.springframework.mail.javamail.JavaMailSender;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
 public class EMailSenderTest {
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     private EMailSender eMailSender;
 
@@ -38,7 +33,7 @@ public class EMailSenderTest {
 
     private MimeMessage message;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.javaMailSender = mock(JavaMailSender.class);
         this.eMailSender = new EMailSender(this.javaMailSender);

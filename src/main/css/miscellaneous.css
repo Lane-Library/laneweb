@@ -239,6 +239,21 @@ hr {
     display: none;
 }
 
+.resource.course-reserves-item {
+    display: flex;
+    margin-top: 60px;
+    max-width: 700px;
+}
+
+.resource.course-reserves-item>div:first-child {
+    margin-right: 24px;
+    margin-top: 6px;
+}
+
+.resource.course-reserves-item img {
+    max-width: none;
+}
+
 .centered-text {
     text-align: center;
 }

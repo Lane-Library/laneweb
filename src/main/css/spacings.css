@@ -42,6 +42,10 @@
     margin: 94px 81px;
 }
 
+.scroll-margin-lg {
+    scroll-margin-top: 7em;
+}
+
 .max-width-md {
     max-width: 800px !important;
     margin-left: auto;

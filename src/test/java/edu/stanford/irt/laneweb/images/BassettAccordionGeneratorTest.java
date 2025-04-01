@@ -10,8 +10,8 @@ import static org.easymock.EasyMock.verify;
 import java.util.Collections;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.bassett.service.BassettImageService;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
@@ -30,7 +30,7 @@ public class BassettAccordionGeneratorTest {
 
     private XMLConsumer xmlConsumer;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.service = mock(BassettImageService.class);
         this.facets = mock(Map.class);
