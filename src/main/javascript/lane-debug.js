@@ -94,8 +94,8 @@ YUI({ debug: true, filter: "debug", combine: false, fetchCSS: false }).use(
             "holdings-toggle.js",
             "table-hide-empty-columns.js",
             "zotero.js",
-            "altmetric.js"
-
+            "altmetric.js",
+            "sfp-form.js"
         ];
 
         //Model doesn't exist yet, get basePath by hand:

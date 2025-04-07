@@ -30,17 +30,15 @@
     margin-bottom: 24px;
 }
 
-.contacts-choice li,
-.contacts-choice li:last-child {
+.contacts-choice li {
     flex: 1 1 auto;
     margin: 3px 2%;
-    padding: 0px;
-    border-radius: 9px;
-}
-
-.contacts-choice li a {
     padding: 10px 2px;
     width: 100%;
+}
+
+.contacts-choice li:last-child {
+    border-bottom: 2px solid #007C92;
 }
 
 .contacts-info>div {
@@ -54,29 +52,15 @@
     display: none;
 }
 
-
-#sfp-book:target,
-#sfp-journal:target,
-#sfp-other:target {
+#sfp-book.active,
+#sfp-journal.active,
+#sfp-other.active {
     display: block;
-    scroll-margin-top: 500px;
 }
 
-#sfp-journal:target .sfp-journal-button,
-#sfp-journal:target .sfp-journal-button a,
-#sfp-journal:target .sfp-button a,
-#sfp-journal:target .sfp-button a,
-#sfp-other:target .sfp-other-button a,
-#sfp-other:target .sfp-other-button a,
-#sfp-other:target .sfp-button,
-#sfp-other:target .sfp-button a,
-#sfp-book:target .sfp-book-button,
-#sfp-book:target .sfp-book-button a,
-#sfp-book:target .sfp-button a,
-#sfp-book:target .sfp-button a,
-#sfp-book:target .sfp-button i.icon,
-#sfp-other:target .sfp-button i.icon,
-#sfp-journal:target .sfp-button i.icon {
+
+
+#sfp-form .contacts-choice li.active {
     background-color: #007C92;
     color: #F0F0F0;
     cursor: not-allowed;
