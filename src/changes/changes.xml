@@ -5,6 +5,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2025-04-07" version="3.14.6" description="bug fix and update release">
+            <action date="2025-02-28" dev="alainb" issue="LANEWEB-11458" type="update">
+                Updating Heading in Lane Search
+            </action>
+            <action date="2025-04-04" dev="alainb" issue="LANEWEB-11477" type="update">
+                Issue with Suggestion for Purchase Form
+            </action>
+        </release> 
         <release date="2025-03-17" version="3.14.5" description="bug fix and update release">
             <action date="2025-02-21" dev="alainb" issue="LANEWEB-11455" type="update">
                 Clean up email controller

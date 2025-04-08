@@ -7,15 +7,14 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import jakarta.mail.MessagingException;
-import jakarta.mail.internet.MimeMessage;
-
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.model.Model;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 
 public class EMailSender {
 
@@ -26,8 +25,8 @@ public class EMailSender {
     private static final String EMAIL = "email";
 
     // "name@domain.com" or "jane doe <name@domain.com>"
-    private static final Pattern EMAIL_PATTERN = Pattern
-            .compile("^(?:[\\w ]+ <)?[\\w\\.%\\+\\-]+@[\\w.-]+\\.[A-Z]{2,4}>?$", Pattern.CASE_INSENSITIVE);
+    private static final Pattern EMAIL_PATTERN = Pattern.compile(
+            "^(?:[\\w \\-'\"\\.\\(\\)]+ <)?[\\w\\.%\\+\\-]+@[\\w.-]+\\.[A-Z]{2,4}>?$", Pattern.CASE_INSENSITIVE);
 
     private static final String LANE_STANFORD_EDU = "lane.stanford.edu";
 

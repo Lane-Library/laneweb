@@ -2,9 +2,9 @@ describe('Form submited Test Case', () => {
 
     beforeEach(() => {
         cy.viewport(1101, 1750);
-        cy.visit('/cypress-test/contacts/sfp.html#sfp-book');
-        cy.get("#sfp-book").as('form');
-        cy.get("#sfp-book button[type='submit']").as('submit');
+        cy.visit('/cypress-test/contacts/sfp.html');
+        cy.get("#sfp-form").as('form');
+        cy.get("#sfp-form button[type='submit']").as('submit');
     });
 
     it('Form submited', () => {
