@@ -56,7 +56,7 @@
                 <title>search results</title>
             </head>
             <body>
-                <h2 class="level5 border-thick border-thin">Search Results</h2>
+                <h2>Search Results</h2>
                 <xsl:if test="number(@size) &gt; 1 and matches($source,'^(all|catalog)')">
                     <xsl:call-template name="sortBy" />
                 </xsl:if>
