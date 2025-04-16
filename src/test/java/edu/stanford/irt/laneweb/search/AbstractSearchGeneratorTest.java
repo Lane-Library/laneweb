@@ -6,8 +6,8 @@ import static org.easymock.EasyMock.verify;
 
 import java.util.Collections;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.model.Model;
@@ -37,7 +37,7 @@ public class AbstractSearchGeneratorTest {
 
     private SAXStrategy<Object> saxStrategy;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.saxStrategy = mock(SAXStrategy.class);
         this.generator = new TestAbstractSearchGenerator(this.saxStrategy);

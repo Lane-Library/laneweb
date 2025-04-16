@@ -4,9 +4,9 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,8 +14,8 @@ import java.util.Map;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.laneweb.ipgroup.IPGroup;
 import edu.stanford.irt.laneweb.model.Model;
@@ -32,7 +32,7 @@ public class RemoteProxyIPDataBinderTest {
 
     private HttpSession session;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.proxyLinks = mock(ProxyLinks.class);
         this.dataBinder = new RemoteProxyIPDataBinder(this.proxyLinks);

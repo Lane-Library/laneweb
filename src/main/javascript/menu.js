@@ -47,6 +47,4 @@
     L.on("content-changed", function (event) {
         selectMenuByHash(event.hash);
     });
-
-
 })();

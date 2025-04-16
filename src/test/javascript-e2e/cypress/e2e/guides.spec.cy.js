@@ -15,9 +15,7 @@ describe('Guide Menus', () => {
         cy.get('#all-guides div.guide-container .guide').as('allGuidesContainer');
     });
 
-    it('test the guide page whit ash #event-guides', () => {
-
-
+    it('test the guide page with ash #event-guides', () => {
         // Check if items status in left menu
         cy.get('@eventGuidesLink').should('have.class', 'menuitem-active');
         cy.get('@allGuidesLink').should('have.not.class', 'menuitem-active');
@@ -53,6 +51,21 @@ describe('Guide Menus', () => {
 
     });
 
+
+    it('test if menu seleted after a guide is clicked on', () => {
+        cy.get('#event-guides a[href="#off"]').as('hideMenu');
+        cy.get('.guide-container a[href="#event-guides"]').as('guideHeader');
+        // Close menu
+        cy.get('@hideMenu').click();
+
+        // Open guide by clicking on the herder guide
+        cy.get('@guideHeader').click();
+
+        // Check if items status in left menu
+        cy.get('@eventGuidesLink').should('have.class', 'menuitem-active');
+        cy.get('@allGuidesLink').should('have.not.class', 'menuitem-active');
+    })
+
     it('test the guide menu whitout ash', () => {
         cy.visit('/cypress-test/help/guides/index.html');
 
@@ -71,4 +84,6 @@ describe('Guide Menus', () => {
         cy.get('@eventGuidesContainer').should('be.not.visible');
 
     })
+
+
 })

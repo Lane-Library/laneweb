@@ -10,8 +10,8 @@ import java.io.IOException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ErrordocsServletTest {
 
@@ -21,7 +21,7 @@ public class ErrordocsServletTest {
 
     private ErrordocsServlet servlet;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.servlet = new ErrordocsServlet();
         this.request = mock(HttpServletRequest.class);

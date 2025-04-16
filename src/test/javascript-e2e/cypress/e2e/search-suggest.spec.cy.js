@@ -1,7 +1,7 @@
 describe('Suggest', () => {
 
     beforeEach(() => {
-        cy.viewport(1200, 1000);
+        cy.viewport(1200, 3000);
         cy.visit('/cypress-test/index.html');
 
         // Parameters
@@ -54,16 +54,10 @@ describe('Suggest', () => {
 
     })
 
-    //Test suggestion after the search input loosing the focus
-    it('suggestion should not exist after loosing focus', () => {
-        cy.get('@input').type('skin');
-        cy.get('.aclist-item').should('exist');
-        cy.get('#mc-embedded-subscribe').click();
-        cy.get('.aclist-item').should('not.exist');
-    })
 
     it('check keyboard selection for suggestion ', () => {
         cy.get('@input').type('skin');
+        cy.wait(300);
         cy.get('.aclist-item').should('exist');
         cy.get('@input').type('{downArrow}');
         cy.get('@input').type('{downArrow}');
@@ -72,6 +66,15 @@ describe('Suggest', () => {
         cy.get('ul .aclist-item').last().should('have.class', 'aclist-item-active');
     })
 
+
+
+    //Test suggestion after the search input loosing the focus
+    it('suggestion should not exist after loosing focus', () => {
+        cy.get('@input').type('skin');
+        cy.get('.aclist-item').should('exist');
+        cy.get('.footer-link-bar').click();
+        cy.get('.aclist-item').should('not.exist');
+    })
 
 
 

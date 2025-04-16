@@ -1,14 +1,14 @@
 package edu.stanford.irt.laneweb.cme;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.laneweb.ipgroup.IPGroup;
 import edu.stanford.irt.laneweb.model.Model;
@@ -19,7 +19,7 @@ public class CMELinkSelectorTest {
 
     private CMELinkSelector selector;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.selector = new CMELinkSelector();
         this.model = new HashMap<>();

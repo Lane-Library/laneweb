@@ -7,13 +7,14 @@ import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.same;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.util.Collections;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
@@ -33,7 +34,7 @@ public class LinkWithCoverEresourceSAXStrategyTest {
 
     private TestXMLConsumer xmlConsumer;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.saxStrategy = new LinkWithCoverEresourceSAXStrategy();
         this.xmlConsumer = new TestXMLConsumer();
@@ -41,12 +42,15 @@ public class LinkWithCoverEresourceSAXStrategyTest {
         this.link = mock(Link.class);
     }
 
-    @Test(expected = LanewebException.class)
+    @Test
     public void testNoLink() throws IOException, SAXException {
         expect(this.eresource.getRecordId()).andReturn("12");
         expect(this.eresource.getLinks()).andReturn(Collections.emptySet());
         replay(this.eresource, this.link);
-        this.saxStrategy.toSAX(this.eresource, this.xmlConsumer);
+        assertThrows(LanewebException.class, () -> {
+            this.saxStrategy.toSAX(this.eresource, this.xmlConsumer);
+        });
+
     }
 
     @Test
@@ -85,7 +89,7 @@ public class LinkWithCoverEresourceSAXStrategyTest {
                 this.xmlConsumer.getStringValue());
     }
 
-    @Test(expected = LanewebException.class)
+    @Test
     public void testToSAXThrowsException() throws IOException, SAXException {
         XMLConsumer x = mock(XMLConsumer.class);
         expect(this.eresource.getRecordId()).andReturn("12");
@@ -95,6 +99,8 @@ public class LinkWithCoverEresourceSAXStrategyTest {
         x.startElement(same("http://www.w3.org/1999/xhtml"), same("a"), same("a"), isA(AttributesImpl.class));
         expectLastCall().andThrow(new SAXException());
         replay(this.eresource, this.link, x);
-        this.saxStrategy.toSAX(this.eresource, x);
+        assertThrows(LanewebException.class, () -> {
+            this.saxStrategy.toSAX(this.eresource, x);
+        });
     }
 }

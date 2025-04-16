@@ -7,14 +7,14 @@ import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.same;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Collections;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.web.client.RestClientException;
 
 import edu.stanford.irt.laneweb.rest.RESTService;
@@ -31,7 +31,7 @@ public class RESTBookCoverServiceTest {
 
     private URI uri;
 
-    @Before
+    @BeforeEach
     public void setUp() throws URISyntaxException {
         this.uri = new URI("/");
         this.restService = mock(RESTService.class);

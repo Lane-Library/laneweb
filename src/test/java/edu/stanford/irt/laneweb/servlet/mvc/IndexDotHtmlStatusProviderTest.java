@@ -5,8 +5,8 @@ import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.strictMock;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.OutputStream;
 import java.net.URI;
@@ -15,8 +15,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.cocoon.pipeline.Pipeline;
 import edu.stanford.irt.cocoon.sitemap.ComponentFactory;
@@ -38,12 +38,13 @@ public class IndexDotHtmlStatusProviderTest {
 
     private IndexDotHtmlStatusProvider statusProvider;
 
-    @Before
+    @BeforeEach
     public void setUp() throws URISyntaxException {
         this.componentFactory = strictMock(ComponentFactory.class);
         this.sitemap = strictMock(Sitemap.class);
         this.sourceResolver = strictMock(SourceResolver.class);
-        this.statusProvider = new IndexDotHtmlStatusProvider(this.sitemap, this.componentFactory, this.sourceResolver,
+        this.statusProvider = new IndexDotHtmlStatusProvider(this.sitemap, this.componentFactory,
+                this.sourceResolver,
                 250, new URI("file:/"), new URI("file:/"));
         this.pipeline = strictMock(Pipeline.class);
     }
@@ -81,7 +82,8 @@ public class IndexDotHtmlStatusProviderTest {
         expect(this.sitemap.buildPipeline(isA(SitemapContext.class))).andReturn(this.pipeline);
         this.pipeline.process(isA(OutputStream.class));
         replay(this.componentFactory, this.sitemap, this.sourceResolver, this.pipeline);
-        IndexDotHtmlStatusProvider provider = new IndexDotHtmlStatusProvider(this.sitemap, this.componentFactory,
+        IndexDotHtmlStatusProvider provider = new IndexDotHtmlStatusProvider(this.sitemap,
+                this.componentFactory,
                 this.sourceResolver, -1, new URI("file:/"), new URI("file:/"));
         StatusItem item = provider.getStatusItems().get(0);
         assertEquals(Status.WARN, item.getStatus());

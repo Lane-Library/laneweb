@@ -9,8 +9,8 @@ import static org.easymock.EasyMock.verify;
 
 import java.util.Collections;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.search.impl.Result;
@@ -23,7 +23,7 @@ public class ClinicalSearchResultsGeneratorTest {
 
     private MetaSearchService metaSearchService;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.metaSearchService = mock(MetaSearchService.class);
         this.factory = mock(ClinicalSearchResultsFactory.class);

@@ -96,8 +96,8 @@
     .menu-container.mobile h2:before {
         margin: 0;
         padding: 0;
-        border: none;
         cursor: pointer;
+        border: none;
     }
 
     .menu-container.active.mobile h2 {

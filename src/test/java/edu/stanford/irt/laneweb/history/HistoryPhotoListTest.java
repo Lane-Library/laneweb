@@ -6,13 +6,13 @@ import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class HistoryPhotoListTest {
 

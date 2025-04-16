@@ -8,11 +8,11 @@ import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.newCapture;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.easymock.Capture;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
@@ -31,7 +31,7 @@ public class AbstractXHTMLSAXStrategyTest {
 
     private XMLConsumer xmlConsumer;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.strategy = new TestAbstractXHTMLSAXStrategy();
         this.xmlConsumer = mock(XMLConsumer.class);

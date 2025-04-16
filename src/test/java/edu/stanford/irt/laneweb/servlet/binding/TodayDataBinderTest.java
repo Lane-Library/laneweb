@@ -1,13 +1,13 @@
 package edu.stanford.irt.laneweb.servlet.binding;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.laneweb.model.Model;
 

@@ -7,14 +7,14 @@ import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.newCapture;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.easymock.Capture;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
@@ -34,10 +34,10 @@ public class SolrSearchGeneratorTest {
     private SAXStrategy<RestResult<Eresource>> saxStrategy;
 
     private EresourceSearchService service;
-    
+
     private RestPage<Eresource> page;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.service = mock(EresourceSearchService.class);
         this.saxStrategy = mock(SAXStrategy.class);

@@ -7,12 +7,12 @@ import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.Collections;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
@@ -29,7 +29,7 @@ public class EresourcesCountGeneratorTest {
 
     private XMLConsumer xmlConsumer;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.searchService = mock(EresourceSearchService.class);
         this.generator = new EresourcesCountGenerator(this.searchService);

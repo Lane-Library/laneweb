@@ -7,16 +7,17 @@ import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Collections;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.laneweb.rest.RESTException;
 import edu.stanford.irt.laneweb.rest.RESTService;
@@ -31,7 +32,7 @@ public class RESTBookmarkServiceTest {
 
     private URI uri;
 
-    @Before
+    @BeforeEach
     public void setUp() throws URISyntaxException {
         this.uri = new URI("/");
         this.restService = mock(RESTService.class);
@@ -47,12 +48,15 @@ public class RESTBookmarkServiceTest {
         verify(this.restService);
     }
 
-    @Test(expected = BookmarkException.class)
+    @Test()
     public void testGetLinksThrows() {
         expect(this.restService.getObject(eq(this.uri.resolve("userid")), isA(TypeReference.class)))
                 .andThrow(new RESTException(new IOException()));
         replay(this.restService);
-        this.bookmarkService.getLinks("userid");
+        assertThrows(BookmarkException.class, () -> {
+            this.bookmarkService.getLinks("userid");
+        });
+
     }
 
     @Test
@@ -63,12 +67,14 @@ public class RESTBookmarkServiceTest {
         verify(this.restService);
     }
 
-    @Test(expected = BookmarkException.class)
+    @Test()
     public void testGetRowCountThrows() {
         expect(this.restService.getObject(this.uri.resolve("rowcount"), Integer.class))
                 .andThrow(new RESTException(new IOException()));
         replay(this.restService);
-        this.bookmarkService.getRowCount();
+        assertThrows(BookmarkException.class, () -> {
+            this.bookmarkService.getRowCount();
+        });
     }
 
     @Test
@@ -88,11 +94,13 @@ public class RESTBookmarkServiceTest {
         verify(this.restService);
     }
 
-    @Test(expected = BookmarkException.class)
+    @Test()
     public void testSaveLinksThrows() {
         this.restService.putObject(this.uri.resolve("userid"), Collections.emptyList());
         expectLastCall().andThrow(new RESTException(new IOException()));
         replay(this.restService);
-        this.bookmarkService.saveLinks("userid", Collections.emptyList());
+        assertThrows(BookmarkException.class, () -> {
+            this.bookmarkService.saveLinks("userid", Collections.emptyList());
+        });
     }
 }

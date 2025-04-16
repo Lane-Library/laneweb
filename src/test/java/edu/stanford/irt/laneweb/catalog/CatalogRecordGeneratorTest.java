@@ -4,7 +4,7 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -12,8 +12,8 @@ import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.Collections;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
@@ -31,7 +31,7 @@ public class CatalogRecordGeneratorTest {
 
     private XMLReader xmlReader;
 
-    @Before
+    @BeforeEach
     public void setUp() throws IOException, SAXException {
         this.service = mock(CatalogRecordService.class);
         this.xmlReader = XMLReaderFactory.createXMLReader();

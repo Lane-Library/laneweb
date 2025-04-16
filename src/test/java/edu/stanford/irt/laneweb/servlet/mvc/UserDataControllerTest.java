@@ -4,14 +4,14 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Collections;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.ui.Model;
 
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
@@ -26,7 +26,7 @@ public class UserDataControllerTest {
 
     private HttpServletRequest request;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.dataBinder = mock(DataBinder.class);
         this.controller = new UserDataController(this.dataBinder);

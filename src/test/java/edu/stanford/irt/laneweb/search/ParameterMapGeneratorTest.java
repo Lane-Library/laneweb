@@ -5,8 +5,8 @@ import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.newCapture;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -16,8 +16,8 @@ import java.util.Map;
 import javax.xml.transform.sax.SAXResult;
 
 import org.easymock.Capture;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.oxm.Marshaller;
 
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
@@ -31,7 +31,7 @@ public class ParameterMapGeneratorTest {
 
     private XMLConsumer xmlConsumer;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.marshaller = mock(Marshaller.class);
         this.generator = new ParameterMapGenerator(this.marshaller);

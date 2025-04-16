@@ -5,7 +5,7 @@ import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -15,8 +15,8 @@ import java.util.Map;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.cocoon.pipeline.Pipeline;
 import edu.stanford.irt.cocoon.sitemap.ComponentFactory;
@@ -57,7 +57,7 @@ public class AbstractSitemapControllerTest {
 
     private HttpServletResponse response;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.componentFactory = mock(ComponentFactory.class);
         this.processor = mock(Sitemap.class);

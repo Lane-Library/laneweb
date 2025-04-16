@@ -1,12 +1,12 @@
 package edu.stanford.irt.laneweb.proxy;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.laneweb.model.Model;
 
@@ -16,7 +16,7 @@ public class AbstractProxyLinkTransformerTest {
 
     private AbstractProxyLinkTransformer transformer;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.transformer = new AbstractProxyLinkTransformer() {
         };

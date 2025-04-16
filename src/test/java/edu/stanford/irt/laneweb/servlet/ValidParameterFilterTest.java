@@ -16,8 +16,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletRequestWrapper;
 import jakarta.servlet.http.HttpServletResponse;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ValidParameterFilterTest {
 
@@ -29,7 +29,7 @@ public class ValidParameterFilterTest {
 
     private HttpServletResponse response;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.filter = new ValidParameterFilter();
         this.request = mock(HttpServletRequest.class);

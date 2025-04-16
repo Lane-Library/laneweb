@@ -4,15 +4,15 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.sax.SAXTransformerFactory;
 import javax.xml.transform.sax.TransformerHandler;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.BeanFactory;
 
 public class PipelineConfigurationTest {
@@ -21,7 +21,7 @@ public class PipelineConfigurationTest {
 
     private PipelineConfiguration configuration;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.beanFactory = mock(BeanFactory.class);
         this.configuration = new PipelineConfiguration();

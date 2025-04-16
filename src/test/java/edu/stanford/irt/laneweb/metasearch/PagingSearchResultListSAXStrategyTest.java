@@ -5,15 +5,15 @@ import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
@@ -41,7 +41,7 @@ public class PagingSearchResultListSAXStrategyTest {
 
     private TestXMLConsumer xmlConsumer;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.results = mock(List.class);
         this.xmlConsumer = new TestXMLConsumer();
@@ -100,7 +100,8 @@ public class PagingSearchResultListSAXStrategyTest {
         replay(this.results, this.result, this.iterator, this.list, this.pagingData, this.resultStrategy);
         this.strategy.toSAX(this.list, this.xmlConsumer);
         assertEquals(
-                this.xmlConsumer.getExpectedResult(this, "PagingSearchResultListSAXStrategyTest-testAllPagesToSAX.xml"),
+                this.xmlConsumer.getExpectedResult(this,
+                        "PagingSearchResultListSAXStrategyTest-testAllPagesToSAX.xml"),
                 this.xmlConsumer.getStringValue());
         verify(this.results, this.result, this.iterator, this.list, this.pagingData, this.resultStrategy);
     }
@@ -156,7 +157,8 @@ public class PagingSearchResultListSAXStrategyTest {
         replay(this.results, this.result, this.iterator, this.list, this.pagingData, this.resultStrategy);
         this.strategy.toSAX(this.list, this.xmlConsumer);
         assertEquals(
-                this.xmlConsumer.getExpectedResult(this, "PagingSearchResultListSAXStrategyTest-testNullQuery.xml"),
+                this.xmlConsumer.getExpectedResult(this,
+                        "PagingSearchResultListSAXStrategyTest-testNullQuery.xml"),
                 this.xmlConsumer.getStringValue());
         verify(this.results, this.result, this.iterator, this.list, this.pagingData, this.resultStrategy);
     }
@@ -181,7 +183,8 @@ public class PagingSearchResultListSAXStrategyTest {
         replay(this.results, this.result, this.iterator, this.list, this.pagingData, this.resultStrategy);
         this.strategy.toSAX(this.list, this.xmlConsumer);
         assertEquals(
-                this.xmlConsumer.getExpectedResult(this, "PagingSearchResultListSAXStrategyTest-testPage0ToSAX.xml"),
+                this.xmlConsumer.getExpectedResult(this,
+                        "PagingSearchResultListSAXStrategyTest-testPage0ToSAX.xml"),
                 this.xmlConsumer.getStringValue());
         verify(this.results, this.result, this.iterator, this.list, this.pagingData, this.resultStrategy);
     }
@@ -206,7 +209,8 @@ public class PagingSearchResultListSAXStrategyTest {
         replay(this.results, this.result, this.iterator, this.list, this.pagingData, this.resultStrategy);
         this.strategy.toSAX(this.list, this.xmlConsumer);
         assertEquals(
-                this.xmlConsumer.getExpectedResult(this, "PagingSearchResultListSAXStrategyTest-testPage1ToSAX.xml"),
+                this.xmlConsumer.getExpectedResult(this,
+                        "PagingSearchResultListSAXStrategyTest-testPage1ToSAX.xml"),
                 this.xmlConsumer.getStringValue());
         verify(this.results, this.result, this.iterator, this.list, this.pagingData, this.resultStrategy);
     }
@@ -231,7 +235,8 @@ public class PagingSearchResultListSAXStrategyTest {
         replay(this.results, this.result, this.iterator, this.list, this.pagingData, this.resultStrategy);
         this.strategy.toSAX(this.list, this.xmlConsumer);
         assertEquals(
-                this.xmlConsumer.getExpectedResult(this, "PagingSearchResultListSAXStrategyTest-testPage2ToSAX.xml"),
+                this.xmlConsumer.getExpectedResult(this,
+                        "PagingSearchResultListSAXStrategyTest-testPage2ToSAX.xml"),
                 this.xmlConsumer.getStringValue());
         verify(this.results, this.result, this.iterator, this.list, this.pagingData, this.resultStrategy);
     }

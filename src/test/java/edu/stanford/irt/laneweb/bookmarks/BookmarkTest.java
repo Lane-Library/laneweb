@@ -1,13 +1,14 @@
 package edu.stanford.irt.laneweb.bookmarks;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Arrays;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
@@ -19,7 +20,7 @@ public class BookmarkTest {
 
     private String url;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.label = "label";
         this.url = "url";
@@ -117,15 +118,19 @@ public class BookmarkTest {
         assertEquals(this.label, b.getLabel());
     }
 
-    @Test(expected = LanewebException.class)
+    @Test()
     public void testSetLabelAlreadySet() {
-        this.bookmark.setLabel(this.label);
+        assertThrows(LanewebException.class, () -> {
+            this.bookmark.setLabel(this.label);
+        });
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test()
     public void testSetLabelNull() {
         Bookmark b = new Bookmark();
-        b.setLabel(null);
+        assertThrows(NullPointerException.class, () -> {
+            b.setLabel(null);
+        });
     }
 
     @Test
@@ -135,15 +140,19 @@ public class BookmarkTest {
         assertEquals(this.url, b.getUrl());
     }
 
-    @Test(expected = LanewebException.class)
+    @Test()
     public void testSetUrlAlreadySet() {
-        this.bookmark.setUrl(this.url);
+        assertThrows(LanewebException.class, () -> {
+            this.bookmark.setUrl(this.url);
+        });
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testSetUrlNull() {
         Bookmark b = new Bookmark();
-        b.setUrl(null);
+        assertThrows(NullPointerException.class, () -> {
+            b.setUrl(null);
+        });
     }
 
     @Test

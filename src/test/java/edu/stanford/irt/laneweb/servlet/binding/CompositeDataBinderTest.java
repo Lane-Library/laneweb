@@ -10,8 +10,8 @@ import java.util.Map;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class CompositeDataBinderTest {
 
@@ -23,7 +23,7 @@ public class CompositeDataBinderTest {
 
     private HttpServletRequest request;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.child = mock(DataBinder.class);
         this.binder = new CompositeDataBinder(Collections.singletonList(this.child));

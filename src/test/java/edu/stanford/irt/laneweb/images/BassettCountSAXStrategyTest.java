@@ -8,7 +8,7 @@ import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -16,8 +16,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
@@ -34,7 +34,7 @@ public class BassettCountSAXStrategyTest {
 
     private XMLConsumer xmlConsumer;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.strategy = new BassettCountSAXStrategy();
         this.xmlConsumer = mock(XMLConsumer.class);
@@ -61,20 +61,26 @@ public class BassettCountSAXStrategyTest {
                 eq("bassett_count"), isA(Attributes.class));
         this.xmlConsumer.startElement(eq("http://lane.stanford.edu/bassett/ns"), eq("region"), eq("region"),
                 isA(Attributes.class));
-        this.xmlConsumer.startElement(eq("http://lane.stanford.edu/bassett/ns"), eq("sub_region"), eq("sub_region"),
+        this.xmlConsumer.startElement(eq("http://lane.stanford.edu/bassett/ns"), eq("sub_region"),
+                eq("sub_region"),
                 isA(Attributes.class));
-        this.xmlConsumer.endElement(eq("http://lane.stanford.edu/bassett/ns"), eq("sub_region"), eq("sub_region"));
+        this.xmlConsumer.endElement(eq("http://lane.stanford.edu/bassett/ns"), eq("sub_region"),
+                eq("sub_region"));
         this.xmlConsumer.characters(aryEq(new char[] { '5' }), eq(0), eq(1));
-        this.xmlConsumer.startElement(eq("http://lane.stanford.edu/bassett/ns"), eq("sub_region"), eq("sub_region"),
+        this.xmlConsumer.startElement(eq("http://lane.stanford.edu/bassett/ns"), eq("sub_region"),
+                eq("sub_region"),
                 isA(Attributes.class));
         this.xmlConsumer.characters(aryEq(new char[] { '5' }), eq(0), eq(1));
-        this.xmlConsumer.endElement(eq("http://lane.stanford.edu/bassett/ns"), eq("sub_region"), eq("sub_region"));
+        this.xmlConsumer.endElement(eq("http://lane.stanford.edu/bassett/ns"), eq("sub_region"),
+                eq("sub_region"));
         this.xmlConsumer.endElement(eq("http://lane.stanford.edu/bassett/ns"), eq("region"), eq("region"));
         this.xmlConsumer.startElement(eq("http://lane.stanford.edu/bassett/ns"), eq("region"), eq("region"),
                 isA(Attributes.class));
-        this.xmlConsumer.startElement(eq("http://lane.stanford.edu/bassett/ns"), eq("sub_region"), eq("sub_region"),
+        this.xmlConsumer.startElement(eq("http://lane.stanford.edu/bassett/ns"), eq("sub_region"),
+                eq("sub_region"),
                 isA(Attributes.class));
-        this.xmlConsumer.endElement(eq("http://lane.stanford.edu/bassett/ns"), eq("sub_region"), eq("sub_region"));
+        this.xmlConsumer.endElement(eq("http://lane.stanford.edu/bassett/ns"), eq("sub_region"),
+                eq("sub_region"));
         this.xmlConsumer.characters(aryEq(new char[] { '5' }), eq(0), eq(1));
         this.xmlConsumer.endElement(eq("http://lane.stanford.edu/bassett/ns"), eq("region"), eq("region"));
         this.xmlConsumer.endElement(eq("http://lane.stanford.edu/bassett/ns"), eq("bassett_count"),

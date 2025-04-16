@@ -14,8 +14,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import org.apache.catalina.connector.ClientAbortException;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.laneweb.ResourceNotFoundException;
 
@@ -29,7 +29,7 @@ public class SitemapHandlerExceptionResolverTest {
 
     private HttpServletResponse response;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.controller = mock(SitemapController.class);
         this.resolver = new SitemapHandlerExceptionResolver(this.controller);

@@ -12,8 +12,8 @@ import java.util.Map;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.ui.Model;
 
 import edu.stanford.irt.laneweb.bookmarks.BookmarkService;
@@ -44,7 +44,7 @@ public class BookmarkControllerTest {
 
     private UserDataBinder userDataBinder;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.bookmarkService = mock(BookmarkService.class);
         this.bookmarkDataBinder = mock(BookmarkDataBinder.class);

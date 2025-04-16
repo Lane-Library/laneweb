@@ -3,12 +3,12 @@
  */
 package edu.stanford.irt.laneweb.search;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.regex.Pattern;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author ryanmax
@@ -16,7 +16,9 @@ import org.junit.Test;
 public class QueryTermPatternTest {
 
     /**
-     * Test method for {@link edu.stanford.irt.laneweb.search.QueryTermPattern#getPattern(java.lang.String)} .
+     * Test method for
+     * {@link edu.stanford.irt.laneweb.search.QueryTermPattern#getPattern(java.lang.String)}
+     * .
      */
     @Test
     public final void testGetPattern1() {

@@ -7,8 +7,8 @@ import static org.easymock.EasyMock.verify;
 
 import java.util.Collections;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
@@ -27,7 +27,7 @@ public class CourseReservesItemListGeneratorTest {
 
     private XMLConsumer xmlConsumer;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.service = mock(CourseReservesService.class);
         this.saxStrategy = mock(SAXStrategy.class);

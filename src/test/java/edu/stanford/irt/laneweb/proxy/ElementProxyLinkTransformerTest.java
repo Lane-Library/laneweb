@@ -8,8 +8,8 @@ import static org.easymock.EasyMock.verify;
 
 import java.util.Collections;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
@@ -21,7 +21,7 @@ public class ElementProxyLinkTransformerTest {
 
     private XMLConsumer xmlConsumer;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.transformer = new ElementProxyLinkTransformer("elementName");
         this.xmlConsumer = mock(XMLConsumer.class);

@@ -4,12 +4,12 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class PagingDataTest {
 
@@ -17,7 +17,7 @@ public class PagingDataTest {
 
     private List<Object> resources;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.resources = mock(List.class);
         expect(this.resources.size()).andReturn(351);

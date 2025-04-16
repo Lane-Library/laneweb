@@ -13,8 +13,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class NegativeOneAposFilterTest {
 
@@ -28,7 +28,7 @@ public class NegativeOneAposFilterTest {
 
     private HttpServletResponse response;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.filter = new NegativeOneAposFilter();
         this.chain = mock(FilterChain.class);

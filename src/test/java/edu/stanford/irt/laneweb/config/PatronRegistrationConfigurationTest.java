@@ -1,12 +1,12 @@
 package edu.stanford.irt.laneweb.config;
 
 import static org.easymock.EasyMock.mock;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.net.URI;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.laneweb.rest.BasicAuthRESTService;
 
@@ -18,7 +18,7 @@ public class PatronRegistrationConfigurationTest {
 
     private URI uri;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.uri = new URI("/");
         this.restService = mock(BasicAuthRESTService.class);

@@ -21,6 +21,7 @@
 }
 
 .aclist-content {
+    border: solid 1px #ddd;
     background-color: #f0f4f5;
     z-index: 3;
     position: absolute;

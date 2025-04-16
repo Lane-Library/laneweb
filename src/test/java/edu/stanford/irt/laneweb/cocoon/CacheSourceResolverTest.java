@@ -6,10 +6,10 @@ import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -20,8 +20,8 @@ import java.net.URISyntaxException;
 
 import javax.cache.Cache;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.cocoon.cache.Cacheable;
 import edu.stanford.irt.cocoon.cache.CachedResponse;
@@ -44,7 +44,7 @@ public class CacheSourceResolverTest {
 
     private Validity validity;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.cache = mock(Cache.class);
         this.sourceResolver = mock(SourceResolver.class);

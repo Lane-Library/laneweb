@@ -6,7 +6,7 @@ import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -15,8 +15,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.laneweb.rest.RESTService;
 import edu.stanford.irt.laneweb.rest.TypeReference;
@@ -29,7 +29,7 @@ public class RESTBigqueryServiceTest {
 
     private URI uri;
 
-    @Before
+    @BeforeEach
     public void setUp() throws URISyntaxException {
         this.uri = getClass().getResource("").toURI();
         this.restService = mock(RESTService.class);
