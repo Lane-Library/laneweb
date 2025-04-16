@@ -16,10 +16,10 @@ describe('History Photos', () => {
 
 
     it('should show embedded images after images load from server', () => {
-        cy.intercept('GET', '/apps/getHistoryPhotoList', {
+        cy.intercept('GET', '/cypress-test/apps/getHistoryPhotoList', {
             fixture: 'history/history-photos.json'
         }).as('getHistoryPhotos');
-        cy.visit('/med-history/index.html');
+        cy.visit('/cypress-test/test/history-photos.html');
 
         cy.get('.history-photos a').should('have.length', 12);
         cy.wait('@getHistoryPhotos');
@@ -27,20 +27,20 @@ describe('History Photos', () => {
     })
 
     it('should show embedded images even after server error', () => {
-        cy.intercept('GET', '/apps/getHistoryPhotoList', {
+        cy.intercept('GET', '/cypress-test/apps/getHistoryPhotoList', {
             statusCode: 500
         }).as('getHistoryPhotos');
-        cy.visit('/med-history/index.html');
+        cy.visit('/cypress-test/test/history-photos.html');
         cy.get('.history-photos a').should('have.length', 12);
         cy.wait('@getHistoryPhotos');
         cy.get('.history-photos').should('have.css', 'opacity', '1');
     })
 
     it('after 15s, should load images and update links', () => {
-        cy.intercept('GET', '/apps/getHistoryPhotoList', {
+        cy.intercept('GET', '/cypress-test/apps/getHistoryPhotoList', {
             fixture: 'history/history-photos.json'
         }).as('getHistoryPhotos');
-        cy.visit('/med-history/index.html');
+        cy.visit('/cypress-test/test/history-photos.html');
         cy.wait('@getHistoryPhotos').then((interception) => {
             const photos = interception.response.body;
             cy.wait(15001);
