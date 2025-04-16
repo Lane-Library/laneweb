@@ -33,7 +33,7 @@
     <properties>
         <sonar.sources>src/main/java,src/main/javascript,src/main/css</sonar.sources>
         <sonar.exclusions>
-            **/yui*,**/jquery*,**/*-test.js,**/fontawesome.css,**/googlefonts.css,**/pure-grids.css</sonar.exclusions>
+            **/jquery*,**/*-test.js,**/fontawesome.css,**/googlefonts.css,**/pure-grids.css</sonar.exclusions>
         <sonar.javascript.lcov.reportPaths>
             ${project.build.directory}/test-classes/e2e/coverage/lcov.info,${project.build.directory}/jest-coverage/lcov.info</sonar.javascript.lcov.reportPaths>
     </properties>
@@ -482,9 +482,6 @@
                     <directories>
                         <directory>src/main/javascript</directory>
                     </directories>
-                    <excludes>
-                        <exclude>src/main/javascript/yui-3.18.1.js</exclude>
-                    </excludes>
                 </configuration>
             </plugin>
             <plugin>
@@ -530,7 +527,6 @@
                 <version>0.7</version>
                 <configuration>
                     <jsDir>src/main/javascript/</jsDir>
-                    <excludes>yui-*.js</excludes>
                 </configuration>
                 <reportSets>
                     <reportSet>
