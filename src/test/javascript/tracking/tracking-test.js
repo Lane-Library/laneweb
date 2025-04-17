@@ -71,17 +71,6 @@ YUI({fetchCSS:false}).use("test", "test-console", "node-event-simulate", functio
             Y.Assert.isNull(this.pageView);
         },
 
-        testBrowseResultClick: function() {
-            let link = Y.one(".lwSearchResults a");
-            link.simulate("click");
-            Y.Assert.areEqual("id-123 -> Primary Type -> " + link.get("text"), this.event.label);
-            Y.Assert.areEqual("lane:browseResultClick", this.event.category);
-            Y.Assert.areEqual(location.pathname, this.event.action);
-            Y.Assert.areEqual(101, this.event.value);
-            Y.Assert.areEqual(this.fixPath(link.get("pathname")) , this.pageView.path);
-            Y.Assert.areEqual(link.get("text"), this.pageView.title);
-        },
-
         testSearchResultClick: function() {
             L.Model.set(L.Model.URL_ENCODED_QUERY, "foo%20bar");
             let link = Y.one(".lwSearchResults a");

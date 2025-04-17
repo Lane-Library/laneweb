@@ -6,7 +6,6 @@ import java.time.Duration;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,22 +18,12 @@ import edu.stanford.irt.cocoon.cache.validity.ExpiresValidity;
 import edu.stanford.irt.cocoon.pipeline.Generator;
 import edu.stanford.irt.cocoon.pipeline.Transformer;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
-import edu.stanford.irt.laneweb.eresources.EresourceBrowseService;
 import edu.stanford.irt.laneweb.eresources.EresourceFacetService;
 import edu.stanford.irt.laneweb.eresources.EresourceSAXStrategy;
 import edu.stanford.irt.laneweb.eresources.EresourceSearchService;
 import edu.stanford.irt.laneweb.eresources.EresourceStatusService;
-import edu.stanford.irt.laneweb.eresources.browse.AtoZBrowseGenerator;
-import edu.stanford.irt.laneweb.eresources.browse.AtoZBrowseSAXStrategy;
 import edu.stanford.irt.laneweb.eresources.browse.BibIDToEresourceTransformer;
-import edu.stanford.irt.laneweb.eresources.browse.BrowseAllEresourcesGenerator;
-import edu.stanford.irt.laneweb.eresources.browse.BrowseEresourcesGenerator;
-import edu.stanford.irt.laneweb.eresources.browse.BrowseLetter;
-import edu.stanford.irt.laneweb.eresources.browse.EresourceListPagingDataSAXStrategy;
-import edu.stanford.irt.laneweb.eresources.browse.LinkWithCoverEresourceSAXStrategy;
 import edu.stanford.irt.laneweb.eresources.browse.LinkWithoutCoverEresourceSAXStrategy;
-import edu.stanford.irt.laneweb.eresources.browse.PagingEresourceList;
-import edu.stanford.irt.laneweb.eresources.browse.PagingEresourceListXHTMLSAXStrategy;
 import edu.stanford.irt.laneweb.eresources.model.Eresource;
 import edu.stanford.irt.laneweb.eresources.model.solr.FacetFieldEntry;
 import edu.stanford.irt.laneweb.eresources.model.solr.RestResult;
@@ -62,33 +51,9 @@ public class EresourcesConfiguration {
         this.publicationTypes = Collections.unmodifiableCollection(this.publicationTypes);
     }
 
-    @Bean(name = "edu.stanford.irt.cocoon.xml.SAXStrategy/er-a2z-browse-xml")
-    public SAXStrategy<List<BrowseLetter>> aToZBrowseSAXStrategy() {
-        return new AtoZBrowseSAXStrategy();
-    }
-
-    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/er-a2z-browse-html")
-    @Scope("prototype")
-    public Generator eresourcesAtoZBrowseGenerator(final EresourceBrowseService restBrowseService) {
-        return new AtoZBrowseGenerator("er-a2z-browse-html", restBrowseService, aToZBrowseSAXStrategy());
-    }
-
     @Bean(name = "edu.stanford.irt.cocoon.xml.SAXStrategy/eresource-xml")
     public SAXStrategy<Eresource> eresourceSAXStrategy() {
         return new EresourceSAXStrategy();
-    }
-
-    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/er-browse-all-html")
-    @Scope("prototype")
-    public Generator eresourcesBrowseAllGenerator(final EresourceBrowseService restBrowseService) {
-        return new BrowseAllEresourcesGenerator("er-browse-all-html", restBrowseService,
-                pagingEresourceListHTMLSAXStrategy());
-    }
-
-    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/er-browse-html")
-    @Scope("prototype")
-    public Generator eresourcesBrowseGenerator(final EresourceBrowseService solrService) {
-        return new BrowseEresourcesGenerator("er-browse-html", solrService, pagingEresourceListHTMLSAXStrategy());
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/eresources-count")
@@ -112,20 +77,8 @@ public class EresourcesConfiguration {
     }
 
     @Bean
-    public SAXStrategy<Eresource> linkWithCoverSAXStrategy() {
-        return new LinkWithCoverEresourceSAXStrategy();
-    }
-
-    @Bean
     public SAXStrategy<Eresource> linkWithoutCoverSAXStrategy() {
         return new LinkWithoutCoverEresourceSAXStrategy();
-    }
-
-    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/link-with-cover")
-    @Scope("prototype")
-    public Transformer linkWithCoverTransformer(final EresourceSearchService restSearchService) {
-        return new BibIDToEresourceTransformer(restSearchService, linkWithCoverSAXStrategy(), "link-with-cover",
-                new ExpiresValidity(Duration.ofHours(1).toMillis()));
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/link-without-cover")
@@ -133,12 +86,6 @@ public class EresourcesConfiguration {
     public Transformer linkWithoutCoverTransformer(final EresourceSearchService restSearchService) {
         return new BibIDToEresourceTransformer(restSearchService, linkWithoutCoverSAXStrategy(), "link-without-cover",
                 new ExpiresValidity(Duration.ofHours(1).toMillis()));
-    }
-
-    @Bean
-    public SAXStrategy<PagingEresourceList> pagingEresourceListHTMLSAXStrategy() {
-        return new PagingEresourceListXHTMLSAXStrategy(eresourceSAXStrategy(),
-                new EresourceListPagingDataSAXStrategy());
     }
 
     @Bean
@@ -163,12 +110,6 @@ public class EresourcesConfiguration {
     EresourceFacetService getRESTFacetService(@Qualifier("java.net.URI/eresource-service") final URI searchServiceURI,
             final RESTService restService) {
         return new EresourceFacetService(searchServiceURI, restService);
-    }
-
-    @Bean
-    EresourceBrowseService getRESTBrowseService(@Qualifier("java.net.URI/eresource-service") final URI searchServiceURI,
-            final RESTService restService) {
-        return new EresourceBrowseService(searchServiceURI, restService);
     }
 
     @Bean

@@ -30,26 +30,4 @@
             <map:serialize type="xml"/>
         </map:match>
     </map:pipeline>
-    <map:pipeline type="caching">
-        <map:parameter name="mime-type" value="text/html; charset=utf8"/>
-        <map:match type="wildcard" pattern="a2z-browse/base-path/*/query/*.html">
-            <map:generate type="er-a2z-browse-html">
-                <map:parameter name="base-path" value="{1}"/>
-                <map:parameter name="query" value="{2}"/>
-            </map:generate>
-            <map:serialize type="xml"/>
-        </map:match>
-        <map:match type="wildcard" pattern="browse/query/*.html">
-            <map:generate type="er-browse-html">
-                <map:parameter name="query" value="{1}"/>
-            </map:generate>
-            <map:transform type="description-labeling"/>
-            <map:transform type="description-linebreak"/>
-            <map:transform type="description-linking"/>
-            <map:transform type="saxon" src="classpath:/xsl/eresource2html.xsl">
-                <map:parameter name="browse-query" value="{1}"/>
-            </map:transform>
-            <map:serialize type="xml"/>
-        </map:match>
-    </map:pipeline>
 </map:sitemap>

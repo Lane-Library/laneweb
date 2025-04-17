@@ -15,48 +15,13 @@ public class EresourcesConfigurationTest {
     }
 
     @Test
-    public void testAtoZBrowseSAXStrategy() {
-        assertNotNull(this.configuration.aToZBrowseSAXStrategy());
-    }
-
-    @Test
-    public void testEresourcesAtoZBrowseGenerator() {
-        assertNotNull(this.configuration.eresourcesAtoZBrowseGenerator(null));
-    }
-
-    @Test
-    public void testEresourcesBrowseAllGenerator() {
-        assertNotNull(this.configuration.eresourcesBrowseAllGenerator(null));
-    }
-
-    @Test
-    public void testEresourcesBrowseGenerator() {
-        assertNotNull(this.configuration.eresourcesBrowseGenerator(null));
-    }
-
-    @Test
     public void testEresourcesCountGenerator() {
         assertNotNull(this.configuration.eresourcesCountGenerator(null));
     }
 
     @Test
-    public void testLinkWithCoverSAXStrategy() {
-        assertNotNull(this.configuration.linkWithCoverSAXStrategy());
-    }
-
-    @Test
-    public void testLinkWithCoverTransformer() {
-        assertNotNull(this.configuration.linkWithCoverTransformer(null));
-    }
-
-    @Test
     public void testLinkWithoutCoverTransformer() {
         assertNotNull(this.configuration.linkWithoutCoverTransformer(null));
-    }
-
-    @Test
-    public void testPagingEresourceListHTMLSAXStrategy() {
-        assertNotNull(this.configuration.pagingEresourceListHTMLSAXStrategy());
     }
 
     @Test

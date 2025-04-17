@@ -60,14 +60,6 @@ public class LanewebIT {
     }
 
     @Test
-    public void testEresourceBrowse() throws Exception {
-        this.mockMvc
-                .perform(get("/eresources/browse/query/type:Journal.html")
-                        .servletPath("/eresources/browse/query/type:Journal.html"))
-                .andExpect(status().isOk()).andExpect(content().contentType(TEXT_HTML));
-    }
-
-    @Test
     public void testGetSuggestionList() throws Exception {
         this.mockMvc.perform(get("/apps/suggest/getSuggestionList?q=cardio")).andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON));

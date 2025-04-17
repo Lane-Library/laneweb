@@ -7,8 +7,6 @@ public final class Model {
 
     public static final String ACTION = "action";
 
-    public static final String ALPHA = "alpha";
-
     public static final String AUTH = "auth";
 
     public static final String BASE_PATH = "base-path";
