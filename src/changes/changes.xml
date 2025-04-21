@@ -5,6 +5,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2025-04-21" version="3.14.8" description="bug fix and update release">
+            <action date="2025-04-15" dev="ryanmax" issue="LANEWEB-11482" type="delete">
+                remove laneweb A-Z browse functionality
+            </action>
+        </release>
         <release date="2025-04-14" version="3.14.7" description="bug fix and update release">
             <action date="2025-04-14" dev="alainb" issue="LANEWEB-11478" type="fix">
                 Lane Search headings mismatch
