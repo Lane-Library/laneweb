@@ -38,9 +38,9 @@ public class SolrProxyServersService implements ProxyServersService {
 
     @Override
     public Set<String> getHosts() {
-        Map<String,List<FacetFieldEntry>>  fps = this.restFacetService.facetByField("*", null, FACET_NAME,  MAX_HOSTS, 1, FacetSort.INDEX);
-       Set<String> hosts = extractHosts(fps);
-        hosts.add("bodoni.stanford.edu");
+        Map<String, List<FacetFieldEntry>> fps = this.restFacetService.facetByField("*", "proxyHosts:*",
+                FACET_NAME, MAX_HOSTS, 1, FacetSort.INDEX);
+        Set<String> hosts = extractHosts(fps);
         hosts.add("library.stanford.edu");
         hosts.add("searchworks.stanford.edu");
         return hosts;
