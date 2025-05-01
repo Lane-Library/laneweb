@@ -26,7 +26,7 @@
 
 .menu-container h2 i {
     float: right;
-    margin-top: 20px;
+    margin-top: 14px;
     padding: 0 7px;
     display: none;
 }
@@ -176,9 +176,6 @@
         bottom: -2px;
     }
 
-    .menu-container h2 i {
-        margin-top: 14px;
-    }
 
     /* content closable with 3 images  */
     .menu-container.phone section.articles article,

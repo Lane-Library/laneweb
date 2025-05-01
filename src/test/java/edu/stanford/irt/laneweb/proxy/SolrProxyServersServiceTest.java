@@ -22,8 +22,7 @@ import edu.stanford.irt.laneweb.eresources.model.solr.FacetSort;
 
 public class SolrProxyServersServiceTest {
 
-    private String expectedOutput = "T bodoni.stanford.edu\n" + "U https://bodoni.stanford.edu\n"
-            + "HJ bodoni.stanford.edu\n" + "HJ bodoni.stanford.edu:443\n" + "\n" + "T foo\n" + "U https://foo\n"
+    private String expectedOutput = "T foo\n" + "U https://foo\n"
             + "HJ foo\n" + "HJ foo:443\n" + "\n" + "T library.stanford.edu\n" + "U https://library.stanford.edu\n"
             + "HJ library.stanford.edu\n" + "HJ library.stanford.edu:443\n" + "\n" + "T searchworks.stanford.edu\n"
             + "U https://searchworks.stanford.edu\n" + "HJ searchworks.stanford.edu\n"
@@ -48,7 +47,7 @@ public class SolrProxyServersServiceTest {
     @Test
     public final void testWrite() throws Exception {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        expect(this.solrService.facetByField("*", null, "proxyHosts", 100000, 1, FacetSort.INDEX)).andReturn(this.fps);
+        expect(this.solrService.facetByField("*", "proxyHosts:*", "proxyHosts", 100000, 1, FacetSort.INDEX)).andReturn(this.fps);
         replay(this.solrService);
         this.proxyService.write(baos);
         assertEquals(this.expectedOutput, baos.toString(StandardCharsets.UTF_8.name()));

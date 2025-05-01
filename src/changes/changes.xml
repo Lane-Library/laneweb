@@ -5,6 +5,24 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2025-04-28" version="3.14.9" description="bug fix and update release">
+            <action date="2025-04-24" dev="ryanmax" issue="LANEWEB-11488" type="fix">
+                ProxyHosts queries are slow and expensive
+            </action>
+        </release>
+        <release date="2025-04-21" version="3.14.8" description="bug fix and update release">
+            <action date="2025-04-15" dev="ryanmax" issue="LANEWEB-11482" type="delete">
+                remove laneweb A-Z browse functionality
+            </action>
+        </release>
+        <release date="2025-04-14" version="3.14.7" description="bug fix and update release">
+            <action date="2025-04-14" dev="alainb" issue="LANEWEB-11478" type="fix">
+                Lane Search headings mismatch
+            </action>
+            <action date="2025-04-08" dev="ryanmax" issue="LANEWEB-11479" type="fix">
+                folio registration email dropped by LibAnswers
+            </action>
+        </release>
         <release date="2025-04-07" version="3.14.6" description="bug fix and update release">
             <action date="2025-02-28" dev="alainb" issue="LANEWEB-11458" type="update">
                 Updating Heading in Lane Search

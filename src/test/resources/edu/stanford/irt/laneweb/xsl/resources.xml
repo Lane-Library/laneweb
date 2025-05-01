@@ -4,7 +4,7 @@
       <title>search results</title>
    </head>
    <body>
-      <h2 class="level5 border-thick border-thin">Search Results</h2>
+      <h2>Search Results</h2>
       <ul class="lwSearchResults">
          <li class="resource" data-sid="bib-301866" data-index="1">
             <div class="resource-detail">

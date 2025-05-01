@@ -4,16 +4,9 @@
     xsi:schemaLocation="http://lane.stanford.edu/irt-cocoon/sitemap/1.0 http://lane.stanford.edu/xsd/irt-cocoon-sitemap-1.0.xsd">
     <map:pipeline type="noncaching">
     	<map:match pattern="biomed-resources/**" type="wildcard">
-            <map:match pattern="biomed-resources/(ej|eb|cc|db|exam|video|images|statistics|software|a2z-test).html" type="regexp">
+            <map:match pattern="biomed-resources/(ej|eb|exam|video|images|software(-.+)?).html" type="regexp">
                 <map:generate type="html" src="{content-base}/biomed-resources/{1}.html"/>
                 <map:transform type="xinclude"/>
-                <map:transform type="saxon" src="classpath:/xsl/eresources-count.xsl"/>
-                <map:serialize type="xml"/>
-            </map:match>
-            <map:match pattern="biomed-resources/((.+)?(browse|mobile|pda|software-)(.+)?).html" type="regexp">
-                <map:generate type="html" src="{content-base}/biomed-resources/{1}.html"/>
-                <map:transform type="xinclude"/>
-                <map:transform type="saxon" src="classpath:/xsl/eresources-count.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="biomed-resources/bassett/raw/**.html" type="wildcard">
@@ -198,7 +191,6 @@
         </map:match>
         <map:match pattern="portals/**" type="wildcard">
             <map:generate type="html" src="{content-base}/portals/{1}"/>
-            <map:transform type="link-with-cover"/>
             <map:transform type="xinclude"/>
             <map:serialize type="xml"/>
         </map:match>
