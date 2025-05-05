@@ -5,7 +5,7 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2025-05-05" version="3.15.0" description="bug fix and update release">
+        <release date="2025-05-05" version="3.15.0" description="update release">
             <action date="2024-11-24" dev="alainb" issue="LANEWEB-11388" type="update">
                 Remove YUI reference from all javascript files
             </action>
