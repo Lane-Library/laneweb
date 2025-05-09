@@ -29,7 +29,7 @@ public class FacetsGenerator extends AbstractGenerator {
 
     private String facets;
 
-    private int facetsToShow;
+    private int facetLimit;
 
     private Collection<String> prioritizedPublicationTypes;
 
@@ -40,11 +40,11 @@ public class FacetsGenerator extends AbstractGenerator {
     private EresourceFacetService service;
 
     public FacetsGenerator(final EresourceFacetService service,
-            final SAXStrategy<Map<String, Collection<FacetFieldEntry>>> facetSolrSAXStrategy, final int facetsToShow,
+            final SAXStrategy<Map<String, Collection<FacetFieldEntry>>> facetSolrSAXStrategy, final int facetLimit,
             final Collection<String> publicationTypes) {
         this.service = service;
         this.saxStrategy = facetSolrSAXStrategy;
-        this.facetsToShow = facetsToShow + 1;
+        this.facetLimit = facetLimit;
         this.prioritizedPublicationTypes = publicationTypes;
         this.facetComparator = new FacetComparator(publicationTypes);
         this.facetFieldEntries = new HashMap<>();
@@ -65,7 +65,7 @@ public class FacetsGenerator extends AbstractGenerator {
         Collection<FacetFieldEntry> facetList = this.facetFieldEntries.get(PUBLICATION_TYPE);
         long count = facetList.stream()
                 .filter((final FacetFieldEntry s) -> this.prioritizedPublicationTypes.contains(s.getValue())).count();
-        if (count < this.prioritizedPublicationTypes.size()) {
+        if (facetList.size() > 0 && count < this.prioritizedPublicationTypes.size()) {
             Map<String, List<FacetFieldEntry>> fps = this.service.facetByField(this.query, this.facets,
                     PUBLICATION_TYPE, 1000, 1, FacetSort.COUNT);
             List<FacetFieldEntry> facetPage = fps.get(PUBLICATION_TYPE);
@@ -89,7 +89,7 @@ public class FacetsGenerator extends AbstractGenerator {
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
         Map<String, List<FacetFieldEntry>> fps = this.service.facetByManyFields(this.query, this.facets,
-                this.facetsToShow);
+                this.facetLimit);
         orderFacets(fps);
         maybeRequestMorePublicationTypes();
         this.saxStrategy.toSAX(this.facetFieldEntries, xmlConsumer);

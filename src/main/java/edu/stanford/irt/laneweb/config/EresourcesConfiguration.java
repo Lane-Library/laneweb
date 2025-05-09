@@ -37,7 +37,7 @@ import edu.stanford.irt.laneweb.rest.RESTService;
 @Configuration
 public class EresourcesConfiguration {
 
-    private static final int FACETS_TO_SHOW_SEARCH = 4;
+    private static final int FACETS_TO_SHOW_SEARCH = 20;
 
     private Collection<String> facetFields;
 
