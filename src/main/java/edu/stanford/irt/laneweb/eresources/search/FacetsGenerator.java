@@ -1,10 +1,15 @@
 package edu.stanford.irt.laneweb.eresources.search;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
+
+import com.google.gson.JsonObject;
 
 import edu.stanford.irt.cocoon.pipeline.generate.AbstractGenerator;
 import edu.stanford.irt.cocoon.xml.SAXStrategy;
@@ -23,13 +28,13 @@ public class FacetsGenerator extends AbstractGenerator {
 
     private FacetComparator facetComparator;
 
+    private JsonObject facetConfig;
+
     private Map<String, Collection<FacetFieldEntry>> facetFieldEntries;
 
     private Collection<String> facetFields;
 
     private String facets;
-
-    private int facetLimit;
 
     private Collection<String> prioritizedPublicationTypes;
 
@@ -40,18 +45,19 @@ public class FacetsGenerator extends AbstractGenerator {
     private EresourceFacetService service;
 
     public FacetsGenerator(final EresourceFacetService service,
-            final SAXStrategy<Map<String, Collection<FacetFieldEntry>>> facetSolrSAXStrategy, final int facetLimit,
-            final Collection<String> publicationTypes) {
+            final SAXStrategy<Map<String, Collection<FacetFieldEntry>>> facetSolrSAXStrategy,
+            final JsonObject facetConfig) {
         this.service = service;
+        this.facetConfig = facetConfig;
         this.saxStrategy = facetSolrSAXStrategy;
-        this.facetLimit = facetLimit;
-        this.prioritizedPublicationTypes = publicationTypes;
-        this.facetComparator = new FacetComparator(publicationTypes);
+        JsonObject facetResultMatch = facetConfig.asMap().get("facet-result-match").getAsJsonObject();
+        String publicationTypeMatch = facetResultMatch.get(PUBLICATION_TYPE).getAsString();
+        this.prioritizedPublicationTypes = Arrays.asList(publicationTypeMatch.split("\\|"));
+        this.facetComparator = new FacetComparator(prioritizedPublicationTypes);
+        this.facetFields = new ArrayList<String>();
+        facetConfig.get("facets").getAsJsonArray().forEach(el -> this.facetFields.add(el.getAsString()));
         this.facetFieldEntries = new HashMap<>();
-    }
 
-    public void setFacet(final Collection<String> facetFields) {
-        this.facetFields = facetFields;
     }
 
     @Override
@@ -89,7 +95,7 @@ public class FacetsGenerator extends AbstractGenerator {
     @Override
     protected void doGenerate(final XMLConsumer xmlConsumer) {
         Map<String, List<FacetFieldEntry>> fps = this.service.facetByManyFields(this.query, this.facets,
-                this.facetLimit);
+                this.facetConfig);
         orderFacets(fps);
         maybeRequestMorePublicationTypes();
         this.saxStrategy.toSAX(this.facetFieldEntries, xmlConsumer);

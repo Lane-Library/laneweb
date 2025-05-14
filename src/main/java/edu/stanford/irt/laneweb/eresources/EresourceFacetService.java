@@ -10,6 +10,8 @@ import org.apache.http.message.BasicNameValuePair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.gson.JsonObject;
+
 import edu.stanford.irt.laneweb.eresources.model.solr.FacetFieldEntry;
 import edu.stanford.irt.laneweb.eresources.model.solr.FacetSort;
 import edu.stanford.irt.laneweb.rest.RESTService;
@@ -53,11 +55,14 @@ public class EresourceFacetService extends AbstractRestService {
     }
 
     public Map<String, List<FacetFieldEntry>> facetByManyFields(final String searchTerm, final String filters,
-            final int facetLimit) {
+            final JsonObject facetConfig) {
         String path = "facet/many/field/".concat(this.urlEncode(searchTerm));
         List<NameValuePair> parameters = new ArrayList<>();
         parameters.add(new BasicNameValuePair("filters", filters));
-        parameters.add(new BasicNameValuePair("facetLimit", String.valueOf(facetLimit)));
+        parameters.add(new BasicNameValuePair("limit", facetConfig.get("limit").getAsString()));
+        parameters.add(new BasicNameValuePair("facets", facetConfig.get("facets").toString()));
+        parameters.add(new BasicNameValuePair("facetMatch", facetConfig.get("facet-result-match").toString()));
+        parameters.add(new BasicNameValuePair("limitByFacet", facetConfig.get("limit-by-facet").toString()));
         URI uri = this.getURIWithParameters(path, null, parameters);
         log.info("EresourceFacetService facetByManyFields {}", uri);
         return this.restService.getObject(uri, FACET_PAGE_ERESOURCES_TYPE);
