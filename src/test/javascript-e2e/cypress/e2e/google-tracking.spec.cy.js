@@ -70,7 +70,11 @@ describe('Google Analytics Tracking', () => {
     });
 
     it('test metasearch and google analytics', () => {
-        cy.visit('/cypress-test/search.html?q=skin&source=clinical-all');
+        cy.visit('/cypress-test/search.html?q=skin&source=clinical-all&facet=uptodate');
+        cy.intercept('GET', 'https://www.uptodate.com/**', {
+            statusCode: 200,
+            body: '<html><body>test</body></html>'
+        }).as('uptodateResult');
         cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {
             if (req.body.includes('en=lane%3AsearchResultClick')) {
                 req.reply('OK');
@@ -78,9 +82,9 @@ describe('Google Analytics Tracking', () => {
             }
         });
         cy.get('.lwSearchResults a.primaryLink.bookmarking').first().click();
+        cy.wait('@uptodateResult');
         cy.wait('@gaCollect');
     });
-
 
     it('test image src tracking analytics', () => {
         cy.intercept('GET', 'https://laneblog.stanford.edu/**', {
