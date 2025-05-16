@@ -36,7 +36,9 @@
         _displaySuggestions() {
             let query = this._input.value,
                 urlEndpoint = this.sourceBase.replace("{query}", encodeURIComponent(query));
-            urlEndpoint += this.limit;
+            if (urlEndpoint.includes("&l=")) {
+                urlEndpoint += this.limit;
+            }
             if (query.length >= this.queryLength) {
                 fetch(urlEndpoint)
                     .then(response => response.json())
