@@ -4,9 +4,9 @@
 
     "use strict";
 
-    let form = document.querySelector(".search-form");
+    let form = document.querySelector(".search-form"),
 
-
+        SOURCE_BASE = '/apps/suggest/getSuggestionList?q={query}&l=';
 
     // table search inputs (e.g. course reserves, liaisons, equipment) should not get solr suggestions: LANEWEB-11444
     if (form && form.querySelector("input[name=q]:not(#table-search-input)")) {
@@ -16,7 +16,7 @@
                     suggest: suggest,
                     source: source
                 };
-            }(new L.Suggest(queryInput),
+            }(new L.Suggest(queryInput, SOURCE_BASE),
                 form.querySelector("input[name=source]").value),
 
             view = function () {
@@ -43,7 +43,7 @@
                         else if (source.match(/^(all|catalog)/)) {
                             limit = "er-mesh";
                         } else {
-                            limit = "";
+                            limit = "mesh";
                         }
                         model.suggest.setLimit(limit);
                         model.source = source;
@@ -61,15 +61,14 @@
             }();
 
         controller.sourceChange({ newVal: model.source });
+
         L.addEventTarget(model.suggest);
-        model.suggest.on("suggest:select", controller.suggestion);
-
-        L.on("search:sourceChange", controller.sourceChange);
-        controller.sourceChange({ newVal: model.source });
 
         model.suggest.on("suggest:select", controller.suggestion);
 
         L.on("search:sourceChange", controller.sourceChange);
+
+
     }
 })();
 

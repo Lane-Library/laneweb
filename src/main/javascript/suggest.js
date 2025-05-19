@@ -5,20 +5,19 @@
 
     let model = L.Model,
         basePath = model.get(model.BASE_PATH) || "",
-        DEFAULT_SOURCE_BASE = basePath + `/apps/suggest/getSuggestionList?q={query}&l=`,
-        DEFAULT_LIMIT = "mesh",
+        //DEFAULT_SOURCE_BASE = basePath + `/apps/suggest/getSuggestionList?q={query}&l=`,
         DEFAULT_QUERY_LENGTH = 3,
         SELECT = "suggest:select";
 
     class Suggest {
-        constructor(input, minQueryLength, sourceBase) {
+        constructor(input, sourceBase, minQueryLength) {
             this._input = input;
             this._input.autocomplete = 'off';
             this._ac = [];
             this.selectedItem = null;
-            this.limit = DEFAULT_LIMIT;
+            this.limit = null;
             this.queryLength = minQueryLength || DEFAULT_QUERY_LENGTH;
-            this.sourceBase = sourceBase || DEFAULT_SOURCE_BASE;
+            this.sourceBase = basePath + sourceBase;
             this.isKeyDown = false;
             this.bindUI();
         }
@@ -36,7 +35,7 @@
         _displaySuggestions() {
             let query = this._input.value,
                 urlEndpoint = this.sourceBase.replace("{query}", encodeURIComponent(query));
-            if (urlEndpoint.includes("&l=")) {
+            if (this.limit != null) {
                 urlEndpoint += this.limit;
             }
             if (query.length >= this.queryLength) {
@@ -200,7 +199,7 @@
          * @param limit {String} the limit parameter
          */
         setLimit(limit) {
-            this.limit = limit || DEFAULT_LIMIT;
+            this.limit = limit;
         }
     };
 
