@@ -37,7 +37,7 @@ import edu.stanford.irt.laneweb.rest.RESTService;
 @Configuration
 public class EresourcesConfiguration {
 
-    private static final int FACETS_TO_SHOW_SEARCH = 20;
+    private static final int FACET_LIMIT = 5;
 
     private Collection<String> facetFields;
 
@@ -70,7 +70,7 @@ public class EresourcesConfiguration {
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/solr-facets")
     @Scope("prototype")
     public Generator facetsGenerator(final EresourceFacetService service) {
-        FacetsGenerator generator = new FacetsGenerator(service, facetSAXStrategy(), FACETS_TO_SHOW_SEARCH,
+        FacetsGenerator generator = new FacetsGenerator(service, facetSAXStrategy(), FACET_LIMIT,
                 this.publicationTypes);
         generator.setFacet(this.facetFields);
         return generator;
