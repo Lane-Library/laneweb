@@ -58,8 +58,11 @@ addEventListener("load", function () {
                 };
 
             inputs.forEach(function (input) {
-                let suggest;
-                suggest = new L.Suggest(input);
+                let
+                    SOURCE_BASE = '/apps/suggest/getSuggestionList?q={query}&l=mesh',
+                    suggest;
+
+                suggest = new L.Suggest(input, SOURCE_BASE);
                 L.addEventTarget(suggest);
 
                 suggest.on("suggest:select", eventHandler);
