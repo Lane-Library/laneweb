@@ -5,16 +5,10 @@
     xmlns:f="http://lane.stanford.edu/resources/1.0"
     xmlns:fct="http://lane.stanford.edu/function" exclude-result-prefixes="f h fct" version="2.0">
 
-    <xsl:param name="base-path" />
-    <xsl:param name="facet" />
     <xsl:param name="facets" />
-    <xsl:param name="page" />
     <xsl:param name="query" />
     <xsl:param name="query-string" />
-    <xsl:param name="facet.sort" />
     <xsl:param name="source" />
-    <xsl:param name="url-encoded-query" />
-
 
     <xsl:variable name="encoded-facets" select="replace(replace($facets, '\[', '%5B'), '\]','%5D')" />
     <xsl:variable name="start-year" select="substring-before(substring-after($facets, 'year:['), ' TO')" />
