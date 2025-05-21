@@ -3,12 +3,12 @@
     "use strict";
 
     let fields = [],
-        SOURCE_BASE = '/apps/suggest/getSuggestionList?q={query}&l=mesh',
+        sourceBase = '/apps/suggest/getSuggestionList?q={query}&l=mesh',
 
         PicoField = function (input) {
             let suggest;
 
-            suggest = new L.Suggest(input, SOURCE_BASE);
+            suggest = new L.Suggest(input, sourceBase);
             L.addEventTarget(suggest);
             suggest.on("suggest:select", function () {
                 fields.fire("input");

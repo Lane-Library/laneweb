@@ -5,19 +5,17 @@
 
     let model = L.Model,
         basePath = model.get(model.BASE_PATH) || "",
-        //DEFAULT_SOURCE_BASE = basePath + `/apps/suggest/getSuggestionList?q={query}&l=`,
         DEFAULT_QUERY_LENGTH = 3,
         SELECT = "suggest:select";
 
     class Suggest {
-        constructor(input, sourceBase, minQueryLength) {
+        constructor(input, sourceEndpoint, minQueryLength) {
             this._input = input;
             this._input.autocomplete = 'off';
             this._ac = [];
             this.selectedItem = null;
-            this.limit = null;
             this.queryLength = minQueryLength || DEFAULT_QUERY_LENGTH;
-            this.sourceBase = basePath + sourceBase;
+            this.sourceEndpoint = basePath + sourceEndpoint;
             this.isKeyDown = false;
             this.bindUI();
         }
@@ -34,10 +32,7 @@
 
         _displaySuggestions() {
             let query = this._input.value,
-                urlEndpoint = this.sourceBase.replace("{query}", encodeURIComponent(query));
-            if (this.limit != null) {
-                urlEndpoint += this.limit;
-            }
+                urlEndpoint = this.sourceEndpoint.replace("{query}", encodeURIComponent(query));
             if (query.length >= this.queryLength) {
                 fetch(urlEndpoint)
                     .then(response => response.json())
@@ -194,12 +189,12 @@
         }
 
         /**
-         * Set the limit parameter for the request, setting it to the default if the value is empty.
-         * @method setLimit
-         * @param limit {String} the limit parameter
+         * Set the source base URL for the request
+         * @method setSourceEndpoint
+         * @param sourceEndpoint {String} the suggestion source endpoint URL
          */
-        setLimit(limit) {
-            this.limit = limit;
+        setSourceEndpoint(sourceEndpoint) {
+            this.sourceEndpoint = basePath + sourceEndpoint;
         }
     };
 
