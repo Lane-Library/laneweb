@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
  * repository. On-prem apache rules are in place and .git/devOps directories are not copied to the laneweb-content
  * bucket in GCP. This servlet an extra precaution. LANEWEB-11508
  */
-@WebServlet(urlPatterns = { "/.git/*", "/devOps/*" })
+@WebServlet(urlPatterns = { "/.git/*", "/.gitignore", "/.gitlab-ci.yml", "/devOps/*"  })
 public class NotFoundServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
