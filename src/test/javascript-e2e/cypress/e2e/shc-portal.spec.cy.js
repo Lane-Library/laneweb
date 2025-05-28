@@ -18,8 +18,6 @@ describe('Lane Search Test Case', () => {
         cy.get('.aclist-item').should('have.length', 10);
     })
 
-
-
     it('suggestion should exist after typing 3 characters in intervention input', () => {
         cy.get('@intervention').type('ski');
         cy.get('.aclist-item').should('exist');
@@ -43,16 +41,17 @@ describe('Lane Search Test Case', () => {
         cy.get('@comparison').type('comparison');
         cy.get('@outcome').focus();
         cy.get('@outcome').type('outcome');
+        cy.wait(100);
         cy.get('@patientCondition').click();
         cy.get('.verticalPico .btn').click();
         cy.url().should('include', 'p=condition&i=intervention&c=comparison&o=outcome&q=%28condition%29+AND+%28intervention%29+AND+%28comparison%29+AND+%28outcome%29');
     });
 
     it('check google analytics  url', () => {
-
         // intercept the GA request and count the number of descriptionTrigger click events
         cy.intercept('POST', 'https://www.google-analytics.com/g/collect*en=page_view*').as('gaCollect');
         cy.get('@patientCondition').type('condition');
+        cy.wait(100);
         cy.get('@patientCondition').click();
         cy.get('.verticalPico .btn').click();
         cy.wait('@gaCollect').then((interception) => {
