@@ -5,18 +5,21 @@
     let model = L.Model,
         basePath = model.get(model.BASE_PATH) || "",
         DEFAULT_QUERY_LENGTH = 3,
+        DEFAULT_QUERY_DELAY = 100,
         SELECT = "suggest:select";
 
     class Suggest {
-        constructor(input, sourceEndpoint, minQueryLength) {
+        constructor(input, sourceEndpoint, minQueryLength, queryDelay) {
             this._input = input;
             this._input.autocomplete = 'off';
             this._ac = [];
             this.selectedItem = null;
             this.queryLength = minQueryLength || DEFAULT_QUERY_LENGTH;
+            this.queryDelay = queryDelay || DEFAULT_QUERY_DELAY;
             this.sourceEndpoint = basePath + sourceEndpoint;
             this.isKeyDown = false;
             this.cache = {};
+            this._queryDelayTimer = null;
             this.bindUI();
         }
 
@@ -24,7 +27,12 @@
             L.on("search:search", (e) => {
                 this._destroy();
             });
-            this._input.addEventListener('input', (event) => this._getSuggestions(event));
+            this._input.addEventListener('input', (event) => {
+                clearTimeout(this._queryDelayTimer);
+                this._queryDelayTimer = setTimeout(() => {
+                    this._getSuggestions(event);
+                }, this.queryDelay);
+            });
         }
 
         _getSuggestions() {

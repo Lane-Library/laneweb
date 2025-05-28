@@ -88,4 +88,17 @@ describe('Suggest', () => {
         cy.get('.aclist-item').should('exist');
     })
 
+    it('should not fire queries before queryDelay', () => {
+        cy.intercept('/apps/suggest/getSuggestionList*', { fixture: 'suggest/suggest.json' }).as('suggest10Match');
+        cy.get('@input').type('ski');
+        // wait less than queryDelay
+        cy.wait(10);
+        // should not have made a request yet
+        cy.get('@suggest10Match.all').should('have.length', 0);
+        // wait for the rest of the queryDelay
+        cy.wait(400);
+        // now it should have made a request
+        cy.get('@suggest10Match.all').should('have.length', 1);
+    })
+
 })
