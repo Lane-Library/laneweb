@@ -124,15 +124,7 @@
                 <map:generate type="file" src="cocoon://apps/search-describe.xml"/>
                 <map:generate type="file" src="cocoon://apps/search-templates.xml"/>
             </map:aggregate>
-            <map:transform type="saxon" src="classpath:/xsl/describe.xsl"/>
-            <map:serialize type="html5"/>
-        </map:match>
-        <map:match pattern="search-describe.html" type="wildcard">
-            <map:aggregate type="caching" element="portals" ns="http://lane.stanford.edu/describe/ns">
-                <map:generate type="file" src="cocoon://apps/search-describe.xml"/>
-                <map:generate type="file" src="cocoon://apps/search-templates.xml"/>
-            </map:aggregate>
-            <map:transform type="saxon" src="classpath:/xsl/describe.xsl"/>
+            <map:transform type="saxon" src="classpath:/xsl/search-describe.xsl"/>
             <map:serialize type="html5"/>
         </map:match>
     </map:pipeline>
