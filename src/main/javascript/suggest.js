@@ -1,4 +1,3 @@
-
 (function () {
 
     "use strict";
@@ -17,49 +16,54 @@
             this.queryLength = minQueryLength || DEFAULT_QUERY_LENGTH;
             this.sourceEndpoint = basePath + sourceEndpoint;
             this.isKeyDown = false;
+            this.cache = {};
             this.bindUI();
         }
-
-
 
         bindUI() {
             L.on("search:search", (e) => {
                 this._destroy();
             });
-            this._input.addEventListener('input', (event) => this._displaySuggestions(event));
+            this._input.addEventListener('input', (event) => this._getSuggestions(event));
         }
 
-
-        _displaySuggestions() {
+        _getSuggestions() {
             let query = this._input.value,
                 urlEndpoint = this.sourceEndpoint.replace("{query}", encodeURIComponent(query));
             if (query.length >= this.queryLength) {
-                fetch(urlEndpoint)
-                    .then(response => response.json())
-                    .then(data => {
-                        let suggestions = data || [],
-                            suggestionContainer = document.createElement('div'),
-                            dropdown = document.createElement('ul');
-                        dropdown.className = 'aclist-list';
-                        suggestions.forEach(suggestion => {
-                            let item = document.createElement('li');
-                            item.className = 'aclist-item';
-                            item.textContent = suggestion;
-                            dropdown.appendChild(item);
-                            suggestionContainer.className = 'aclist-content';
+                if (this.cache[query]) {
+                    this._renderSuggestions(this.cache[query]);
+                } else {
+                    fetch(urlEndpoint)
+                        .then(response => response.json())
+                        .then(data => {
+                            let suggestions = data || [];
+                            this.cache[query] = suggestions;
+                            this._renderSuggestions(suggestions);
                         });
-                        this._destroy();
-                        this._ac = dropdown.querySelectorAll('.aclist-item');
-                        suggestionContainer.appendChild(dropdown);
-                        this._handleEvents();
-                        this._input.after(suggestionContainer);
-
-                    });
+                }
             } else {
                 this._destroy();
             }
         }
 
+        _renderSuggestions(suggestions) {
+            let suggestionContainer = document.createElement('div'),
+                dropdown = document.createElement('ul');
+            dropdown.className = 'aclist-list';
+            suggestions.forEach(suggestion => {
+                let item = document.createElement('li');
+                item.className = 'aclist-item';
+                item.textContent = suggestion;
+                dropdown.appendChild(item);
+                suggestionContainer.className = 'aclist-content';
+            });
+            this._destroy();
+            this._ac = dropdown.querySelectorAll('.aclist-item');
+            suggestionContainer.appendChild(dropdown);
+            this._handleEvents();
+            this._input.after(suggestionContainer);
+        }
 
         _handleEvents() {
             this._ac.forEach(item => {
@@ -88,13 +92,11 @@
             }
         }
 
-
         _destroyOnClick(event) {
             if (!event.target.classList.contains('aclist-item')) {
                 this._destroy();
             }
         }
-
 
         _updateInputValue(event) {
             this._input.value = event.target.textContent;
@@ -131,7 +133,6 @@
             }, 100);
         }
 
-
         _removedActiveClass() {
             this._ac.forEach(item => {
                 if (item.classList.contains('aclist-item-active')) {
@@ -140,7 +141,6 @@
             });
         }
 
-
         _handleKeysUpChange(event) {
             this._input.addEventListener('keyup', (event) => {
                 if (event.key === 'ArrowDown' || event.key === 'ArrowUp' && this.isKeyDown) {
@@ -148,7 +148,6 @@
                 }
             });
         }
-
 
         _handleArrowDownChange(event) {
             this._removedActiveClass();

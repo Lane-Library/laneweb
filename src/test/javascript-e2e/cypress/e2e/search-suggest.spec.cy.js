@@ -76,6 +76,16 @@ describe('Suggest', () => {
         cy.get('.aclist-item').should('not.exist');
     })
 
-
+    it('should cache queries', () => {
+        cy.intercept('/apps/suggest/getSuggestionList*', { fixture: 'suggest/suggest.json' }).as('suggest10Match');
+        cy.get('@input').type('ski');
+        cy.wait('@suggest10Match');
+        cy.get('.aclist-item').should('exist');
+        // type same query again
+        cy.get('@input').clear().type('ski');
+        // should not make another request, as it should be cached
+        cy.get('@suggest10Match.all').should('have.length', 1);
+        cy.get('.aclist-item').should('exist');
+    })
 
 })
