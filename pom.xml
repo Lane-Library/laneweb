@@ -111,7 +111,7 @@
             <artifactId>Saxon-HE</artifactId>
             <groupId>net.sf.saxon</groupId>
             <scope>runtime</scope>
-            <version>12.5</version>
+            <version>12.7</version>
             <exclusions>
                 <exclusion>
                     <groupId>xml-apis</groupId>
