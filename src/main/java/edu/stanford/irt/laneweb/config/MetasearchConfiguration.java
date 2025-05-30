@@ -73,6 +73,17 @@ public class MetasearchConfiguration {
                 clinicalSearchResultsFactory);
     }
 
+    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/chat-ehr")
+    @Scope("prototype")
+    public Generator chatEhrClinicalSearchResultsGenerator(final MetaSearchService metaSearchService,
+            final ClinicalSearchResultsFactory clinicalSearchResultsFactory) {
+        List<String> engines = new ArrayList<>(2);
+        engines.add("pubmed");
+        engines.add("uptodate");
+        return new ClinicalSearchResultsGenerator(metaSearchService, clinicalSearchResultsSAXStrategy(), engines,
+                clinicalSearchResultsFactory);
+    }
+
     @Bean
     public ClinicalSearchResultsFactory clinicalSearchResultsFactory(
             final ContentResultConversionStrategy contentResultConversionStrategy) {

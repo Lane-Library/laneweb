@@ -58,7 +58,7 @@
                 <map:transform type="saxon" src="classpath:/xsl/eresources-count.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match type="regex-parameter" pattern="^(clinical-all|peds-all)$">
+            <map:match type="regex-parameter" pattern="^(chat-ehr|clinical-all|peds-all)$">
                 <map:parameter name="parameter-name" value="source"/>
                 <map:aggregate type="default" element="doc">
                     <map:generate type="{0}"/>
