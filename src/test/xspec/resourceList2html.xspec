@@ -25,7 +25,7 @@
         <x:expect label="searchContent gets a li with primaryLink resultInfo and sourceInfo with link">
             <li class="resource" data-sid="" data-index=""><div class="resource-detail">
             <span class="primaryType">Article</span><div><a class="primaryLink bookmarking"
-             href="" /></div><div class="sourceInfo"><span>Source: <a href=""> - NaN </a></span></div></div></li>
+             href="" /></div><div class="sourceInfo"><span>Source: <a href="" title="All NaN from "> </a></span></div></div></li>
         </x:expect>
     </x:scenario>
     
