@@ -122,11 +122,8 @@
                 <div class="sourceInfo">
                     <span>
                         <xsl:text>Source: </xsl:text>
-                        <a href="{s:resourceUrl}">
+                        <a href="{s:resourceUrl}" title="{concat('All ', format-number(number(s:resourceHits),'###,###,##0'), ' from ', s:resourceName)}">
                             <xsl:value-of select="s:resourceName" />
-                            <xsl:text> - </xsl:text>
-                            <xsl:value-of select="format-number(number(s:resourceHits),'###,###,##0')" />
-                            <xsl:text> </xsl:text>
                         </a>
                     </span>
                 </div>
