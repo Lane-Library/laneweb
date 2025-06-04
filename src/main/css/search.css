@@ -100,7 +100,6 @@ li.active .descriptionTrigger {
     border-bottom-color: #f2f3ed;
     display: inline-block;
     position: relative;
-    z-index: 1;
 }
 
 li.active .description {
