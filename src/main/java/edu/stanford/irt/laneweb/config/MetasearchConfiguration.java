@@ -77,9 +77,8 @@ public class MetasearchConfiguration {
     @Scope("prototype")
     public Generator chatEhrClinicalSearchResultsGenerator(final MetaSearchService metaSearchService,
             final ClinicalSearchResultsFactory clinicalSearchResultsFactory) {
-        List<String> engines = new ArrayList<>(2);
+        List<String> engines = new ArrayList<>(1);
         engines.add("pubmed");
-        engines.add("uptodate");
         return new ClinicalSearchResultsGenerator(metaSearchService, clinicalSearchResultsSAXStrategy(), engines,
                 clinicalSearchResultsFactory);
     }
