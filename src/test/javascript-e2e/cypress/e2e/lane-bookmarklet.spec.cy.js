@@ -17,7 +17,6 @@ describe('lane bookmarklet selector', () => {
     //         }
     //     });
     //     cy.get('#bookmarkletNotIE').should('not.be.visible');
-    //     cy.get('#bookmarkletIE').should('not.visible');
     //     cy.get('.bookmarklet-edge').should('not.be.visible');
     // })
 
@@ -28,7 +27,6 @@ describe('lane bookmarklet selector', () => {
     //         }
     //     });
     //     cy.get('#bookmarkletNotIE').should('not.be.visible');
-    //     cy.get('#bookmarkletIE').should('not.be.visible');
     //     cy.get('.bookmarklet-edge').should('be.visible');
     //})
 });
