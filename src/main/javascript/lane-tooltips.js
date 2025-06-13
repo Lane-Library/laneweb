@@ -1,4 +1,3 @@
-
 (function () {
 
     "use strict";
@@ -323,25 +322,15 @@
         }
 
         /*
-         * Clear out the current trigger state, restoring
-         * the title attribute on the trigger node,
-         * if it was originally set.
+         * Clears the current trigger node and restores the title attribute
          */
         _clearCurrentTrigger() {
-            let currTrigger = this._currTrigger,
-                node,
-                title;
-
-            if (currTrigger.node) {
-                node = currTrigger.node;
-                title = currTrigger.title || "";
-                node.removeEventListener("mousemove", this._onNodeMouseMove.bind(this));
-                node.removeEventListener("mouseleave", this._onNodeMouseLeave.bind(this));
-                node = null;
-                currTrigger.title = null;
-                if (title != '') {
-                    node.title = title;
-                }
+            if (this._currTrigger && this._currTrigger.node && this._currTrigger.title !== undefined) {
+                this._currTrigger.node.setAttribute('title', this._currTrigger.title);
+            }
+            if (this._currTrigger) {
+                this._currTrigger.node = null;
+                this._currTrigger.title = null;
             }
         }
 
