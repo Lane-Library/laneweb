@@ -215,7 +215,7 @@
             </xsl:when>
             <xsl:when test="$name = 'sfx'">Lane Knowledge Base</xsl:when>
             <xsl:when test="$name = 'gideon'">
-                <span class="yui3-tooltip-trigger" title="Global Infectious Diseases and Epidemiology Online Network">GIDEON</span>
+                <span class="tooltip-trigger" title="Global Infectious Diseases and Epidemiology Online Network">GIDEON</span>
             </xsl:when>
             <xsl:when test="$name = 'web'">Lane Web Site</xsl:when>
             <xsl:when test="$name = 'class'">Lane Classes</xsl:when>

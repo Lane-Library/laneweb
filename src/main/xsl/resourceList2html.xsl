@@ -145,7 +145,7 @@
             <xsl:if test="s:isAnExactMatch = 'true' and position() = 1">
                     <div class="exact-match">
                         Exact Match
-                        <i class="fa-regular fa-info-circle yui3-tooltip-trigger" title="Your search terms closely match the title of this resource."></i>
+                        <i class="fa-regular fa-info-circle tooltip-trigger" title="Your search terms closely match the title of this resource."></i>
                     </div>
             </xsl:if>
             <div class="resource-detail">
