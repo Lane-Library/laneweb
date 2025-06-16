@@ -4,6 +4,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2025-06-16" version="3.15.5" description="bug fix and update release">
+            <action date="2024-06-13" dev="ryanmax" issue="LANEWEB-11510" type="fix">
+                tooltips fail on second hover in search facets
+            </action>
+            <action date="2024-06-09" dev="ryanmax" issue="LANEWEB-11514" type="fix">
+                bookmark title overlaps action buttons
+            </action>
+            <action date="2024-06-09" dev="ryanmax" issue="LANEWEB-11515" type="update">
+                remove liaison-card functionality
+            </action>
+            <action date="2024-06-13" dev="ryanmax" issue="LANEWEB-11519" type="fix">
+                exact match, version tooltips not working on search results pages
+            </action>
+        </release>
         <release date="2025-06-09" version="3.15.4" description="bug fix and update release">
             <action date="2024-06-04" dev="ryanmax" issue="LANEWEB-11513" type="fix">
                 search spinner hidden behind Abstract header when open
