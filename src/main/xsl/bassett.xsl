@@ -3,7 +3,6 @@
 	xmlns="http://www.w3.org/1999/xhtml" xmlns:b="http://lane.stanford.edu/bassett/ns" exclude-result-prefixes="h b"
 	version="2.0">
 
-	<xsl:param name="query" />
 	<xsl:param name="type" />
 	<xsl:param name="region" />
 	<xsl:param name="images-url" />
@@ -25,17 +24,14 @@
 	<xsl:variable name="total-pages"><xsl:value-of select="/doc/b:bassetts/b:total-pages/@b:value" /></xsl:variable>
 
 	<xsl:variable name="query-string">
-		<xsl:if test="$query != ''">q=<xsl:value-of select="$query" />
-		</xsl:if><xsl:if test="$query != '' and $region != ''"><xsl:text>&amp;</xsl:text></xsl:if>
-		<xsl:if test="$region != ''">r=<xsl:value-of select="$region" /></xsl:if>
-		<xsl:if test="$type != ''">&amp;t=<xsl:value-of select="$type" />
-		</xsl:if>
+		<xsl:if test="$region != ''">&amp;r=<xsl:value-of select="$region" /></xsl:if>
+		<xsl:if test="$type != ''">&amp;t=<xsl:value-of select="$type" /></xsl:if>
 	</xsl:variable>
-
 
 	<xsl:variable name="query-str">
 		<xsl:value-of select="replace($query-string,'&amp;t=diagram','')" />
 	</xsl:variable>
+
 	<xsl:template match="*">
 		<xsl:copy>
 			<xsl:apply-templates select="attribute::node()|child::node()" />
@@ -51,15 +47,9 @@
 	<xsl:template match="h:span[@id='bassett-title']">
 		<xsl:copy>
 			<xsl:apply-templates select="attribute::node()|child::node()" />
-			<xsl:choose>
-				<xsl:when test="$query">
-					<xsl:text>Search Term </xsl:text>
-					<xsl:value-of select="$query" />
-				</xsl:when>
-				<xsl:when test="$region">
-					<xsl:value-of select="replace($region, '--',': ')" />
-				</xsl:when>
-			</xsl:choose>
+            <xsl:if test="$region and count(/doc/b:bassetts/b:bassett) != 0">
+                <xsl:value-of select="replace($region, '--',': ')" />
+            </xsl:if>
 		</xsl:copy>
 	</xsl:template>
 
@@ -90,11 +80,7 @@
 				</xsl:copy>
 			</xsl:when>
 			<xsl:otherwise>
-				<xsl:text>No images for search term </xsl:text>
-				<b>
-					<xsl:value-of select="$query" />
-				</b>
-				<xsl:text> were found.</xsl:text>
+				<xsl:text>No images found</xsl:text>
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
@@ -262,19 +248,6 @@
 		</xsl:if>
 	</xsl:template>
 
-
-	<xsl:template match="h:form[@name='bassett-pagination']/h:input[@name='q']">
-		<xsl:if test="$query != ''">
-			<xsl:copy>
-				<xsl:copy-of select="@*" />
-				<xsl:attribute name="value">
-	  			<xsl:value-of select="$query"></xsl:value-of>
-	  		</xsl:attribute>
-			</xsl:copy>
-		</xsl:if>
-	</xsl:template>
-
-
 	<xsl:template match="h:form[@name='bassett-pagination']/h:input[@name='r']">
 		<xsl:if test="$region != ''">
 			<xsl:copy>
@@ -322,7 +295,7 @@
 		</xsl:copy>
 	</xsl:template>
 
-	<xsl:template match="h:span[@id='searchResults']">
+	<xsl:template match="h:span[@id='searchResults' and count(/doc/b:bassetts/b:bassett) != 0]">
 		<xsl:copy>
 			<xsl:value-of select="/doc/b:bassetts/b:image-number-low/@b:value" />
 			<xsl:text> to </xsl:text>
