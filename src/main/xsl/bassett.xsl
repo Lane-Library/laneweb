@@ -317,7 +317,7 @@
 
 	<xsl:template match="h:label[@for='pages']">
 		<xsl:copy>
-			<xsl:text> for </xsl:text>
+			<xsl:text> of </xsl:text>
 			<xsl:value-of select="/doc/b:bassetts/b:total-pages/@b:value" />
 		</xsl:copy>
 	</xsl:template>
