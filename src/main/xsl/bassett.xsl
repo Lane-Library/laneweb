@@ -85,6 +85,7 @@
 		</xsl:choose>
 	</xsl:template>
 
+    <xsl:template match="h:form[@name='bassett-pagination']/h:input[@name='q']"/>
 
 	<xsl:template match="h:a[@id='photo-choice']/@href">
 		<xsl:attribute name="href">
