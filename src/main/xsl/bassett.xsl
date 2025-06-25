@@ -24,7 +24,7 @@
 	<xsl:variable name="total-pages"><xsl:value-of select="/doc/b:bassetts/b:total-pages/@b:value" /></xsl:variable>
 
 	<xsl:variable name="query-string">
-		<xsl:if test="$region != ''">&amp;r=<xsl:value-of select="$region" /></xsl:if>
+		<xsl:if test="$region != ''">r=<xsl:value-of select="$region" /></xsl:if>
 		<xsl:if test="$type != ''">&amp;t=<xsl:value-of select="$type" /></xsl:if>
 	</xsl:variable>
 
