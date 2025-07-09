@@ -29,6 +29,16 @@ footer section,
     max-width: none;
 }
 
+.su-design section.content>div.centered:first-of-type {
+    margin: 0;
+    padding: 0;
+}
+
+.su-design .footer-organizations {
+    margin-top: 0;
+}
+
+
 header:first-of-type {
     background-color: #8c1515;
     color: white;
