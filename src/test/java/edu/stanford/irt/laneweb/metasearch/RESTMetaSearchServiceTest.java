@@ -15,14 +15,14 @@ import java.util.Collections;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import edu.stanford.irt.laneweb.rest.BasicAuthRESTService;
 import edu.stanford.irt.laneweb.rest.RESTException;
-import edu.stanford.irt.laneweb.rest.RESTService;
 import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.status.ApplicationStatus;
 
 public class RESTMetaSearchServiceTest {
 
-    private RESTService restService;
+    private BasicAuthRESTService restService;
 
     private Result result;
 
@@ -32,7 +32,7 @@ public class RESTMetaSearchServiceTest {
 
     @BeforeEach
     public void setUp() throws URISyntaxException {
-        this.restService = mock(RESTService.class);
+        this.restService = mock(BasicAuthRESTService.class);
         this.uri = new URI("/");
         this.service = new RESTMetaSearchService(this.uri, this.restService);
         this.result = mock(Result.class);

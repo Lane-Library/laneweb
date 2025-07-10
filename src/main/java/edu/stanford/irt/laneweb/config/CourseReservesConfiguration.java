@@ -25,8 +25,7 @@ import edu.stanford.irt.laneweb.rest.BasicAuthRESTService;
 @Configuration
 public class CourseReservesConfiguration {
 
-    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/course-reserves-item-list")
-    @Scope("prototype")
+    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/course-reserves-item-list") @Scope("prototype")
     public Generator courseReservesItemListGenerator(final CourseReservesService courseReservesService) {
         return new CourseReservesItemListGenerator(courseReservesService, coursesReservesItemListSAXStrategy());
     }
@@ -34,12 +33,11 @@ public class CourseReservesConfiguration {
     @Bean
     public CourseReservesService courseReservesService(
             @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI,
-            final BasicAuthRESTService restService) {
+            @Qualifier("restService/catalog-service") final BasicAuthRESTService restService) {
         return new RESTCourseReservesService(catalogServiceURI, restService);
     }
 
-    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/courses")
-    @Scope("prototype")
+    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/courses") @Scope("prototype")
     public Generator coursesGenerator(final CourseReservesService courseReservesService) {
         return new CourseListGenerator(courseReservesService, coursesSAXStrategy());
     }
