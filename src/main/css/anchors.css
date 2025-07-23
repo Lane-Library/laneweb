@@ -27,7 +27,7 @@ a.disabled {
 .banner a,
 .bg-img-lagunita a,
 .no-search-content a,
-.su-design .content a {
+.content .landing-page-container a {
     text-decoration: underline;
     text-underline-offset: 3px;
 }

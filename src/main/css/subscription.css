@@ -7,7 +7,7 @@
     position: relative;
 }
 
-.subscription input[type='email'] {
+.subscription #mc_embed_signup input[type='email'] {
     padding: 9px;
     margin-right: 3px;
     outline: none;
@@ -25,8 +25,7 @@
     width: 25%;
 }
 
-.su-design #mc_embed_signup input[type='email'],
-.no-search-content #mc_embed_signup input[type='email'] {
+#mc_embed_signup input[type='email'] {
     width: 315px;
     padding: 13px 6px 11px 11px;
     outline: none;
