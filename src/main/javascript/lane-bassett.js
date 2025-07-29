@@ -94,7 +94,7 @@
 
         registerLinksContainer = function(container) {
             if (container) {
-                let anchors = container.querySelectorAll('a');
+                let anchors = Array.from(container.querySelectorAll('a')).filter(a => a.hostname && a.hostname === window.location.hostname);
                 anchors.forEach(function(anchor) {
                     if (!anchor.rel || anchor.rel === "propagation") {
                         anchor.addEventListener('click', handleClick);
