@@ -5,9 +5,6 @@ html {
 body {
     background-color: #ecf1f2;
     font-family: 'Source Sans Pro', sans-serif;
-    /* override lane-reset.css for font-size and line-height */
-    font-size: initial;
-    line-height: initial;
 }
 
 a {

@@ -15,7 +15,7 @@ public class PatronRegistrationConfiguration {
 
     @Bean
     public UserService userService(@Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI,
-            final BasicAuthRESTService restService) {
+            @Qualifier("restService/catalog-service") final BasicAuthRESTService restService) {
         return new RESTUserService(catalogServiceURI, restService);
     }
 }

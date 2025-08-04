@@ -67,36 +67,3 @@
     border-left: 1px white solid;
     margin-left: -1px;
 }
-
-.portal .business-card {
-    background-color: white;
-    border: 10px #666666 solid;
-    padding: 0;
-}
-
-.portal .business-card h3 {
-    background-color: #666666;
-    font-size: 1.125em;
-    margin: 0;
-    padding-bottom: 10px;    
-}
-
-.portal .business-card h3:before {
-	border: none;
-}
-.portal .business-card > div {
-    background-color: white;
-    color: black;
-    margin: 12px;
-}
-
-.portal .business-card a,
-.portal .business-card a .fa {
-    color: #007c92;
-}
-
-.portal .business-card p {
-    color: black;
-    padding: 6px;
-}
-

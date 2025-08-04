@@ -136,13 +136,6 @@
     </map:pipeline>
     <map:pipeline type="expires">
     	<map:parameter name="cache-key" value="{sitemap-uri}"/>
-        <map:match type="wildcard" pattern="liaison-card/*.html">
-            <map:generate type="file" src="cocoon://content/staff.xml"/>
-            <map:transform type="saxon" src="classpath:/xsl/liaison-card.xsl">
-                <map:parameter name="liaison" value="{1}"/>
-            </map:transform>
-            <map:serialize type="xml"/>
-        </map:match>
         <map:match pattern="staff-list.html" type="wildcard">
             <map:generate type="file" src="cocoon://content/staff.xml"/>
            	<map:transform type="saxon" src="classpath:/xsl/staff-directory.xsl">

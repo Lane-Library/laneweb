@@ -130,10 +130,8 @@ hr {
     text-transform: uppercase;
 }
 
-/*hide IE, Edge bookmarklet instructions, made visible via javascript (lane-ie.js)*/
-.bookmarklet-ie,
+/*hide Edge bookmarklet instructions, made visible via javascript (lane-ie.js)*/
 .bookmarklet-edge,
-#bookmarkletIE,
 .no-js {
     display: none;
 }

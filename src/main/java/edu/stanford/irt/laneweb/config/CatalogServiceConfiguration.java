@@ -26,11 +26,11 @@ public class CatalogServiceConfiguration {
 
     @Bean
     public StatusService catalogStatusService(@Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI,
-            final BasicAuthRESTService restService) {
+            @Qualifier("restService/catalog-service") final BasicAuthRESTService restService) {
         return new CatalogStatusService(catalogServiceURI, restService);
     }
 
-    @Bean
+    @Bean("restService/catalog-service")
     public BasicAuthRESTService getBasicAuthRESTService(RestClient restClient,
             @Value("${edu.stanford.irt.laneweb.catalog-service.userInfo}") final String userInfo) {
         return new BasicAuthRESTService(restClient, userInfo);

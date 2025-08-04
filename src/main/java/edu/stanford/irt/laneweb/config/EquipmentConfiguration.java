@@ -20,8 +20,7 @@ import edu.stanford.irt.laneweb.rest.BasicAuthRESTService;
 @Configuration
 public class EquipmentConfiguration {
 
-    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/equipment-list")
-    @Scope("prototype")
+    @Bean(name = "edu.stanford.irt.cocoon.pipeline.Generator/equipment-list") @Scope("prototype")
     public Generator equipmentListGenerator(final EquipmentService equipmentService) {
         return new EquipmentListGenerator(equipmentService, equipmentListSAXStrategy());
     }
@@ -32,9 +31,8 @@ public class EquipmentConfiguration {
     }
 
     @Bean
-    public EquipmentService restEquipmentService(
-            @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI,
-            final BasicAuthRESTService restService) {
+    public EquipmentService restEquipmentService(@Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI,
+            @Qualifier("restService/catalog-service") final BasicAuthRESTService restService) {
         return new RESTEquipmentService(catalogServiceURI, restService);
     }
 }

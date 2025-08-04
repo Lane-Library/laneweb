@@ -6,7 +6,7 @@
          <a rel="popup local bassett">Copyright Information</a>
       </div>
       <ul id="imageList">
-         <li id="110-3" class="yui3-tooltip-trigger">
+         <li id="110-3" class="tooltip-trigger">
             <a href="/biomed-resources/bassett/bassettView.html?bn=110-3">
                <div id="image">
                   <image src="//lane.stanford.edu/elane/public/L254573/small/bassettSrc"/>
