@@ -25,7 +25,7 @@
 
         bindUI() {
             L.on("search:search", (e) => {
-                this._destroy();
+                this._disable();
             });
             this._input.addEventListener('input', (event) => {
                 clearTimeout(this._queryDelayTimer);
@@ -33,6 +33,15 @@
                     this._getSuggestions(event);
                 }, this.queryDelay);
             });
+        }
+
+        _disable() {
+            this._reset();
+            this._input.disabled = true;
+            // remove the event listener added in bindUI
+            this._input.removeEventListener('input', this._getSuggestions);
+            clearTimeout(this._queryDelayTimer);
+            this._queryDelayTimer = null;
         }
 
         _getSuggestions() {
@@ -51,7 +60,7 @@
                         });
                 }
             } else {
-                this._destroy();
+                this._reset();
             }
         }
 
@@ -66,7 +75,7 @@
                 dropdown.appendChild(item);
                 suggestionContainer.className = 'aclist-content';
             });
-            this._destroy();
+            this._reset();
             this._ac = dropdown.querySelectorAll('.aclist-item');
             suggestionContainer.appendChild(dropdown);
             this._handleEvents();
@@ -84,7 +93,7 @@
             document.addEventListener("click", (event) => this._destroyOnClick(event));
         }
 
-        _destroy() {
+        _reset() {
             if (this._ac.length !== 0) {
                 this._ac.forEach(item => {
                     item.removeEventListener('click', (event) => this._handleMouseClickItemChange(event));
@@ -102,7 +111,7 @@
 
         _destroyOnClick(event) {
             if (!event.target.classList.contains('aclist-item')) {
-                this._destroy();
+                this._reset();
             }
         }
 
@@ -112,7 +121,7 @@
                 suggestion: event.target.textContent,
                 input: this._input
             });
-            this._destroy();
+            this._disable();
         }
 
         _handleKeysDownChange(event) {

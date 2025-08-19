@@ -101,4 +101,42 @@ describe('Suggest', () => {
         cy.get('@suggest10Match.all').should('have.length', 1);
     })
 
+    it('should reset suggestions on input click', () => {
+        cy.intercept('/apps/suggest/getSuggestionList?q=ski&l=er-mesh', { fixture: 'suggest/suggest.json' }).as('suggest10Match');
+        cy.get('@input').type('ski');
+        cy.wait('@suggest10Match');
+        cy.get('.aclist-item').should('exist');
+        // click input to reset suggestions
+        cy.get('@input').click();
+        cy.get('.aclist-item').should('not.exist');
+    })
+
+    it('should handle long loading times for suggestions', () => {
+        cy.intercept('/apps/suggest/getSuggestionList*', (req) => {
+            // Simulate a long loading time
+            req.reply((res) => {
+                res.setDelay(200);
+                res.send({ fixture: 'suggest/suggest.json' });
+            });
+        }).as('suggestLongLoad');
+        cy.get('@input').type('ski');
+        cy.get('.aclist-item').should('not.exist');
+        cy.wait('@suggestLongLoad');
+        cy.get('.aclist-item').should('exist');
+    })
+
+    it('should not show suggestions after search is submitted', () => {
+        cy.intercept('/apps/suggest/getSuggestionList*', { fixture: 'suggest/suggest.json' }).as('suggest10Match');
+        cy.get('@input').type('ski');
+        cy.wait('@suggest10Match');
+        cy.get('.aclist-item').should('exist');
+        cy.get('@input').should('have.value', 'ski').and('not.be.disabled');
+        // simulate submitting the search form w/o going to a new page
+        cy.window().then(win => {
+            win.L.fire('search:search');
+        });
+        cy.get('.aclist-item').should('not.exist');
+        cy.get('@input').should('have.value', 'ski').and('be.disabled');
+    })
+
 })
