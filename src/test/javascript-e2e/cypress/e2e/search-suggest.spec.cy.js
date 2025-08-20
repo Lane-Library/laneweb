@@ -60,7 +60,6 @@ describe('Suggest', () => {
         cy.wait(300);
         cy.get('.aclist-item').should('exist');
         cy.get('@input').type('{downArrow}');
-        cy.get('@input').type('{downArrow}');
         cy.get('ul .aclist-item').first().should('have.class', 'aclist-item-active');
         cy.get('@input').type('{upArrow}');
         cy.get('ul .aclist-item').last().should('have.class', 'aclist-item-active');
