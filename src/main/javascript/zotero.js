@@ -1,5 +1,4 @@
-(function() {
-
+(() => {
     "use strict";
 
     /**
@@ -7,16 +6,17 @@
      * Zotero does a decent job of scraping free-text DOIs and expanding them to complete citations.
      * For more comprehensive Zotero support, consider storing metadata objects (COinS?) in Solr at index time.
      */
-    let dois = [];
-    document.querySelectorAll("li[data-doi]").forEach(function(node) {
-        let doi = node.dataset.doi;
-        if (!dois.includes(doi)) {
-            dois.push(doi);
-        }
-    })
-    if (dois.length) {
-        document.body.insertAdjacentHTML("beforeend",
-            '<span class="zotero-metadata">doi:' + dois.join(' doi:') + '</span>');
+    const doiNodes = document.querySelectorAll("li[data-doi]");
+
+    // get a unique array of doi values from the doiNodes
+    const uniqueDois = [...new Set(Array.from(doiNodes, node => node.dataset.doi))];
+
+    if (uniqueDois.length > 0) {
+        const zoteroString = `doi:${uniqueDois.join(' doi:')}`;
+
+        const zoteroHtml = `<span class="zotero-metadata">${zoteroString}</span>`;
+
+        document.body.insertAdjacentHTML("beforeend", zoteroHtml);
     }
 
 })();
