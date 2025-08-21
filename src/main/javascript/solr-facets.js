@@ -1,80 +1,73 @@
-(function() {
+(() => {
+    "use-strict";
 
-    "use strict";
+    /**
+     * Handles validation and submission for the Solr date range facet form.
+     * When this form is submitted, it validates the dates, updates hidden 'facets'
+     * input in the main search form, and then submits the main search form.
+     */
+    const dateSolrForm = document.querySelector("#solr-date-form");
 
-    if (document.querySelector("#solr-date-form")) {
-
-        let ERROR_MESSAGE_YEAR_START_GREATER_THAN_YEAR_END = "The start year should be smaller than the end year", 
-            searchForm = document.querySelector(".search-form"),
-            dateSolrForm = document.querySelector("#solr-date-form"),
-            startYearInput = document.querySelector(".date.start"),
-            endYearInput = document.querySelector(".date.end"),
-            yearEndwith2Columns = /year:\[.*\]::/i,
-            maybeStartwith2Coulnms = /(::)?year:\[.*\]/i,
-            facets = searchForm.querySelector("input[name=facets]"),
-            errorMessage  = document.querySelector("#facet-error-message"),
-            model = function(input1, input2) {
-                let m = {
-                    startYear: input1,
-                    endYear: input2,
-                }
-                return m;
-            }(startYearInput, endYearInput),
-
-            view = function() {
-                return {
-                    submitSearchForm: function() { 
-                     if (!model.startYear.checkValidity()) {
-                        errorMessage.textContent = model.startYear.validationMessage;
-                    }
-                    else if (!model.endYear.checkValidity()) {
-                        errorMessage.textContent = model.endYear.validationMessage;
-                    }
-                    else if ( model.startYear.value > model.endYear.value) {
-                        errorMessage.textContent = ERROR_MESSAGE_YEAR_START_GREATER_THAN_YEAR_END;
-                        
-                    }else{
-                        searchForm.submit();   
-                    }
-                }
-                }
-            }(),
-            controller = function() {
-                return {
-                    resetYearFromFacets: function() {
-                        if (yearEndwith2Columns.exec(facets.value) != null) {
-                            facets.value = facets.value.replace(yearEndwith2Columns, '');
-                        }
-                        else if (maybeStartwith2Coulnms.exec(facets.value) != null) {
-                            facets.value = facets.value.replace(maybeStartwith2Coulnms, '');
-                        }
-                    },
-                    setYearFromFacets: function() {
-                        let currentYearFacetValue = 'year:[' + model.startYear.value + ' TO ' + model.endYear.value + ']';
-                        if (model.startYear.value != '' || model.endYear.value != '') {
-                            if (facets && facets.value != '') {
-                                facets.value = facets.value + '::' + currentYearFacetValue;
-                            } else {
-                                facets.disabled = false;
-                                facets.value = currentYearFacetValue;
-                            }
-                        }
-                    },
-                    
-                }
-            }();
-
-
-
-        dateSolrForm.addEventListener("submit", function(event) {
-            controller.resetYearFromFacets();
-            controller.setYearFromFacets();
-            view.submitSearchForm();
-            event.preventDefault();
-        });
-
+    // do nothing if solr-date-form is not found
+    if (!dateSolrForm) {
+        return;
     }
 
+    const searchForm = document.querySelector(".search-form");
+    const startYearInput = document.querySelector(".date.start");
+    const endYearInput = document.querySelector(".date.end");
+    const facetsInput = searchForm.querySelector("input[name=facets]");
+    const errorMessage = document.querySelector("#facet-error-message");
 
+    const ERROR_MESSAGE_YEAR_START_GREATER_THAN_YEAR_END = "The start year must be less than or equal to the end year.";
+
+    /**
+     * main handler for the solr date form
+     * @param {Event} event - form submission event
+     */
+    const handleDateSubmit = (event) => {
+        event.preventDefault();
+        // clear any previous errors
+        errorMessage.textContent = "";
+
+        const startYear = startYearInput.value;
+        const endYear = endYearInput.value;
+
+        // --- Validation ---
+        if (!startYearInput.checkValidity()) {
+            errorMessage.textContent = startYearInput.validationMessage;
+            return;
+        }
+        if (!endYearInput.checkValidity()) {
+            errorMessage.textContent = endYearInput.validationMessage;
+            return;
+        }
+        // ensure that the start year is not after the end year
+        // since both inputs are required, could be simplified to remove the check for empty years
+        if (startYear && endYear && parseInt(startYear, 10) > parseInt(endYear, 10)) {
+            errorMessage.textContent = ERROR_MESSAGE_YEAR_START_GREATER_THAN_YEAR_END;
+            return;
+        }
+
+        // --- update facets input ---
+        const allFacets = facetsInput.value ? facetsInput.value.split('::') : [];
+        const nonYearFacets = allFacets.filter(facet => !facet.startsWith('year:['));
+
+        // add the new year facet if either input has a value
+        // defaults (*, NOW) are provided but likely not necessary assuming inputs are required and of type number
+        if (startYear || endYear) {
+            const newYearFacet = `year:[${startYear || '*'} TO ${endYear || 'NOW'}]`;
+            nonYearFacets.push(newYearFacet);
+        }
+
+        facetsInput.value = nonYearFacets.join('::');
+
+        // will likely never be true assuming inputs are required and of type number
+        facetsInput.disabled = nonYearFacets.length === 0;
+
+        searchForm.submit();
+    };
+
+    dateSolrForm.addEventListener("submit", handleDateSubmit);
 
 })();
