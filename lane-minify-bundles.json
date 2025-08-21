@@ -103,7 +103,7 @@
                 "description-toggle.js",
                 "shibboleth-sfx.js",
                 "back-to-top.js",
-                "solr-facets.js",
+                "solr-date-facet.js",
                 "solr-facet-suggest.js",
                 "solr-pagination.js",
                 "shc-portal.js",

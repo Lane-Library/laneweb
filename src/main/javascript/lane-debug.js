@@ -52,7 +52,7 @@
         "description-toggle.js",
         "shibboleth-sfx.js",
         "back-to-top.js",
-        "solr-facets.js",
+        "solr-date-facet.js",
         "solr-pagination.js",
         "solr-facet-suggest.js",
         "bookcovers.js",
