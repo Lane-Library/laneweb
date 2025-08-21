@@ -19,7 +19,7 @@
     const facetsInput = searchForm.querySelector("input[name=facets]");
     const errorMessage = document.querySelector("#facet-error-message");
 
-    const ERROR_MESSAGE_YEAR_START_GREATER_THAN_YEAR_END = "The start year must be less than or equal to the end year.";
+    const ERROR_MESSAGE_YEAR_START_GREATER_THAN_YEAR_END = "The start year should be smaller than the end year";
 
     /**
      * main handler for the solr date form
