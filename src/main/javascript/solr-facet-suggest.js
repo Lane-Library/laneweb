@@ -1,60 +1,58 @@
-(function () {
-
+(() => {
     "use strict";
 
-    if (document.querySelector(".solrFacets")) {
+    /**
+     * Initialize suggestion component for each facet search input.
+     * When a user selects a suggestion, add the selection as a new facet
+     * to the main search form's hidden facet input and submit the form.
+     */
 
-        let searchForm = document.querySelector(".search-form"),
-            RESULT_NOT_FOUND = "No match found",
-            facetsNode = searchForm.querySelector("input[name=facets]"),
+    // bail if facets container not present
+    if (!document.querySelector(".solrFacets")) {
+        return;
+    }
 
-            FacetSuggestion = function (input) {
-                let facet = input.dataset.facet,
-                    searchTerm = input.dataset.searchterm,
-                    facets = input.dataset.facets,
-                    sourceBase = '/apps/solr/facet/suggest?q=' + searchTerm + '&contains={query}&facet=' + facet + '&facets=' + encodeURI(facets),
-                    suggest = new L.Suggest(input, sourceBase, {
-                        minQueryLength: 1,
-                    }),
-                    model = function (suggest, input) {
-                        return {
-                            suggest: suggest,
-                            suggestionNode: input,
-                        };
-                    }(suggest, input),
-                    view = function () {
-                        return {
-                            search: function (query) {
-                                if (facetsNode && facetsNode.value != '') {
-                                    facetsNode.value = facetsNode.value + '::' + facet + ':"' + query + '"';
-                                } else {
-                                    facetsNode.disabled = false;
-                                    facetsNode.value = facet + ':"' + query + '"';
-                                }
-                                if (query != RESULT_NOT_FOUND) {
-                                    searchForm.submit();
-                                }
-                                else {
-                                    model.suggestionNode.value = '';
-                                }
-                            }
-                        };
-                    }(),
-                    controller = function () {
-                        return {
-                            suggestion: function (event) {
-                                view.search(event.suggestion);
-                            }
-                        };
+    const searchForm = document.querySelector(".search-form");
+    const facetsInput = searchForm.querySelector("input[name=facets]");
+    const RESULT_NOT_FOUND = "No match found";
 
-                    }();
-                L.addEventTarget(model.suggest);
-                model.suggest.on("suggest:select", controller.suggestion);
+    document.querySelectorAll(".facet-suggestion").forEach(input => {
+        // get data from facet input attributes
+        const { facet, searchterm, facets } = input.dataset;
+
+        // construct the suggestion source URL
+        const sourceBase = `/apps/solr/facet/suggest?q=${searchterm}&contains={query}&facet=${facet}&facets=${encodeURI(facets)}`;
+
+        // initialize the suggestion component
+        const suggest = new L.Suggest(input, sourceBase, {
+            minQueryLength: 1,
+        });
+
+        // make the suggest instance an event target
+        L.addEventTarget(suggest);
+
+        // event handler for suggestion selection
+        const handleSuggestionSelect = (event) => {
+            const selectedValue = event.suggestion;
+
+            // handle the special case where "no match found" is selected and clear input
+            if (selectedValue === RESULT_NOT_FOUND) {
+                input.value = '';
+                return;
             }
 
-        document.querySelectorAll(".facet-suggestion").forEach(function (input) {
-            new FacetSuggestion(input);
-        });
-    }
-})();
+            // update the facets input value on the main search form
+            const currentFacets = facetsInput.value ? facetsInput.value.split('::') : [];
+            const newFacet = `${facet}:"${selectedValue}"`;
 
+            currentFacets.push(newFacet);
+            facetsInput.value = currentFacets.join('::');
+            facetsInput.disabled = false;
+
+            searchForm.submit();
+        };
+
+        suggest.on("suggest:select", handleSuggestionSelect);
+    });
+
+})();
