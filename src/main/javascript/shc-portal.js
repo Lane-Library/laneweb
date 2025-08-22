@@ -1,74 +1,103 @@
-addEventListener("load", function () {
-
+(() => {
     "use strict";
-    if (document.querySelector('.verticalPico')) {
-        (function () {
-            let forms = document.querySelectorAll('form');
 
-            forms.forEach(function (form) {
-                form.addEventListener("submit", function (event) {
-                    let trackingData = {}, re;
-                    trackingData.title = event.target.name;
-                    if (!trackingData.title && event.target.className === 'search-form') {
-                        trackingData.title = 'SHC-Epic Lane search ' + L.search.getSource();
+    // guard clause to exit early if SHC PICO form not present
+    if (!document.querySelector('.verticalPico')) {
+        return;
+    }
+
+    window.addEventListener("load", () => {
+
+        /**
+         * Attaches a submit event listener to all forms on the page
+         * to track submissions as pageviews.
+         */
+        const initializeFormTracking = () => {
+            const forms = document.querySelectorAll('form');
+
+            forms.forEach(form => {
+                form.addEventListener("submit", event => {
+                    const targetForm = event.target;
+                    let title = targetForm.name;
+
+                    if (!title && targetForm.classList.contains('search-form')) {
+                        // special case for the main search form
+                        title = `SHC-Epic Lane search ${L.search.getSource()}`;
                     }
-                    if (trackingData.title) {
-                        re = event.target.action.match('.*:\/\/([a-zA-Z0-9:\.\-]*)\/(.*)');
-                        trackingData.host = re[1] === location.host ? "" : re[1];
-                        trackingData.path = "/" + re[2];
-                        trackingData.external = trackingData.host.length > 0;
-                        L.fire("tracker:trackablePageview", {
-                            host: trackingData.host,
-                            path: trackingData.path,
-                            title: trackingData.title,
-                            external: trackingData.external
-                        });
+
+                    // not title, no tracking
+                    if (!title) {
+                        return;
                     }
+
+                    const urlParts = targetForm.action.match(/.*:\/\/([^/]+)\/(.*)/);
+                    if (!urlParts) return;
+
+                    // Destructure for clarity.
+                    const [, host, path] = urlParts;
+
+                    L.fire("tracker:trackablePageview", {
+                        title,
+                        host: host === location.host ? "" : host,
+                        path: `/${path}`,
+                        external: host !== location.host
+                    });
                 });
             });
-        })();
+        };
 
-        (function () {
-            let form = document.querySelector('.verticalPico'),
-                inputs = form.querySelectorAll('input[type="text"]'),
-                queryInput = form.querySelector("input[name=q]"),
-                searchTerms = document.querySelector(".search-form input[name=q]"),
-                //build query terms from pico inputs:
-                getPicoQuery = function () {
-                    let qString = '';
-                    inputs.forEach(function (input) {
-                        if (input.value) {
-                            qString += "(" + input.value + ")";
-                        }
-                    });
-                    if (qString.length) {
-                        qString = qString.replace(/\)\(/g, ") AND (");
-                        if (qString.startsWith('(') && qString.indexOf(')') === qString.length - 1) {
-                            qString = qString.replace(/[()]/g, '');
-                        }
-                    }
-                    return qString;
-                },
-                eventHandler = function () {
-                    let picoQuery = getPicoQuery();
-                    if (picoQuery) {
-                        searchTerms.value = picoQuery;
-                        queryInput.value = picoQuery;
-                    }
-                };
+        /**
+         * Sets up the PICO form functionality, including MeSH suggestions
+         * and synchronizing inputs with the main search form
+         */
+        const initializePicoForm = () => {
+            const picoForm = document.querySelector('.verticalPico');
+            const picoInputs = picoForm.querySelectorAll('input[type="text"]');
+            const picoQueryInput = picoForm.querySelector("input[name=q]");
+            const mainQueryInput = document.querySelector(".search-form input[name=q]");
 
-            inputs.forEach(function (input) {
-                let sourceBase = '/apps/suggest/getSuggestionList?q={query}&l=mesh',
-                    suggest;
+            /**
+             * Build a query string from PICO inputs.
+             * Example: (term1) AND (term2)
+             */
+            const getPicoQuery = () => {
+                const terms = Array.from(picoInputs)
+                    .map(input => input.value.trim())
+                    .filter(value => value); // Keep only non-empty terms.
 
-                suggest = new L.Suggest(input, sourceBase);
+                if (terms.length === 0) return "";
+                if (terms.length === 1) return terms[0];
+
+                return terms.map(term => `(${term})`).join(' AND ');
+            };
+
+            /**
+            * update the hidden and visible query inputs with the PICO query
+            */
+            const updateMainQuery = () => {
+                const picoQuery = getPicoQuery();
+                mainQueryInput.value = picoQuery;
+                picoQueryInput.value = picoQuery;
+            };
+
+            picoInputs.forEach(input => {
+                const sourceBase = '/apps/suggest/getSuggestionList?q={query}&l=mesh';
+                const suggest = new L.Suggest(input, sourceBase);
                 L.addEventTarget(suggest);
 
-                suggest.on("suggest:select", eventHandler);
-                input.addEventListener("blur", eventHandler);
-                input.addEventListener("keyup", eventHandler);
+                // attach the same handler to multiple events
+                suggest.on("suggest:select", updateMainQuery);
+                ['blur', 'keyup'].forEach(eventType => {
+                    input.addEventListener(eventType, updateMainQuery);
+                });
             });
-            form.style.visibility = "visible";
-        })();
-    }
-});
+
+            // the PICO form is visible once initialized
+            picoForm.style.visibility = "visible";
+        };
+
+        initializeFormTracking();
+        initializePicoForm();
+    });
+
+})();
