@@ -23,7 +23,7 @@ describe('Slideshow functionality', () => {
 
 	it('should navigate to next slide on next button click', () => {
 		cy.get('#next-slide').click();
-		cy.get('#slide-show .slide').first().should('have.class', 'desactive-next');
+		cy.get('#slide-show .slide').first().should('have.class', 'hidden');
 	});
 
 	it('should disable next button on last slide', () => {
@@ -41,7 +41,7 @@ describe('Slideshow functionality', () => {
 	it('should navigate to previous slide on previous button click', () => {
 		cy.get('#next-slide').click();
 		cy.get('#previous-slide').click();
-		cy.get('#slide-show .slide').first().should('not.have.class', 'desactive-next');
+		cy.get('#slide-show .slide').first().should('not.have.class', 'hidden');
 	});
 
 	it('should recalculate displayed images on resize', () => {
