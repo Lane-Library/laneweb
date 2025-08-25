@@ -360,6 +360,24 @@
                         </configuration>
                     </execution>
                     <execution>
+                        <id>npm-install</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>install</arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>npm-run-build</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>run build</arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
                         <id>npm install</id>
                         <phase>test</phase>
                         <goals>
@@ -426,16 +444,13 @@
                 <version>1.7.6</version>
                 <executions>
                     <execution>
-                        <id>lane-minify</id>
+                        <id>lane-minify-css</id>
                         <configuration>
                             <webappSourceDir>${project.basedir}/src/main</webappSourceDir>
                             <webappTargetDir>
                                 ${project.build.directory}/classes/static/resources</webappTargetDir>
-                            <jsEngine>CLOSURE</jsEngine>
                             <cssSourceDir>css</cssSourceDir>
-                            <jsSourceDir>javascript</jsSourceDir>
-                            <bundleConfiguration>
-                                ${project.basedir}/lane-minify-bundles.json</bundleConfiguration>
+                            <bundleConfiguration>${project.basedir}/lane-minify-css-bundles.json</bundleConfiguration>
                         </configuration>
                         <goals>
                             <goal>minify</goal>
