@@ -1,92 +1,91 @@
-(function () {
+(() => {
     "use strict";
 
+    const form = document.querySelector("#sfp-form");
 
-    const Model = {
-        currentType: null,
-        defaultType: "book",
-        setType(type) {
+    // bail out if the form doesn't exist
+    if (!form) return;
+
+    /**
+     * Class to control the state and behavior of the SFP form (#sfp-form).
+     */
+    class SFPFormController {
+        constructor(formElement) {
+            this.form = formElement;
+
+            // --- centralized selectors ---
+            this.selectors = {
+                typeInput: "#sfp-type",
+                choiceButtons: ".contacts-choice li",
+                contentPrefix: "#sfp-",
+                activeClass: "active",
+                suggestionContainer: ".sfp-suggestion",
+                choiceContainer: ".contacts-choice"
+            };
+
+            this.typeInput = this.form.querySelector(this.selectors.typeInput);
+            this.choiceButtons = this.form.querySelectorAll(this.selectors.choiceButtons);
+
+            // if critical child elements are missing, bail and log an error
+            if (!this.typeInput || this.choiceButtons.length === 0) {
+                console.error("SFPFormController: Could not find required child elements (type input or choice buttons).");
+                return;
+            }
+
+            // --- State ---
+            this.defaultType = this.form.dataset.defaultType || "book";
+            this.currentType = this.defaultType;
+
+            this.init();
+        }
+
+        init = () => {
+            this.choiceButtons.forEach(btn => {
+                btn.addEventListener("click", this._handleTypeChange);
+            });
+            this.form.addEventListener("submit", this._cleanupFormOnSubmit);
+            this.setFormType(this.defaultType);
+        }
+
+        /**
+         * cleanup method to remove event listeners
+         */
+        destroy = () => {
+            this.choiceButtons.forEach(btn => {
+                btn.removeEventListener("click", this._handleTypeChange);
+            });
+            this.form.removeEventListener("submit", this._cleanupFormOnSubmit);
+        }
+
+        setFormType = (type) => {
+            if (!type) return;
             this.currentType = type;
-        },
-        getType() {
-            return this.currentType;
+
+            this.form.querySelectorAll(`.${this.selectors.activeClass}`).forEach(el => el.classList.remove(this.selectors.activeClass));
+
+            const newActiveButton = this.form.querySelector(`#${type}`);
+            const newActiveContent = this.form.querySelector(`${this.selectors.contentPrefix}${type}`);
+
+            newActiveButton?.classList.add(this.selectors.activeClass);
+            newActiveContent?.classList.add(this.selectors.activeClass);
+
+            this.typeInput.value = this.currentType;
         }
-    };
 
-    const View = {
-        form: document.querySelector("#sfp-form"),
-        typeInput: null,
-
-        init() {
-            if (!this.form) return;
-            this.typeInput = this.form.querySelector("#sfp-type");
-        },
-
-        removeActive() {
-            this.form.querySelectorAll(".active").forEach(el => el.classList.remove("active"));
-        },
-
-        setActiveButton(type) {
-            const button = this.form.querySelector(`#${type}`);
-            if (button) button.classList.add("active");
-        },
-
-        setInputType(type) {
-            if (this.typeInput) this.typeInput.value = type;
-        },
-
-        displayDiv(type) {
-            const div = this.form.querySelector(`#sfp-${type}`);
-            if (div) div.classList.add("active");
-        },
-
-        //Before the form is submitted, remove the buttons and the input not used
-        // in the form by the type and remove the submit button in case of going back after submit 
-        removeDuplicateElements(type) {
-            if (type !== "book") {
-                this.form.querySelector("#sfp-book").remove();
-            }
-            if (type !== "journal") {
-                this.form.querySelector("#sfp-journal").remove();
-            }
-            this.form.querySelector(".sfp-suggestion").remove();
-            this.form.querySelector("button").remove();
+        _handleTypeChange = (event) => {
+            this.setFormType(event.currentTarget.id);
         }
-    };
 
-    // Controller
-    const Controller = {
-        init() {
-            View.init();
-            if (!View.form) return;
-
-            this.bindEvents();
-            this.setFormType(Model.defaultType);
-        },
-
-        bindEvents() {
-            View.form.querySelectorAll(".contacts-choice li").forEach(btn => {
-                btn.addEventListener("click", e => {
-                    const type = e.currentTarget.id;
-                    if (type) this.setFormType(type);
+        _cleanupFormOnSubmit = () => {
+            this.form.querySelectorAll(`${this.selectors.contentPrefix}book, ${this.selectors.contentPrefix}journal`)
+                .forEach(el => {
+                    if (!el.id.endsWith(this.currentType)) el.remove();
                 });
-            });
-
-            View.form.addEventListener("submit", () => {
-                View.removeDuplicateElements(Model.getType());
-            });
-        },
-
-        setFormType(type) {
-            Model.setType(type);
-            View.removeActive();
-            View.setInputType(type);
-            View.setActiveButton(type);
-            View.displayDiv(type);
+            this.form.querySelector(this.selectors.suggestionContainer)?.remove();
+            this.form.querySelector(this.selectors.choiceContainer)?.remove();
         }
-    };
+    }
 
-    // Initialize the application
-    document.addEventListener("DOMContentLoaded", Controller.init());
+    new SFPFormController(form);
 
 })();
