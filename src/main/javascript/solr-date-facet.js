@@ -1,5 +1,5 @@
 (() => {
-    "use-strict";
+    "use strict";
 
     /**
      * Handles validation and submission for the Solr date range facet form.
