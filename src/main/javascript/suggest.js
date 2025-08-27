@@ -243,7 +243,7 @@
         disable() {
             this.hideSuggestions();
             this.unbindUI();
-            this._input.disabled = true;
+            this._input.readOnly = true;
             clearTimeout(this._queryDelayTimer);
         }
     }

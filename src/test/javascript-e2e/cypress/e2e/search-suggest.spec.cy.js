@@ -129,13 +129,13 @@ describe('Suggest', () => {
         cy.get('@input').type('ski');
         cy.wait('@suggest10Match');
         cy.get('.aclist-item').should('exist');
-        cy.get('@input').should('have.value', 'ski').and('not.be.disabled');
+        cy.get('@input').should('have.value', 'ski').and('not.have.attr', 'readonly');
         // simulate submitting the search form w/o going to a new page
         cy.window().then(win => {
             win.L.fire('search:search');
         });
         cy.get('.aclist-item').should('not.exist');
-        cy.get('@input').should('have.value', 'ski').and('be.disabled');
+        cy.get('@input').should('have.value', 'ski').and('have.attr', 'readonly');
     })
 
 })
