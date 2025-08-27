@@ -1,63 +1,68 @@
-(function () {
-
+{
     "use strict";
 
-    let SEARCH_RESET = "search-reset",
-        SEARCH_RESET_ACTIVE = SEARCH_RESET + "-active",
-        CLICK = "click",
-        EMPTY = "",
+    const SEARCH_RESET = "search-reset";
+    const SEARCH_RESET_ACTIVE = `${SEARCH_RESET}-active`;
+    const CLICK = "click";
+    const EMPTY = "";
 
-        view = function (reset) {
+    const resetElement = document.querySelector(`.${SEARCH_RESET}`);
 
-            let v = {
-                hide: function () {
-                    reset.classList.remove(SEARCH_RESET_ACTIVE);
-                },
-                show: function () {
-                    reset.classList.add(SEARCH_RESET_ACTIVE);
-                },
-                click: function () {
-                    view.fire(CLICK);
+    // Set up listeners and logic only if the reset element exists.
+    // case 131334 javascript error on discovery login page
+    if (resetElement) {
+
+        /**
+         * The View: responsible for showing and hiding the reset element.
+         */
+        const view = {
+            hide() {
+                resetElement.classList.remove(SEARCH_RESET_ACTIVE);
+            },
+            show() {
+                resetElement.classList.add(SEARCH_RESET_ACTIVE);
+            },
+        };
+
+        /**
+         * The Controller: contains the application logic.
+         * Responds to events from the view and other parts of the application.
+         */
+        const controller = {
+            change(event) {
+                if (event.newVal === EMPTY) {
+                    view.hide();
+                } else if (event.oldVal === EMPTY) {
+                    view.show();
                 }
-            };
-            // case 131334 javascript error on discovery login page
-            if (reset) {
-                reset.addEventListener(CLICK, v.click);
-            }
+            },
 
-            return v;
+            reset() {
+                // The `fire` method is added by L.addEventTarget
+                this.fire("reset");
+                L.fire("tracker:trackableEvent", {
+                    category: "lane:searchFormReset",
+                    action: location.pathname,
+                });
+            },
+        };
 
-        }(document.querySelector("." + SEARCH_RESET)),
+        // --- Initialization and Event Wiring ---
 
-        controller = function () {
+        // Make the view and controller objects capable of firing/receiving events.
+        L.addEventTarget(view);
+        L.addEventTarget(controller, {
+            prefix: "searchReset"
+        });
 
-            return {
-                change: function (event) {
-                    if (event.newVal === EMPTY) {
-                        view.hide();
-                    } else if (event.oldVal === EMPTY) {
-                        view.show();
-                    }
-                },
-                reset: function () {
-                    controller.fire("reset");
-                    L.fire("tracker:trackableEvent", {
-                        category: "lane:searchFormReset",
-                        action: location.pathname
-                    });
-                }
-            };
-        }();
+        // Listen for a click on the DOM element and have the view fire a custom event.
+        // This decouples the DOM from the controller.
+        resetElement.addEventListener(CLICK, () => view.fire(CLICK));
 
-    L.addEventTarget(controller, {
-        prefix: "searchReset"
-    });
+        // The controller listens for the view's custom 'click' event.
+        view.on(CLICK, () => controller.reset());
 
-    L.addEventTarget(view);
-
-
-    L.on("search:queryChange", controller.change);
-
-    view.on(CLICK, controller.reset);
-
-})();
+        // The controller listens for global query changes.
+        L.on("search:queryChange", controller.change);
+    }
+}
