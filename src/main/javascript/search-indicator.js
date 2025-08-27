@@ -1,43 +1,39 @@
-(function() {
+{
+  'use strict';
 
-    "use strict";
+  const SEARCH_INDICATOR = 'search-indicator';
+  const SEARCH_INDICATOR_ACTIVE = `${SEARCH_INDICATOR}-active`;
+  const indicatorNode = document.querySelector(`.${SEARCH_INDICATOR}`);
 
-    let SEARCH_INDICATOR = "search-indicator",
-        SEARCH_INDICATOR_ACTIVE = SEARCH_INDICATOR + "-active",
-        indicatorNode = document.querySelector("." + SEARCH_INDICATOR),
+  /**
+   * Provides static show and hide methods to (surprise!) show
+   * and hide the search indicator animated gif.
+   */
+  const searchIndicator = {
+    /**
+     * activates the .search-indicator
+     * @method show
+     * @static
+     */
+    show() {
+      indicatorNode?.classList.add(SEARCH_INDICATOR_ACTIVE);
+    },
 
     /**
-     * Provides static show and hide methods to (surprise!) show
-     * and hide the search indicator animated gif.
+     * deactivates the .search-indicator
+     * @method hide
+     * @static
      */
-    searchIndicator = {
+    hide() {
+      indicatorNode?.classList.remove(SEARCH_INDICATOR_ACTIVE);
+    },
+  };
 
-        /**
-         * activates the .search-indicator
-         * @method show
-         * @static
-         */
-        show: function() {
-            indicatorNode.classList.add(SEARCH_INDICATOR_ACTIVE);
-        },
+  L.on('search:search', searchIndicator.show);
 
-        /**
-         * deactivates the .search-indicator
-         * @method hide
-         * @static
-         */
-        hide: function() {
-			if(indicatorNode){
-            	indicatorNode.classList.remove(SEARCH_INDICATOR_ACTIVE);
-            }
-        }
-    };
+  // LANEWEB-10724: spinner appears on back button
+  window.addEventListener('pagehide', searchIndicator.hide);
 
-    L.on("search:search", searchIndicator.show);
-
-    // LANEWEB-10724: spinner appears on back button
-    addEventListener("pagehide", searchIndicator.hide);
-
-    L.searchIndicator = searchIndicator;
-
-})();
+  // Expose the object to the global L namespace
+  L.searchIndicator = searchIndicator;
+}
