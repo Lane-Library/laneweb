@@ -23,6 +23,7 @@
                 return {
                     search: function (query) {
                         queryInput.value = query;
+                        queryInput.readOnly = true;
                         form.submit();
                     }
                 };
