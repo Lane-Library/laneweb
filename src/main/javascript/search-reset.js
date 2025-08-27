@@ -21,7 +21,7 @@
             },
             show() {
                 resetElement.classList.add(SEARCH_RESET_ACTIVE);
-            },
+            }
         };
 
         /**
