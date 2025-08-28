@@ -1,61 +1,50 @@
-(function () {
-
+(() => {
     "use strict";
 
-    let PICO_FIELDS = "pico-fields",
-        PICO_FIELDS_ACTIVE = PICO_FIELDS + "-active",
+    const PICO_FIELDS = "pico-fields";
+    const picoFieldsElement = document.querySelector(`.${PICO_FIELDS}`);
 
-        picoView = function (pico) {
+    // guard clause: exit if no pico fields container present
+    if (!picoFieldsElement) {
+        return;
+    }
 
-            return {
-                hide: function () {
-                    pico.classList.remove(PICO_FIELDS_ACTIVE);
-                },
-                show: function () {
-                    pico.classList.add(PICO_FIELDS_ACTIVE);
-                }
-            };
+    const PICO_FIELDS_ACTIVE = `${PICO_FIELDS}-active`;
 
-        }(document.querySelector("." + PICO_FIELDS)),
+    const view = {
+        hide() {
+            picoFieldsElement.classList.remove(PICO_FIELDS_ACTIVE);
+        },
+        show() {
+            picoFieldsElement.classList.add(PICO_FIELDS_ACTIVE);
+        }
+    };
 
-        controller = function (view) {
+    const controller = {
+        searchDropdownChange(event) {
+            // hide the fields if user switches away from clinical-all
+            if (event.newVal.source !== "clinical-all") {
+                view.hide();
+                this.fire("change", { active: false });
+            }
+        },
+        toggleChange(event) {
+            // show/hide the fields based on pico toggle state
+            if (event.active) {
+                view.show();
+                this.fire("change", { active: true });
+            } else {
+                view.hide();
+                this.fire("change", { active: false });
+            }
+        }
+    };
 
-            return {
-                activeChange: function (event) {
-                    if (!event.active) {
-                        view.hide();
-                        controller.fire("change", { active: false });
-                    }
-                },
-                tabChange: function (event) {
-                    if (event.newVal.source !== "clinical-all") {
-                        view.hide();
-                        controller.fire("change", { active: false });
-                    }
-                },
-                toggleChange: function (event) {
-                    if (event.active) {
-                        view.show();
-                        controller.fire("change", { active: true });
-                    } else {
-                        view.hide();
-                        controller.fire("change", { active: false });
-                    }
-                }
-            };
+    // --- Initialization and Event Wiring ---
+    L.addEventTarget(controller, { prefix: "picoFields" });
 
-        }(picoView);
-
-
-    L.addEventTarget(controller, {
-        prefix: "picoFields"
-    });
-
-
-    L.on("search:activeChange", controller.activeChange);
-    L.on("searchDropdown:change", controller.tabChange);
-    L.on("picoToggle:change", controller.toggleChange);
-
-
+    // Arrow functions ensure `this` inside the controller methods refers to the `controller` object.
+    L.on("searchDropdown:change", event => controller.searchDropdownChange(event));
+    L.on("picoToggle:change", event => controller.toggleChange(event));
 
 })();
