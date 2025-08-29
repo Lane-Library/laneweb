@@ -1,30 +1,25 @@
-(function () {
+{
 
     "use strict";
 
-    let helpNode = document.querySelector(".search-help a"),
+    const helpNode = document.querySelector(".search-help a");
 
-        view = function () {
+    // guard clause: exit if no help link present
+    if (helpNode) {
+        const basePath = window.model?.["base-path"] ?? "";
 
-            return {
-                update: function (href) {
-                    helpNode.href = window.model["base-path"] + href;
-                }
-            };
+        const updateHelpLink = ({ newVal }) => {
+            // destructure to get the `source` value
+            // then destructure again using the computed `source` as a key for `help` value
+            const { source, [source]: { help } } = newVal;
 
-        }(),
+            if (help) {
+                helpNode.href = `${basePath}${help}`;
+            }
+        };
 
-        controller = function () {
+        L.on("searchDropdown:change", updateHelpLink);
 
-            return {
-                change: function (event) {
-                    let newVal = event.newVal;
-                    view.update(newVal[newVal.source].help);
-                }
-            };
+    }
 
-        }();
-
-    L.on("searchDropdown:change", controller.change);
-
-})();
+}
