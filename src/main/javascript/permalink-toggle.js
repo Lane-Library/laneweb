@@ -1,37 +1,47 @@
-(function() {
-
+(() => {
     "use strict";
 
-    if (document.querySelector(".permalink")) {
+    const searchResults = document.querySelector(".lwSearchResults");
 
-        let handlePermalinkClick = function(node, event) {
-            event.stopPropagation();
-            event.preventDefault();
-            let anchor = node.querySelector('a'), copyNode, originalHtml = node.innerHTML;
-            anchor.insertAdjacentHTML("afterend",'<input value="' + anchor.href + '"/>');
-            copyNode = node.querySelector("input");
-            copyNode.select();
-            copyNode.setSelectionRange(0, 99999);
-            document.execCommand("copy");
-            copyNode.blur();
-            node.innerHTML = '<i class="fa-regular fa-check"></i> Link copied';
+    // guardian: exit if not on a search results page
+    if (!searchResults) return;
+
+    const handleCopyPermalink = async (permalinkNode) => {
+
+        const anchor = permalinkNode.querySelector("a");
+        if (!anchor) return;
+
+        const originalHtml = permalinkNode.innerHTML;
+
+        try {
+            await navigator.clipboard.writeText(anchor.href);
+
+            // tracking
             L.fire("tracker:trackableEvent", {
                 category: "lane:permalinkCopied",
-                action: event.target.textContent,
-                label: copyNode.value
+                action: anchor.textContent.trim(),
+                label: anchor.href,
             });
-            setTimeout(function() {
-                node.innerHTML = originalHtml;
+
+            // show UI confirmation
+            permalinkNode.innerHTML = `<i class="fa-regular fa-check"></i> Link copied`;
+
+            // use a timer to restore the original HTML
+            setTimeout(() => {
+                permalinkNode.innerHTML = originalHtml;
             }, 2000);
-        };
 
-        document.querySelector(".lwSearchResults").addEventListener("click", function(event) {
-            let permalink = event.target.closest(".permalink");
-            if (permalink) {
-                handlePermalinkClick(permalink, event);
-            }
-        });
+        } catch (err) {
+            console.error("Failed to copy permalink:", err);
+        }
+    };
 
-    }
-
+    searchResults.addEventListener("click", (event) => {
+        const permalink = event.target.closest(".permalink");
+        if (permalink) {
+            event.preventDefault();
+            event.stopPropagation();
+            handleCopyPermalink(permalink);
+        }
+    });
 })();
