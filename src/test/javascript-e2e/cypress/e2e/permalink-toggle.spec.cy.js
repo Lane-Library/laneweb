@@ -3,12 +3,25 @@ describe('Permalink Toggle Test', () => {
         cy.visit('/cypress-test/search.html?source=all-all&q=12&facets=recordType:%22bib%22', {
             // Stub the clipboard API before the page loads
             onBeforeLoad(win) {
+                // The Clipboard API may be undefined in non-secure contexts (like http in CLI)
+                // so we need to create a mock object to stub if it doesn't exist.
+                if (!win.navigator.clipboard) {
+                    win.navigator.clipboard = {
+                        writeText: () => {} // does nothing
+                    };
+                }
+
                 cy.stub(win.navigator.clipboard, 'writeText').resolves();
-            },
+            }
         });
 
-        // Intercept the GA event
-        cy.intercept('POST', '**/collect*').as('gaCollect');
+        // intercept the GA POST and make sure "permalinkCopied" is present in the body (below)
+        cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {
+            if (req.body.includes('permalinkCopied')) {
+                req.reply('OK');
+                req.alias = 'gaCollect';
+            }
+        });
 
         cy.viewport(1101, 750);
 
