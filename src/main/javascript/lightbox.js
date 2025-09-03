@@ -1,45 +1,53 @@
-(function () {
-
+(() => {
     "use strict";
-
     class Lightbox {
+        #lightboxEl;
+        #backgroundEl;
+
         constructor() {
-            this.lightbox = document.createElement('div');
-            this.lightbox.classList.add("lightbox");
-            this.lightbox.classList.add("lightbox-hidden");
-            this.background = document.createElement('div');
-            this.background.classList.add("lightboxbg");
-            this.background.classList.add("lightboxbg-hidden");
-            document.body.appendChild(this.background);
-            document.body.appendChild(this.lightbox);
-            this.background.addEventListener("click", this.hide.bind(this));
-        };
+            this.#lightboxEl = document.createElement('div');
+            this.#lightboxEl.classList.add("lightbox");
+
+            this.#backgroundEl = document.createElement('div');
+            this.#backgroundEl.classList.add("lightboxbg");
+
+            document.body.append(this.#backgroundEl, this.#lightboxEl);
+
+            this.#backgroundEl.addEventListener("click", () => this.hide());
+        }
 
         show() {
-            this.lightbox.classList.remove("lightbox-hidden");
-            this.background.classList.remove("lightboxbg-hidden");
+            document.body.classList.add("lightbox-active");
             this.setPosition();
         }
 
-
         hide() {
-            this.lightbox.classList.add("lightbox-hidden");
-            this.background.classList.add("lightboxbg-hidden");
+            document.body.classList.remove("lightbox-active");
         }
 
+        /**
+         * Sets the content of the lightbox. Can accept an HTML string or a DOM Node.
+         * @param {string|Node} content
+         */
         setContent(content) {
-            this.lightbox.innerHTML = content;
+            if (typeof content === 'string') {
+                this.#lightboxEl.innerHTML = content;
+            } else if (content instanceof Node) {
+                this.#lightboxEl.replaceChildren(content);
+            }
         }
 
+        /**
+         * Sets the position of the lightbox to be centered in the viewport.
+         */
         setPosition() {
-            let x = (window.innerWidth - this.lightbox.offsetWidth) / 2;
-            let y = (window.innerHeight - this.lightbox.offsetHeight) / 2;
-            this.lightbox.style.left = x + "px";
-            this.lightbox.style.top = y + "px";
-        }
+            const x = (window.innerWidth - this.#lightboxEl.offsetWidth) / 2;
+            const y = (window.innerHeight - this.#lightboxEl.offsetHeight) / 2;
 
+            this.#lightboxEl.style.left = `${x}px`;
+            this.#lightboxEl.style.top = `${y}px`;
+        }
     }
 
     L.Lightbox = new Lightbox();
 })();
-
