@@ -13,11 +13,14 @@
          * @returns {string|undefined} The cookie value or undefined if not found.
          */
         get(name) {
-            const value = `; ${document.cookie}`;
-            const parts = value.split(`; ${name}=`);
-            if (parts.length === 2) {
-                return parts.pop().split(';').shift();
+            const cookie = document.cookie
+                .split(';')
+                .find(c => c.trim().startsWith(`${name}=`));
+
+            if (!cookie) {
+                return undefined;
             }
+            return cookie.split('=')[1];
         },
 
         /**
