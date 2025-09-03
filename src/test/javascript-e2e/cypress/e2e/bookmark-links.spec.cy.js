@@ -118,7 +118,7 @@ describe('Bookmark Links', () => {
             .and('include', '/secure/addBookmark?&label=PubMed');
         cy.get(".lightboxbg").should('be.exist');
         cy.get('#no-bookmark-login').click();
-        cy.get(".lightboxbg.lightboxbg-hidden").should('be.exist');
+        cy.get('.lightboxbg').should('be.not.visible');
     })
 
 });
