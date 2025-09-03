@@ -80,10 +80,6 @@
                     }
                     return returnValue;
                 },
-                isSecureVideo = function (link) {
-                    let pathname = link.pathname;
-                    return (pathname && (/\/secure\/edtech\//).test(pathname));
-                },
                 isLocalPopup = function (node) {
                     let rel = node.getAttribute("rel");
                     return rel && rel.indexOf("popup local") === 0;
@@ -147,7 +143,7 @@
                     let external;
                     if (!node.hostname) {
                         external = false;
-                    } else if (isProxyOrCMELogin(node) || isProxyHost(node) || isSecureVideo(node)) {
+                    } else if (isProxyOrCMELogin(node) || isProxyHost(node)) {
                         external = true;
                     } else {
                         external = node.hostname !== location.host;
@@ -328,9 +324,6 @@
     });
 
     document.querySelectorAll(".searchFacet a, *[rel^='popup local']").forEach(function (node) {
-        node.isTrackableAsPageView = true;
-    });
-    document.querySelectorAll("a[href*='secure/edtech']").forEach(function (node) {
         node.isTrackableAsPageView = true;
     });
     document.querySelectorAll("#bookmarks a, .bookmark-editor-content a, .lwSearchResults a, footer a").forEach(function (node) {
