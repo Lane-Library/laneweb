@@ -1,5 +1,5 @@
 (() => {
-    "use-strict";
+    "use strict";
 
     const navMenus = document.querySelectorAll(".nav-menu");
     const openButton = document.querySelector("#nav-toggle-on");
