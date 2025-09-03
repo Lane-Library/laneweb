@@ -8,17 +8,12 @@
             //TODO more thorough documentation
             let getSearchResultsTrackingData = function (link) {
                 let trackingData = {},
-
                     searchTerms = model.get(model.URL_ENCODED_QUERY);
                 trackingData.value = link.closest("li").dataset['index'];
                 trackingData.label = link.textContent;
                 if (searchTerms) {
                     trackingData.category = "lane:searchResultClick";
                     trackingData.action = decodeURIComponent(searchTerms);
-                    trackingData.label = link.closest("li").dataset['sid'] + " -> " + link.closest("li").querySelector(".primaryType").textContent + " -> " + trackingData.label;
-                } else {
-                    trackingData.category = "lane:browseResultClick";
-                    trackingData.action = location.pathname;
                     trackingData.label = link.closest("li").dataset['sid'] + " -> " + link.closest("li").querySelector(".primaryType").textContent + " -> " + trackingData.label;
                 }
                 return trackingData;
