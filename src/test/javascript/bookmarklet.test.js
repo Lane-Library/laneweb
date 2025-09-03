@@ -19,7 +19,7 @@ test('default bookmarklet instructions hidden, Edge instructions shown', () => {
   L.getUserAgent = function () {
     return "fake Edge user agent";
   }
-  require('@/lane-bookmarklet.js');
+  require('@/bookmarklet.js');
   const nonEdge = document.querySelector('#bookmarklet');
   expect(nonEdge.style.display).toBe('none');
   const edge = document.querySelector('.bookmarklet-edge');
@@ -27,7 +27,7 @@ test('default bookmarklet instructions hidden, Edge instructions shown', () => {
 });
 
 test('default bookmarklet instructions shown, Edge instructions hidden', () => {
-  require('@/lane-bookmarklet.js');
+  require('@/bookmarklet.js');
   const nonEdge = document.querySelector('#bookmarklet');
   expect(nonEdge.style.display).toBe('');
   const edge = document.querySelector('.bookmarklet-edge');
