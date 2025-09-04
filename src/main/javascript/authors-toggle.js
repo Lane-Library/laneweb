@@ -1,46 +1,38 @@
-(function() {
+(() => {
 
     "use strict";
 
-    let initializeAuthorToggles = function() {
-        document.querySelectorAll(".authorsTrigger").forEach(function(triggerNode) {
-            if (!triggerNode.authorsTriggerSubscribed) {
-                triggerNode.authorsTriggerSubscribed = true;
-                triggerNode.addEventListener("click", function(event) {
-                    let node = event.currentTarget,
-                        anchorNode = node.querySelector('a'),
-                        iconNode = node.querySelector('i'),
-                        hideNode = node.parentNode.querySelector(".authors-hide");
+    const searchResultsContainer = document.querySelector('#searchResults');
 
-                    event.stopPropagation();
-                    event.preventDefault();
-                    node.classList.toggle('active');
-                    if (!node.classList.contains('active')) {
-                        node.previousElementSibling.textContent = " - ";
-                        hideNode.style.display = "block";
-                        anchorNode.textContent = ' Show Less ';
-                        iconNode.classList.remove('fa-angle-double-down');
-                        iconNode.classList.add('fa-angle-double-up');
-                    } else {
-                        node.previousElementSibling.textContent = " ... ";
-                        hideNode.style.display = "none";
-                        anchorNode.textContent = ' Show More ';
-                        iconNode.classList.remove('fa-angle-double-up');
-                        iconNode.classList.add('fa-angle-double-down');
-                    }
-                });
-            }
-        });
-    };
-
-    //add trigger markup and delegate click events on class "authorsTrigger"
-    if (document.querySelector('#searchResults')) {
-        initializeAuthorToggles();
+    // exit if not on search results page
+    if (!searchResultsContainer) {
+        return;
     }
 
-    //reinitialize when content has changed
-    L.on('lane:new-content', function() {
-        initializeAuthorToggles();
+    // attach a single delegated event listener to the container
+    searchResultsContainer.addEventListener("click", event => {
+        const triggerNode = event.target.closest('.authorsTrigger');
+
+        // exit if the click was not on a trigger
+        if (!triggerNode) {
+            return;
+        }
+
+        // act on the trigger
+        event.stopPropagation();
+        event.preventDefault();
+
+        const anchorNode = triggerNode.querySelector('a');
+        const iconNode = triggerNode.querySelector('i');
+        const hideNode = triggerNode.parentNode.querySelector(".authors-hide");
+        const isActive = triggerNode.classList.contains('active');
+
+        triggerNode.previousElementSibling.textContent = isActive ? " ... " : " - ";
+        hideNode.style.display = isActive ? "none" : "block";
+        anchorNode.textContent = isActive ? ' Show More ' : ' Show Less ';
+        iconNode.classList.toggle('fa-angle-double-up', !isActive);
+        iconNode.classList.toggle('fa-angle-double-down', isActive);
+        triggerNode.classList.toggle('active');
     });
 
 })();
