@@ -1,19 +1,14 @@
-(function () {
-
+(() => {
     "use strict";
 
-    // the check box for persistent login on the discovery login page
-    let persistentLoginCheckbox = document.getElementById('is-persistent-login');
-
-    // handle checking or unchecking the check box on the discovery login page
-    if (persistentLoginCheckbox) {
-        persistentLoginCheckbox.addEventListener("change", function (event) {
-            if (event.target.checked) {
-                L.Cookie.set("isPersistent", "yes");
-            } else {
-                L.Cookie.remove("isPersistent");
-            }
+    // Find the check box for persistent login on the discovery login page
+    // Handle setting or removing the cookie when the user toggles the checkbox
+    // Attach a listener in one chain using optional chaining (?.) in case the element doesn't exist
+    document.getElementById('is-persistent-login')
+        ?.addEventListener("change", (event) => {
+            event.target.checked
+                ? L.Cookie.set("isPersistent", "yes")
+                : L.Cookie.remove("isPersistent");
         });
-    }
 
 })();
