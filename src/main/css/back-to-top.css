@@ -19,6 +19,7 @@
 .back-to-top.active {
     opacity: 1;
     transition: opacity .9s;
+    visibility: visible;
 }
 
 .back-to-top .fa-solid {

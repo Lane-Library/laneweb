@@ -11,26 +11,14 @@
     }
 
     const SCROLL_THRESHOLD = 270;
-    const FADE_OUT_DELAY = 450;
+    let isScrolling;
 
     /**
-     * @method fadeIn display the backToTop node
+     * @method handleScroll checks scroll position and toggles the button's visibility
      * @private
      */
-    const fadeIn = () => {
-        backToTop.style.visibility = "visible";
-        backToTop.classList.add("active");
-    };
-
-    /**
-     * @method fadeOut hide the backToTop node
-     * @private
-     */
-    const fadeOut = () => {
-        setTimeout(() => {
-            backToTop.style.visibility = "hidden";
-        }, FADE_OUT_DELAY);
-        backToTop.classList.remove("active");
+    const handleScroll = () => {
+        backToTop.classList.toggle('active', window.scrollY > SCROLL_THRESHOLD);
     };
 
     /**
@@ -44,16 +32,18 @@
         });
     };
 
-    // respond to scroll events and decide if the backToTop node needs to be hidden or displayed
-    document.addEventListener("scroll", function () {
-        if (window.scrollY > SCROLL_THRESHOLD && !backToTop.classList.contains("active")) {
-            fadeIn();
-        } else if (window.scrollY <= SCROLL_THRESHOLD && backToTop.classList.contains("active")) {
-            fadeOut();
-        }
+    // Listen for scrolls, using a throttle to prevent performance issues
+    document.addEventListener('scroll', () => {
+        if (isScrolling) return;
+
+        isScrolling = true;
+        // Use requestAnimationFrame for a smooth, performant check tied to browser repaints
+        requestAnimationFrame(() => {
+            handleScroll();
+            isScrolling = false;
+        });
     });
 
-    // call the scrollToTop function when backToTop clicked
-    backToTop.addEventListener("click", scrollToTop);
+    backToTop.addEventListener('click', scrollToTop);
 
 })();
