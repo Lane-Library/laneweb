@@ -1,182 +1,165 @@
-(function() {
+(() => {
 
     "use strict";
 
-    let bassettContent = document.querySelector('#bassettContent'),
-        model = L.Model,
-        basePath = model.get(model.BASE_PATH) || "",
-        HIDE = 'Hide',
-        SEE_ALL = 'See All',
-        diagramDisplay = false,
-        accordion,
-        history = window.history,
-        subRegionToShow = 4,
+    const bassettContent = document.querySelector('#bassettContent');
+    const accordion = document.querySelector('#bassett-menu');
 
-        formatAjaxUrl = function(string) {
-            let url, href;
-            href = string.replace("search.html", "/biomed-resources/bassett/bassettsView.html");
-            href = href.substr(href.indexOf("/bassett/") + 8);
-            href = href.split("?");
-            if (href.length === 1) {
-                url = href[0];
-            }
-            if (href.length > 1) {
-                url = href[0] + "?" + href[1];
-            }
-            if (diagramDisplay) {
-                url = url + "&t=diagram";
-            }
-            return url;
-        },
+    // exit if core elements aren't on the page
+    if (!bassettContent || !accordion) {
+        return;
+    }
 
-        submitPagination = function(e) {
-            let page = e.target.page.value,
-                pages = e.target.pages;
-            if (page.match('[^0-9]') || page < 1 || Number(page) > Number(pages.value)) {
-                e.preventDefault();
-                document.querySelectorAll(".bassett-error").forEach(function(node) {
-                    node.style.display = "block";
-                });
-                return;
-            }
-            pages.remove();
-        },
+    // --- State and Constants ---
+    const model = L.Model;
+    const basePath = model.get(model.BASE_PATH) || "";
+    const HIDE_TEXT = 'Hide';
+    const SHOW_ALL_TEXT = 'See All';
+    const SUB_REGIONS_TO_SHOW = 4;
+    let diagramDisplay = false;
 
-        loadContent = function(string) {
-            let url = basePath + "/plain/biomed-resources/bassett/raw".concat(string);
-            function successHandler(_id, o) {
-                bassettContent.innerHTML = o.responseText;
-                registerLinksContainer(bassettContent);
-                document.querySelectorAll('.s-pagination form[name=bassett-pagination]').forEach(function(node) {
-                    node.addEventListener('submit', submitPagination);
-                });
-            }
-            fetch(url)
-                .then(response => response.text())
-                .then(data => {
-                    successHandler(null, { responseText: data });
-                })
-                .catch(error => {
-                    console.error('Error fetching content:', error);
-                });
-        },
+    // --- Core Functions ---
+    const formatAjaxUrl = (hrefString) => {
+        const url = new URL(hrefString.replace("search.html", "/biomed-resources/bassett/bassettsView.html"));
+        let path = url.pathname.substring(url.pathname.indexOf('/bassett/') + 8) + url.search;
 
-        handleClick = function(ev) {
-            let url;
-            if (this.id === "diagram-choice") {
-                diagramDisplay = true;
-            }
-            if (this.id === "photo-choice") {
-                diagramDisplay = false;
-            }
-            url = formatAjaxUrl(this.href);
-            try {
-                history.pushState({ bassett: url }, "", "");
-                loadContent(url);
-            } catch (e) {
-                loadContent(url);
-            }
-            ev.preventDefault();
-        },
+        if (diagramDisplay && !path.includes('t=diagram')) {
+            path += path.includes('?') ? '&t=diagram' : '?t=diagram';
+        }
+        return path;
+    };
 
-        initializeHistory = function() {
-            if (history.state && history.state.bassett) {
-                loadContent(history.state.bassett);
-            }
-            window.addEventListener("popstate", function(event) {
-                if (event.state) {
-                    loadContent(event.state && event.state.bassett);
-                } else {
-                    loadContent(formatAjaxUrl(document.location.href));
-                }
-            });
-        },
+    const submitPagination = (event) => {
+        const pageInput = event.target.page;
+        const pagesTotal = event.target.pages;
 
-        registerLinksContainer = function(container) {
-            if (container) {
-                let anchors = Array.from(container.querySelectorAll('a')).filter(a => a.hostname && a.hostname === window.location.hostname);
-                anchors.forEach(function(anchor) {
-                    if (!anchor.rel || anchor.rel === "propagation") {
-                        anchor.addEventListener('click', handleClick);
-                    }
-                })
-            }
-        },
+        if (!/^\d+$/.test(pageInput.value) || Number(pageInput.value) < 1 || Number(pageInput.value) > Number(pagesTotal.value)) {
+            event.preventDefault();
+            document.querySelectorAll(".bassett-error").forEach(node => node.style.display = "block");
+            return;
+        }
+        pagesTotal.remove();
+    };
 
-        // For the bassett menu
-        hideSubRegions = function(event) {
-            let i, region = event.currentTarget.closest("ul"),
-                subRegion = region.querySelectorAll('li');
-            resetSubRegions();
-            region.querySelector('.see-all').innerHTML = SEE_ALL;
-            for (i = subRegionToShow; i < subRegion.length; i++) {
-                subRegion[i].style.display = "none";
-            }
-        },
+    const loadContent = async (pathSegment) => {
+        const url = `${basePath}/plain/biomed-resources/bassett/raw${pathSegment}`;
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
-        resetSubRegions = function() {
-            let i, iElement,
-                subRegion = document.querySelector('#bassett-menu').querySelectorAll('li');
-            for (i = 1; i < subRegion.length; i++) {
-                iElement = subRegion[i].querySelector('i');
-                if (iElement) {
-                    iElement.classList.add('fa-square');
-                    iElement.classList.add('fa-regular');
-                    iElement.classList.remove('fa-solid');
-                    iElement.classList.remove('fa-square-check');
-                }
-            }
-        },
+            bassettContent.innerHTML = await response.text();
 
-        expandSubRegion = function(event) {
-            let i, subRegion,
-                region = event.currentTarget.closest("ul");
-            resetSubRegions();
-            region.querySelector('.see-all').innerHTML = HIDE;
-            subRegion = region.querySelectorAll('li');
-            for (i = subRegionToShow + 1; i < subRegion.length; i++) {
-                subRegion[i].style.display = 'block';
-            }
-        },
-
-        displaySubRegion = function(event) {
-            let seeAllContent = event.currentTarget.innerHTML;
-            if (seeAllContent === HIDE) {
-                hideSubRegions(event);
-            }
-            else {
-                expandSubRegion(event);
-            }
-        },
-
-        surlineSubRegion = function(event) {
-            let i, li = event.currentTarget;
-            resetSubRegions();
-            li.classList.add('enabled');
-            i = li.querySelector('i');
-            i.classList.remove('fa-square');
-            i.classList.remove('fa-regular');
-            i.classList.add('fa-solid');
-            i.classList.add('fa-square-check');
-        };
-
-    if (bassettContent) {
-        accordion = document.querySelector('#bassett-menu');
-        // not if largerView.html
-        if (accordion) {
-            registerLinksContainer(accordion);
             registerLinksContainer(bassettContent);
-            document.querySelectorAll('.see-all').forEach(function(node) {
-                node.addEventListener('click', displaySubRegion);
-            });
-            document.querySelectorAll('.region li:not(:first-child)').forEach(function(node) {
-                node.addEventListener('click', surlineSubRegion);
-            });
-            document.querySelectorAll('.s-pagination form[name=bassett-pagination]').forEach(function(node) {
+            document.querySelectorAll('.s-pagination form[name=bassett-pagination]').forEach(node => {
                 node.addEventListener('submit', submitPagination);
             });
-            initializeHistory();
+        } catch (error) {
+            console.error('Error fetching content:', error);
+            bassettContent.innerHTML = '<p class="error">Sorry, content could not be loaded.</p>';
         }
-    }
+    };
+
+    const handleClick = (event) => {
+        event.preventDefault();
+        // use event.currentTarget instead of `this` to be compatible with arrow functions
+        const link = event.currentTarget;
+
+        if (link.id === "diagram-choice") diagramDisplay = true;
+        if (link.id === "photo-choice") diagramDisplay = false;
+
+        const url = formatAjaxUrl(link.href);
+        window.history.pushState({ bassett: url }, "", "");
+        loadContent(url);
+    };
+
+    const initializeHistory = () => {
+        window.addEventListener("popstate", (event) => {
+            const path = event.state?.bassett ?? formatAjaxUrl(document.location.href);
+            loadContent(path);
+        });
+
+        if (window.history.state?.bassett) {
+            loadContent(window.history.state.bassett);
+        }
+    };
+
+    const registerLinksContainer = (container) => {
+        if (container) {
+            container.querySelectorAll('a')
+                .forEach(anchor => {
+                    if (anchor.hostname === window.location.hostname && !anchor.rel) {
+                        anchor.addEventListener('click', handleClick);
+                    }
+                });
+        }
+    };
+
+    // --- Menu Functions ---
+
+    const resetSubRegions = () => {
+        accordion.querySelectorAll('.region li.enabled').forEach(li => {
+            li.classList.remove('enabled');
+            const icon = li.querySelector('i');
+            if (icon) {
+                icon.classList.replace('fa-square-check', 'fa-square');
+                icon.classList.replace('fa-solid', 'fa-regular');
+            }
+        });
+    };
+
+    const hideSubRegions = (event) => {
+        const region = event.currentTarget.closest("ul");
+        const subRegions = region.querySelectorAll('li');
+        resetSubRegions();
+        region.querySelector('.see-all').innerHTML = SHOW_ALL_TEXT;
+        for (let i = SUB_REGIONS_TO_SHOW; i < subRegions.length; i++) {
+            subRegions[i].style.display = "none";
+        }
+    };
+
+    const expandSubRegion = (event) => {
+        const region = event.currentTarget.closest("ul");
+        const subRegions = region.querySelectorAll('li');
+        resetSubRegions();
+        region.querySelector('.see-all').innerHTML = HIDE_TEXT;
+        for (let i = SUB_REGIONS_TO_SHOW + 1; i < subRegions.length; i++) {
+            subRegions[i].style.display = 'block';
+        }
+    };
+
+    const displaySubRegion = (event) => {
+        const seeAllContent = event.currentTarget.innerHTML;
+        if (seeAllContent === HIDE_TEXT) {
+            hideSubRegions(event);
+        } else {
+            expandSubRegion(event);
+        }
+    };
+
+    const surlineSubRegion = (event) => {
+        resetSubRegions();
+        const li = event.currentTarget;
+        li.classList.add('enabled');
+        const icon = li.querySelector('i');
+        if (icon) {
+            icon.classList.replace('fa-square', 'fa-square-check');
+            icon.classList.replace('fa-regular', 'fa-solid');
+        }
+    };
+
+    registerLinksContainer(accordion);
+    registerLinksContainer(bassettContent);
+
+    document.querySelectorAll('.see-all').forEach(node => {
+        node.addEventListener('click', displaySubRegion);
+    });
+    document.querySelectorAll('.region li:not(:first-child)').forEach(node => {
+        node.addEventListener('click', surlineSubRegion);
+    });
+    document.querySelectorAll('.s-pagination form[name=bassett-pagination]').forEach(node => {
+        node.addEventListener('submit', submitPagination);
+    });
+
+    initializeHistory();
 
 })();
