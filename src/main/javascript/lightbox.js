@@ -1,5 +1,7 @@
 (() => {
+
     "use strict";
+
     class Lightbox {
         #lightboxEl;
         #backgroundEl;

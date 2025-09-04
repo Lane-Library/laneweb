@@ -1,4 +1,5 @@
 {
+
     "use strict";
 
     window.model = window.model || {};

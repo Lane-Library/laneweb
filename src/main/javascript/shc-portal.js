@@ -1,4 +1,5 @@
 (() => {
+
     "use strict";
 
     // guard clause to exit early if SHC PICO form not present

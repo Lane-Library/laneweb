@@ -1,4 +1,5 @@
 (() => {
+
     "use strict";
 
     const picoInputs = document.querySelectorAll(".pico-fields input");

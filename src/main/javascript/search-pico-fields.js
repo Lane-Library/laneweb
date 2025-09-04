@@ -1,4 +1,5 @@
 (() => {
+
     "use strict";
 
     const PICO_FIELDS = "pico-fields";

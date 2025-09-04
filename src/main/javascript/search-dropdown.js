@@ -1,6 +1,7 @@
 if (document.querySelector("#main-search")) {
 
     (() => {
+
         "use strict";
 
         const searchDropdown = document.querySelector("#main-search");

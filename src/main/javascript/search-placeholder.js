@@ -1,4 +1,5 @@
 {
+
     "use strict";
 
     const dropdown = document.querySelector("#main-search");

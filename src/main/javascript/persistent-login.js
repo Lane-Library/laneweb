@@ -1,4 +1,5 @@
 (() => {
+
     "use strict";
 
     // Find the check box for persistent login on the discovery login page

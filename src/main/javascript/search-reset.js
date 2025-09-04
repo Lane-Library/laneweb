@@ -1,4 +1,5 @@
 {
+
     "use strict";
 
     const SEARCH_RESET = "search-reset";

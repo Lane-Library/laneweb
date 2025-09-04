@@ -2,6 +2,7 @@
 if (document.querySelector(".pico-toggle")) {
 
     (() => {
+
         "use strict";
 
         // --- Constants ---

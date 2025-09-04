@@ -1,4 +1,5 @@
 (() => {
+
     "use strict";
 
     const navMenus = document.querySelectorAll(".nav-menu");

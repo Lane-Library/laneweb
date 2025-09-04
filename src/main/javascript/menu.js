@@ -1,4 +1,5 @@
 (() => {
+
     "use strict";
 
     // Toggle the 'active' class on mobile menus when their h2 is clicked

@@ -1,5 +1,6 @@
 {
-    'use strict';
+
+    "use strict";
 
     const form = document.querySelector('.search-form');
     // table search inputs (e.g. course reserves, liaisons, equipment) should not get solr suggestions: LANEWEB-11444

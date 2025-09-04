@@ -1,4 +1,5 @@
 (() => {
+
     "use strict";
 
     const slideContainer = document.querySelector("#slide-show");

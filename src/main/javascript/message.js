@@ -1,5 +1,6 @@
 // show a message to the user.  Initially just calls alert()
 {
+
     "use strict";
 
     /**

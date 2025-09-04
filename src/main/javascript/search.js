@@ -1,5 +1,6 @@
 if (document.querySelector(".search-form")) {
     (() => {
+
         "use strict";
 
         /**

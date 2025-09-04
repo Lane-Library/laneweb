@@ -1,4 +1,5 @@
 (() => {
+
     "use strict";
 
     document.querySelectorAll('.s-pagination form[name=pagination]').forEach(form => {
