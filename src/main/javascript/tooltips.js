@@ -1,418 +1,224 @@
-(function () {
-
+(() => {
     "use strict";
 
-    let
-        OX = -10000,
-        OY = -10000,
+    const SHOW_DELAY = 250;
+    const HIDE_DELAY = 100;
+    const OFFSET_X = 15;
+    const OFFSET_Y = 15;
+    const TRIGGER_CLASS = 'tooltip-trigger';
 
-        OFFSET_X = 15,
-        OFFSET_Y = 15;
-
-
+    /**
+     * @class Tooltip
+     * @description Manages the lifecycle of a single tooltip element on the page,
+     * handling all triggers within a specified delegate container.
+     */
     class Tooltip {
+        /**
+         * @param {object} options
+         * @param {HTMLElement} options.delegate - The container element to listen for events on.
+         * @param {Map<string, string>} options.contentMap - A map of trigger IDs to their HTML content.
+         */
+        constructor({ delegate, contentMap }) {
+            this.delegate = delegate;
+            this.contentMap = contentMap;
 
+            this.tooltipElement = null;
+            this.activeTrigger = null;
+            this.timers = { show: null, hide: null };
 
-        constructor(args) {
-            this.showDelay = 250;
-            this.hideDelay = 10;
-            this.visible = false;
-            this.xy = [OX, OY]
-            this.content = args.content;
-            this.triggerNodes = this.triggerNodes(args.triggerNodes);
-            this.zIndex = args.zIndex;
-            this.autoHideDelay = args.autoHideDelay;
-            this.initializer();
-            this.syncUI();
-            this.delegate = this.setDelegate(args.delegate);
-            this.bindUI();
+            // Bind the core event handler once to the delegate container.
+            // 'mouseover' is used for reliable delegation of entering an element and its children.
+            this.delegate.addEventListener('mouseover', this._handleMouseOver);
+            // also need to detect when the mouse leaves an element and its children.
+            this.delegate.addEventListener('mouseout', this._handleMouseOut);
         }
 
-        // PROTOTYPE METHODS/PROPERTIES
-
-        /*
-         * Initialization Code: Sets up privately used state
-         * properties, and publishes the events Tooltip introduces
+        /**
+         * The primary event handler. It determines if the mouse is over a new trigger
+         * or has left a trigger area, then initiates the correct action.
          */
-        initializer() {
-            this._triggerClassName = "tooltip-trigger";
-            // Currently bound trigger node information
-            this._currTrigger = {
-                node: null,
-                title: null,
-                mouseX: Tooltip.OFFSCREEN_X,
-                mouseY: Tooltip.OFFSCREEN_Y,
-                mouseClientX: Tooltip.OFFSCREEN_X,
-                mouseClientY: Tooltip.OFFSCREEN_Y
-            };
+        _handleMouseOver = (event) => {
+            const trigger = event.target.closest(`.${TRIGGER_CLASS}`);
+            if (!trigger) return;
 
-            // Show/hide timers
-            this._timers = {
-                show: null,
-                hide: null
-            };
-
-        }
-
-        /*
-         * Destruction Code: Clears event handles, timers,
-         * and current trigger information
-         */
-        destructor() {
-            this._clearCurrentTrigger();
-            this._clearTimers();
-            this._clearHandles();
-        }
-
-        /*
-         * bindUI is used to bind attribute change and dom event
-         * listeners
-         */
-        bindUI() {
-            L.addEventTarget(this, {
-                prefix: 'tooltip',
-            });
-
-            // Publish events introduced by Tooltip. Note the triggerEnter event is preventable,
-            // with the default behavior defined in the _defTriggerEnterFn method
-            this.on("triggerEnter", (e) => this._defTriggerEnterFn(e));
-            this._bindDelegate();
-        }
-
-        /*
-         * syncUI is used to update the rendered DOM, based on the current
-         * Tooltip state
-         */
-        syncUI() {
-            this._uiSetNodes(this.triggerNodes);
-        }
-
-        /*
-         * Public method, which can be used by triggerEvent event listeners
-         * to set the content of the tooltip for the current trigger node
-         */
-        setTriggerContent(content) {
-            this.deleteTooltip();
-            let i, l, contentBox = document.createElement("div");
-            contentBox.classList.add("tooltip");
-            contentBox.classList.add("tooltip-content");
-            document.body.appendChild(contentBox);
-            contentBox.innerHTML = "";
-            if (content) {
-                if (content instanceof Node) {
-                    for (i = 0, l = content.size(); i < l; ++i) {
-                        contentBox.appendChild(content.item(i));
-                    }
-                }
-                if (typeof content === 'string') {
-                    contentBox.innerHTML = content;
-                }
-            }
-        }
-
-
-
-        /*
-         * Updates the rendered DOM to reflect the
-         * set of trigger nodes passed in
-         */
-        _uiSetNodes(nodes) {
-            if (this._triggerNodes) {
-                this._triggerNodes.removeClass(this._triggerClassName);
-            }
-
-            if (nodes) {
-                this._triggerNodes = nodes;
-                this._triggerNodes.forEach(node => {
-                    if (node) {
-                        node.classList.add(this._triggerClassName);
-                    }
-                });
-            }
-        }
-        /*
-         * Attaches the default mouseover DOM listener to the
-         * current delegate node
-         */
-        _bindDelegate() {
-            const delegateNode = this.delegate;
-            if (delegateNode) {
-                delegateNode.querySelectorAll("." + this._triggerClassName).forEach((node) => {
-                    node.addEventListener("mouseenter", (e) => {
-                        this._onNodeMouseEnter(e);
-                    });
-                });
-            }
-        }
-
-        /*
-         * Default mouse enter DOM event listener.
-         *
-         * Delegates to the _enterTrigger method,
-         * if the mouseover enters a trigger node.
-         */
-        _onNodeMouseEnter(e) {
-            let node = e.currentTarget;
-            if (node) {
-                this._enterTrigger(node, e.pageX, e.pageY, e.clientX, e.clientY);
-            }
-        }
-
-        /*
-         * Default mouse leave DOM event listener
-         *
-         * Delegates to _leaveTrigger if the mouse
-         * leaves the current trigger node
-         */
-        _onNodeMouseLeave(e) {
-            this._leaveTrigger(e.currentTarget);
-        }
-
-        /*
-         * Default mouse move DOM event listener
-         */
-        _onNodeMouseMove(e) {
-            this._overTrigger(e.pageX, e.pageY, e.clientX, e.clientY);
-        }
-
-        /*
-         * Default handler invoked when the mouse enters
-         * a trigger node. Fires the triggerEnter
-         * event which can be prevented by listeners to
-         * show the tooltip from being displayed.
-         */
-        _enterTrigger(node, x, y, mouseClientX, mouseClientY) {
-            this._setCurrentTrigger(node, x, y, mouseClientX, mouseClientY);
-            this.fire("triggerEnter", { node: node, pageX: x, pageY: y, mouseClientX: mouseClientX, mouseClientY: mouseClientY });
-        }
-
-        /*
-         * Default handler for the triggerEvent event,
-         * which will setup the timer to display the tooltip,
-         * if the default handler has not been prevented.
-         */
-        _defTriggerEnterFn(e) {
-            let delay, node = e.node;
-            if (!this.disabled) {
+            // If we are moving over the same trigger, just cancel any pending hide.
+            if (trigger === this.activeTrigger) {
                 this._clearTimers();
-                delay = (this.visible) ? 0 : this.showDelay;
-                this._timers.show = setTimeout(() => this._showTooltip(node), delay);
+                return;
             }
+
+            // A new trigger has been entered.
+            this._startShowTimer(trigger);
         }
 
-        /*
-         * Default handler invoked when the mouse leaves
-         * the current trigger node. Fires the triggerLeave
-         * event and sets up the hide timer
+        /**
+         * Handles the mouse leaving a potential trigger zone.
          */
-        _leaveTrigger() {
-            this._clearCurrentTrigger();
-            this._clearTimers();
-            this._timers.hide = setTimeout(() => this._hideTooltip(), this.hideDelay);
-        }
+        _handleMouseOut = (event) => {
+            const trigger = event.target.closest(`.${TRIGGER_CLASS}`);
 
-        /*
-         * Default handler invoked for mousemove events
-         * on the trigger node. Stores the current mouse
-         * x, y positions
-         */
-        _overTrigger(x, y, mouseClientX, mouseClientY) {
-            this._currTrigger.mouseX = x;
-            this._currTrigger.mouseY = y;
-            this._currTrigger.mouseClientX = mouseClientX;
-            this._currTrigger.mouseClientY = mouseClientY;
-        }
-
-        /*
-         * Shows the tooltip, after moving it to the current mouse
-         * position.
-         */
-        _showTooltip() {
-            let tt = document.querySelector(".tooltip.tooltip-content"),
-                height = tt.clientHeight,
-                width = tt.clientWidth,
-                x = this._currTrigger.mouseX,
-                y = this._currTrigger.mouseY,
-                mouseClientX = this._currTrigger.mouseClientX,
-                mouseClientY = this._currTrigger.mouseClientY;
-
-            if (mouseClientX >= document.documentElement.clientWidth - width) {
-                x = x - width - OFFSET_X;
-                if (x < 0) {
-                    x = OFFSET_X;
+            // Only act if we are leaving the currently active trigger.
+            if (trigger === this.activeTrigger) {
+                // If the mouse is moving to the tooltip itself, don't hide.
+                const toElement = event.relatedTarget;
+                if (toElement && this.tooltipElement?.contains(toElement)) {
+                    return;
                 }
-
-            } else {
-                x = x + OFFSET_X;
+                this._startHideTimer();
             }
+        }
 
-            if (mouseClientY >= document.documentElement.clientHeight - height) {
-                y = y - height - OFFSET_Y;
-            } else {
-                y = y + OFFSET_Y;
+        /**
+         * Initiates the process of showing a tooltip for a given trigger element.
+         * @param {HTMLElement} trigger
+         */
+        _startShowTimer(trigger) {
+            // Hide any currently visible tooltip immediately before proceeding with the new one. 
+            // This prevents tooltip stacking.
+            if (this.tooltipElement) {
+                this._hide();
             }
-
-
-            tt.style.left = x + "px";
-            tt.style.top = y + "px";
-
-
-
 
             this._clearTimers();
+            this.activeTrigger = trigger;
 
-            this._timers.hide = setTimeout(() => this._hideTooltip(), this.autoHideDelay);
+            this.timers.show = setTimeout(() => {
+                this._show();
+            }, SHOW_DELAY);
         }
 
-        /*
-         * Hides the tooltip, after clearing existing timers.
+        /**
+         * Starts the timer to hide the currently active tooltip.
          */
-        _hideTooltip() {
+        _startHideTimer() {
             this._clearTimers();
-            this.deleteTooltip();
+            this.timers.hide = setTimeout(this._hide, HIDE_DELAY);
         }
 
-
-        deleteTooltip() {
-            let tooltip = document.body.querySelector(".tooltip.tooltip-content");
-            if (tooltip) {
-                document.body.removeChild(tooltip);
-            }
-        }
-
-        /*
-         * Set the rendered content of the tooltip for the current
-         * trigger, based on (in order of precedence):
-         *
-         * a). The string/node content attribute value
-         * b). From the content lookup map if it is set, or
-         * c). From the title attribute if set.
+        /**
+         * Creates, positions, and displays the tooltip element on the page.
          */
-        _setTriggerContent(node) {
-            let content = this.content;
+        _show = () => {
+            if (!this.activeTrigger) return;
 
-            if (content) {
-                content = content[node.id] || node.title;
+            const originalTitle = this.activeTrigger.title || '';
+            const content = this.contentMap.get(this.activeTrigger.id) ?? originalTitle;
+             // Don't show an empty tooltip.
+            if (!content) return;
+
+            // Temporarily disable the browser's native tooltip to prevent it from overlapping.
+            if (originalTitle) {
+                this.activeTrigger.setAttribute('data-original-title', originalTitle);
+                this.activeTrigger.title = '';
             }
-            this.setTriggerContent(content);
+
+            this.tooltipElement = document.createElement('div');
+            this.tooltipElement.className = 'tooltip tooltip-content';
+            this.tooltipElement.innerHTML = content;
+            this.tooltipElement.style.zIndex = '1000';
+
+            // Add listeners to the tooltip itself to keep it alive when the user hovers over it.
+            this.tooltipElement.addEventListener('mouseenter', this._clearTimers);
+            this.tooltipElement.addEventListener('mouseleave', this._startHideTimer);
+
+            document.body.appendChild(this.tooltipElement);
+            this._position();
         }
 
-        /*
-         * Set the currently bound trigger node information, clearing
-         * out the title attribute if set and setting up mousemove/out
-         * listeners.
+        /**
+         * Hides and completely destroys the tooltip element and resets state.
          */
-        _setCurrentTrigger(node, x, y, mouseClientX, mouseClientY) {
-
-            let currTrigger = this._currTrigger, title;
-            this._setTriggerContent(node);
-            node.addEventListener("mousemove", this._onNodeMouseMove.bind(this));
-            node.addEventListener("mouseleave", this._onNodeMouseLeave.bind(this));
-
-            title = node.getAttribute("title");
-            if (title && title != '') {
-                node.setAttribute("title", "");
+        _hide = () => {
+            // Restore the native title attribute on the trigger.
+            if (this.activeTrigger) {
+                const originalTitle = this.activeTrigger.getAttribute('data-original-title');
+                if (originalTitle) {
+                    this.activeTrigger.title = originalTitle;
+                    this.activeTrigger.removeAttribute('data-original-title');
+                }
             }
-            currTrigger.mouseX = x;
-            currTrigger.mouseY = y;
-            currTrigger.mouseClientX = mouseClientX;
-            currTrigger.mouseClientY = mouseClientY;
-            currTrigger.node = node;
-            currTrigger.title = title;
+
+            this.tooltipElement?.remove();
+
+            // Reset state properties.
+            this.tooltipElement = null;
+            this.activeTrigger = null;
+            this._clearTimers();
         }
 
-        /*
-         * Clears the current trigger node and restores the title attribute
+        /**
+         * Positions the tooltip element relative to its active trigger.
          */
-        _clearCurrentTrigger() {
-            if (this._currTrigger && this._currTrigger.node && this._currTrigger.title !== undefined) {
-                this._currTrigger.node.setAttribute('title', this._currTrigger.title);
+        _position() {
+            if (!this.tooltipElement || !this.activeTrigger) return;
+
+            const triggerRect = this.activeTrigger.getBoundingClientRect();
+            const ttRect = this.tooltipElement.getBoundingClientRect();
+
+            let x = window.scrollX + triggerRect.left + (triggerRect.width / 2) - (ttRect.width / 2);
+            let y = window.scrollY + triggerRect.bottom + OFFSET_Y;
+
+            // Basic viewport collision detection
+            if (y + ttRect.height > window.innerHeight + window.scrollY) {
+                y = window.scrollY + triggerRect.top - ttRect.height - OFFSET_Y;
             }
-            if (this._currTrigger) {
-                this._currTrigger.node = null;
-                this._currTrigger.title = null;
+            if (x < window.scrollX) {
+                x = window.scrollX + OFFSET_X;
             }
+            if (x + ttRect.width > window.innerWidth + window.scrollX) {
+                x = window.innerWidth + window.scrollX - ttRect.width - OFFSET_X;
+            }
+
+            this.tooltipElement.style.left = `${x}px`;
+            this.tooltipElement.style.top = `${y}px`;
         }
 
-        /*
-         * Cancel any existing show/hide timers
+        /**
+         * A utility to clear all active timers.
          */
-        _clearTimers() {
-            let timers = this._timers;
-            if (timers.hide) {
-                clearTimeout(timers.hide);
-                timers.hide = null;
-            }
-            if (timers.show) {
-                clearTimeout(timers.show);
-                timers.show = null;
-            }
+        _clearTimers = () => {
+            clearTimeout(this.timers.show);
+            clearTimeout(this.timers.hide);
         }
 
-
-        triggerNodes(val) {
-            if (val && typeof val === 'string') {
-                let nodes = [];
-                val.split(',').forEach((id) => {
-                    let anchors = document.querySelectorAll(id);
-                    if (anchors) {
-                        anchors.forEach((el) => {
-                            nodes.push(el)
-                        })
-                    }
-                });
-                return nodes;
-            };
-            return val;
-        }
-
-
-        /*
-         * The delegate node to which event listeners should be attached.
-         * This node should be an ancestor of all trigger nodes bound
-         * to the instance. By default the document is used.
+        /**
+         * Public method to completely remove all listeners and clean up the instance.
          */
-        setDelegate(val) {
-            let body = document.body;
-            return body.querySelector(val) || document.body;
+        destroy() {
+            this._hide();
+            this.delegate.removeEventListener('mouseover', this._handleMouseOver);
         }
     }
 
+    /**
+     * Scans the DOM for tooltip content and trigger elements, then initializes the Tooltip manager.
+     */
+    const initializeTooltips = () => {
+        const delegate = document.querySelector('.content') || document.body;
+        const contentMap = new Map();
 
-    let createTooltips = function () {
-        let tooltipTriggerIds,
-            tooltipContainer, tooltipId, i, j, tt, content = {},
-            tooltipContainerNodeList = document.querySelectorAll('.tooltips');
-        for (i = 0; i < tooltipContainerNodeList.length; i++) {
-            tooltipContainer = tooltipContainerNodeList[i].children;
-            for (j = 0; j < tooltipContainer.length; j++) {
-                if (tooltipContainer[j].id) {
-                    tooltipId = tooltipContainer[j].id.replace(/Tooltip$/, '');
-                    tooltipTriggerIds += ', #' + tooltipId;
-                    content[tooltipId] = tooltipContainer[j].innerHTML;
+        document.querySelectorAll('.tooltips > *[id]').forEach(contentEl => {
+            const triggerId = contentEl.id.replace(/Tooltip$/, '');
+            if (triggerId) {
+                const triggerEl = document.getElementById(triggerId);
+                if (triggerEl) {
+                    contentMap.set(triggerId, contentEl.innerHTML);
+                    triggerEl.classList.add(TRIGGER_CLASS);
                 }
             }
-        }
-        tt = new Tooltip({
-            content: content,
-            triggerNodes: tooltipTriggerIds,
-            zIndex: 2,
-            autoHideDelay: 60000,
-            delegate: ".content"
         });
 
-
-        L.ToolTips = tt;
+        if (contentMap.size > 0) {
+            L.ToolTips = new Tooltip({ delegate, contentMap });
+        }
     };
 
-    createTooltips();
+    initializeTooltips();
 
-    //reinitialize when content has changed
-    L.on("lane:new-content", function () {
-        L.on("lane:new-content", function () {
-            L.ToolTips.destructor();
-            createTooltips();
-        });
+    // Re-initialize when new content is loaded.
+    L.on("lane:new-content", () => {
+        L.ToolTips?.destroy();
+        initializeTooltips();
     });
 
 })();

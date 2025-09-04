@@ -15,7 +15,7 @@ describe('Lane Tooltip Test Case', () => {
 
         cy.get('.tooltip').should('be.not.exist');
 
-        cy.get('@tooltipTrigger').trigger('mouseenter');
+        cy.get('@tooltipTrigger').trigger('mouseover');
         cy.get('.tooltip').should('be.visible');
 
         cy.get('.tooltip')
@@ -29,11 +29,11 @@ describe('Lane Tooltip Test Case', () => {
 
     it('mouseover an element to show a tooltip, mouseout to hide it', () => {
 
-        cy.get('@tooltipTrigger').trigger('mouseenter');
+        cy.get('@tooltipTrigger').trigger('mouseover');
 
         cy.get('.tooltip').should('be.visible');
 
-        cy.get('@tooltipTrigger').trigger('mouseleave');
+        cy.get('@tooltipTrigger').trigger('mouseout');
 
         cy.get('.tooltip').should('not.be.exist');
     });
