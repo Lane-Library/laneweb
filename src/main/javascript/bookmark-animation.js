@@ -1,14 +1,27 @@
-(function() {
+(() => {
 
     "use strict";
 
-    // animate the favorites icon when bookmarks are added 
-    L.on("bookmarks:added", function() {
-        let favoritesIcon = document.querySelector('.favorites.dropdown .fa-bookmark');
+    // Animates favorites icon when a bookmark is added 
+
+    const favoritesIcon = Array.from(document.querySelectorAll('.favorites.dropdown .fa-bookmark'))
+        .find(el => el.offsetParent !== null);
+
+    // exit if favorites icon is not present and visible
+    if (!favoritesIcon) {
+        return;
+    }
+
+    const ANIMATION_DURATION = 2000;
+
+    const handleBookmarkAdded = () => {
         favoritesIcon.classList.add('shake');
-        setTimeout(function() {
+
+        setTimeout(() => {
             favoritesIcon.classList.remove('shake');
-        }, 2000);
-    });
+        }, ANIMATION_DURATION);
+    };
+
+    L.on("bookmarks:added", handleBookmarkAdded);
 
 })();
