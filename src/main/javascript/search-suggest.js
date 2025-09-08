@@ -23,6 +23,8 @@
                 return {
                     search: function (query) {
                         queryInput.value = query;
+                        queryInput.readOnly = true;
+                        L.searchIndicator.show();
                         form.submit();
                     }
                 };

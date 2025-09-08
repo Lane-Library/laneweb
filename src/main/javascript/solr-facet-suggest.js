@@ -13,7 +13,9 @@
                     searchTerm = input.dataset.searchterm,
                     facets = input.dataset.facets,
                     sourceBase = '/apps/solr/facet/suggest?q=' + searchTerm + '&contains={query}&facet=' + facet + '&facets=' + encodeURI(facets),
-                    suggest = new L.Suggest(input, sourceBase, 1),
+                    suggest = new L.Suggest(input, sourceBase, {
+                        minQueryLength: 1,
+                    }),
                     model = function (suggest, input) {
                         return {
                             suggest: suggest,
