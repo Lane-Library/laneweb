@@ -118,10 +118,6 @@
             this.tooltipElement.innerHTML = content;
             this.tooltipElement.style.zIndex = '1000';
 
-            // Add listeners to the tooltip itself to keep it alive when the user hovers over it.
-            this.tooltipElement.addEventListener('mouseenter', this._clearTimers);
-            this.tooltipElement.addEventListener('mouseleave', this._startHideTimer);
-
             document.body.appendChild(this.tooltipElement);
             this._position();
         }
