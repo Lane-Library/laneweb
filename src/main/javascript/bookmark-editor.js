@@ -127,7 +127,7 @@
             if (!isValid) return;
 
             if (this.bookmark) {
-                if (newLabel !== this.bookmark.getLabel() || newUrl !== this.bookmark.getUrl()) {
+                if (newLabel !== this.bookmark.label || newUrl !== this.bookmark.url) {
                     this.bookmark.setValues(newLabel, newUrl);
                     this._anchorElement.textContent = newLabel;
                     this._anchorElement.href = newUrl;
@@ -147,8 +147,8 @@
             this._labelInput.placeholder = "Name";
             this._urlInput.placeholder = "Location";
             if (this.bookmark) {
-                this._labelInput.value = this.bookmark.getLabel();
-                this._urlInput.value = this.bookmark.getUrl();
+                this._labelInput.value = this.bookmark.label;
+                this._urlInput.value = this.bookmark.url;
             } else {
                 this._labelInput.value = "";
                 this._urlInput.value = "";
@@ -159,8 +159,8 @@
          * Update the editors anchor text and url with the bookmark's label and url.
          */
         update() {
-            this._anchorElement.textContent = this.bookmark.getLabel();
-            this._anchorElement.href = this.bookmark.getUrl();
+            this._anchorElement.textContent = this.bookmark.label;
+            this._anchorElement.href = this.bookmark.url;
             this._truncateLabel();
         }
 

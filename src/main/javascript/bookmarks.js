@@ -133,7 +133,7 @@
 
         hasURL(url) {
             for (let i = 0; i < this._bookmarks.length; i++) {
-                if (url === this._bookmarks[i].getUrl()) {
+                if (url === this._bookmarks[i].url) {
                     return true;
                 }
             }
@@ -175,7 +175,7 @@
          * @param event {CustomEvent}
          */
         _defAddFn(event) {
-            let data = JSON.stringify({ label: event.bookmark.getLabel(), url: event.bookmark.getUrl() });
+            let data = JSON.stringify({ label: event.bookmark.label, url: event.bookmark.url });
             fetch(BASE_PATH + "/bookmarks", {
                 method: "POST",
                 headers: {
@@ -258,7 +258,7 @@
          * @param event {CustomEvent}
          */
         _defUpdateFn(event) {
-            let data = JSON.stringify({ position: event.position, label: event.bookmark.getLabel(), url: event.bookmark.getUrl() });
+            let data = JSON.stringify({ position: event.position, label: event.bookmark.label, url: event.bookmark.url });
             fetch(BASE_PATH + "/bookmarks", {
                 method: "PUT",
                 headers: {
@@ -307,7 +307,7 @@
             L.fire("tracker:trackableEvent", {
                 category: "lane:bookmarkAdd",
                 action: Model.get(Model.AUTH),
-                label: event.bookmark.getLabel()
+                label: event.bookmark.label
             });
         }
 

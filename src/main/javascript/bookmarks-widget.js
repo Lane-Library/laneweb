@@ -58,14 +58,14 @@
          * @param event {CustomEvent}
          */
         _bookmarkAdded(event) {
-            let url = event.bookmark.getUrl();
+            let url = event.bookmark.url;
             if (PROXY_LINKS && url.match(/^http[s]?:/)) {
                 url = BASE_PATH + "/apps/proxy/credential?url=" + url;
             }
             const li = document.createElement('li');
             const a = document.createElement('a');
             a.href = url;
-            a.textContent = event.bookmark.getLabel();
+            a.textContent = event.bookmark.label;
             li.appendChild(a);
             this.srcNode.prepend(li);
             this.syncUI();
@@ -114,8 +114,8 @@
         _bookmarkUpdated(event) {
             let bookmark = this.bookmarks.getBookmark(event.position),
                 anchor = this.srcNode.querySelectorAll("li").item(event.position).querySelector("a");
-            anchor.innerHTML = bookmark.getLabel();
-            anchor.href = bookmark.getUrl();
+            anchor.innerHTML = bookmark.label;
+            anchor.href = bookmark.url;
             this.syncUI();
         }
 
