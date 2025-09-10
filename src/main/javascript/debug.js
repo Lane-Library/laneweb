@@ -1,17 +1,12 @@
-(function () {
-
-    /*
-     * This attaches the Y object with all dependencies to the window
-     * so we can use it object globally.  It also creates the L object.
-     */
-
+{
 
     "use strict";
 
+    // Ensure the global L namespace exists
+    window.L = window.L || {};
 
-    window.L = {};
-
-    let i, laneJavascript = [
+    /** @type {string[]} */
+    const laneJavascript = [
         "lane.js",
         "util.js",
         "menu.js",
@@ -73,39 +68,45 @@
         "sfp-form.js"
     ];
 
-    //Model doesn't exist yet, get basePath by hand:
-    let basePath = "", errorHandler;
+    // Model doesn't exist yet, get basePath by hand
+    const basePath = window.model?.["base-path"] ?? "";
 
-    if (window.model) {
-        basePath = window.model["base-path"] || basePath;
-    }
+    /**
+     * Load a single script and resolve when it’s ready.
+     *
+     * @param {string} src - Full URL of the script to load
+     * @returns {Promise<void>}
+     */
+    const loadScript = (src) => {
+        return new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = src;
+            script.onload = () => resolve();
+            script.onerror = () => reject(new Error(`Failed to load script: ${src}`));
+            document.head.appendChild(script);
+        });
+    };
 
-    errorHandler = function (err) {
-        if (err) {
-            console.log('Error loading JS: ' + err[0].error, 'error');
-            return;
+    /**
+     * Sequentially load an array of script filenames.
+     *
+     * @param {string[]} files - Filenames relative to the JS resources dir
+     * @returns {Promise<void>}
+     */
+    const loadAllScriptsSequentially = async () => {
+        // Build the base URL once, taking Cypress test path into account.
+        let url = `${basePath}/resources/javascript/`;
+        if (window.location.pathname.startsWith('/cypress-test')) {
+            url += 'instrumented/';
+        }
+
+        for (const file of laneJavascript) {
+            const scriptSrc = `${url}${file}`;
+            await loadScript(scriptSrc);
         }
     };
 
-
-    function loadScriptsSequentially(scripts) {
-        if (scripts.length === 0) {
-            return;
-        }
-
-        const script = document.createElement('script');
-        let path = basePath + "/resources/javascript/";
-        //cypress test path is different from the normal path to the intrumented javascript files
-        if (window.location.pathname.startsWith('/cypress-test')) {
-            path = path.concat("instrumented/");
-        }
-        script.src = path + scripts[0];
-        script.onload = () => {
-            loadScriptsSequentially(scripts.slice(1));
-        };
-        document.head.appendChild(script);
-    }
-
-    loadScriptsSequentially(laneJavascript);
-
-})();
+    loadAllScriptsSequentially().catch((err) => {
+        console.error(err);
+    });
+}
