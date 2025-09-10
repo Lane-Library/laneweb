@@ -10,7 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.rest.BasicAuthRESTService;
+import edu.stanford.irt.laneweb.rest.OauthRESTService;
 import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.status.ApplicationStatus;
 
@@ -22,9 +22,9 @@ public class RESTMetaSearchService implements MetaSearchService {
 
     private URI metaSearchURI;
 
-    private BasicAuthRESTService restService;
+    private OauthRESTService restService;
 
-    public RESTMetaSearchService(final URI metaSearchURL, final BasicAuthRESTService restService) {
+    public RESTMetaSearchService(final URI metaSearchURL, final OauthRESTService restService) {
         this.metaSearchURI = metaSearchURL;
         this.restService = restService;
     }
