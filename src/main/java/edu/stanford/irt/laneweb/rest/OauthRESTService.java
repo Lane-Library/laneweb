@@ -53,13 +53,8 @@ public class OauthRESTService {
         try {
             jsonResponse = mapper.readTree(response.getBody());
             this.accessToken = jsonResponse.get("access_token").asText();
-            System.out.println(
-
-                    "\n\n**********************\n\naccess token: " + this.accessToken
-                            + "\n\n***********************\n\n");
-
         } catch (Exception e) {
-            throw new LanewebException(e);            
+            throw new LanewebException(e);
         }
     }
 
