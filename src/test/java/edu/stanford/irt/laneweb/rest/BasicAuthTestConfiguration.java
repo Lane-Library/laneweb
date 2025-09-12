@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.web.client.RestClient;
 
 @Configuration @Profile("test")
-public class BaiscAuthConfiguration {
+public class BasicAuthTestConfiguration {
 
     @Bean
     BasicAuthRESTService basicAuthRestService(final RestClient restClient) {
