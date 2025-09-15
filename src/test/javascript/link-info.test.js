@@ -28,14 +28,13 @@ test('proxy login link', () => {
 
 test('proxy links', () => {
     const anchor = document.createElement('a');
-    anchor.href = 'http://laneproxy.stanford.edu/login?user=ditenus&amp;ticket=tekcit&amp;url=http://www.nejm.org/';
+    anchor.href = 'http://laneproxy.stanford.edu/login?user=ditenus&ticket=tekcit&url=http://www.nejm.org/';
     let linkInfo = new L.LinkInfo(anchor);
     expect(linkInfo.proxy).toBe(true);
-    anchor.href = 'https://login.laneproxy.stanford.edu/login?user=ditenus&amp;ticket=tekcit&amp;url=http://www.nejm.org/';
+    anchor.href = 'https://login.laneproxy.stanford.edu/login?user=ditenus&ticket=tekcit&url=http://www.nejm.org/';
     linkInfo = new L.LinkInfo(anchor);
     expect(linkInfo.proxy).toBe(true);
 });
-
 
 test('link url', () => {
     const anchor = document.createElement('a');
@@ -47,12 +46,34 @@ test('link url', () => {
 
 test('proxy url', () => {
     const anchor = document.createElement('a');
-    anchor.href = 'http://laneproxy.stanford.edu/login?user=ditenus&amp;ticket=tekcit&amp;url=http://www.nejm.org/';
+    anchor.href = 'http://laneproxy.stanford.edu/login?user=ditenus&ticket=tekcit&url=http://www.nejm.org/';
     let linkInfo = new L.LinkInfo(anchor);
     expect(linkInfo.url).toBe('http://www.nejm.org/');
-    anchor.href = 'https://login.laneproxy.stanford.edu/login?user=ditenus&amp;ticket=tekcit&amp;url=https://www.nejm.org/';
+    anchor.href = 'https://login.laneproxy.stanford.edu/login?user=ditenus&ticket=tekcit&url=https://www.nejm.org/';
     linkInfo = new L.LinkInfo(anchor);
     expect(linkInfo.url).toBe('https://www.nejm.org/');
+});
+
+test('proxy missing url param', () => {
+    const anchor = document.createElement('a');
+    anchor.href = 'http://laneproxy.stanford.edu/login?user=ditenus&ticket=tekcit&missingurl';
+    let linkInfo = new L.LinkInfo(anchor);
+    expect(linkInfo.url).toBe('http://laneproxy.stanford.edu/login?user=ditenus&ticket=tekcit&missingurl');
+    anchor.href = 'https://login.laneproxy.stanford.edu/login?user=ditenus&ticket=tekcit';
+    linkInfo = new L.LinkInfo(anchor);
+    expect(linkInfo.url).toBe('https://login.laneproxy.stanford.edu/login?user=ditenus&ticket=tekcit');
+});
+
+test('proxy bad url param', () => {
+    const anchor = document.createElement('a');
+    anchor.href = 'http://laneproxy.stanford.edu/login?user=ditenus&ticket=tekcit&url=bad url';
+    let linkInfo = new L.LinkInfo(anchor);
+    expect(linkInfo.url).toBe('bad url');
+    expect(linkInfo.trackingData.host).toBe('invalid-proxied-url');
+    expect(linkInfo.trackingData.path).toBe('/');
+    expect(linkInfo.trackingData.query).toBe('');
+    expect(linkInfo.trackingData.title).toBe('unknown');
+    expect(linkInfo.trackingData.external).toBe(true);
 });
 
 test('link titles where @rel attributes contain expected titles', () => {
@@ -123,5 +144,16 @@ test('link tracking data', () => {
   expect(linkInfo.trackingData.path).toBe('/path2.jsp');
   expect(linkInfo.trackingData.query).toBe('');
   expect(linkInfo.trackingData.title).toBe('tracking title');
+  expect(linkInfo.trackingData.external).toBe(true);
+});
+
+test('link tracking data bad proxy login url', () => {
+  const anchor = document.createElement('a');
+  anchor.href = '/secure/apps/proxy/credential?url=\\';
+  let linkInfo = new L.LinkInfo(anchor);
+  expect(linkInfo.trackingData.host).toBe('invalid-proxied-url');
+  expect(linkInfo.trackingData.path).toBe('/');
+  expect(linkInfo.trackingData.query).toBe('');
+  expect(linkInfo.trackingData.title).toBe('unknown');
   expect(linkInfo.trackingData.external).toBe(true);
 });
