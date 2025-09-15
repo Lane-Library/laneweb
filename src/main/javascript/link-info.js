@@ -2,173 +2,132 @@
  * LinkInfo is a wrapper for anchor nodes to provide
  * valuable information about such things as proxy status, etc.
  */
-(function() {
+(() => {
 
     "use strict";
 
-    let PROXY_HOST_PATTERN = "^(?:login\\.)?laneproxy.stanford.edu$",
-        PROXY_LOGIN_PATH = "/login",
-        basePath = L.Model.get("base-path") || "",
-        documentHostName = location.hostname,
-        loginPath = basePath + "/secure/apps/proxy/credential",
-        linkInfo = function(node) {
-            this.node = node;
-        };
+    const PROXY_HOST_REGEX = /^(?:login\.)?laneproxy\.stanford\.edu$/;
+    const PROXY_LOGIN_PATH = "/login";
+    const BASE_PATH = L.Model.get("base-path") || "";
+    const DOCUMENT_HOSTNAME = window.location.hostname;
+    const LOGIN_PATH = `${BASE_PATH}/secure/apps/proxy/credential`;
+    class LinkInfo {
 
-    linkInfo.prototype = {
+        /**
+         * The raw anchor DOM node.
+         * @private
+         * @type {HTMLAnchorElement}
+         */
+        #node;
 
-        _isLocalPopup : function(node) {
-            let rel = node.rel;
-            return rel && rel.indexOf("popup local") === 0;
-        },
+        /**
+         * @param {HTMLAnchorElement} node The anchor element to wrap.
+         */
+        constructor(node) {
+            this.#node = node;
+        }
 
-        _getTitleFromImg : function() {
-            let i, title, img = this.node.querySelectorAll('img');
-            for (i = 0; i < img.length; i++) {
-                if (img.item(i).alt) {
-                    title = img.item(i).alt;
-                } else if (img.item(i).src) {
-                    title = img.item(i).src;
-                }
-                if (title) {
-                    break;
-                }
+        /** @returns {boolean} */
+        #isLocalPopup() {
+            return this.#node.rel?.startsWith("popup local") ?? false;
+        }
+
+        /** @returns {string|undefined} */
+        #getTitleFromImg() {
+            const img = this.#node.querySelector('img[alt], img[src]');
+            return img?.alt || img?.src;
+        }
+
+        /** The hostname of the link, stripping any port number. */
+        get linkHost() {
+            return this.#node.hostname || DOCUMENT_HOSTNAME;
+        }
+
+        /** Is the link to a local, non-proxied resource? */
+        get local() {
+            return this.linkHost === DOCUMENT_HOSTNAME && !this.proxyLogin;
+        }
+
+        /** The full path of the link, ensuring it starts with a '/'. */
+        get path() {
+            const path = this.#node.pathname || window.location.pathname;
+            return path.startsWith('/') ? path : `/${path}`;
+        }
+
+        /** Is the link a proxy link? */
+        get proxy() {
+            return PROXY_HOST_REGEX.test(this.linkHost) && this.path === PROXY_LOGIN_PATH;
+        }
+
+        /** Is the link a proxy login link? */
+        get proxyLogin() {
+            return this.linkHost === DOCUMENT_HOSTNAME && this.path === LOGIN_PATH;
+        }
+
+        /** The query string of the link. */
+        get query() {
+            return this.local ? this.#node.search : "";
+        }
+
+        /** A descriptive title for the link, derived from various link attributes. */
+        get title() {
+            let title = this.#node.title
+                || this.#node.alt
+                || this.#getTitleFromImg()
+                || this.#node.textContent
+                || 'unknown';
+            if (this.#isLocalPopup()) {
+                title = `YUI Pop-up [local]: ${title}`;
             }
+            title = title.trim().replace(/\s+/g, ' ');
             return title;
         }
-    };
 
-    Object.defineProperties(linkInfo.prototype, {
-        linkHost : {
-            writeable: false,
-            get: function() {
-                let host = this.node.hostname;
-                host = host || documentHostName;
-                if (host.indexOf(":") > -1) {
-                    host = host.substring(0, host.indexOf(":"));
-                }
-                return host;
-            }
-        },
-        local : {
-            writeable: false,
-            get: function() {
-                return this.linkHost === documentHostName ? !this.proxyLogin : false;
-            }
-        },
-        path : {
-            writeable: false,
-            get: function() {
-                let path = this.node.pathname;
-                path = path === undefined || path === "" ? location.pathname : path;
-                return path.indexOf("/") === 0 ? path : "/" + path;
-            }
-        },
-        proxy : {
-            writeable: false,
-            get: function() {
-                return this.linkHost.match(PROXY_HOST_PATTERN) && this.path === PROXY_LOGIN_PATH;
-            }
-        },
-        proxyLogin : {
-            writeable: false,
-            get: function() {
-                if (this.linkHost !== documentHostName) {
-                    return false;
-                } else {
-                    return this.path === loginPath;
-                }
-            }
-        },
-        query : {
-            writeable: false,
-            get: function() {
-                if (this.local) {
-                    return this.node.search;
-                } else {
-                    //TODO: implement query for external links.
-                    return "";
-                }
-            }
-        },
-        title : {
-            writeable: false,
-            get: function() {
-                //if there is a title attribute, use that.
-                let node = this.node, title = node.title;
-                //next try alt attribute.
-                if (!title) {
-                    title = node.alt;
-                }
-                //next look for alt or src attributes in any child img.
-                if (!title) {
-                    title = this._getTitleFromImg(node);
-                }
-                //next get the text content before any nested markup
-                if (!title) {
-                    title = node.textContent;
-                }
-                if (!title) {
-                    title = node.innerText;
-                }
-                //finally:
-                if (!title) {
-                    title = 'unknown';
-                }
-                //if there is rel="popup local" then add "pop-up" to the title
-                if (this._isLocalPopup(node)) {
-                    title = 'YUI Pop-up [local]: ' + title;
-                }
-                title = title.replace(/\s+/g, ' ').replace(/^\s|\s$/g, '');
-                return title;
-
-            }
-        },
-        trackable : {
-            writeable: false,
-            get: function() {
-                return !(this.local && (/\.html$/).test(this.path));
-            }
-        },
-        trackingData : {
-            writeable: false,
-            get: function() {
-                let host, path, query, title, external;
-                if ( this.proxy || this.proxyLogin) {
-                    host = this.url;
-                    host = host.substring(host.indexOf("//") + 2);
-                    if (host.indexOf("/") > -1) {
-                        path = host.substring(host.indexOf("/"));
-                        host = host.substring(0, host.indexOf("/"));
-                    }
-                } else {
-                    host = this.linkHost;
-                    path = this.path;
-                }
-                title = this.title;
-                external = !this.local;
-                query = external ? "" : location.search;
-                return {
-                    host: host,
-                    path: path,
-                    query: query,
-                    title: title,
-                    external: external
-                };
-            }
-        },
-        url : {
-            writeable: false,
-            get: function() {
-                let href = this.node.href;
-                if (this.proxy || this.proxyLogin) {
-                    href = href.substring(href.indexOf("url=") + 4);
-                } 
-                return href;
-            }
+        /** Should this link be tracked? (e.g., not a simple link to a local .html file) */
+        get trackable() {
+            return !(this.local && /\.html$/.test(this.path));
         }
-    });
 
-    L.LinkInfo = linkInfo;
+        /** An object containing structured data for analytics tracking. */
+        get trackingData() {
+            let host = this.linkHost, path = this.path;
+            if (this.proxy || this.proxyLogin) {
+                try {
+                    const proxiedUrl = new URL(this.url);
+                    host = proxiedUrl.hostname;
+                    path = proxiedUrl.pathname;
+                } catch (e) {
+                    // Handle cases where the proxied URL is invalid.
+                    host = 'invalid-proxied-url';
+                    path = '/';
+                }
+            }
+
+            const title = this.title;
+            const external = !this.local;
+            const query = external ? "" : this.#node.search;
+
+            return {
+                host,
+                path,
+                query,
+                title,
+                external
+            };
+        }
+
+        /** The "real" URL, with the proxy part removed if present. */
+        get url() {
+            let href = this.#node.href;
+            if (this.proxy || this.proxyLogin) {
+                // href = href.substring(href.indexOf("url=") + 4);
+                const params = new URL(href).searchParams;
+                return params.get('url') || href;
+            }
+            return href;
+        }
+    }
+
+    L.LinkInfo = LinkInfo;
 
 })();
