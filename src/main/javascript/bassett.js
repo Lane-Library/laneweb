@@ -45,7 +45,7 @@
         const url = `${basePath}/plain/biomed-resources/bassett/raw${pathSegment}`;
         try {
             const response = await fetch(url);
-            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status} ${response.statusText}`);
 
             bassettContent.innerHTML = await response.text();
 
