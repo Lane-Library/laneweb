@@ -1,134 +1,168 @@
-(function () {
+(() => {
 
     "use strict";
 
+    /**
+     * Manages a single, draggable, in-page popup element.
+     * Also provides a static utility to open new browser windows.
+     */
     class Popup {
-        constructor() {
+        #popupElement = null;
+        #offsetX = 0;
+        #offsetY = 0;
+
+        #handleDragStart = (event) => {
+            // Calculate the offset from the cursor to the top-left of the element.
+            this.#offsetX = event.clientX - this.#popupElement.offsetLeft;
+            this.#offsetY = event.clientY - this.#popupElement.offsetTop;
+
+            document.addEventListener('dragover', this.#handleDragOver);
+            document.addEventListener('drop', this.#handleDrop);
         };
 
-        maybeCreatePopup(title, body, width, xy) {
-            if (width === "0px" || width === "auto") {
-                width = 350;
-            }
-            let titleDiv, contentDiv, bodyDiv, closedDiv;
-            this.clearPopup();
-            this.popupWindow = document.createElement('div');
-            this.popupWindow.classList.add("popup");
-            contentDiv = document.createElement('div');
-            contentDiv.classList.add("popup-content");
-            titleDiv = document.createElement('div');
-            titleDiv.classList.add("widget-hd");
-            titleDiv.innerHTML = title;
-            this.popupWindow.appendChild(titleDiv);
-            bodyDiv = document.createElement('div');
-            bodyDiv.classList.add("widget-bd");
-            bodyDiv.innerHTML = body;
-            contentDiv.appendChild(titleDiv);
-            contentDiv.appendChild(bodyDiv);
-            this.popupWindow.appendChild(contentDiv);
-            this.popupWindow.style.width = width + "px";
-            this.popupWindow.style.position = "absolute";
-            this.popupWindow.style.maxWidth = "90%";
-
-            closedDiv = document.createElement('div');
-            closedDiv.classList.add("fa-close")
-            closedDiv.classList.add("fa");
-            closedDiv.classList.add("close");
-            this.popupWindow.appendChild(closedDiv);
-
-            document.body.appendChild(this.popupWindow);
-            this.popupWindow.draggable = true;
-            let xlocation = this.calWidth(xy[0])
-            this.popupWindow.style.left = xlocation + "px ";
-            this.popupWindow.style.top = xy[1] + "px ";
-
-            closedDiv.addEventListener("click", () => {
-                this.clearPopup();
-            });
-            this.setDraggable();
-            this.setDropZone();
+        #handleDragOver = (event) => {
+            // This is necessary to allow a 'drop' event to fire.
+            event.preventDefault();
         };
 
-        clearPopup() {
-            document.body.querySelectorAll(".popup").forEach(popup => {
-                document.body.removeChild(popup);
-            })
+        #handleDrop = (event) => {
+            event.preventDefault();
+            // Move the popup to the final drop position.
+            this.#popupElement.style.left = `${event.clientX - this.#offsetX}px`;
+            this.#popupElement.style.top = `${event.clientY - this.#offsetY}px`;
+            // clean up drag-and-drop listeners
+            document.removeEventListener('dragover', this.#handleDragOver);
+            document.removeEventListener('drop', this.#handleDrop);
+        };
+
+        /**
+         * Hides and removes the current in-page popup from the DOM.
+         */
+        hide() {
+            this.#popupElement?.remove();
+            this.#popupElement = null;
+            // clean up drag-and-drop listeners
+            document.removeEventListener('dragover', this.#handleDragOver);
+            document.removeEventListener('drop', this.#handleDrop);
         }
 
-        setDraggable() {
-            this.popupWindow.addEventListener("dragstart", (event) => {
-                let target = event.target;
-                this.offsetX = event.clientX - target.offsetLeft;
-                this.offsetY = event.clientY - target.offsetTop;
-            });
-            this.popupWindow.addEventListener("drag", (event) => {
-                event.preventDefault();
-                let target = event.target;
-                target.style.left = event.clientX - this.offsetX + 'px';
-                target.style.top = event.clientY - this.offsetY + 'px';
-            })
+        /**
+         * Creates and displays a new in-page popup, replacing any existing one.
+         * @param {string} title - The title text for the popup header.
+         * @param {string} body - The HTML content for the popup body.
+         * @param {string} width - The desired width (e.g., "400px", "auto").
+         * @param {{x: number, y: number}} position - The initial coordinates.
+         */
+        show(title, body, width, position) {
+            // show only one popup at a time
+            this.hide();
+
+            const popupWidth = (width === "0px" || width === "auto") ? 350 : parseInt(width, 10);
+
+            const template = `
+                <div class="popup-content">
+                    <div class="widget-hd">${title}</div>
+                    <div class="widget-bd">${body}</div>
+                </div>
+                <div class="fa fa-close close" title="Close"></div>
+            `;
+
+            this.#popupElement = document.createElement('div');
+            this.#popupElement.className = 'popup';
+            this.#popupElement.innerHTML = template;
+            this.#popupElement.draggable = true;
+            this.#popupElement.style.cssText = `
+                width: ${popupWidth}px;
+                max-width: 90%;
+                position: absolute;
+                left: ${position.x}px;
+                top: ${position.y}px;
+            `;
+
+            document.body.appendChild(this.#popupElement);
+            this.#ensureInBounds();
+
+            this.#popupElement.querySelector('.close').addEventListener('click', () => this.hide());
+            this.#popupElement.addEventListener('dragstart', this.#handleDragStart);
         }
 
-        setDropZone() {
-            let content = document.body;
-            content.addEventListener("dragover", (event) => { event.preventDefault(); });
-            content.addEventListener("drop", (event) => { event.preventDefault(); });
-            content.addEventListener("dropend", (event) => { event.preventDefault(); });
-        }
-
-        calWidth(x) {
-            let windowWidth = this.popupWindow.offsetWidth,
-                screenWidth = document.body.clientWidth;
-            if (x + windowWidth > screenWidth) {
-                x = screenWidth - 20 - windowWidth;
+        /**
+         * Adjusts the popup's horizontal position to keep it within the viewport.
+         */
+        #ensureInBounds() {
+            const popupRect = this.#popupElement.getBoundingClientRect();
+            const screenWidth = document.documentElement.clientWidth;
+            if (popupRect.right > screenWidth) {
+                const newLeft = screenWidth - popupRect.width - 20; // 20px buffer
+                this.#popupElement.style.left = `${Math.max(0, newLeft)}px`;
             }
-            return x;
         }
 
-        showWindow(url, type, width, height) {
-            let strWidth = width, popupWindow,
-                strHeight = height;
-            if (popupWindow !== undefined && !popupWindow.closed) {
-                popupWindow.close();
-            }
+        /**
+         * A static utility method to open a new browser window.
+         * It does not rely on any instance state.
+         * @param {string} url - The URL to open.
+         * @param {string} type - The type of window ('fullscreen', 'standard', etc.).
+         * @param {string} width - The desired width.
+         * @param {string} height - The desired height.
+         */
+        static showBrowserPopup(url, type, width, height) {
+            const toolbars = {
+                'standard': 'resizable,toolbar=yes,location=yes,scrollbars=yes,menubar=yes',
+                'console': 'resizable,toolbar=no,location=no,scrollbars=no',
+                'console-with-scrollbars': 'resizable,toolbar=no,location=no,scrollbars=yes',
+                'fullscreen': 'resizable,toolbar=no,location=no,scrollbars=no'
+            };
+
+            let tools = toolbars[type] || '';
+            let finalWidth = width;
+            let finalHeight = height;
+
             if (type === 'fullscreen') {
-                strWidth = screen.availWidth;
-                strHeight = screen.availHeight;
+                finalWidth = window.screen.availWidth;
+                finalHeight = window.screen.availHeight;
             }
-            let tools = '';
-            if (type === 'standard') {
-                tools = 'resizable,toolbar=yes,location=yes,scrollbars=yes,menubar=yes';
+
+            if (finalWidth && finalHeight) {
+                tools += `,width=${finalWidth},height=${finalHeight}`;
             }
-            if (type === 'console' || type === 'fullscreen') {
-                tools = 'resizable,toolbar=no,location=no,scrollbars=no';
-            }
-            if (type === 'console-with-scrollbars') {
-                tools = 'resizable,toolbar=no,location=no,scrollbars=yes';
-            }
-            if (strWidth && strHeight) {
-                tools += ',width=' + strWidth + ',height=' + strHeight;
-            }
-            popupWindow = window.open(url, 'newWin', tools);
-            popupWindow.focus();
-        };
+
+            const newWindow = window.open(url, 'newWin', tools);
+            newWindow?.focus();
+        }
     }
 
-    document.addEventListener("click", function (event) {
-        let args, popupElement, title, body,
-            anchor = event.target.closest("a"),
-            rel = anchor && anchor.rel;
-        if (rel && rel.indexOf("popup") === 0) {
-            event.preventDefault();
-            let popup = new Popup();
-            args = rel.split(" ");
-            if (args[1] === "local") {
-                popupElement = document.querySelector('#' + args[2]);
-                title = popupElement && popupElement.title ? popupElement.title : '';
-                body = popupElement ? popupElement.innerHTML : '';
-                popup.maybeCreatePopup(title, body, popupElement.style.width, [event.pageX, event.pageY]);
-            } else {
-                popup.showWindow(anchor.href, args[1], args[2], args[3]);
-            }
+    // Singleton Popup Manager
+    const popupManager = new Popup();
+
+    // --- Global Event Handling ---
+
+    document.addEventListener("click", (event) => {
+        const anchor = event.target.closest("a");
+
+        if (!anchor?.rel?.startsWith("popup")) {
+            return;
+        }
+
+        event.preventDefault();
+
+        // parse the 'rel' attribute
+        const [, type, ...args] = anchor.rel.split(" ");
+
+        if (type === "local") {
+            const [popupId] = args;
+            const popupElement = document.querySelector(`#${popupId}`);
+            if (!popupElement) return;
+
+            const title = popupElement.title || '';
+            const body = popupElement.innerHTML;
+            const width = popupElement.style.width;
+
+            // Call the method on our single popupManager instance.
+            popupManager.show(title, body, width, { x: event.pageX, y: event.pageY });
+        } else {
+            // Call the static method directly on the class.
+            Popup.showBrowserPopup(anchor.href, type, ...args);
         }
     });
 })();
