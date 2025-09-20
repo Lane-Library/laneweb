@@ -20,7 +20,6 @@ const bundles = [
             'src/main/javascript/lightbox.js',
             'src/main/javascript/guides.js',
             'src/main/javascript/link-info.js',
-            'src/main/javascript/bookmarklet.js',
             'src/main/javascript/persistent-login.js',
             'src/main/javascript/search-indicator.js',
             'src/main/javascript/bassett.js',
