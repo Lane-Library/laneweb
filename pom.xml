@@ -4,10 +4,10 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>182</version>
+        <version>183</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.15.11-SNAPSHOT</version>
+    <version>3.15.13-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -71,7 +71,7 @@
         <dependency>
             <groupId>org.springframework.session</groupId>
             <artifactId>spring-session-data-redis</artifactId>
-            <version>3.5.1</version>
+            <version>3.5.2</version>
             <!--<version>${org.springframework.boot.version}</version>-->
         </dependency>
         <dependency>
@@ -90,7 +90,7 @@
         <dependency>
             <artifactId>commons-codec</artifactId>
             <groupId>commons-codec</groupId>
-            <version>1.18.0</version>
+            <version>1.19.0</version>
         </dependency>
         <dependency>
             <artifactId>jackson-databind</artifactId>
@@ -111,7 +111,7 @@
             <artifactId>Saxon-HE</artifactId>
             <groupId>net.sf.saxon</groupId>
             <scope>runtime</scope>
-            <version>12.7</version>
+            <version>12.8</version>
             <exclusions>
                 <exclusion>
                     <groupId>xml-apis</groupId>
@@ -122,7 +122,7 @@
         <dependency>
             <artifactId>search-core</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>3.2.7</version>
+            <version>4.0.0</version>
         </dependency>
         <dependency>
             <artifactId>slf4j-api</artifactId>
@@ -215,7 +215,7 @@
         <dependency>
             <groupId>org.ehcache</groupId>
             <artifactId>ehcache</artifactId>
-            <version>3.10.8</version>
+            <version>3.11.1</version>
             <classifier>jakarta</classifier>
             <scope>runtime</scope>
             <!-- Added exclusion because there was some warning during the mvn package  -->
@@ -264,7 +264,7 @@
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>1.21.1</version>
+            <version>1.21.3</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

@@ -34,15 +34,14 @@ public class ResultDeserializerTest {
         Result result = this.objectMapper.readValue(getClass().getResourceAsStream("describe-pubmed.json"),
                 Result.class);
         assertNotNull(result);
-        assertEquals("description", result.getId());
-        assertEquals("description", result.getDescription());
-        assertEquals("none", result.getURL());
+        assertEquals("631585061", result.getId());
+        assertEquals("Lane Metasearch - Version:1.2.92-SNAPSHOT", result.getDescription());
         assertEquals(1, result.getChildren().size());
         assertNull(result.getException());
         assertNull(result.getHits());
         assertEquals("rubella", result.getQuery().getSearchText());
         assertNull(result.getStatus());
-        assertEquals("null", result.getTime());
+        assertNull(null, result.getTime());
         for (Result child : result.getChildren()) {
             assertEquals("pubmed", child.getId());
             assertEquals("PubMed", child.getDescription());
@@ -51,10 +50,10 @@ public class ResultDeserializerTest {
                     child.getURL());
             assertEquals(1, child.getChildren().size());
             assertNull(child.getException());
-            assertNull(child.getHits());
+            assertEquals("-1", child.getHits());
             assertEquals("rubella", child.getQuery().getSearchText());
             assertNull(child.getStatus());
-            assertEquals(result.getTime(), child.getTime());
+            assertEquals("-1", child.getTime());
             for (Result grandchild : child.getChildren()) {
                 assertEquals("pubmed", grandchild.getId());
                 assertEquals("PubMed", grandchild.getDescription());
@@ -63,10 +62,9 @@ public class ResultDeserializerTest {
                         grandchild.getURL());
                 assertEquals(0, grandchild.getChildren().size());
                 assertNull(grandchild.getException());
-                assertNull(grandchild.getHits());
-                assertNull(grandchild.getQuery());
+                assertEquals("0", grandchild.getHits());
+                assertEquals("rubella", grandchild.getQuery().getSearchText());
                 assertNull(grandchild.getStatus());
-                assertEquals(result.getTime(), grandchild.getTime());
             }
         }
     }
@@ -76,41 +74,40 @@ public class ResultDeserializerTest {
         Result result = this.objectMapper.readValue(getClass().getResourceAsStream("search-aafp_patients.json"),
                 Result.class);
         assertNotNull(result);
-        assertEquals("2069082541", result.getId());
-        assertEquals("metasearch", result.getDescription());
-        assertEquals("none", result.getURL());
+        assertEquals("631585061", result.getId());
+        assertEquals("Lane Metasearch - Version:1.2.92-SNAPSHOT", result.getDescription());
         assertEquals(1, result.getChildren().size());
         assertNull(result.getException());
         assertNull(result.getHits());
-        assertEquals("elephant", result.getQuery().getSearchText());
+        assertEquals("lupus", result.getQuery().getSearchText());
         assertEquals(SearchStatus.SUCCESSFUL, result.getStatus());
-        assertEquals("null", result.getTime());
         for (Result child : result.getChildren()) {
             assertEquals("aafp_patients", child.getId());
             assertEquals("AAFP familydoctor.org", child.getDescription());
-            assertEquals("http://s.aafp.org/?q=elephant&q1=&x1=", child.getURL());
+            assertEquals("https://www.aafp.org/global-search.html?#q=lupus&t=All&sort=relevancy", child.getURL());
             assertEquals(1, child.getChildren().size());
             assertNull(child.getException());
-            assertEquals("29", child.getHits());
-            assertEquals("elephant", child.getQuery().getSearchText());
+            assertEquals("417", child.getHits());
+            assertEquals("lupus", child.getQuery().getSearchText());
             assertEquals(SearchStatus.SUCCESSFUL, child.getStatus());
-            assertEquals("960", child.getTime());
+            assertEquals("8648", child.getTime());
             for (Result grandchild : child.getChildren()) {
                 assertEquals("aafp_patients", grandchild.getId());
                 assertEquals("AAFP familydoctor.org", grandchild.getDescription());
-                assertEquals("http://s.aafp.org/?q=elephant&q1=&x1=", grandchild.getURL());
-                assertEquals(25, grandchild.getChildren().size());
+                assertEquals("https://www.aafp.org/global-search.html?#q=lupus&t=All&sort=relevancy",
+                        grandchild.getURL());
+                assertEquals(10, grandchild.getChildren().size());
                 assertNull(grandchild.getException());
-                assertEquals("29", grandchild.getHits());
-                assertNull(grandchild.getQuery());
+                assertEquals("417", grandchild.getHits());
+                assertEquals("lupus", grandchild.getQuery().getSearchText());
                 assertEquals(SearchStatus.SUCCESSFUL, grandchild.getStatus());
-                assertEquals(result.getTime(), grandchild.getTime());
+                assertEquals(child.getTime(), grandchild.getTime());
                 ContentResult content = (ContentResult) grandchild.getChildren().stream().reduce((a, b) -> b)
                         .orElse(null);
                 assertNull(content.getAuthor());
                 assertNull(content.getContentId());
-                assertEquals(13, content.getDescription().length());
-                assertEquals("aafp_patients_content_25", content.getId());
+                assertEquals(196, content.getDescription().length());
+                assertEquals("content-9", content.getId());
                 assertEquals("", content.getPublicationText());
             }
         }
@@ -120,15 +117,13 @@ public class ResultDeserializerTest {
     public void testSearchMMBIDDeserialize() throws IOException {
         Result result = this.objectMapper.readValue(getClass().getResourceAsStream("search-mmbid.json"), Result.class);
         assertNotNull(result);
-        assertEquals("2069082541", result.getId());
-        assertEquals("metasearch", result.getDescription());
-        assertEquals("none", result.getURL());
+        assertEquals("631585061", result.getId());
+        assertEquals("Lane Metasearch - Version:1.2.92-SNAPSHOT", result.getDescription());
         assertEquals(1, result.getChildren().size());
         assertNull(result.getException());
         assertNull(result.getHits());
         assertEquals("rubella", result.getQuery().getSearchText());
         assertEquals(SearchStatus.SUCCESSFUL, result.getStatus());
-        assertEquals("null", result.getTime());
         for (Result child : result.getChildren()) {
             assertEquals("mmbid", child.getId());
             assertEquals("Metabolic & Molecular Bases of Inherited Disease", child.getDescription());
@@ -146,9 +141,9 @@ public class ResultDeserializerTest {
                 assertEquals(0, grandchild.getChildren().size());
                 assertNull(grandchild.getException());
                 assertEquals("12", grandchild.getHits());
-                assertNull(grandchild.getQuery());
+                assertEquals("rubella", grandchild.getQuery().getSearchText());
                 assertEquals(SearchStatus.SUCCESSFUL, grandchild.getStatus());
-                assertEquals(result.getTime(), grandchild.getTime());
+                assertEquals(child.getTime(), grandchild.getTime());
             }
         }
     }
@@ -158,15 +153,13 @@ public class ResultDeserializerTest {
         Result result = this.objectMapper.readValue(getClass().getResourceAsStream("search-pubmed-running.json"),
                 Result.class);
         assertNotNull(result);
-        assertEquals("2069082541", result.getId());
-        assertEquals("metasearch", result.getDescription());
-        assertEquals("none", result.getURL());
+        assertEquals("631585061", result.getId());
+        assertEquals("Lane Metasearch - Version:1.2.92-SNAPSHOT", result.getDescription());
         assertEquals(1, result.getChildren().size());
         assertNull(result.getException());
         assertNull(result.getHits());
         assertEquals("rubella", result.getQuery().getSearchText());
         assertEquals(SearchStatus.RUNNING, result.getStatus());
-        assertEquals("null", result.getTime());
         for (Result child : result.getChildren()) {
             assertEquals("pubmed", child.getId());
             assertEquals("PubMed", child.getDescription());
@@ -175,10 +168,10 @@ public class ResultDeserializerTest {
                     child.getURL());
             assertEquals(0, child.getChildren().size());
             assertNull(child.getException());
-            assertNull(child.getHits());
-            assertNull(child.getQuery());
+            assertEquals("-1", child.getHits());
+            assertEquals("rubella", child.getQuery().getSearchText());
             assertEquals(SearchStatus.RUNNING, child.getStatus());
-            assertEquals(result.getTime(), child.getTime());
+
         }
     }
 
@@ -187,45 +180,42 @@ public class ResultDeserializerTest {
         Result result = this.objectMapper.readValue(getClass().getResourceAsStream("search-pubmed-successful.json"),
                 Result.class);
         assertNotNull(result);
-        assertEquals("2069082541", result.getId());
-        assertEquals("metasearch", result.getDescription());
-        assertEquals("none", result.getURL());
+        assertEquals("1363428449", result.getId());
+        assertEquals("Lane Metasearch - Version:1.2.92-SNAPSHOT", result.getDescription());
         assertEquals(1, result.getChildren().size());
         assertNull(result.getException());
         assertNull(result.getHits());
         assertEquals("rubella", result.getQuery().getSearchText());
         assertEquals(SearchStatus.SUCCESSFUL, result.getStatus());
-        assertEquals("null", result.getTime());
         for (Result child : result.getChildren()) {
             assertEquals("pubmed", child.getId());
             assertEquals("PubMed", child.getDescription());
             assertEquals(
-                    "https://www.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&tool=stanfordmeta&email=ceyates@stanford.edu&retmax=50&term=rubella",
+                    "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&email=alainb@stanford.edu&api_key=a2aead2fd50d6d10a8bb79a981b0b6cfb209&retmode=xml&term=rubella",
                     child.getURL());
             assertEquals(1, child.getChildren().size());
             assertNull(child.getException());
-            assertEquals("14462", child.getHits());
+            assertEquals("18280", child.getHits());
             assertEquals("rubella", child.getQuery().getSearchText());
             assertEquals(SearchStatus.SUCCESSFUL, child.getStatus());
-            assertEquals("1521", child.getTime());
+            assertEquals("983", child.getTime());
             for (Result grandchild : child.getChildren()) {
                 assertEquals("pubmed", grandchild.getId());
                 assertEquals("PubMed", grandchild.getDescription());
                 assertEquals(
-                        "https://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=pubmed&cmd=search&term=rubella&holding=f1000%2CF1000M&otool=Stanford",
+                        "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&email=alainb@stanford.edu&retmode=xml&id=rubella",
                         grandchild.getURL());
-                assertEquals(50, grandchild.getChildren().size());
+                assertEquals(20, grandchild.getChildren().size());
                 assertNull(grandchild.getException());
-                assertEquals("14462", grandchild.getHits());
-                assertNull(grandchild.getQuery());
+                assertEquals("18280", grandchild.getHits());
+                assertEquals("rubella", grandchild.getQuery().getSearchText());
                 assertEquals(SearchStatus.SUCCESSFUL, grandchild.getStatus());
-                assertEquals(result.getTime(), grandchild.getTime());
                 ContentResult content = (ContentResult) grandchild.getChildren().stream().findFirst().orElse(null);
-                assertEquals("Nelly A, Marion LM, Lisa F, Pierre V, Céline P.", content.getAuthor());
-                assertEquals("PMID:27599689", content.getContentId());
-                assertEquals(1663, content.getDescription().length());
-                assertEquals("pubmed_content_1", content.getId());
-                assertEquals("Clin Microbiol Infect. 2016 Sep 3", content.getPublicationText());
+                assertEquals("Hajipour N, Mohammady E, Barzegar G.", content.getAuthor());
+                assertEquals("PMID:40963106", content.getContentId());
+                assertEquals(1809, content.getDescription().length());
+                assertEquals("content-0", content.getId());
+                assertEquals("BMC Infect Dis. 2025 Sep 17;25(1)", content.getPublicationText());
             }
         }
     }

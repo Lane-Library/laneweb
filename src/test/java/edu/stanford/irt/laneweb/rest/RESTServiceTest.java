@@ -21,9 +21,8 @@ import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.test.web.client.match.MockRestRequestMatchers;
 import org.springframework.test.web.client.response.MockRestResponseCreators;
 
-@ActiveProfiles(profiles = "test")
-@ContextConfiguration(classes = { RESTClientTestConfiguration.class })
-@RestClientTest({ RESTService.class })
+@ActiveProfiles(profiles = "test") @ContextConfiguration(classes = {
+        BasicAuthTestConfiguration.class }) @RestClientTest({ RESTService.class })
 class RESTServiceTest {
 
     @Autowired

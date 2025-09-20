@@ -1,1 +1,28 @@
-{"children":[{"children":[{"children":[],"hits":"12","description":"Metabolic & Molecular Bases of Inherited Disease","id":"mmbid","query":null,"status":"SUCCESSFUL","time":null,"url":"http://ommbid.mhmedical.com/SearchResults.aspx?q=rubella"}],"hits":"12","description":"Metabolic & Molecular Bases of Inherited Disease","id":"mmbid","query":"rubella","status":"SUCCESSFUL","time":"886","url":"http://ommbid.mhmedical.com/SearchResults.aspx?q=rubella"}],"hits":null,"description":"metasearch","id":"2069082541","query":"rubella","status":"SUCCESSFUL","time":null,"url":"none"}
+{
+    "searchId": 631585061,
+    "serviceInfo": "Lane Metasearch - Version:1.2.92-SNAPSHOT",
+    "originalQuery": "rubella",
+    "status": "SUCCESSFUL",
+    "engines": [
+        {
+            "resources": [
+                {
+                    "results": [],
+                    "hitCount": "12",
+                    "resourceName": "Metabolic & Molecular Bases of Inherited Disease",
+                    "resourceId": "mmbid",
+                    "query": null,
+                    "status": "SUCCESSFUL",
+                    "executionTimeMs": "886",
+                    "retrievalUrl": "http://ommbid.mhmedical.com/SearchResults.aspx?q=rubella"
+                }
+            ],
+            "totalHits": "12",
+            "engineName": "Metabolic & Molecular Bases of Inherited Disease",
+            "engineId": "mmbid",
+            "status": "SUCCESSFUL",
+            "executionTimeMs": "886",
+            "requestUrl": "http://ommbid.mhmedical.com/SearchResults.aspx?q=rubella"
+        }
+    ]
+}
