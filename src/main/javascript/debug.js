@@ -15,7 +15,6 @@
         "slideshow.js",
         "guides.js",
         "link-info.js",
-        "bookmarklet.js",
         "persistent-login.js",
         "search-indicator.js",
         "bassett.js",
