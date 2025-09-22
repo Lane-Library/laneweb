@@ -42,8 +42,9 @@ describe('Search Form Scroll', () => {
             const expectedScrollY = formOffsetTop - SCROLL_OFFSET_DESKTOP;
 
             cy.scrollTo(0, expectedScrollY + 20); // Scroll past the target position
+            cy.wait(100);
             cy.reload(); // Reload the page to trigger the script
-            cy.wait(100); // Wait for the scroll to complete
+            cy.wait(150); // Wait for the scroll to complete
 
             console.log('Window scrollY:', window.scrollY);
             cy.window().its('scrollY').should('equal', expectedScrollY + 20);
