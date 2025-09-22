@@ -37,4 +37,72 @@ describe('Popup functionality', () => {
                 'resizable,toolbar=no,location=no,scrollbars=yes,width=1320,height=1925');
     });
 
+    it('should move the popup when dragged and dropped', () => {
+        cy.viewport(1101, 1000);
+
+        cy.visit('/cypress-test/patron-registration/index.html');
+
+        cy.get('a[rel="popup local popup-id-shc"]').click();
+
+        cy.get('.popup').should('be.visible').invoke('position').then((initialPosition) => {
+            // `initialPosition` will be an object like { top: 123, left: 456 }
+
+            console.log('Initial popup position:', initialPosition);
+
+            // Define our drag-and-drop coordinates
+            // Where the user's cursor "clicks" to start the drag
+            const dragStartCoords = {
+                x: initialPosition.left + 20, // 20px inside the popup
+                y: initialPosition.top + 10,   // 10px from the top of the popup
+            };
+
+            // How far the user's cursor moves during the drag
+            const dragMovement = { x: -600, y: 150 };
+
+            // Where the user's cursor will be when the drop happens
+            const dropCoords = {
+                x: dragStartCoords.x + dragMovement.x,
+                y: dragStartCoords.y + dragMovement.y,
+            };
+
+            // The DataTransfer object is required for drag-and-drop events to work
+            const dataTransfer = new DataTransfer();
+
+            // Simulate the drag and drop
+            cy.get('.popup').trigger('dragstart', {
+                force: true,
+                clientX: dragStartCoords.x,
+                clientY: dragStartCoords.y,
+                dataTransfer,
+            });
+
+            // The drop listener is on the document, so triggering on the body is effective
+            cy.get('body').trigger('drop', {
+                force: true,
+                clientX: dropCoords.x,
+                clientY: dropCoords.y,
+                dataTransfer
+            });
+
+            // Calculate the expected final position and verify
+            // The component's logic is: finalPos = dropPos - (dragStartPos - initialPos)
+            // This simplifies to: finalPos = initialPos + (dropPos - dragStartPos)
+            // Which is: finalPos = initialPos + dragMovement
+            // Need to round because position values can be fractional
+            const expectedFinalPosition = {
+                left: Math.round(initialPosition.left + dragMovement.x),
+                top: Math.round(initialPosition.top + dragMovement.y),
+            };
+
+            console.log('Expected final popup position:', expectedFinalPosition);
+
+            // Assert that the popup has moved to the correct new location
+            cy.get('.popup')
+                .should('have.css', 'left', `${expectedFinalPosition.left}px`)
+                .and('have.css', 'top', `${expectedFinalPosition.top}px`);
+        });
+    });
+
+
+
 });
