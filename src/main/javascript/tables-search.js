@@ -35,6 +35,10 @@
     };
 
     searchInput.addEventListener("keyup", filterRows);
-    L.on("searchReset:reset", filterRows);
+
+    L.on("searchReset:reset", () => {
+        searchInput.value = "";
+        filterRows();
+    });
 
 })();
