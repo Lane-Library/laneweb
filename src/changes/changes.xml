@@ -4,6 +4,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2025-09-22" version="3.15.13" description="bug fix and update release">
+            <action date="2025-09-18" dev="alainb" issue="LANEWEB-11550" type="update">
+                Update ResultDeserializer since the JSON from metasearch was updated for more readability and maintainability
+            </action>
+            <action date="2025-09-22" dev="ryanmax" issue="LANEWEB-11551" type="update">
+                Remove code and content checking for user agent "Edge"
+            </action>
+        </release>
         <release date="2025-09-16" version="3.15.12" description="bug fix and update release">
             <action date="2025-08-29" dev="alainb" issue="LANEWEB-11548" type="update">
                 The status.txt response time increase since the login metasearch was added (Oauth2)       
