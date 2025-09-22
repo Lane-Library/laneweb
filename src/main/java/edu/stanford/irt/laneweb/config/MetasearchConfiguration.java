@@ -39,6 +39,7 @@ import edu.stanford.irt.laneweb.metasearch.SearchDirectoryTransformer;
 import edu.stanford.irt.laneweb.metasearch.SearchGenerator;
 import edu.stanford.irt.laneweb.metasearch.SearchResultSAXStrategy;
 import edu.stanford.irt.laneweb.rest.BasicAuthRESTService;
+import edu.stanford.irt.laneweb.rest.OauthRESTService;
 import edu.stanford.irt.search.impl.Result;
 
 @Configuration
@@ -50,7 +51,8 @@ public class MetasearchConfiguration {
         List<String> engines = new ArrayList<>(20);
         engines.add("aafp_patients");
         engines.add("acpjc");
-        engines.add("bmj_clinical_evidence");
+        engines.add("bmj_best_practice");
+        engines.add("dynamed");
         engines.add("medlineplus");
         engines.add("pubmed");
         engines.add("pubmed_clinicaltrial");
@@ -139,6 +141,7 @@ public class MetasearchConfiguration {
         engines.add("aafp_patients");
         engines.add("aappatient");
         engines.add("aapwebsite");
+        engines.add("dynamed_pediatric");
         engines.add("pubmed_allchild");
         engines.add("pubmed_clinicaltrial_allchild");
         engines.add("pubmed_cost_allchild");
@@ -160,13 +163,24 @@ public class MetasearchConfiguration {
 
     @Bean
     public MetaSearchService restMetaSearchService(
-            @Qualifier("restService/metasearch") final BasicAuthRESTService restService,
+            @Qualifier("oauthRestService/metasearch") final OauthRESTService restService,
             @Value("${edu.stanford.irt.laneweb.metasearch.scheme}") final String scheme,
             @Value("${edu.stanford.irt.laneweb.metasearch.host}") final String host,
             @Value("${edu.stanford.irt.laneweb.metasearch.port}") final int port,
             @Value("${edu.stanford.irt.laneweb.metasearch.path}") final String path) throws URISyntaxException {
         URI metaSearchURI = new URI(scheme, null, host, port, path, null, null);
         return new RESTMetaSearchService(metaSearchURI, restService);
+    }
+
+    @Bean("oauthRestService/metasearch")
+    public OauthRESTService getMetasearchOauthRestService(RestClient restClient,
+            @Value("${edu.stanford.irt.laneweb.metasearch.userInfo}") final String userInfo,
+            @Value("${edu.stanford.irt.laneweb.metasearch.scheme}") final String scheme,
+            @Value("${edu.stanford.irt.laneweb.metasearch.host}") final String host,
+            @Value("${edu.stanford.irt.laneweb.metasearch.port}") final int port,
+            @Value("${edu.stanford.irt.laneweb.metasearch.path}") final String path) throws URISyntaxException {
+        URI tokenEndpoint = new URI(scheme, null, host, port, path + "oauth2/token", null, null);
+        return new OauthRESTService(restClient, userInfo, tokenEndpoint);
     }
 
     @Bean("restService/metasearch")

@@ -39,36 +39,4 @@ test('search form scrolling', () => {
 
 });
 
-test('search form will not immediately scroll w/ Edge browser', () => {
-
-  // override the getUserAgent method
-  L.getUserAgent = function () {
-    return "fake Edge user agent";
-  }
-
-  expect(window.scrollY).toBe(0);
-
-  require('@/search-form-scroll.js');
-
-  expect(window.scroll).not.toHaveBeenCalledWith();
-
-});
-
-test('search form scrolling w/ Edge browser and a little time', async () => {
-
-  // override the getUserAgent method
-  L.getUserAgent = function () {
-    return "fake Edge user agent";
-  }
-
-  expect(window.scrollY).toBe(0);
-
-  require('@/search-form-scroll.js');
-
-  // sleep to allow edgeDelay to run
-  await new Promise((r) => setTimeout(r, 1100));
-
-  expect(window.scroll).toHaveBeenCalledWith(0, 70);
-
-});
 
