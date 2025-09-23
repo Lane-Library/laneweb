@@ -20,8 +20,7 @@
             search(query) {
                 queryInput.value = query;
                 queryInput.readOnly = true;
-                L.searchIndicator.show();
-                form.submit();
+                L.search.search();
             },
         };
 
