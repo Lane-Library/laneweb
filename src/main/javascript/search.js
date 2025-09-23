@@ -24,6 +24,7 @@ if (document.querySelector(".search-form")) {
                 // --- Initialize state from the DOM ---
                 this.query = this.queryInput.value;
                 this.source = this.sourceInput.value;
+                this.isSearching = false;
 
                 this._bindEvents();
             }
@@ -44,6 +45,8 @@ if (document.querySelector(".search-form")) {
             getQuery() { return this.query; }
 
             getSource() { return this.source; }
+
+            getSearching() { return this.isSearching; }
 
             /**
              * Sets the search query, updates the input, and fires an event.
@@ -84,6 +87,7 @@ if (document.querySelector(".search-form")) {
              */
             search() {
                 if (this.query) {
+                    this.isSearching = true;
                     this.fire("search");
                     this.form.submit();
                 }

@@ -39,13 +39,15 @@
             },
 
             reset() {
-                // The `fire` method is added by L.addEventTarget
-                this.fire("reset");
-                L.fire("tracker:trackableEvent", {
-                    category: "lane:searchFormReset",
-                    action: location.pathname,
-                });
-            },
+                // Only reset if not currently searching
+                if (!L.search.getSearching()) {
+                    this.fire("reset");
+                    L.fire("tracker:trackableEvent", {
+                        category: "lane:searchFormReset",
+                        action: location.pathname,
+                    });
+                }
+            }
         };
 
         // --- Initialization and Event Wiring ---
