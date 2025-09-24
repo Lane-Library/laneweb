@@ -23,7 +23,7 @@
 
                     if (!title && targetForm.classList.contains('search-form')) {
                         // special case for the main search form
-                        title = `SHC-Epic Lane search ${L.search.getSource()}`;
+                        title = `SHC-Epic Lane search ${L.search.source}`;
                     }
 
                     // not title, no tracking

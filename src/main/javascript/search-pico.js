@@ -90,7 +90,7 @@
         }
 
         // Update the main search query input
-        L.search.setQuery(query);
+        L.search.query = query;
     });
 
 })();

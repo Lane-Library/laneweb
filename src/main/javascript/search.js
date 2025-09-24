@@ -9,6 +9,11 @@ if (document.querySelector(".search-form")) {
          * search query, source, and related UI elements.
          */
         class SearchFormController {
+
+            #query;
+            #searching;
+            #source;
+
             constructor(formElement) {
                 this.form = formElement;
 
@@ -22,56 +27,56 @@ if (document.querySelector(".search-form")) {
                 L.addEventTarget(this, { prefix: "search" });
 
                 // --- Initialize state from the DOM ---
-                this.query = this.queryInput.value;
-                this.source = this.sourceInput.value;
-                this.isSearching = false;
+                this.#query = this.queryInput.value;
+                this.#source = this.sourceInput.value;
+                this.#searching = false;
 
-                this._bindEvents();
+                this.#bindEvents();
             }
 
             /**
              * Bind internal and external event listeners
              */
-            _bindEvents() {
-                this.form.addEventListener("submit", this._handleSubmit);
-                this.queryInput.addEventListener("focus", this._handleFocus);
-                this.queryInput.addEventListener("input", this._handleInputChange);
+            #bindEvents() {
+                this.form.addEventListener("submit", this.#handleSubmit);
+                this.queryInput.addEventListener("focus", this.#handleFocus);
+                this.queryInput.addEventListener("input", this.#handleInputChange);
 
                 // listen for custom global events
-                L.on("searchDropdown:change", this._handleSearchDropdownChange);
+                L.on("searchDropdown:change", this.#handleSearchDropdownChange);
                 L.on("searchReset:reset", this.reset);
             }
 
-            getQuery() { return this.query; }
+            get query() { return this.#query; }
 
-            getSource() { return this.source; }
+            get searching() { return this.#searching; }
 
-            getSearching() { return this.isSearching; }
+            get source() { return this.#source; }
 
             /**
              * Sets the search query, updates the input, and fires an event.
              * @param {string} newQuery - The new search term.
              */
-            setQuery(newQuery) {
-                if (typeof newQuery !== "string" || newQuery === this.query) return;
+            set query(newQuery) {
+                if (typeof newQuery !== "string" || newQuery === this.#query) return;
 
-                const oldQuery = this.query;
-                this.query = newQuery;
-                this.queryInput.value = this.query; // Directly update the view
+                const oldQuery = this.#query;
+                this.#query = newQuery;
+                this.queryInput.value = this.#query; // Directly update the view
 
-                this.fire("queryChange", { newVal: this.query, oldVal: oldQuery });
+                this.fire("queryChange", { newVal: this.#query, oldVal: oldQuery });
             }
 
             /**
              * Sets the search source, updates the input, resets facets, and fires an event.
              * @param {string} newSource - The new search source.
              */
-            setSource(newSource) {
-                if (typeof newSource !== "string" || newSource === this.source) return;
+            set source(newSource) {
+                if (typeof newSource !== "string" || newSource === this.#source) return;
 
-                const oldSource = this.source;
-                this.source = newSource;
-                this.sourceInput.value = this.source;
+                const oldSource = this.#source;
+                this.#source = newSource;
+                this.sourceInput.value = this.#source;
 
                 // Reset facets when the source changes
                 if (this.facetsInput.value) {
@@ -79,15 +84,15 @@ if (document.querySelector(".search-form")) {
                     this.facetsInput.disabled = true;
                 }
 
-                this.fire("sourceChange", { newVal: this.source, oldVal: oldSource });
+                this.fire("sourceChange", { newVal: this.#source, oldVal: oldSource });
             }
 
             /**
              * Programmatically trigger a search
              */
             search() {
-                if (this.query) {
-                    this.isSearching = true;
+                if (this.#query) {
+                    this.#searching = true;
                     this.fire("search");
                     this.form.submit();
                 }
@@ -97,26 +102,26 @@ if (document.querySelector(".search-form")) {
              * Reset search form inputs
              */
             reset = () => {
-                this.setQuery("");
+                this.query = "";
                 if (this.facetsInput) this.facetsInput.disabled = true;
                 if (this.sortInput) this.sortInput.disabled = true;
             }
 
-            _handleSubmit = (event) => {
+            #handleSubmit = (event) => {
                 event.preventDefault();
                 this.search();
             }
 
-            _handleInputChange = () => {
-                this.setQuery(this.queryInput.value);
+            #handleInputChange = () => {
+                this.query = this.queryInput.value;
             }
 
-            _handleFocus = () => {
+            #handleFocus = () => {
                 this.fire("activeChange", { active: true });
             }
 
-            _handleSearchDropdownChange = (event) => {
-                this.setSource(event.newVal.source);
+            #handleSearchDropdownChange = (event) => {
+                this.source = event.newVal.source;
                 this.search();
             }
         }

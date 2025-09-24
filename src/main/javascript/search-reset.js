@@ -40,7 +40,7 @@
 
             reset() {
                 // Only reset if not currently searching
-                if (!L.search.getSearching()) {
+                if (!L.search.searching) {
                     this.fire("reset");
                     L.fire("tracker:trackableEvent", {
                         category: "lane:searchFormReset",
