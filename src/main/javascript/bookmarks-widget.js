@@ -15,35 +15,42 @@
     const MAX_ANCHOR_LENGTH = 32;
 
     class BookmarksWidget {
-        constructor({ srcNode, bookmarks, displayLimit }) {
-            this.bookmarks = bookmarks;
-            this.srcNode = srcNode;
-            this.displayLimit = displayLimit;
 
-            this._bindEvents();
-            this._refreshUI();
+        #bookmarks;
+        #displayLimit;
+        #srcNode;
+
+        constructor({ srcNode, bookmarks, displayLimit }) {
+            this.#bookmarks = bookmarks;
+            this.#srcNode = srcNode;
+            this.#displayLimit = displayLimit;
+
+            this.#bindEvents();
+            this.#refreshUI();
         }
 
         /**
          * Set up event listeners to respond to events when the server has been updated
          * so the bookmark markup can change appropriately
          */
-        _bindEvents = () => {
-            this.bookmarks.after("addSync", this._bookmarkAdded);
-            this.bookmarks.after("moveSync", this._bookmarkMoved);
-            this.bookmarks.after("removeSync", this._bookmarksRemoved);
-            this.bookmarks.after("updateSync", this._bookmarkUpdated);
+        #bindEvents = () => {
+            this.#bookmarks.after("addSync", this.#bookmarkAdded);
+            this.#bookmarks.after("moveSync", this.#bookmarkMoved);
+            this.#bookmarks.after("removeSync", this.#bookmarksRemoved);
+            this.#bookmarks.after("updateSync", this.#bookmarkUpdated);
         }
 
         /**
          * Set up the UI, in this case truncate text in links to MAX_ANCHOR_LENGTH characters,
          * and hide items > displayLimit.
          */
-        _refreshUI() {
-            this._truncateLabels();
-            this._hideSomeItems();
-            this._showManageBookmarks();
+        #refreshUI() {
+            this.#truncateLabels();
+            this.#hideSomeItems();
+            this.#showManageBookmarks();
         }
+
+        get bookmarks() { return this.#bookmarks; }
 
         /**
          * Provide a text representation of this widget.
@@ -58,7 +65,7 @@
          * @private
          * @param event {CustomEvent}
          */
-        _bookmarkAdded = ({ bookmark }) => {
+        #bookmarkAdded = ({ bookmark }) => {
             const li = document.createElement('li');
             const a = document.createElement('a');
             const href = PROXY_LINKS && /^http[s]?:/.test(bookmark.url)
@@ -68,8 +75,8 @@
             a.href = href;
             a.textContent = bookmark.label;
             li.append(a);
-            this.srcNode.prepend(li);
-            this._refreshUI();
+            this.#srcNode.prepend(li);
+            this.#refreshUI();
         }
 
         /**
@@ -77,8 +84,8 @@
          * @private
          * @param event {CustomEvent}
          */
-        _bookmarkMoved = ({ from, to }) => {
-            const children = this.srcNode.children;
+        #bookmarkMoved = ({ from, to }) => {
+            const children = this.#srcNode.children;
             // get node references before DOM is changed
             const movedNode = children[from];
             const targetNode = children[to];
@@ -88,7 +95,7 @@
             } else {
                 targetNode.before(movedNode);
             }
-            this._refreshUI();
+            this.#refreshUI();
         }
 
         /**
@@ -96,11 +103,11 @@
          * @private
          * @param event {CustomEvent}
          */
-        _bookmarksRemoved = ({ positions }) => {
+        #bookmarksRemoved = ({ positions }) => {
             positions.slice().reverse().forEach(pos => {
-                this.srcNode.children[pos]?.remove();
+                this.#srcNode.children[pos]?.remove();
             });
-            this._refreshUI();
+            this.#refreshUI();
         }
 
         /**
@@ -108,20 +115,20 @@
          * @private
          * @param event {CustomEvent}
          */
-        _bookmarkUpdated = ({ position }) => {
-            const bookmark = this.bookmarks.getBookmark(position);
-            const anchor = this.srcNode.querySelectorAll("li").item(position).querySelector("a");
+        #bookmarkUpdated = ({ position }) => {
+            const bookmark = this.#bookmarks.getBookmark(position);
+            const anchor = this.#srcNode.querySelectorAll("li").item(position).querySelector("a");
             anchor.innerHTML = bookmark.label;
             anchor.href = bookmark.url;
-            this._refreshUI();
+            this.#refreshUI();
         }
 
         /**
          * Shorten all anchor text to less than MAX_ANCHOR_LENGTH characters, append ... if shortened.
          * @private
          */
-        _truncateLabels() {
-            this.srcNode.querySelectorAll("a").forEach(anchor => {
+        #truncateLabels() {
+            this.#srcNode.querySelectorAll("a").forEach(anchor => {
                 if (anchor.textContent.length > MAX_ANCHOR_LENGTH) {
                     anchor.textContent = anchor.textContent.substring(0, MAX_ANCHOR_LENGTH) + "...";
                 }
@@ -132,10 +139,10 @@
          * Hide items > displayLimit
          * @private;
          */
-        _hideSomeItems() {
-            const items = this.srcNode.querySelectorAll("li");
+        #hideSomeItems() {
+            const items = this.#srcNode.querySelectorAll("li");
             items.forEach((item, index) => {
-                item.style.display = index < this.displayLimit ? "block" : "none";
+                item.style.display = index < this.#displayLimit ? "block" : "none";
             });
         }
 
@@ -143,12 +150,12 @@
          * Show manage bookmarks link when more items than displayLimit
          * @private;
          */
-        _showManageBookmarks() {
-            const items = this.srcNode.querySelectorAll("li");
+        #showManageBookmarks() {
+            const items = this.#srcNode.querySelectorAll("li");
             const manageBookmarks = document.querySelector(".manageBookmarks");
 
             if (manageBookmarks) {
-                manageBookmarks.style.display = items.length === 0 || items.length > this.displayLimit ? 'block' : 'none';
+                manageBookmarks.style.display = items.length === 0 || items.length > this.#displayLimit ? 'block' : 'none';
                 manageBookmarks.textContent = items.length === 0 ? 'Add a Bookmark' : '';
             }
         }

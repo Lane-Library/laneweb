@@ -15,7 +15,7 @@
         /**
          * Add a bookmark when not logged in.  Constructs a query string with the bookmark
          * information and the page to return to, then fetches a popup page and passes control
-         * to the _handleSuccess method.
+         * to the #handleSuccess method.
          * @param label {string} the label
          * @param url {string} the url
          */
@@ -29,10 +29,10 @@
                     throw new Error(`Network response was not ok: ${response.status} ${response.statusText}`);
                 }
                 const htmlContent = await response.text();
-                this._handleSuccess(htmlContent, queryString);
+                this.#handleSuccess(htmlContent, queryString);
             } catch (error) {
                 console.error("Failed to fetch bookmark login form:", error);
-                this._handleFailure();
+                this.#handleFailure();
             }
         }
 
@@ -41,7 +41,7 @@
          * is necessary for bookmarking.
          * @private
          */
-        _handleFailure() {
+        #handleFailure() {
             L.showMessage("You must log in in order to create bookmarks.");
         }
 
@@ -52,7 +52,7 @@
          * @param {string} htmlContent - The HTML content for the lightbox.
          * @param {string} queryString - The query string to append to the login link.
          */
-        _handleSuccess(htmlContent, queryString) {
+        #handleSuccess(htmlContent, queryString) {
             lightbox.setContent(htmlContent);
             const yesButton = document.querySelector("#yes-bookmark-login");
             const noButton = document.querySelector("#no-bookmark-login");

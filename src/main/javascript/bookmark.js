@@ -4,13 +4,16 @@
 
     class Bookmark {
 
+        #label;
+        #url;
+
         constructor(label, url) {
-            this._label = undefined;
-            this._url = undefined;
+            this.#label = undefined;
+            this.#url = undefined;
             L.addEventTarget(this, {
                 prefix: 'bookmark'
             });
-            this.on("valueChange", this._handleValueChange);
+            this.on("valueChange", this.#handleValueChange);
             this.setValues(label, url);
         };
 
@@ -21,9 +24,9 @@
          * @param event
          *            {CustomEvent} the valueChange event
          */
-        _handleValueChange = ({ newLabel, newUrl }) => {
-            this._label = newLabel;
-            this._url = newUrl;
+        #handleValueChange = ({ newLabel, newUrl }) => {
+            this.#label = newLabel;
+            this.#url = newUrl;
         }
 
         /**
@@ -32,7 +35,7 @@
          * @returns {string} the label
          */
         get label() {
-            return this._label;
+            return this.#label;
         }
 
         /**
@@ -41,7 +44,7 @@
          * @returns {string} the url
          */
         get url() {
-            return this._url;
+            return this.#url;
         }
 
         /**
@@ -52,7 +55,7 @@
          *            {string}
          */
         set label(newLabel) {
-            this.setValues(newLabel, this._url);
+            this.setValues(newLabel, this.#url);
         }
 
         /**
@@ -62,7 +65,7 @@
          *            {string}
          */
         set url(newUrl) {
-            this.setValues(this._label, newUrl);
+            this.setValues(this.#label, newUrl);
         }
 
         /**
@@ -80,11 +83,11 @@
             if (!newUrl) {
                 throw new Error("Bookmark URL cannot be null or empty.");
             }
-            const hasChanged = newLabel !== this._label || newUrl !== this._url;
+            const hasChanged = newLabel !== this.#label || newUrl !== this.#url;
             if (hasChanged) {
                 this.fire("valueChange", {
-                    prevLabel: this._label,
-                    prevUrl: this._url,
+                    prevLabel: this.#label,
+                    prevUrl: this.#url,
                     newLabel,
                     newUrl,
                     target: this
@@ -96,7 +99,7 @@
          * @return {string} a string with the label and url values
          */
         toString() {
-            return `Bookmark{label:${this._label},url:${this._url}}`;
+            return `Bookmark{label:${this.#label},url:${this.#url}}`;
         }
     };
 
