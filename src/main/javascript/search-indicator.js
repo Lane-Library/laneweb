@@ -13,7 +13,6 @@
     const searchIndicator = {
         /**
          * activates the .search-indicator
-         * @method show
          * @static
          */
         show() {
@@ -22,7 +21,6 @@
 
         /**
          * deactivates the .search-indicator
-         * @method hide
          * @static
          */
         hide() {

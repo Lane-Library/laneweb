@@ -14,7 +14,7 @@
     let isScrolling;
 
     /**
-     * @method handleScroll checks scroll position and toggles the button's visibility
+     * checks scroll position and toggles the button's visibility
      * @private
      */
     const handleScroll = () => {
@@ -22,7 +22,7 @@
     };
 
     /**
-     * @method scrollToTop scroll the browser back to the top
+     * scroll the browser back to the top
      * @private
      */
     const scrollToTop = () => {

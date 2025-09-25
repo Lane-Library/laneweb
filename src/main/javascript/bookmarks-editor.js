@@ -95,7 +95,6 @@
         /**
          * Responds to a click on the add button.  Adds a list item and associated BookmarkEditor to
          * the top of the list and sets it editing state to true.
-         * @method add
          */
         add() {
             const addBookmarkContainer = document.querySelector(".addBookmarkContainer");
