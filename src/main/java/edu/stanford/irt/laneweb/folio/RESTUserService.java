@@ -4,7 +4,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
-import edu.stanford.irt.laneweb.rest.BasicAuthRESTService;
+import edu.stanford.irt.laneweb.rest.OauthRESTService;
 import edu.stanford.irt.laneweb.rest.TypeReference;
 
 public class RESTUserService implements UserService {
@@ -19,9 +19,9 @@ public class RESTUserService implements UserService {
 
     private URI catalogServiceURI;
 
-    private BasicAuthRESTService restService;
+    private OauthRESTService restService;
 
-    public RESTUserService(final URI catalogServiceURI, final BasicAuthRESTService restService) {
+    public RESTUserService(final URI catalogServiceURI, final OauthRESTService restService) {
         this.catalogServiceURI = catalogServiceURI;
         this.restService = restService;
     }

@@ -15,7 +15,7 @@ import edu.stanford.irt.laneweb.catalog.equipment.EquipmentListGenerator;
 import edu.stanford.irt.laneweb.catalog.equipment.EquipmentListSAXStrategy;
 import edu.stanford.irt.laneweb.catalog.equipment.EquipmentService;
 import edu.stanford.irt.laneweb.catalog.equipment.RESTEquipmentService;
-import edu.stanford.irt.laneweb.rest.BasicAuthRESTService;
+import edu.stanford.irt.laneweb.rest.OauthRESTService;
 
 @Configuration
 public class EquipmentConfiguration {
@@ -32,7 +32,7 @@ public class EquipmentConfiguration {
 
     @Bean
     public EquipmentService restEquipmentService(@Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI,
-            @Qualifier("restService/catalog-service") final BasicAuthRESTService restService) {
+            @Qualifier("restService/catalog-service") final OauthRESTService restService) {
         return new RESTEquipmentService(catalogServiceURI, restService);
     }
 }

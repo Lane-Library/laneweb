@@ -88,4 +88,42 @@ public class OauthRESTService {
             }
         }
     }
+
+    public <T> T getObject(final URI uri, final TypeReference<T> type) throws RESTException {
+        try {
+            return this.restClient.get().uri(uri).header(HttpHeaders.AUTHORIZATION, "Bearer " + this.accessToken)
+                    .retrieve().body(type);
+        } catch (RestClientException e) {
+            if (e instanceof HttpClientErrorException) {
+                HttpClientErrorException hce = (HttpClientErrorException) e;
+                if (HttpStatus.UNAUTHORIZED.equals(hce.getStatusCode())) {
+                    this.authenticate();
+                    return getObject(uri, type);
+                } else {
+                    throw new RESTException(e);
+                }
+            } else {
+                throw new RESTException(e);
+            }
+        }
+    }
+
+    public <T> T postObject(final URI uri, final Object object, final Class<T> responseType) throws RESTException {
+        try {
+            return this.restClient.post().uri(uri).header(HttpHeaders.AUTHORIZATION, "Bearer " + this.accessToken)
+                    .contentType(MediaType.APPLICATION_JSON).body(object).retrieve().body(responseType);
+        } catch (RestClientException e) {
+            if (e instanceof HttpClientErrorException) {
+                HttpClientErrorException hce = (HttpClientErrorException) e;
+                if (HttpStatus.UNAUTHORIZED.equals(hce.getStatusCode())) {
+                    this.authenticate();
+                    return postObject(uri, object, responseType);
+                } else {
+                    throw new RESTException(e);
+                }
+            } else {
+                throw new RESTException(e);
+            }
+        }
+    }
 }

@@ -18,12 +18,12 @@ import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import edu.stanford.irt.laneweb.rest.BasicAuthRESTService;
+import edu.stanford.irt.laneweb.rest.OauthRESTService;
 import edu.stanford.irt.laneweb.rest.TypeReference;
 
 public class RESTEquipmentServiceTest {
 
-    private BasicAuthRESTService restService;
+    private OauthRESTService restService;
 
     private RESTEquipmentService service;
 
@@ -32,7 +32,7 @@ public class RESTEquipmentServiceTest {
     @BeforeEach
     public void setUp() throws URISyntaxException {
         this.uri = getClass().getResource("").toURI();
-        this.restService = mock(BasicAuthRESTService.class);
+        this.restService = mock(OauthRESTService.class);
         this.service = new RESTEquipmentService(this.uri, this.restService);
     }
 

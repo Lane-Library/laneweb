@@ -8,20 +8,20 @@ import java.net.URI;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import edu.stanford.irt.laneweb.rest.BasicAuthRESTService;
+import edu.stanford.irt.laneweb.rest.OauthRESTService;
 
 public class PatronRegistrationConfigurationTest {
 
     private PatronRegistrationConfiguration configuration;
 
-    private BasicAuthRESTService restService;
+    private OauthRESTService restService;
 
     private URI uri;
 
     @BeforeEach
     public void setUp() throws Exception {
         this.uri = new URI("/");
-        this.restService = mock(BasicAuthRESTService.class);
+        this.restService = mock(OauthRESTService.class);
         this.configuration = new PatronRegistrationConfiguration();
     }
 

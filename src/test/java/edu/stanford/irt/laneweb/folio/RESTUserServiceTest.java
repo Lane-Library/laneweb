@@ -13,11 +13,11 @@ import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import edu.stanford.irt.laneweb.rest.BasicAuthRESTService;
+import edu.stanford.irt.laneweb.rest.OauthRESTService;
 
 public class RESTUserServiceTest {
 
-    private BasicAuthRESTService restService;
+    private OauthRESTService restService;
 
     private RESTUserService service;
 
@@ -26,7 +26,7 @@ public class RESTUserServiceTest {
     @BeforeEach
     public void setUp() throws Exception {
         this.uri = new URI("/");
-        this.restService = mock(BasicAuthRESTService.class);
+        this.restService = mock(OauthRESTService.class);
         this.service = new RESTUserService(this.uri, this.restService);
     }
 
