@@ -6,39 +6,11 @@
     const BASE_PATH = Model.get(Model.BASE_PATH) ?? "";
 
     /**
-     * A utility function to handle API requests
-     * @param {string} endpoint - The URL path for the request.
-     * @param {object} options - The options object for the fetch call (method, body, etc.).
-     * @returns {Promise<object>} A promise that resolves with the parsed JSON response.
-     * @private
-     */
-    const _fetchAPI = async (endpoint, options = {}) => {
-        const url = `${BASE_PATH}${endpoint}`;
-        const defaultHeaders = { "Content-Type": "application/json" };
-
-        const response = await fetch(url, {
-            ...options, // merge passed options
-            headers: { ...defaultHeaders, ...options.headers }
-        });
-
-        if (!response.ok) {
-            throw new Error(`API request failed: ${response.status} ${response.statusText}`);
-        }
-
-        // Return JSON response if available
-        const contentType = response.headers.get("content-type");
-        if (contentType && contentType.includes("application/json")) {
-            return response.json();
-        }
-    };
-
-    /**
      * The `Bookmarks` class provides functionality to manage a collection of bookmarks.
      * It supports adding, removing, moving, and updating bookmarks, as well as syncing
      * these operations with the server. The class emits custom events for each operation,
      * allowing external listeners to respond to changes in the bookmarks collection.
      *
-     * @class
      * @fires bookmarks:add - Fired when a bookmark is added.
      * @fires bookmarks:addSync - Fired after a bookmark is successfully synced with the server.
      * @fires bookmarks:move - Fired when a bookmark is moved.
@@ -49,14 +21,18 @@
      * @fires bookmarks:updateSync - Fired after a bookmark update is successfully synced with the server.
      */
     class Bookmarks {
+
+        #bookmarks;
+
+        // --- Constructor and Initialization ---
         constructor(bookmarks = []) {
             if (!Array.isArray(bookmarks)) {
                 throw new Error("Bookmarks constructor requires an array.");
             }
 
-            this._bookmarks = bookmarks;
-            this._bookmarks.forEach(bookmark =>
-                bookmark.after("valueChange", this._handleValueChange)
+            this.#bookmarks = bookmarks;
+            this.#bookmarks.forEach(bookmark =>
+                bookmark.after("valueChange", this.#handleValueChange)
             );
 
             //Add EventTarget attributes to the Bookmarks prototype
@@ -64,7 +40,7 @@
                 prefix: 'bookmarks'
             });
 
-            this._bindEvents();
+            this.#bindEvents();
 
         }
 
@@ -72,23 +48,24 @@
          * Binds the default event listeners for the class instance.
          * @private
          */
-        _bindEvents = () => {
+        #bindEvents = () => {
             /** @event add @description Fired when a bookmark is added. */
-            this.on("add", this._defAddFn);
+            this.on("add", this.#defAddFn);
             /** @event addSync @description Fired after an add is successfully synced. */
-            this.on("addSync", this._handleAddSync);
+            this.on("addSync", this.#handleAddSync);
             /** @event move @description Fired when a bookmark is moved. */
-            this.on("move", this._defMoveFn);
+            this.on("move", this.#defMoveFn);
             /** @event moveSync @description Fired when a move is successfully synced. */
-            this.on("moveSync", this._handleMoveSync);
+            this.on("moveSync", this.#handleMoveSync);
             /** @event remove @description Fired when a bookmark is removed. */
-            this.on("remove", this._defRemoveFn);
+            this.on("remove", this.#defRemoveFn);
             /** @event removeSync @description Fired when a removal is successfully synced. */
-            this.on("removeSync", this._handleRemoveSync);
+            this.on("removeSync", this.#handleRemoveSync);
             /** @event update @description Fired when a bookmark is updated. */
-            this.on("update", this._defUpdateFn);
+            this.on("update", this.#defUpdateFn);
         }
 
+        // --- Public Methods ---
         /**
          * Fires a bookmark:add event.
          * @param {L.Bookmark} bookmark
@@ -106,7 +83,24 @@
          * @returns {L.Bookmark|undefined} The bookmark at the given position.
          */
         getBookmark(position) {
-            return this._bookmarks[position];
+            return this.#bookmarks[position];
+        }
+
+        /**
+         * Checks if a bookmark with the given URL already exists.
+         * @param {string} url
+         * @returns {boolean}
+         */
+        hasURL(url) {
+            return this.#bookmarks.some(bookmark => bookmark.url === url);
+        }
+
+        /**
+         * @param {L.Bookmark} bookmark
+         * @returns {number} The index of the given bookmark, or -1 if not found.
+         */
+        indexOf(bookmark) {
+            return this.#bookmarks.indexOf(bookmark);
         }
 
         /**
@@ -126,6 +120,13 @@
         }
 
         /**
+         * @returns {number} The number of bookmarks.
+         */
+        size() {
+            return this.#bookmarks.length;
+        }
+
+        /**
          * Fires a bookmark:update event
          * @param {L.Bookmark} bookmark
          */
@@ -137,34 +138,10 @@
         }
 
         /**
-         * @returns {number} The number of bookmarks.
-         */
-        size() {
-            return this._bookmarks.length;
-        }
-
-        /**
-         * Checks if a bookmark with the given URL already exists.
-         * @param {string} url
-         * @returns {boolean}
-         */
-        hasURL(url) {
-            return this._bookmarks.some(bookmark => bookmark.url === url);
-        }
-
-        /**
-         * @param {L.Bookmark} bookmark
-         * @returns {number} The index of the given bookmark, or -1 if not found.
-         */
-        indexOf(bookmark) {
-            return this._bookmarks.indexOf(bookmark);
-        }
-
-        /**
          * @returns {string} A string representation of the bookmarks collection.
          */
         toString() {
-            return `Bookmarks[${this._bookmarks.join(",")}]`;
+            return `Bookmarks[${this.#bookmarks.join(",")}]`;
         }
 
         // --- Default Event Handlers (for API interaction) ---
@@ -175,15 +152,15 @@
          * @private
          * @param {CustomEvent} event
          */
-        _defAddFn = async (event) => {
+        #defAddFn = async (event) => {
             try {
-                await _fetchAPI('/bookmarks', {
+                await this.#fetchAPI('/bookmarks', {
                     method: "POST",
                     body: JSON.stringify({ label: event.bookmark.label, url: event.bookmark.url })
                 });
                 this.fire("addSync", { success: true, bookmark: event.bookmark, target: event.target });
             } catch (error) {
-                this._handleSyncFailure("add", error);
+                this.#handleSyncFailure("add", error);
             }
         }
 
@@ -193,15 +170,15 @@
          * @private
          * @param {CustomEvent} event
          */
-        _defMoveFn = async (event) => {
+        #defMoveFn = async (event) => {
             try {
-                await _fetchAPI('/bookmarks/move', {
+                await this.#fetchAPI('/bookmarks/move', {
                     method: "POST",
                     body: JSON.stringify({ to: event.to, from: event.from })
                 });
                 this.fire("moveSync", { success: true, to: event.to, from: event.from });
             } catch (error) {
-                this._handleSyncFailure("move", error);
+                this.#handleSyncFailure("move", error);
             }
         }
 
@@ -211,15 +188,15 @@
          * @private
          * @param {CustomEvent} event
          */
-        _defRemoveFn = async (event) => {
+        #defRemoveFn = async (event) => {
             const indexes = JSON.stringify(event.positions);
             try {
-                await _fetchAPI(`/bookmarks?indexes=${encodeURIComponent(indexes)}`, {
+                await this.#fetchAPI(`/bookmarks?indexes=${encodeURIComponent(indexes)}`, {
                     method: "DELETE"
                 });
                 this.fire("removeSync", { success: true, positions: event.positions });
             } catch (error) {
-                this._handleSyncFailure("delete", error);
+                this.#handleSyncFailure("delete", error);
             }
         }
 
@@ -229,24 +206,26 @@
          * @private
          * @param {CustomEvent} event
          */
-        _defUpdateFn = async (event) => {
+        #defUpdateFn = async (event) => {
             try {
-                await _fetchAPI('/bookmarks', {
+                await this.#fetchAPI('/bookmarks', {
                     method: "PUT",
                     body: JSON.stringify({ position: event.position, label: event.bookmark.label, url: event.bookmark.url })
                 });
                 this.fire("updateSync", { success: true, position: event.position });
             } catch (error) {
-                this._handleSyncFailure("update", error);
+                this.#handleSyncFailure("update", error);
             }
         }
+
+        // --- Private Utility Methods ---
 
         /**
          * handler for bookmark:valueChange events
          * @private
          * @param {CustomEvent} event
          */
-        _handleValueChange = (event) => {
+        #handleValueChange = (event) => {
             this.updateBookmark(event.target);
         }
 
@@ -256,9 +235,9 @@
          * @private
          * @param {CustomEvent} event
          */
-        _handleAddSync = ({ bookmark }) => {
-            bookmark.after("valueChange", this._handleValueChange);
-            this._bookmarks.unshift(bookmark);
+        #handleAddSync = ({ bookmark }) => {
+            bookmark.after("valueChange", this.#handleValueChange);
+            this.#bookmarks.unshift(bookmark);
             L.fire("tracker:trackableEvent", {
                 category: "lane:bookmarkAdd",
                 action: Model.get(Model.AUTH),
@@ -271,8 +250,8 @@
          * @private
          * @param {CustomEvent} event
          */
-        _handleMoveSync = ({ to, from }) => {
-            this._bookmarks.splice(to, 0, this._bookmarks.splice(from, 1)[0]);
+        #handleMoveSync = ({ to, from }) => {
+            this.#bookmarks.splice(to, 0, this.#bookmarks.splice(from, 1)[0]);
         }
 
         /**
@@ -281,8 +260,8 @@
          * @private
          * @param {CustomEvent} event
          */
-        _handleRemoveSync = ({ positions }) => {
-            positions.reverse().forEach(pos => this._bookmarks.splice(pos, 1));
+        #handleRemoveSync = ({ positions }) => {
+            positions.reverse().forEach(pos => this.#bookmarks.splice(pos, 1));
         }
 
         /**
@@ -290,9 +269,36 @@
          * @param {String} action - The action that failed (add, move, delete, update)
          * @param {Error} error - The error that occurred
          */
-        _handleSyncFailure = (action, error) => {
+        #handleSyncFailure = (action, error) => {
             console.error(`Failed to ${action}.`, error);
             L.showMessage(`Sorry, ${action} bookmark failed. Please reload the page and try again later.`);
+        }
+
+        /**
+         * A utility function to handle API requests
+         * @param {string} endpoint - The URL path for the request.
+         * @param {object} options - The options object for the fetch call (method, body, etc.).
+         * @returns {Promise<object>} A promise that resolves with the parsed JSON response.
+         * @private
+         */
+        #fetchAPI = async (endpoint, options = {}) => {
+            const url = `${BASE_PATH}${endpoint}`;
+            const defaultHeaders = { "Content-Type": "application/json" };
+
+            const response = await fetch(url, {
+                ...options, // merge passed options
+                headers: { ...defaultHeaders, ...options.headers }
+            });
+
+            if (!response.ok) {
+                throw new Error(`API request failed: ${response.status} ${response.statusText}`);
+            }
+
+            // Return JSON response if available
+            const contentType = response.headers.get("content-type");
+            if (contentType?.includes("application/json")) {
+                return response.json();
+            }
         }
 
     }
