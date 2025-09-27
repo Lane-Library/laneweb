@@ -68,7 +68,7 @@
         #bookmarkAdded = ({ bookmark }) => {
             const li = document.createElement('li');
             const a = document.createElement('a');
-            const href = PROXY_LINKS && /^http[s]?:/.test(bookmark.url)
+            const href = PROXY_LINKS && /^https?:/.test(bookmark.url)
                 ? `${BASE_PATH}/apps/proxy/credential?url=${bookmark.url}`
                 : bookmark.url;
 
