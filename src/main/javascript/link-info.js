@@ -120,7 +120,6 @@
         get url() {
             let href = this.#node.href;
             if (this.proxy || this.proxyLogin) {
-                // href = href.substring(href.indexOf("url=") + 4);
                 const params = new URL(href).searchParams;
                 return params.get('url') || href;
             }
