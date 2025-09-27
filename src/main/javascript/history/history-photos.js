@@ -16,7 +16,7 @@
     const TARGET_ROW_WIDTH = 989;
     const TARGET_IMAGE_HEIGHT = 200;
 
-    const getFactor = (imagesToFactor) => {
+    const calculateScaleFactor = (imagesToFactor) => {
         let width = 0;
         const relevantImages = imagesToFactor.slice(0, TOTAL_PHOTOS);
         if (relevantImages.length === 0) return 1;
@@ -58,7 +58,7 @@
                             resizeImage(photo.image);
                             return photo.image;
                         });
-                        factor = getFactor(images);
+                        factor = calculateScaleFactor(images);
                         photos.slice(0, TOTAL_PHOTOS).forEach((photo, j) => {
                             const link = links[j];
                             if (link) {
@@ -85,7 +85,7 @@
     };
 
     const handleImagesComplete = () => {
-        const factor = getFactor(images);
+        const factor = calculateScaleFactor(images);
         images.slice(0, TOTAL_PHOTOS).forEach(image => {
             image.parentNode.style.width = `${Math.round(image.width * factor)}px`;
         });
