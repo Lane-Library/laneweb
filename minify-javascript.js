@@ -51,6 +51,7 @@ const bundles = [
             'src/main/javascript/shibboleth-sfx.js',
             'src/main/javascript/back-to-top.js',
             'src/main/javascript/solr-date-facet.js',
+            'src/main/javascript/solr-facet-search.js',
             'src/main/javascript/solr-facet-suggest.js',
             'src/main/javascript/solr-pagination.js',
             'src/main/javascript/shc-portal.js',

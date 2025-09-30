@@ -48,6 +48,7 @@
         "back-to-top.js",
         "solr-date-facet.js",
         "solr-pagination.js",
+        "solr-facet-search.js",
         "solr-facet-suggest.js",
         "bookcovers.js",
         "browzine.js",

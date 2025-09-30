@@ -7,68 +7,100 @@
      * When this form is submitted, it validates the dates, updates hidden 'facets'
      * input in the main search form, and then submits the main search form.
      */
-    const dateSolrForm = document.querySelector("#solr-date-form");
+    class SolrDateFacet {
 
-    // do nothing if solr-date-form is not found
-    if (!dateSolrForm) {
-        return;
+        static #ERROR_MESSAGE_YEAR_START_GREATER_THAN_YEAR_END = "The start year should be smaller than the end year";
+
+        #dateForm;
+        #searchForm;
+        #startYearInput;
+        #endYearInput;
+        #facetsInput;
+        #errorMessage;
+
+        constructor(formElement) {
+            this.#dateForm = formElement;
+            this.#searchForm = document.querySelector(".search-form");
+            this.#startYearInput = this.#dateForm.querySelector(".date.start");
+            this.#endYearInput = this.#dateForm.querySelector(".date.end");
+            this.#facetsInput = this.#searchForm.querySelector("input[name=facets]");
+            this.#errorMessage = document.querySelector("#facet-error-message");
+
+            this.#dateForm.addEventListener("submit", this.#handleDateSubmit);
+        }
+
+        /**
+         * Main handler for the solr date form submission.
+         * @param {Event} event - The form submission event.
+         */
+        #handleDateSubmit = (event) => {
+            event.preventDefault();
+            this.#errorMessage.textContent = "";
+
+            const startYear = this.#startYearInput.value;
+            const endYear = this.#endYearInput.value;
+
+            if (!this.#validateInputs(startYear, endYear)) {
+                return;
+            }
+
+            const allFacets = this.#facetsInput.value ? this.#facetsInput.value.split('::') : [];
+            const nonYearFacets = allFacets.filter(facet => !facet.startsWith('year:['));
+
+            // add the new year facet if either input has a value
+            // defaults (*, NOW) are provided but likely not necessary assuming inputs are required and of type number
+            if (startYear || endYear) {
+                const newYearFacet = `year:[${startYear || '*'} TO ${endYear || 'NOW'}]`;
+                nonYearFacets.push(newYearFacet);
+            }
+
+            this.#facetsInput.value = nonYearFacets.join('::');
+
+            // will likely never be true assuming inputs are required and of type number
+            this.#facetsInput.disabled = nonYearFacets.length === 0;
+
+            this.#searchForm.submit();
+        }
+
+        /**
+         * Validates the start and end year inputs.
+         * @param {string} startYear - The start year value.
+         * @param {string} endYear - The end year value.
+         * @returns {boolean} - True if inputs are valid, false otherwise.
+         */
+        #validateInputs(startYear, endYear) {
+            if (!this.#startYearInput.checkValidity()) {
+                this.#errorMessage.textContent = this.#startYearInput.validationMessage;
+                return false;
+            }
+            if (!this.#endYearInput.checkValidity()) {
+                this.#errorMessage.textContent = this.#endYearInput.validationMessage;
+                return false;
+            }
+            if (startYear && endYear && parseInt(startYear, 10) > parseInt(endYear, 10)) {
+                this.#errorMessage.textContent = SolrDateFacet.#ERROR_MESSAGE_YEAR_START_GREATER_THAN_YEAR_END;
+                return false;
+            }
+            return true;
+        }
     }
 
-    const searchForm = document.querySelector(".search-form");
-    const startYearInput = document.querySelector(".date.start");
-    const endYearInput = document.querySelector(".date.end");
-    const facetsInput = searchForm.querySelector("input[name=facets]");
-    const errorMessage = document.querySelector("#facet-error-message");
-
-    const ERROR_MESSAGE_YEAR_START_GREATER_THAN_YEAR_END = "The start year should be smaller than the end year";
-
     /**
-     * main handler for the solr date form
-     * @param {Event} event - form submission event
+     * Finds and initializes the Solr date facet form.
+     * This function will only initialize the form once.
      */
-    const handleDateSubmit = (event) => {
-        event.preventDefault();
-        // clear any previous errors
-        errorMessage.textContent = "";
-
-        const startYear = startYearInput.value;
-        const endYear = endYearInput.value;
-
-        // --- Validation ---
-        if (!startYearInput.checkValidity()) {
-            errorMessage.textContent = startYearInput.validationMessage;
-            return;
+    const initializeDateForm = () => {
+        const dateSolrForm = document.querySelector("#solr-date-form");
+        // do nothing if solr-date-form is not found or already initialized
+        if (dateSolrForm && dateSolrForm.dataset.initialized !== "true") {
+            new SolrDateFacet(dateSolrForm);
+            dateSolrForm.dataset.initialized = "true";
+            console.log("Solr date facet form initialized.");
         }
-        if (!endYearInput.checkValidity()) {
-            errorMessage.textContent = endYearInput.validationMessage;
-            return;
-        }
-        // ensure that the start year is not after the end year
-        // since both inputs are required, could be simplified to remove the check for empty years
-        if (startYear && endYear && parseInt(startYear, 10) > parseInt(endYear, 10)) {
-            errorMessage.textContent = ERROR_MESSAGE_YEAR_START_GREATER_THAN_YEAR_END;
-            return;
-        }
-
-        // --- update facets input ---
-        const allFacets = facetsInput.value ? facetsInput.value.split('::') : [];
-        const nonYearFacets = allFacets.filter(facet => !facet.startsWith('year:['));
-
-        // add the new year facet if either input has a value
-        // defaults (*, NOW) are provided but likely not necessary assuming inputs are required and of type number
-        if (startYear || endYear) {
-            const newYearFacet = `year:[${startYear || '*'} TO ${endYear || 'NOW'}]`;
-            nonYearFacets.push(newYearFacet);
-        }
-
-        facetsInput.value = nonYearFacets.join('::');
-
-        // will likely never be true assuming inputs are required and of type number
-        facetsInput.disabled = nonYearFacets.length === 0;
-
-        searchForm.submit();
     };
 
-    dateSolrForm.addEventListener("submit", handleDateSubmit);
+    // Initialize on page load and when new facets are loaded.
+    initializeDateForm();
+    L.on("solrFacets:loaded", initializeDateForm);
 
 })();

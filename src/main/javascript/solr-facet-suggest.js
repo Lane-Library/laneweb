@@ -3,57 +3,68 @@
     "use strict";
 
     /**
-     * Initialize suggestion component for each facet search input.
-     * When a user selects a suggestion, add the selection as a new facet
-     * to the main search form's hidden facet input and submit the form.
+     * Manages the suggestion functionality for a single facet input.
      */
+    class FacetSuggest {
 
-    // bail if facets container not present
-    if (!document.querySelector(".solrFacets")) {
-        return;
-    }
+        static #RESULT_NOT_FOUND = "No match found";
 
-    const searchForm = document.querySelector(".search-form");
-    const facetsInput = searchForm.querySelector("input[name=facets]");
-    const RESULT_NOT_FOUND = "No match found";
+        #input;
+        #suggest;
+        #searchForm;
+        #facetsInput;
 
-    document.querySelectorAll(".facet-suggestion").forEach(input => {
-        // get data from facet input attributes
-        const { facet, searchterm, facets } = input.dataset;
+        constructor(inputElement) {
+            this.#input = inputElement;
+            this.#searchForm = document.querySelector(".search-form");
+            this.#facetsInput = this.#searchForm.querySelector("input[name=facets]");
 
-        // construct the suggestion source URL
-        const sourceBase = `/apps/solr/facet/suggest?q=${searchterm}&contains={query}&facet=${facet}&facets=${encodeURI(facets)}`;
+            const { facet, searchterm, facets } = this.#input.dataset;
+            const sourceBase = `/apps/solr/facet/suggest?q=${searchterm}&contains={query}&facet=${facet}&facets=${encodeURI(facets)}`;
 
-        // initialize the suggestion component
-        const suggest = new L.Suggest(input, sourceBase, {
-            minQueryLength: 1,
-        });
+            this.#suggest = new L.Suggest(this.#input, sourceBase, { minQueryLength: 1 });
 
-        // make the suggest instance an event target
-        L.addEventTarget(suggest);
+            L.addEventTarget(this.#suggest);
+            this.#suggest.on("suggest:select", this.#handleSuggestionSelect);
+        }
 
-        // event handler for suggestion selection
-        const handleSuggestionSelect = (event) => {
+        #handleSuggestionSelect = (event) => {
             const selectedValue = event.suggestion;
 
-            // handle the special case where "no match found" is selected and clear input
-            if (selectedValue === RESULT_NOT_FOUND) {
-                input.value = '';
+            if (selectedValue === FacetSuggest.#RESULT_NOT_FOUND) {
+                this.#input.value = '';
                 return;
             }
 
-            // update the facets input value on the main search form
-            const currentFacets = facetsInput.value ? facetsInput.value.split('::') : [];
-            const newFacet = `${facet}:"${selectedValue}"`;
+            const currentFacets = this.#facetsInput.value ? this.#facetsInput.value.split('::') : [];
+            const newFacet = `${this.#input.dataset.facet}:"${selectedValue}"`;
 
             currentFacets.push(newFacet);
-            facetsInput.value = currentFacets.join('::');
-            facetsInput.disabled = false;
+            this.#facetsInput.value = currentFacets.join('::');
+            this.#facetsInput.disabled = false;
 
-            searchForm.submit();
-        };
+            this.#searchForm.submit();
+        }
+    }
 
-        suggest.on("suggest:select", handleSuggestionSelect);
-    });
+    /**
+     * Initialize suggestion component for each facet search input.
+     */
+    const initializeFacetSuggestions = () => {
+        if (!document.querySelector(".solrFacets")) {
+            return;
+        }
+
+        document.querySelectorAll(".facet-suggestion").forEach(input => {
+            if (input.dataset.initialized !== "true") {
+                new FacetSuggest(input);
+                input.dataset.initialized = "true";
+            }
+        });
+    };
+
+    // Run on page load and when new facets are loaded.
+    initializeFacetSuggestions();
+    L.on("solrFacets:loaded", initializeFacetSuggestions);
 
 })();
