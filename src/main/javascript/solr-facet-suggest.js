@@ -5,7 +5,7 @@
     /**
      * Manages the suggestion functionality for a single facet input.
      */
-    class FacetSuggest {
+    class SolrFacetSuggest {
 
         static #RESULT_NOT_FOUND = "No match found";
 
@@ -31,7 +31,7 @@
         #handleSuggestionSelect = (event) => {
             const selectedValue = event.suggestion;
 
-            if (selectedValue === FacetSuggest.#RESULT_NOT_FOUND) {
+            if (selectedValue === SolrFacetSuggest.#RESULT_NOT_FOUND) {
                 this.#input.value = '';
                 return;
             }
@@ -57,7 +57,7 @@
 
         document.querySelectorAll(".facet-suggestion").forEach(input => {
             if (input.dataset.initialized !== "true") {
-                new FacetSuggest(input);
+                input.facetSuggest = new SolrFacetSuggest(input);
                 input.dataset.initialized = "true";
             }
         });

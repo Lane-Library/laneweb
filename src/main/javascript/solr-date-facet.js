@@ -93,7 +93,7 @@
         const dateSolrForm = document.querySelector("#solr-date-form");
         // do nothing if solr-date-form is not found or already initialized
         if (dateSolrForm && dateSolrForm.dataset.initialized !== "true") {
-            new SolrDateFacet(dateSolrForm);
+            dateSolrForm.dateFacet = new SolrDateFacet(dateSolrForm);
             dateSolrForm.dataset.initialized = "true";
             console.log("Solr date facet form initialized.");
         }

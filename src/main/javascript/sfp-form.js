@@ -87,6 +87,6 @@
         }
     }
 
-    new SFPFormController(form);
+    form.sfpController = new SFPFormController(form);
 
 })();

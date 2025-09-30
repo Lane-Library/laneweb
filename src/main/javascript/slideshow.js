@@ -119,6 +119,6 @@
         }
     }
 
-    new PagedSlideshow(slideContainer);
+    slideContainer.pageSlideShow = new PagedSlideshow(slideContainer);
 
 })();
