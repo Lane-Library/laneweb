@@ -204,6 +204,12 @@ footer:nth-of-type(3) {
     background-color: #0077B5;
 }
 
+@media (max-width : 1380px) {
+    .footer-organization.footer-org-som:before {
+        height: 0;
+        border:0;
+    }
+}
 
 @media (max-width : 700px) {
     .footer-organization-address {
@@ -240,6 +246,10 @@ footer:nth-of-type(3) {
 
     .footer-organization .social-logos {
         padding-top: 10px;
+    }
+
+    .footer-organization .flex-container-nowrap {
+        flex-wrap: wrap;
     }
 
 }
