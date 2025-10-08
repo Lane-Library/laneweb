@@ -34,7 +34,7 @@
             getImgsForUpdate(viewport) {
                 const imagesForUpdate = new Set();
                 for (const [bcid, nodes] of imageMap.entries()) {
-                    if (nodes.some(node => viewport.nearView(node, 3))) {
+                    if (nodes.some(node => !node.dataset.requested && viewport.nearView(node, 3))) {
                         imagesForUpdate.add(bcid);
                     }
                 }
@@ -54,6 +54,8 @@
                         const imageNodes = imageMap.get(bcid);
                         imageNodes.forEach(node => {
                             node.innerHTML = `<img src='${src}' alt='cover image'/>`;
+                            // set a data-requested attribute to indicate the image has been requested
+                            node.dataset.requested = "true";
                         });
 
                         // clean up the map to prevent re-processing

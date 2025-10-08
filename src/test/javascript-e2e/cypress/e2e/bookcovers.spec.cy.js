@@ -29,4 +29,35 @@ describe('Book Covers', () => {
         cy.wait('@bookcoversReq');
     })
 
+    it('does not request bookcover images for already loaded images', () => {
+        cy.viewport(1101, 750);
+
+        cy.intercept('/apps/bookcovers*', { fixture: 'bookcovers/search.json' }).as('bookcoversReq');
+
+        cy.visit('/cypress-test/search.html?q=id%3Abib-17&source=all-all&facets=recordType%3A"bib"');
+
+        cy.scrollTo(0, 100);
+        cy.wait('@bookcoversReq');
+
+        cy.get('li[data-sid=bib-17] .bookcover img').should('exist');
+        cy.get('li[data-sid=bib-17] .bookcover img').should('have.attr', 'src').and('eq', '//fake/17.png');
+
+        cy.get('@bookcoversReq.all').then((requests) => {
+            // Assert that we have exactly one request so far.
+            expect(requests).to.have.length(1);
+        });
+
+        // Scroll up and down to try to trigger more requests
+        cy.scrollTo('bottom');
+        // Add a small wait to ensure the scroll event is processed by the browser
+        cy.wait(500);
+        cy.scrollTo('top');
+        cy.wait(500);
+        cy.scrollTo('bottom');
+        cy.wait(500);
+
+        // Assert that NO new requests have been made
+        cy.get('@bookcoversReq.all').should('have.length', 1);
+    })
+
 })
