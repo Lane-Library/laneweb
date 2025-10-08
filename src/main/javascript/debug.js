@@ -65,7 +65,8 @@
         "zotero.js",
         "altmetric.js",
         "mobile-navigation.js",
-        "sfp-form.js"
+        "sfp-form.js",
+        "history-photos.js"
     ];
 
     // Model doesn't exist yet, get basePath by hand

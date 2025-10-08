@@ -33,6 +33,5 @@
         </div>
         <script type="text/javascript" id="model">//</script>
         <script type="text/javascript" src="/resources/javascript/debug.js"></script>
-        <script type="text/javascript" src="/resources/javascript/instrumented/history/history-photos.js"></script>
     </body>
 </html>

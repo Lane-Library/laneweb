@@ -69,15 +69,8 @@ const bundles = [
             'src/main/javascript/table-hide-empty-columns.js',
             'src/main/javascript/zotero.js',
             'src/main/javascript/altmetric.js',
-            'src/main/javascript/sfp-form.js'
-        ]
-    },
-    {
-        name: 'lane-history.min.js',
-        output: 'target/classes/static/resources/javascript/history/lane-history.min.js',
-        inputs: [
-            'src/main/javascript/history/history-photos.js',
-            'src/main/javascript/back-to-top.js'
+            'src/main/javascript/sfp-form.js',
+            'src/main/javascript/history-photos.js'
         ]
     }
 ];

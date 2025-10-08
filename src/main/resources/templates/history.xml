@@ -38,6 +38,5 @@
         </xi:include>
         <script type="text/javascript" id="model">//</script>
         <script src="/resources/javascript/lane-all.min.js"></script>
-        <script src="/resources/javascript/history/lane-history.min.js"></script>
     </body>
 </html>
