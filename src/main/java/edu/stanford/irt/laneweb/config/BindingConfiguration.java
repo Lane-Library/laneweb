@@ -148,8 +148,9 @@ public class BindingConfiguration {
         // hospital 171.65.128.0 - 171.65.255.255
         proxyCIDRRange.add(new CIDRRange("171.65.128.0/17"));
         List<CIDRRange> noProxyCIDRRange = new ArrayList<>();
-        //
+        // Stanford networks that all vendors know about should not go through proxy
         noProxyCIDRRange.add(new CIDRRange("171.64.0.0/14"));
+        noProxyCIDRRange.add(new CIDRRange("204.63.224.0/21"));
         return new ProxyLinks(proxyCIDRRange, noProxyCIDRRange);
     }
 
