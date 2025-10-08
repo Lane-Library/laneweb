@@ -95,7 +95,6 @@
         if (dateSolrForm && dateSolrForm.dataset.initialized !== "true") {
             dateSolrForm.dateFacet = new SolrDateFacet(dateSolrForm);
             dateSolrForm.dataset.initialized = "true";
-            console.log("Solr date facet form initialized.");
         }
     };
 
