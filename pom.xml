@@ -354,9 +354,10 @@
                         <goals>
                             <goal>install-node-and-npm</goal>
                         </goals>
+                        <!-- node and npm versions from: https://nodejs.org/en/about/previous-releases-->
                         <configuration>
-                            <nodeVersion>v23.1.0</nodeVersion>
-                            <npmVersion>7.0.0</npmVersion>
+                            <nodeVersion>v24.9.0</nodeVersion>
+                            <npmVersion>11.6.0</npmVersion>
                         </configuration>
                     </execution>
                     <execution>
