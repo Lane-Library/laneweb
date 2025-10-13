@@ -1,5 +1,7 @@
 package edu.stanford.irt.laneweb.config;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 import org.apache.hc.client5.http.config.RequestConfig;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -30,10 +33,8 @@ public class RESTClientConfiguration {
 
     @Bean
     HttpComponentsClientHttpRequestFactory getRequestFactory() {
-        RequestConfig requestConfig = RequestConfig.custom()
-                .setResponseTimeout(HTTP_READ_TIMEOUT, TimeUnit.SECONDS)
-                .setConnectionRequestTimeout(HTTP_CONNECT_TIMEOUT, TimeUnit.SECONDS)
-                .build();
+        RequestConfig requestConfig = RequestConfig.custom().setResponseTimeout(HTTP_READ_TIMEOUT, TimeUnit.SECONDS)
+                .setConnectionRequestTimeout(HTTP_CONNECT_TIMEOUT, TimeUnit.SECONDS).build();
         CloseableHttpClient httpClient = HttpClientBuilder.create().setDefaultRequestConfig(requestConfig).build();
         HttpComponentsClientHttpRequestFactory hcchrf = new HttpComponentsClientHttpRequestFactory(httpClient);
         hcchrf.setConnectionRequestTimeout(Duration.ofSeconds(HTTP_CONNECT_TIMEOUT));
@@ -62,5 +63,15 @@ public class RESTClientConfiguration {
     @Bean
     RESTService restService(final RestClient restClient) {
         return new RESTService(restClient);
+    }
+
+    @Bean(name = "java.net.URI/oauth2-server")
+    public URI getOauthUri(RestClient restClient,
+            @Value("${edu.stanford.irt.laneweb.authentication-server.scheme}") final String scheme,
+            @Value("${edu.stanford.irt.laneweb.authentication-server.host}") final String host,
+            @Value("${edu.stanford.irt.laneweb.authentication-server.port}") final int port,
+            @Value("${edu.stanford.irt.laneweb.authentication-server.path}") final String path)
+            throws URISyntaxException {
+        return new URI(scheme, null, host, port, path, null, null);
     }
 }

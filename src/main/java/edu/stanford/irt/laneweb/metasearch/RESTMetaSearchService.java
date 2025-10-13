@@ -10,7 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 
 import edu.stanford.irt.laneweb.LanewebException;
-import edu.stanford.irt.laneweb.rest.OauthRESTService;
+import edu.stanford.irt.laneweb.rest.Oauth.OauthRESTService;
 import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.status.ApplicationStatus;
 

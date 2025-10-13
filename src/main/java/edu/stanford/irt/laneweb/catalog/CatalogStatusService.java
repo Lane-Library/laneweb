@@ -2,7 +2,7 @@ package edu.stanford.irt.laneweb.catalog;
 
 import java.net.URI;
 
-import edu.stanford.irt.laneweb.rest.OauthRESTService;
+import edu.stanford.irt.laneweb.rest.Oauth.OauthRESTService;
 import edu.stanford.irt.status.ApplicationStatus;
 import edu.stanford.irt.status.StatusService;
 

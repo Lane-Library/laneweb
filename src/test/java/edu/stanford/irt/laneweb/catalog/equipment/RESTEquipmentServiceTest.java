@@ -18,8 +18,8 @@ import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import edu.stanford.irt.laneweb.rest.OauthRESTService;
 import edu.stanford.irt.laneweb.rest.TypeReference;
+import edu.stanford.irt.laneweb.rest.Oauth.OauthRESTService;
 
 public class RESTEquipmentServiceTest {
 

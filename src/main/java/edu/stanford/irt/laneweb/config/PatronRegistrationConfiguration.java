@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 import edu.stanford.irt.laneweb.folio.RESTUserService;
 import edu.stanford.irt.laneweb.folio.UserService;
-import edu.stanford.irt.laneweb.rest.OauthRESTService;
+import edu.stanford.irt.laneweb.rest.Oauth.OauthRESTService;
 
 @Configuration
 public class PatronRegistrationConfiguration {

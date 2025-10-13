@@ -4,8 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
-import edu.stanford.irt.laneweb.rest.OauthRESTService;
 import edu.stanford.irt.laneweb.rest.TypeReference;
+import edu.stanford.irt.laneweb.rest.Oauth.OauthRESTService;
 
 public class RESTUserService implements UserService {
 

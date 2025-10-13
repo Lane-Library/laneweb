@@ -15,7 +15,7 @@ import edu.stanford.irt.laneweb.catalog.equipment.EquipmentListGenerator;
 import edu.stanford.irt.laneweb.catalog.equipment.EquipmentListSAXStrategy;
 import edu.stanford.irt.laneweb.catalog.equipment.EquipmentService;
 import edu.stanford.irt.laneweb.catalog.equipment.RESTEquipmentService;
-import edu.stanford.irt.laneweb.rest.OauthRESTService;
+import edu.stanford.irt.laneweb.rest.Oauth.OauthRESTService;
 
 @Configuration
 public class EquipmentConfiguration {

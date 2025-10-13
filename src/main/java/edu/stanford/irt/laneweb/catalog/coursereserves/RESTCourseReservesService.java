@@ -5,8 +5,8 @@ import java.util.List;
 
 import edu.stanford.irt.coursereserves.Course;
 import edu.stanford.irt.coursereserves.CourseReservesItemList;
-import edu.stanford.irt.laneweb.rest.OauthRESTService;
 import edu.stanford.irt.laneweb.rest.TypeReference;
+import edu.stanford.irt.laneweb.rest.Oauth.OauthRESTService;
 
 public class RESTCourseReservesService implements CourseReservesService {
 
