@@ -199,6 +199,11 @@
 
     /**
      * Scans the DOM for tooltip content and trigger elements, then initializes the Tooltip manager.
+     * This function supports two kinds of tooltips:
+     * 1. ID-based tooltips defined in a central <div class="tooltips"> block, linked by ID
+     *    (e.g. includes/tooltips.html).
+     * 2. Simple tooltips defined directly on an element with the 'tooltip-trigger' class and a
+     *    'title' attribute (e.g. solr-facets.xsl, search/clinical-all.html).
      */
     const initializeTooltips = () => {
         const delegate = document.querySelector('.content') || document.body;
@@ -215,7 +220,13 @@
             }
         });
 
-        if (contentMap.size > 0) {
+        const hasIdBasedTooltips = contentMap.size > 0;
+        const hasMarkupBasedTooltips = delegate.querySelector(`.${TRIGGER_CLASS}`);
+
+        if (hasIdBasedTooltips || hasMarkupBasedTooltips) {
+            // The Tooltip class is instantiated with the contentMap.
+            // When it encounters a trigger without an ID in the map, it
+            // automatically falla back to using the element's `title` attribute.
             L.ToolTips = new Tooltip({ delegate, contentMap });
         }
     };
