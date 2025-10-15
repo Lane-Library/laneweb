@@ -172,12 +172,6 @@ public class MetasearchConfiguration {
         return new OauthRESTService(restClient, userInfo, tokenEndpoint);
     }
 
-    @Bean("restService/metasearch")
-    public BasicAuthRESTService getMetasearchBasicAuthRESTService(RestClient restClient,
-            @Value("${edu.stanford.irt.laneweb.metasearch.userInfo}") final String userInfo) {
-        return new BasicAuthRESTService(restClient, userInfo);
-    }
-
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/search-directory") @Scope("prototype")
     public Transformer searchDirectoryTransformer() {
         return new SearchDirectoryTransformer();

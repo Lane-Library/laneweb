@@ -130,12 +130,6 @@ hr {
     text-transform: uppercase;
 }
 
-/*hide Edge bookmarklet instructions, made visible via javascript (lane-ie.js)*/
-.bookmarklet-edge,
-.no-js {
-    display: none;
-}
-
 /*make text appear bigger in the main content, mostly for quotes. quote is for middle column, quote-med is for sides*/
 .quote,
 .quote-sig {

@@ -92,6 +92,8 @@ public class IPGroupTest {
         assertEquals(IPGroup.SU, IPGroup.getGroupForIP("171.64.255.255"));
         assertEquals(IPGroup.SU, IPGroup.getGroupForIP("171.66.0.0"));
         assertEquals(IPGroup.SU, IPGroup.getGroupForIP("171.67.255.255"));
+        assertEquals(IPGroup.SU, IPGroup.getGroupForIP("204.63.225.191"));
+        assertEquals(IPGroup.SU, IPGroup.getGroupForIP("204.63.226.203"));
     }
 
     @Test
