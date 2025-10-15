@@ -19,11 +19,11 @@
     };
 
     // --- define the final L.Model object ---
-    L.Model = {
+    L.Model = Object.freeze({
         get: (prop) => window.model[prop],
         set: (prop, value) => { window.model[prop] = value; },
 
         // spread properties from constants map into the final object
         ...MODEL_CONSTANTS
-    };
+    });
 }
