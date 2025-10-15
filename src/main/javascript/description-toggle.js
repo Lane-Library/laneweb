@@ -78,9 +78,6 @@
         }
     });
 
-    // Reinitialize when new content is loaded into the page
-    L.on("lane:new-content", initializeDescriptionToggles);
-
     // Run the initialization for the initial page load
     initializeDescriptionToggles();
 

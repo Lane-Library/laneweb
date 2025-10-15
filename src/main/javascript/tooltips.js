@@ -233,10 +233,4 @@
 
     initializeTooltips();
 
-    // Re-initialize when new content is loaded.
-    L.on("lane:new-content", () => {
-        L.ToolTips?.destroy();
-        initializeTooltips();
-    });
-
 })();
