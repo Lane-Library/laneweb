@@ -47,21 +47,27 @@
              * @param {object} updates - An object mapping bcids to image URLs.
              */
             update(updates) {
-                for (const [bcid, url] of Object.entries(updates)) {
-                    if (url && imageMap.has(bcid)) {
-                        // case 132771: Use protocol-relative URLs.
-                        const src = url.substring(url.indexOf(":") + 1);
-                        const imageNodes = imageMap.get(bcid);
+                // process all bcids that were part of the request
+                updates.bcids.forEach(bcid => {
+                    const url = updates.covers[bcid];
+                    const imageNodes = imageMap.get(bcid);
+
+                    if (imageNodes) {
+                        if (url) {
+                            // case 132771: Use protocol-relative URLs.
+                            const src = url.substring(url.indexOf(":") + 1);
+                            imageNodes.forEach(node => {
+                                node.innerHTML = `<img src='${src}' alt='cover image'/>`;
+                            });
+                        }
+                        // set data-requested on all nodes for this bcid to prevent re-requesting
                         imageNodes.forEach(node => {
-                            node.innerHTML = `<img src='${src}' alt='cover image'/>`;
-                            // set a data-requested attribute to indicate the image has been requested
                             node.dataset.requested = "true";
                         });
-
-                        // clean up the map to prevent re-processing
-                        imageMap.delete(bcid);
                     }
-                }
+                    // clean up the map to prevent re-processing, even if no URL was found
+                    imageMap.delete(bcid);
+                });
             }
         };
     })(document.querySelectorAll(".bookcover[data-bcids],.bookcover[data-bibid]"));
@@ -80,8 +86,8 @@
             async getBookCoverURLs(bcids) {
                 // Take only the first 20 bcids using slice().
                 const params = bcids.slice(0, 20)
-                                    .map(bcid => `bcid=${encodeURIComponent(bcid)}`)
-                                    .join('&');
+                    .map(bcid => `bcid=${encodeURIComponent(bcid)}`)
+                    .join('&');
 
                 const url = `${baseURL}${params}`;
 
@@ -91,7 +97,8 @@
                         throw new Error(`HTTP error! status: ${response.status} ${response.statusText}`);
                     }
                     const data = await response.json();
-                    service.fire("covers", { covers: data });
+                    // Fire event with both the returned covers and the list of bcids that were requested.
+                    service.fire("covers", { covers: data, bcids: bcids.slice(0, 20) });
                 } catch (error) {
                     console.error("Failed to fetch book covers:", error);
                 }
@@ -108,7 +115,7 @@
      */
     const controller = {
         covers(event) {
-            view.update(event.covers);
+            view.update(event);
         },
 
         update(viewport) {
