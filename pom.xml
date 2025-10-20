@@ -350,7 +350,6 @@
                 <executions>
                     <execution>
                         <id>install node and npm</id>
-                        <phase>test</phase>
                         <goals>
                             <goal>install-node-and-npm</goal>
                         </goals>
