@@ -1,10 +1,10 @@
 package edu.stanford.irt.laneweb.servlet.mvc;
 
-import jakarta.servlet.http.HttpServletRequest;
-
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
@@ -13,9 +13,19 @@ import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.proxy.Ticket;
 import edu.stanford.irt.laneweb.servlet.binding.TicketDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class ProxyCredentialController {
+
+
+    // Exception to handle bad requests with a 400 Bad Request status
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    static class BadRequestException extends RuntimeException {
+
+        private static final long serialVersionUID = 1L;
+        // no body needed
+    }
 
     private static final String PROXY_URL_BASE = "https://login.laneproxy.stanford.edu/login?user=";
 
@@ -36,8 +46,8 @@ public class ProxyCredentialController {
             @ModelAttribute(Model.USER_ID) final String userid,
             @ModelAttribute(Model.TICKET) final Ticket ticket) {
         String queryString = request.getQueryString();
-        if (queryString == null) {
-            throw new IllegalArgumentException("null queryString");
+        if (queryString == null || queryString.isEmpty()) {
+            throw new BadRequestException();
         }
         StringBuilder sb = new StringBuilder();
         if (userid == null || ticket == null) {
@@ -57,8 +67,8 @@ public class ProxyCredentialController {
             @ModelAttribute(Model.USER_ID) final String userid,
             @ModelAttribute(Model.TICKET) final Ticket ticket) {
         String queryString = request.getQueryString();
-        if (queryString == null) {
-            throw new IllegalArgumentException("null queryString");
+        if (queryString == null || queryString.isEmpty()) {
+            throw new BadRequestException();
         }
         String url = new StringBuilder(PROXY_URL_BASE).append(userid).append(TICKET_PARAM).append(ticket).append('&')
                 .append(queryString).toString();

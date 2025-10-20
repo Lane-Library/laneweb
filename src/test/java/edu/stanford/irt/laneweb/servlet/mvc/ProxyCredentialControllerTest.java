@@ -4,8 +4,8 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
+import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.Collections;
 
@@ -81,11 +81,8 @@ public class ProxyCredentialControllerTest {
     public void testProxyRedirectNullQueryString() {
         expect(this.request.getQueryString()).andReturn(null);
         replay(this.request, this.ticketBinder);
-        try {
-            this.controller.proxyRedirect(this.request, null, "ditenus", this.ticket);
-            fail("should throw IllegalStateException, null query-string");
-        } catch (IllegalArgumentException e) {
-        }
+        assertThrows(ProxyCredentialController.BadRequestException.class,
+                () -> this.controller.proxyRedirect(this.request, null, "ditenus", this.ticket));
         verify(this.request, this.ticketBinder);
     }
 
@@ -111,11 +108,8 @@ public class ProxyCredentialControllerTest {
     public void testSecureProxyRedirectNullQueryString() {
         expect(this.request.getQueryString()).andReturn(null);
         replay(this.request, this.ticketBinder);
-        try {
-            this.controller.secureProxyRedirect(this.request, null, "ditenus", this.ticket);
-            fail("should throw IllegalStateException, null query-string");
-        } catch (IllegalArgumentException e) {
-        }
+        assertThrows(ProxyCredentialController.BadRequestException.class,
+                () -> this.controller.secureProxyRedirect(this.request, null, "ditenus", this.ticket));
         verify(this.request, this.ticketBinder);
     }
 

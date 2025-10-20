@@ -55,8 +55,8 @@ public class HTMLCMELinkTransformer extends AbstractCMELinkTransformer {
             }
         } else if (INPUT.equals(localName)) {
             String value = atts.getValue(VALUE);
-            String emrid = getEmrid();
-            if (null != emrid && EMRID_REPLACEMENT_STRING.equals(value)) {
+            String emrid = null == getEmrid() ? "" : getEmrid();
+            if (EMRID_REPLACEMENT_STRING.equals(value)) {
                 AttributesImpl newAttributes = new AttributesImpl(atts);
                 newAttributes.setValue(newAttributes.getIndex(VALUE), emrid);
                 this.xmlConsumer.startElement(uri, localName, name, newAttributes);

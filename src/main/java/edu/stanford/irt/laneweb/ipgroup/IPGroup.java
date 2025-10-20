@@ -58,6 +58,7 @@ public final class IPGroup implements Serializable {
         ROOT.addSubrange(new CIDRRange("128.12.0.0/16", SU));
         ROOT.addSubrange(new CIDRRange("134.79.0.0/16", SU));
         ROOT.addSubrange(new CIDRRange("171.64.0.0/14", SU));
+        ROOT.addSubrange(new CIDRRange("204.63.224.0/21", SU));
     }
 
     private String stringValue;
