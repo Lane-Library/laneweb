@@ -1,28 +1,26 @@
-(function() {
+(() => {
 
     "use strict";
 
-
-    document.querySelectorAll('.hldgsTrigger').forEach(function(node) {
-        node.addEventListener("click", function(event) {
+    document.querySelectorAll('.hldgsTrigger').forEach(node => {
+        node.addEventListener("click", (event) => {
             event.preventDefault();
-            let eresource = node.closest("li"),
-                ancestor = node.closest(".hldgsContainer"),
-                active = ancestor.classList.contains("active"),
-                actionLabel;
+
+            const eresource = node.closest("li");
+            const ancestor = node.closest(".hldgsContainer");
+            const wasActive = ancestor.classList.contains("active");
+
             ancestor.classList.toggle("active");
-            if (active) {
-                actionLabel = ancestor.querySelector('.hldgsHeader').textContent.trim() + " -- close";
-            } else {
-                actionLabel = ancestor.querySelector('.hldgsHeader').textContent.trim() + " -- open";
-            }
+
+            // Use a ternary operator and template literal for a concise label
+            const actionLabel = `${ancestor.querySelector('.hldgsHeader').textContent.trim()} -- ${wasActive ? 'close' : 'open'}`;
+
             L.fire("tracker:trackableEvent", {
                 category: "lane:hldgsTrigger",
                 action: actionLabel,
                 label: eresource.querySelector('.primaryLink').textContent
             });
         });
-    })
-
+    });
 
 })();

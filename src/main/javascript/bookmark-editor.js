@@ -1,248 +1,252 @@
-(function () {
+(() => {
 
     "use strict";
 
-    let Bookmark = L.Bookmark,
-        HTMLTemplate = document.querySelector("#bookmark-editor-template");
+    const Bookmark = L.Bookmark;
+    const HTMLTemplate = document.querySelector("#bookmark-editor-template");
 
     class BookmarkEditor {
-        constructor(args) {
-            this.bookmark = args.bookmark;
-            this.srcNode = args.srcNode;
-            this.position = args.position;
-            this.className = "bookmark-editor";
-            this.editing = false;
-            this.renderUI();
-            this.bindUI();
-            this.syncUI();
+
+        #anchorElement;
+        #bookmark;
+        #className;
+        #editing;
+        #labelInput;
+        #position;
+        #srcNode;
+        #urlInput;
+
+        constructor({ bookmark, srcNode, position }) {
+            this.#bookmark = bookmark;
+            this.#srcNode = srcNode;
+            this.#position = position;
+            this.#className = "bookmark-editor";
+            this.#editing = false;
+
+            // Properties to cache DOM elements, initialized to null.
+            this.#labelInput = null;
+            this.#urlInput = null;
+            this.#anchorElement = null;
+
+            this.#renderUI();
+            this.#bindUI();
+            this.#syncUI();
         }
 
-
+        // --- Constructor and Lifecycle Methods ---
 
         /**
-         * Creates text inputs and buttons for the editor using the #bookmark-editor-template from form.stx.
-         * @method renderUI
+         * Creates text inputs and buttons for the editor.
          */
-        renderUI() {
-            this.srcNode.classList.add("bookmark-editor-content");
-            this.srcNode.innerHTML += HTMLTemplate.innerHTML;
+        #renderUI() {
+            this.#srcNode.classList.add("bookmark-editor-content");
+            this.#srcNode.insertAdjacentHTML('beforeend', HTMLTemplate.innerHTML);
         }
 
         /**
          * Sets up event handlers.
-         * @method bindUI
          */
-        bindUI() {
-            //Add EventTarget attributes to the Bookmarks prototype
-            L.addEventTarget(this, {
-                prefix: 'bookmarkEditor'
-            });
+        #bindUI() {
+            L.addEventTarget(this, { prefix: 'bookmarkEditor' });
 
-            const buttons = this.srcNode.querySelectorAll("button");
+            const buttons = this.#srcNode.querySelectorAll("button");
             buttons.forEach(button => {
-                button.addEventListener("click", (event) => this._handleButtonClick(event));
+                button.addEventListener("click", (event) => this.#handleButtonClick(event));
             });
-            this.on("editingChange", (e) => this._handleEditingChange(e));
-            this.srcNode.draggable = true;
-            this.srcNode.addEventListener("dragstart", (event) => { this._handleDragStart(event) });
-            this.srcNode.addEventListener("dragend", (event) => { this._handleDragEnd(event) });
-            this.srcNode.addEventListener("drop", (event) => { this._handleDragDrop(event) });
-            this.srcNode.addEventListener("dragover", (event) => { this._handleDragOver(event) });
+            this.on("editingChange", this.#handleEditingChange.bind(this));
+            this.#srcNode.draggable = true;
+            this.#srcNode.addEventListener("dragstart", (event) => this.#handleDragStart(event));
+            this.#srcNode.addEventListener("dragend", (event) => this.#handleDragEnd(event));
+            this.#srcNode.addEventListener("drop", (event) => this.#handleDragDrop(event));
+            this.#srcNode.addEventListener("dragover", (event) => this.#handleDragOver(event));
         }
 
         /**
          * Sets up the inputs and truncates long labels.
-         * @method syncUI
          */
-        syncUI() {
-            let srcNode = this.srcNode;
-            this._labelInput = srcNode.querySelector("input[name='label']");
-            this._urlInput = srcNode.querySelector("input[name='url']");
-            const urlInputElement = srcNode.querySelector("input[name='url']");
-            urlInputElement.addEventListener("focus", (event) => this._setDefaultUrlInputText(event));
-            this._truncateLabel();
+        #syncUI() {
+            this.#labelInput = this.#srcNode.querySelector("input[name='label']");
+            this.#urlInput = this.#srcNode.querySelector("input[name='url']");
+            this.#anchorElement = this.#srcNode.querySelector("a");
+            this.#urlInput.addEventListener("focus", () => this.#setDefaultUrlInputText());
+            this.#truncateLabel();
         }
 
-        setEditing(newVal) {
-            this.editing = newVal;
-            this.fire("editingChange", { newVal: newVal });
+        // --- Public Methods ---
+
+        get bookmark() { return this.#bookmark; }
+
+        set editing(newVal) {
+            if (this.#editing !== newVal) {
+                this.#editing = newVal;
+                this.fire("editingChange", { newVal });
+            }
+        }
+
+        set position(newVal) {
+            if (this.#position !== newVal) {
+                this.#position = newVal;
+            }
         }
 
         /**
-         * Responds to the cancel button.  If there is no associated bookmark, like when this editor
-         * is for a new bookmark that hasn't been created yet, this editor gets destroyed, otherwise
-         * the editing attribute is set to false
-         * @method cancel
+         * Responds to the cancel button.
          */
         cancel() {
-            let addBookmarkContainer = document.querySelector(".addBookmarkContainer");
-            if (this.bookmark) {
-                this.setEditing(false);
+            if (this.#bookmark) {
+                this.editing = false;
             } else {
-                this._labelInput = null;
-                this._urlInput = null;
                 this.destroy();
-                if (addBookmarkContainer) {
-                    addBookmarkContainer.classList.toggle("active");
-                }
+                document.querySelector(".addBookmarkContainer")?.classList.toggle("active");
             }
         }
 
         destroy() {
-            this.setEditing(false);
-            this.bookmark = null;
-            this.srcNode.remove(true);
+            this.editing = false;
+            this.#bookmark = null;
+            this.#srcNode.remove();
             this.fire("destroy", { editor: this });
         }
 
         /**
          * Responds to the edit button by showing the editContainer form and hiding the bookmark anchor
-         * @method edit
          */
         edit() {
-            if (this.bookmark) {
-                this.setEditing(true);
+            if (this.#bookmark) {
+                this.editing = true;
                 this.reset();
             }
         }
 
         /**
-         * Responds to a click on the delete button. Relies on the bookmarks object to find the index 
-         * of the bookmark to delete and to remove the bookmark.
-         * @method delete
+         * Deletes the associated bookmark.
          */
         delete() {
-            let bookmarks = L.BookmarksWidget.bookmarks,
-                index = bookmarks.indexOf(this.bookmark);
-            bookmarks.removeBookmarks([index]);
+            const { bookmarks } = L.BookmarksWidget;
+            const index = bookmarks.indexOf(this.#bookmark);
+            if (index > -1) {
+                bookmarks.removeBookmarks([index]);
+            }
         }
 
         /**
          * Responds to the save button.  If the inputs lack value, puts 'required' in to the placeholder
          * and does nothing else.  If there is no associated bookmark, creates a new one, otherwise
          * changes the bookmark label and url based on what is in the inputs.
-         * @method save
-         */
+        */
         save() {
-            let newlabel = this._labelInput.value,
-                newurl = this._urlInput.value,
-                bookmark = this.bookmark;
-            if (!newlabel || !newurl) {
-                if (!newlabel) {
-                    this._labelInput.placeholder = "required";
-                }
-                if (!newurl) {
-                    this._urlInput.placeholder = "required";
-                }
-                return;
+            const newLabel = this.#labelInput.value.trim();
+            const newUrl = this.#urlInput.value.trim();
+
+            let isValid = true;
+            if (!newLabel) {
+                this.#labelInput.placeholder = "required";
+                isValid = false;
             }
-            if (bookmark) {
-                if (newlabel !== bookmark.getLabel() || newurl !== bookmark.getUrl()) {
-                    bookmark.setValues(newlabel, newurl);
-                    this.srcNode.querySelector("a").textContent = newlabel;
-                    this.srcNode.querySelector("a").href = newurl;
+            if (!newUrl) {
+                this.#urlInput.placeholder = "required";
+                isValid = false;
+            }
+            if (!isValid) return;
+
+            if (this.#bookmark) {
+                if (newLabel !== this.#bookmark.label || newUrl !== this.#bookmark.url) {
+                    this.#bookmark.setValues(newLabel, newUrl);
+                    this.#anchorElement.textContent = newLabel;
+                    this.#anchorElement.href = newUrl;
                 }
             } else {
-                bookmark = new Bookmark(newlabel, newurl);
-                this.bookmark = bookmark;
-                L.BookmarksWidget.bookmarks.addBookmark(bookmark);
+                this.#bookmark = new Bookmark(newLabel, newUrl);
+                L.BookmarksWidget.bookmarks.addBookmark(this.#bookmark);
             }
-            this.setEditing(false);
+            this.editing = false;
         }
 
         /**
          * Responds to the reset button.  Resets the text inputs to the bookmark's values.
          * If there is no bookmark, sets the inputs to empty strings.
-         * @method reset
          */
         reset() {
-            let bookmark = this.bookmark;
-            this._labelInput.placeholder = "Name";
-            this._urlInput.placeholder = "Location";
-            if (bookmark) {
-                this._labelInput.value = bookmark.getLabel();
-                this._urlInput.value = bookmark.getUrl();
+            this.#labelInput.placeholder = "Name";
+            this.#urlInput.placeholder = "Location";
+            if (this.#bookmark) {
+                this.#labelInput.value = this.#bookmark.label;
+                this.#urlInput.value = this.#bookmark.url;
             } else {
-                this._labelInput.value = ""
-                this._urlInput.value = ""
+                this.#labelInput.value = "";
+                this.#urlInput.value = "";
             }
         }
 
         /**
          * Update the editors anchor text and url with the bookmark's label and url.
-         * @method update
          */
         update() {
-            let anchor = this.srcNode.querySelector("a"),
-                bookmark = this.bookmark;
-            anchor.innerHTML = bookmark.getLabel();
-            anchor.href = bookmark.getUrl();
-            this._truncateLabel();
+            this.#anchorElement.textContent = this.#bookmark.label;
+            this.#anchorElement.href = this.#bookmark.url;
+            this.#truncateLabel();
         }
 
+        // --- Private Methods ---
+
         /**
-         * The click handler for buttons, delegates to the function named the same as the buttons value.
-         * @method _handleButtonClick
+         * Handles button clicks, delegating to the appropriate method.
          * @private
-         * @param event {CustomEvent}
          */
-        _handleButtonClick(event) {
+        #handleButtonClick(event) {
             event.preventDefault();
-            this[event.currentTarget.getAttribute("value")].call(this, event);
+            const action = event.currentTarget.value;
+            if (typeof this[action] === 'function') {
+                this[action]();
+            }
         }
 
-        // /**
-        //  * Called when the editing attribute changes.  Toggles the yui3-bookmark-editor-active class.
-        //  * @method _handleEditingChange
-        //  * @private
-        //  * @param event {CustomEvent}
-        //  */
-        _handleEditingChange(event) {
-            let srcNode = this.srcNode,
-                activeClass = this.className + "-active";
-            srcNode.classList.toggle('active');
+        /**
+         * Toggles the active class when editing state changes.
+         * @private
+         */
+        #handleEditingChange(event) {
+            const activeClass = `${this.#className}-active`;
+            this.#srcNode.classList.toggle('active', event.newVal);
+            this.#srcNode.classList.toggle(activeClass, event.newVal);
+
             if (event.newVal) {
-                srcNode.classList.add(activeClass);
                 this.reset();
-            } else {
-                srcNode.classList.remove(activeClass);
             }
         }
 
         /**
-         * Truncates the link text to 130 characters if necessary.
-         * @method _truncateLabel
+         * Truncates the link text if it's too long.
          * @private
          */
-        _truncateLabel() {
-            let anchor = this.srcNode.querySelector("a"),
-                label = anchor.innerHTML;
+        #truncateLabel() {
+            const label = this.#anchorElement.innerHTML;
             if (label.length > 130) {
-                anchor.innerHTML = label.substring(0, 130) + "...";
+                this.#anchorElement.innerHTML = `${label.substring(0, 130)}...`;
             }
         }
-
 
         /**
-         * Put the text https:// into url input if it is empty
-         * @method _setDefaultUrlInputText
+         * Sets a default value for the URL input on focus.
          * @private
          */
-        _setDefaultUrlInputText() {
-            if (this._urlInput.value === "") {
-                this._urlInput.value = "https://";
+        #setDefaultUrlInputText() {
+            if (this.#urlInput.value === "") {
+                this.#urlInput.value = "https://";
             }
         }
 
-        _handleDragStart(event) {
-            this.startNodePositon = this.position;
+        // --- Drag and Drop Handlers ---
+
+        #handleDragStart(event) {
+            this.startNodePositon = this.#position;
             const draggedNode = event.currentTarget;
             draggedNode.style.border = "1px solid #000";
             draggedNode.querySelector("div").classList.toggle("hidden");
-            this.fire("dragStart", { position: this.position, target: draggedNode });
+            this.fire("dragStart", { position: this.#position, target: draggedNode });
         }
 
-        _handleDragEnd(event) {
+        #handleDragEnd(event) {
             event.preventDefault();
             const draggedNode = event.currentTarget;
             draggedNode.style.border = "none";
@@ -250,24 +254,18 @@
             this.fire("dragEnd");
         }
 
-        _handleDragDrop(event) {
+        #handleDragDrop(event) {
             event.preventDefault();
         }
 
-        _handleDragOver(event) {
+        #handleDragOver(event) {
             event.preventDefault();
-            if (this.startNodePositon != this.position) {
-                this.fire("dragOver", { position: this.position, target: event.currentTarget });
+            if (this.startNodePositon !== this.#position) {
+                this.fire("dragOver", { position: this.#position, target: event.currentTarget });
             }
         }
     }
 
-    L.addEventTarget(BookmarkEditor, {
-        prefix: 'bookmarkEditor'
-    });
-
-
+    L.addEventTarget(BookmarkEditor, { prefix: 'bookmarkEditor' });
     L.BookmarkEditor = BookmarkEditor;
-
 })();
-

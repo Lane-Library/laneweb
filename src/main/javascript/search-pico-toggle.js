@@ -1,96 +1,86 @@
+// guard clause: exit if no toggle present
 if (document.querySelector(".pico-toggle")) {
 
-    (function () {
+    (() => {
 
         "use strict";
 
-        let ACTIVE = "-active",
-            PICO_ON = "pico-on",
-            PICO_ON_ACTIVE = PICO_ON + ACTIVE,
-            PICO_OFF = "pico-off",
-            PICO_OFF_ACTIVE = PICO_OFF + ACTIVE,
-            PICO_TOGGLE = "search-pico",
-            PICO_TOGGLE_ACTIVE = PICO_TOGGLE + ACTIVE,
+        // --- Constants ---
+        const ACTIVE = "-active";
+        const PICO_TOGGLE = "search-pico";
+        const PICO_ON = "pico-on";
+        const PICO_OFF = "pico-off";
+        const PICO_TOGGLE_ACTIVE = `${PICO_TOGGLE}${ACTIVE}`;
+        const PICO_ON_ACTIVE = `${PICO_ON}${ACTIVE}`;
+        const PICO_OFF_ACTIVE = `${PICO_OFF}${ACTIVE}`;
 
-            picoView = function (toggle) {
+        const toggleElement = document.querySelector(`.${PICO_TOGGLE}`);
+        if (!toggleElement) return;
 
-                let on = toggle.querySelector("." + PICO_ON),
-                    off = toggle.querySelector("." + PICO_OFF),
-                    v = {
-                        activate: function () {
-                            // don't activate if already active
-                            if (!toggle.classList.contains(PICO_TOGGLE_ACTIVE)) {
-                                toggle.classList.add(PICO_TOGGLE_ACTIVE);
-                                on.classList.add(PICO_ON_ACTIVE);
-                                off.classList.remove(PICO_OFF_ACTIVE);
-                            }
-                        },
-                        deactivate: function () {
-                            toggle.classList.remove(PICO_TOGGLE_ACTIVE);
-                            on.classList.remove(PICO_ON_ACTIVE);
-                            off.classList.remove(PICO_OFF_ACTIVE);
-                        },
-                        picoOn: function () {
-                            on.classList.remove(PICO_ON_ACTIVE);
-                            off.classList.add(PICO_OFF_ACTIVE);
-                            v.fire("on");
-                        },
-                        picoOff: function () {
-                            off.classList.remove(PICO_OFF_ACTIVE);
-                            on.classList.add(PICO_ON_ACTIVE);
-                            v.fire("off");
-                        },
-                        reset: function () {
-                            on.classList.add(PICO_ON_ACTIVE);
-                            off.classList.remove(PICO_OFF_ACTIVE);
-                        }
-                    };
+        const onButton = toggleElement.querySelector(`.${PICO_ON}`);
+        const offButton = toggleElement.querySelector(`.${PICO_OFF}`);
+        if (!onButton || !offButton) return;
 
-                on.addEventListener("click", v.picoOn);
-                off.addEventListener("click", v.picoOff);
-
-
-                return v;
-
-            }(document.querySelector("." + PICO_TOGGLE));
-
-        (function (view) {
-            let controller = {
-                on: function () {
-                    controller.fire("change", { active: true });
-                },
-                off: function () {
-                    controller.fire("change", { active: false });
-                },
-                activeChange: function (event) {
-                    if (!event.active) {
-                        view.reset();
-                    }
-                },
-                tabChange: function (event) {
-                    if (event.newVal.source === "clinical-all") {
-                        view.activate();
-                    } else {
-                        view.deactivate();
-                    }
+        const view = {
+            activate() {
+                if (!toggleElement.classList.contains(PICO_TOGGLE_ACTIVE)) {
+                    toggleElement.classList.add(PICO_TOGGLE_ACTIVE);
+                    onButton.classList.add(PICO_ON_ACTIVE);
+                    offButton.classList.remove(PICO_OFF_ACTIVE);
                 }
-            };
+            },
+            deactivate() {
+                toggleElement.classList.remove(PICO_TOGGLE_ACTIVE);
+                onButton.classList.remove(PICO_ON_ACTIVE);
+                offButton.classList.remove(PICO_OFF_ACTIVE);
+            },
+            reset() {
+                onButton.classList.add(PICO_ON_ACTIVE);
+                offButton.classList.remove(PICO_OFF_ACTIVE);
+            }
+        };
 
-            L.addEventTarget(view);
-            view.on("on", controller.on);
+        const controller = {
+            activeChange(event) {
+                if (!event.active) view.reset();
+            },
+            tabChange(event) {
+                if (event.newVal.source === "clinical-all") {
+                    view.activate();
+                } else {
+                    view.deactivate();
+                }
+            }
+        };
 
-            view.on("off", controller.off);
+        // make the objects event aware
+        L.addEventTarget(view);
+        L.addEventTarget(controller, { prefix: "picoToggle" });
 
-            L.on("search:activeChange", controller.activeChange);
+        // "Post definition" pattern. Attach the special methods that need to call .fire() on the object itself.
+        // They use the `view` and `controller` constants from the closure above.
+        view.picoOn = () => {
+            onButton.classList.remove(PICO_ON_ACTIVE);
+            offButton.classList.add(PICO_OFF_ACTIVE);
+            view.fire("on");
+        };
+        view.picoOff = () => {
+            offButton.classList.remove(PICO_OFF_ACTIVE);
+            onButton.classList.add(PICO_ON_ACTIVE);
+            view.fire("off");
+        };
+        controller.on = () => controller.fire("change", { active: true });
+        controller.off = () => controller.fire("change", { active: false });
 
-            L.on("searchDropdown:change", controller.tabChange);
+        // --- Event Wiring ---
+        onButton.addEventListener("click", view.picoOn);
+        offButton.addEventListener("click", view.picoOff);
 
-            L.addEventTarget(controller, {
-                prefix: "picoToggle"
-            });
+        view.on("on", controller.on);
+        view.on("off", controller.off);
 
-        })(picoView);
+        L.on("search:activeChange", controller.activeChange);
+        L.on("searchDropdown:change", controller.tabChange);
 
     })();
-
 }

@@ -7,7 +7,7 @@
         <version>186</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.15.16-SNAPSHOT</version>
+    <version>3.16.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -355,7 +355,6 @@
                 <executions>
                     <execution>
                         <id>install node and npm</id>
-                        <phase>test</phase>
                         <goals>
                             <goal>install-node-and-npm</goal>
                         </goals>
@@ -363,6 +362,24 @@
                         <configuration>
                             <nodeVersion>v24.9.0</nodeVersion>
                             <npmVersion>11.6.0</npmVersion>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>npm-install</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>install</arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>npm-run-build</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>run build</arguments>
                         </configuration>
                     </execution>
                     <execution>
@@ -432,16 +449,13 @@
                 <version>1.7.6</version>
                 <executions>
                     <execution>
-                        <id>lane-minify</id>
+                        <id>lane-minify-css</id>
                         <configuration>
                             <webappSourceDir>${project.basedir}/src/main</webappSourceDir>
                             <webappTargetDir>
                                 ${project.build.directory}/classes/static/resources</webappTargetDir>
-                            <jsEngine>CLOSURE</jsEngine>
                             <cssSourceDir>css</cssSourceDir>
-                            <jsSourceDir>javascript</jsSourceDir>
-                            <bundleConfiguration>
-                                ${project.basedir}/lane-minify-bundles.json</bundleConfiguration>
+                            <bundleConfiguration>${project.basedir}/lane-minify-css-bundles.json</bundleConfiguration>
                         </configuration>
                         <goals>
                             <goal>minify</goal>

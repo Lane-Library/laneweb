@@ -1,14 +1,8 @@
 /*---------------lightbox positioning-------------------------------------------------------*/
 .lightbox {
     position: fixed;
-    z-index: 5;
+    z-index: 6;
     margin-top: 13px;
-}
-
-.lightbox-hidden,
-.lightboxbg-hidden,
-.autoLightbox {
-    visibility: hidden;
 }
 
 .lightbox-content {
@@ -23,4 +17,23 @@
     height: 100%;
     z-index: 5;
     top: 0;
+}
+
+.lightbox, .lightboxbg {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+body.lightbox-active .lightbox,
+body.lightbox-active .lightboxbg {
+    visibility: visible;
+}
+
+body.lightbox-active .lightbox {
+    opacity: 1;
+}
+
+body.lightbox-active .lightboxbg {
+    opacity: .75;
 }

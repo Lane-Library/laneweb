@@ -41,12 +41,8 @@
     z-index: 3;
 }
 
-.slide.desactive-next {
+.slide.hidden {
     display: none;
-}
-
-.slide.active-previous {
-    display: block;
 }
 
 #next-slide {

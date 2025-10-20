@@ -1,81 +1,76 @@
-(function () {
+(() => {
 
     "use strict";
 
-
     class Bookmark {
 
+        #label;
+        #url;
+
         constructor(label, url) {
+            this.#label = undefined;
+            this.#url = undefined;
             L.addEventTarget(this, {
                 prefix: 'bookmark'
             });
-            this.on("valueChange", (e) => this._valueChange(e));
+            this.on("valueChange", this.#handleValueChange);
             this.setValues(label, url);
         };
-
-
 
         /**
          * The default changeEvent handler
          *
-         * @method _valueChange
          * @private
          * @param event
          *            {CustomEvent} the valueChange event
          */
-        _valueChange(event) {
-            this._label = event.newLabel;
-            this._url = event.newUrl;
+        #handleValueChange = ({ newLabel, newUrl }) => {
+            this.#label = newLabel;
+            this.#url = newUrl;
         }
 
         /**
          * getter for the label
          *
-         * @method getLabel
          * @returns {string} the label
          */
-        getLabel() {
-            return this._label;
+        get label() {
+            return this.#label;
         }
 
         /**
          * getter for the url
          *
-         * @method getUrl
          * @returns {string} the url
          */
-        getUrl() {
-            return this._url;
+        get url() {
+            return this.#url;
         }
 
         /**
          * setter for the label, delegates to setValues with the current url as
          * the url value.
          *
-         * @method setLabel
          * @param newLabel
          *            {string}
          */
-        setLabel(newLabel) {
-            this.setValues(newLabel, this._url);
+        set label(newLabel) {
+            this.setValues(newLabel, this.#url);
         }
 
         /**
          * setter for the url, delegates to setValues with the current
          *
-         * @method setUrl label as the label value.
-         *
          * @param newUrl
          *            {string}
          */
-        setUrl(newUrl) {
-            this.setValues(this._label, newUrl);
+        set url(newUrl) {
+            this.setValues(this.#label, newUrl);
         }
 
         /**
          * Set both the label and url then fire a changed event
          *
-         * @method setValues
          * @param newLabel
          *            {string}
          * @param newUrl
@@ -83,33 +78,30 @@
          */
         setValues(newLabel, newUrl) {
             if (!newLabel) {
-                throw ("null or empty newLabel");
+                throw new Error("Bookmark label cannot be null or empty.");
             }
             if (!newUrl) {
-                throw ("null or empty newUrl");
+                throw new Error("Bookmark URL cannot be null or empty.");
             }
-            let changed = newLabel !== this._label || newUrl !== this._url;
-            if (changed) {
+            const hasChanged = newLabel !== this.#label || newUrl !== this.#url;
+            if (hasChanged) {
                 this.fire("valueChange", {
-                    prevLabel: this._label,
-                    prevUrl: this._url,
-                    newLabel: newLabel,
-                    newUrl: newUrl,
+                    prevLabel: this.#label,
+                    prevUrl: this.#url,
+                    newLabel,
+                    newUrl,
                     target: this
                 });
             }
         }
 
         /**
-         * @method toString
          * @return {string} a string with the label and url values
          */
         toString() {
-            return "Bookmark{label:" + this._label + ",url:" + this._url + "}";
+            return `Bookmark{label:${this.#label},url:${this.#url}}`;
         }
     };
-
-
 
     // make the Bookmark constructor globally accessible
     L.Bookmark = Bookmark;

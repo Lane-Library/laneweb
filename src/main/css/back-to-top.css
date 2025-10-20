@@ -9,16 +9,8 @@
     right: 4.9%;
     top: -22px;
     inline-size: fit-content;
-    transition: opacity .45s;
     color: #fff;
-    visibility: hidden;
-    opacity: 0;
     z-index: 1;
-}
-
-.back-to-top.active {
-    opacity: 1;
-    transition: opacity .9s;
 }
 
 .back-to-top .fa-solid {

@@ -14,46 +14,46 @@ describe('Bookmark', () => {
     });
 
     test('should not create a new bookmark with no label', () => {
-        expect(() => new Bookmark(null, "url")).toThrow("null or empty newLabel");
+        expect(() => new Bookmark(null, "url")).toThrow("Bookmark label cannot be null or empty.");
     });
 
     test('should not create a new bookmark with no URL', () => {
-        expect(() => new Bookmark("label", null)).toThrow("null or empty newUrl");
+        expect(() => new Bookmark("label", null)).toThrow("Bookmark URL cannot be null or empty.");
     });
 
     test('should not set null values', () => {
-        expect(() => bookmark.setValues(null, null)).toThrow("null or empty newLabel");
-        expect(bookmark.getLabel()).toBe("label");
-        expect(bookmark.getUrl()).toBe("url");
+        expect(() => bookmark.setValues(null, null)).toThrow("Bookmark label cannot be null or empty.");
+        expect(bookmark.label).toBe("label");
+        expect(bookmark.url).toBe("url");
     });
 
     test('should get and set label', () => {
-        bookmark.setLabel("newlabel");
-        expect(bookmark.getLabel()).toBe("newlabel");
+        bookmark.label = "newlabel";
+        expect(bookmark.label).toBe("newlabel");
     });
 
     test('should get and set URL', () => {
-        bookmark.setUrl("newurl");
-        expect(bookmark.getUrl()).toBe("newurl");
+        bookmark.url = "newurl";
+        expect(bookmark.url).toBe("newurl");
     });
 
     test('should get and set values', () => {
         bookmark.setValues("newlabel", "newurl");
-        expect(bookmark.getLabel()).toBe("newlabel");
-        expect(bookmark.getUrl()).toBe("newurl");
+        expect(bookmark.label).toBe("newlabel");
+        expect(bookmark.url).toBe("newurl");
     });
 
     test('should trigger change event on set label', () => {
         const mockCallback = jest.fn();
         bookmark.on("valueChange", mockCallback);
-        bookmark.setLabel("newlabel");
+        bookmark.label = "newlabel";
         expect(mockCallback).toHaveBeenCalledWith(expect.objectContaining({ newLabel: "newlabel" }));
     });
 
     test('should trigger change event on set URL', () => {
         const mockCallback = jest.fn();
         bookmark.on("valueChange", mockCallback);
-        bookmark.setUrl("newurl");
+        bookmark.url = "newurl";
         expect(mockCallback).toHaveBeenCalledWith(expect.objectContaining({ newUrl: "newurl" }));
     });
 

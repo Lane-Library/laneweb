@@ -1,350 +1,307 @@
-(function () {
+(() => {
 
     "use strict";
 
-    let Model = L.Model,
-        BASE_PATH = Model.get(Model.BASE_PATH) || "";
+    const Model = L.Model;
+    const BASE_PATH = Model.get(Model.BASE_PATH) ?? "";
 
+    /**
+     * The `Bookmarks` class provides functionality to manage a collection of bookmarks.
+     * It supports adding, removing, moving, and updating bookmarks, as well as syncing
+     * these operations with the server. The class emits custom events for each operation,
+     * allowing external listeners to respond to changes in the bookmarks collection.
+     *
+     * @fires bookmarks:add - Fired when a bookmark is added.
+     * @fires bookmarks:addSync - Fired after a bookmark is successfully synced with the server.
+     * @fires bookmarks:move - Fired when a bookmark is moved.
+     * @fires bookmarks:moveSync - Fired after a bookmark move is successfully synced with the server.
+     * @fires bookmarks:remove - Fired when bookmarks are removed.
+     * @fires bookmarks:removeSync - Fired after bookmarks are successfully removed from the server.
+     * @fires bookmarks:update - Fired when a bookmark is updated.
+     * @fires bookmarks:updateSync - Fired after a bookmark update is successfully synced with the server.
+     */
     class Bookmarks {
-        constructor(bookmarks) {
-            let i;
-            this._bookmarks = [];
 
-            if (bookmarks && !(bookmarks instanceof Array)) {
-                throw ("bad config");
-            }
-            if (bookmarks) {
-                for (i = 0; i < bookmarks.length; i++) {
-                    bookmarks[i].after("valueChange", (e) => this._handleValueChange(e));
-                    this._bookmarks.push(bookmarks[i]);
-                }
+        #bookmarks;
+
+        // --- Constructor and Initialization ---
+        constructor(bookmarks = []) {
+            if (!Array.isArray(bookmarks)) {
+                throw new Error("Bookmarks constructor requires an array.");
             }
 
+            this.#bookmarks = bookmarks;
+            this.#bookmarks.forEach(bookmark =>
+                bookmark.after("valueChange", this.#handleValueChange)
+            );
 
             //Add EventTarget attributes to the Bookmarks prototype
             L.addEventTarget(this, {
                 prefix: 'bookmarks'
             });
 
-            /**
-             * @event add
-             * @description Fired when a bookmark is added.
-             */
-            this.on("add", (e) => this._defAddFn(e));
-
-            /**
-             * @event addSync
-             * @description fired after an add is successfully synced with the server
-             */
-            this.on("addSync", (e) => this._handleAddSync(e));
-
-            /**
-             * @event move
-             * @description Fired when a bookmark is moved
-             */
-            this.on("move", (e) => this._defMoveFn(e));
-
-            /**
-             * @event moveSync
-             * @description Fired when a move is successfully synced with the server
-             */
-            this.on("moveSync", (e) => this._handleMoveSync(e));
-
-            /**
-             * @event remove
-             * @description Fired when a bookmark is removed.
-             */
-            this.on("remove", (e) => this._defRemoveFn(e));
-
-            /**
-             * @event removeSync
-             * @description fired when a removal is successfully synced with the server
-             */
-            this.on("removeSync", (e) => this._handleRemoveSync(e));
-
-            /**
-             * @event update
-             * @description Fired when a bookmark is updated.
-             */
-            this.on("update", (e) => this._defUpdateFn(e));
-
+            this.#bindEvents();
 
         }
 
-
-
         /**
-         * fires a bookmark:add event
-         * @method addBookmark
-         * @param bookmark {Bookmark}
+         * Binds the default event listeners for the class instance.
+         * @private
+         */
+        #bindEvents = () => {
+            /** @event add @description Fired when a bookmark is added. */
+            this.on("add", this.#defAddFn);
+            /** @event addSync @description Fired after an add is successfully synced. */
+            this.on("addSync", this.#handleAddSync);
+            /** @event move @description Fired when a bookmark is moved. */
+            this.on("move", this.#defMoveFn);
+            /** @event moveSync @description Fired when a move is successfully synced. */
+            this.on("moveSync", this.#handleMoveSync);
+            /** @event remove @description Fired when a bookmark is removed. */
+            this.on("remove", this.#defRemoveFn);
+            /** @event removeSync @description Fired when a removal is successfully synced. */
+            this.on("removeSync", this.#handleRemoveSync);
+            /** @event update @description Fired when a bookmark is updated. */
+            this.on("update", this.#defUpdateFn);
+        }
+
+        // --- Public Methods ---
+        /**
+         * Fires a bookmark:add event.
+         * @param {L.Bookmark} bookmark
          */
         addBookmark(bookmark) {
             if (bookmark instanceof L.Bookmark) {
-                this.fire("add", { bookmark: bookmark });
+                this.fire("add", { bookmark });
             } else {
-                throw ("bad bookmark");
+                throw new Error("Invalid object passed to addBookmark. Expected a Bookmark instance.");
             }
         }
 
         /**
-         * @method getBookmark
-         * @param position {number}
-         * @returns the bookmark at the position
+         * @param {number} position
+         * @returns {L.Bookmark|undefined} The bookmark at the given position.
          */
         getBookmark(position) {
-            return this._bookmarks[position];
+            return this.#bookmarks[position];
         }
 
         /**
-         * @method moveBookmark
-         * @param to {number} where the bookmark goes to
-         * @param from {number} where the bookmark comes from
+         * Checks if a bookmark with the given URL already exists.
+         * @param {string} url
+         * @returns {boolean}
          */
-        moveBookmark(to, from) {
-            this.fire("move", { to: to, from: from });
-        }
-
-        /**
-         * fires a bookmark:remove event
-         * @method removeBookmarks
-         * @param positions {Array} the bookmarks to remove
-         */
-        removeBookmarks(positions) {
-            this.fire("remove", { positions: positions });
-        }
-
-        /**
-         * fires a bookmark:update event
-         * @method updateBookmark
-         * @param bookmark {Bookmark}
-         */
-        updateBookmark(bookmark) {
-            let position = this._bookmarks.indexOf(bookmark);
-            this.fire("update", { bookmark: bookmark, position: position });
-        }
-
-        /**
-         * @method size
-         * @returns {number} the number of bookmarks
-         */
-        size() {
-            return this._bookmarks.length;
-        }
-
         hasURL(url) {
-            for (let i = 0; i < this._bookmarks.length; i++) {
-                if (url === this._bookmarks[i].getUrl()) {
-                    return true;
-                }
-            }
-            return false;
+            return this.#bookmarks.some(bookmark => bookmark.url === url);
         }
 
         /**
-         * @method indexOf
-         * @param bookmark {Bookmark}
-         * @return {number} the index of the given bookmark
+         * @param {L.Bookmark} bookmark
+         * @returns {number} The index of the given bookmark, or -1 if not found.
          */
         indexOf(bookmark) {
-            return this._bookmarks.indexOf(bookmark);
+            return this.#bookmarks.indexOf(bookmark);
         }
 
         /**
-         * @method toString
-         * @returns {String} a string representation
+         * @param {number} to - Where the bookmark goes to.
+         * @param {number} from - Where the bookmark comes from.
          */
-        toString() {
-            let string = "Bookmarks[";
-            for (let i = 0; i < this._bookmarks.length; i++) {
-                string += this._bookmarks[i];
-                if (i < this._bookmarks.length - 1) {
-                    string += ",";
-                }
-            }
-            string += "]";
-            return string;
+        moveBookmark(to, from) {
+            this.fire("move", { to, from });
         }
 
+        /**
+         * Fires a bookmark:remove event.
+         * @param {number[]} positions - The indices of the bookmarks to remove.
+         */
+        removeBookmarks(positions) {
+            this.fire("remove", { positions });
+        }
 
+        /**
+         * @returns {number} The number of bookmarks.
+         */
+        size() {
+            return this.#bookmarks.length;
+        }
+
+        /**
+         * Fires a bookmark:update event
+         * @param {L.Bookmark} bookmark
+         */
+        updateBookmark(bookmark) {
+            const position = this.indexOf(bookmark);
+            if (position > -1) {
+                this.fire("update", { bookmark, position });
+            }
+        }
+
+        /**
+         * @returns {string} A string representation of the bookmarks collection.
+         */
+        toString() {
+            return `Bookmarks[${this.#bookmarks.join(",")}]`;
+        }
+
+        // --- Default Event Handlers (for API interaction) ---
 
         /**
          * The default response to bookmarks:add, attempts to sync with server, fires
          * bookmarks:addSync.
-         * @method _defAddFn
          * @private
-         * @param event {CustomEvent}
+         * @param {CustomEvent} event
          */
-        _defAddFn(event) {
-            let data = JSON.stringify({ label: event.bookmark.getLabel(), url: event.bookmark.getUrl() });
-            fetch(BASE_PATH + "/bookmarks", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: data
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    this.fire("addSync", { success: true, bookmark: event.bookmark, target: event.target });
-                })
-                .catch(() => {
-                    this._handleSyncFailure("add");
+        #defAddFn = async (event) => {
+            try {
+                await this.#fetchAPI('/bookmarks', {
+                    method: "POST",
+                    body: JSON.stringify({ label: event.bookmark.label, url: event.bookmark.url })
                 });
-
+                this.fire("addSync", { success: true, bookmark: event.bookmark, target: event.target });
+            } catch (error) {
+                this.#handleSyncFailure("add", error);
+            }
         }
 
         /**
          * The default response to bookmarks:move, attempts to sync the move with the
          * server, fires bookmarks:moveSync if successful
-         * @method _defMoveFn
          * @private
-         * @param event {CustomEvent}
+         * @param {CustomEvent} event
          */
-        _defMoveFn(event) {
-            let data = JSON.stringify({ to: event.to, from: event.from });
-            fetch(BASE_PATH + "/bookmarks/move", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: data,
-                keepalive: false
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    this.fire("moveSync", { success: true, to: event.to, from: event.from });
-                })
-
-                .catch(() => {
-                    this._handleSyncFailure("move");
+        #defMoveFn = async (event) => {
+            try {
+                await this.#fetchAPI('/bookmarks/move', {
+                    method: "POST",
+                    body: JSON.stringify({ to: event.to, from: event.from })
                 });
+                this.fire("moveSync", { success: true, to: event.to, from: event.from });
+            } catch (error) {
+                this.#handleSyncFailure("move", error);
+            }
         }
 
         /**
          * The default response to bookmarks:remove, attempts to sync with server,
          * fires bookmarks:removeSync if successful
-         * @method _defRemoveFn
          * @private
-         * @param event {CustomEvent}
+         * @param {CustomEvent} event
          */
-        _defRemoveFn(event) {
-            let indexes = JSON.stringify(event.positions);
-            fetch(BASE_PATH + "/bookmarks?indexes=" + encodeURIComponent(indexes), {
-                method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    this.fire("removeSync", { success: true, positions: event.positions });
-                })
-                .catch(() => {
-                    this._handleSyncFailure("delete");
+        #defRemoveFn = async (event) => {
+            const indexes = JSON.stringify(event.positions);
+            try {
+                await this.#fetchAPI(`/bookmarks?indexes=${encodeURIComponent(indexes)}`, {
+                    method: "DELETE"
                 });
+                this.fire("removeSync", { success: true, positions: event.positions });
+            } catch (error) {
+                this.#handleSyncFailure("delete", error);
+            }
         }
 
         /**
          * The default response to bookmarks:update, attempts to sync with server,
          * fires bookmarks:updateSync if successful.
-         * @method _defUpdateFn
          * @private
-         * @param event {CustomEvent}
+         * @param {CustomEvent} event
          */
-        _defUpdateFn(event) {
-            let data = JSON.stringify({ position: event.position, label: event.bookmark.getLabel(), url: event.bookmark.getUrl() });
-            fetch(BASE_PATH + "/bookmarks", {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: data
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    this.fire("updateSync", { success: true, position: event.position });
-                })
-                .catch((error) => {
-                    console.error('An error occurred:', error.message);
-                    console.error('Stack trace:', error.stack);
-                    this._handleSyncFailure("update");
-
-
+        #defUpdateFn = async (event) => {
+            try {
+                await this.#fetchAPI('/bookmarks', {
+                    method: "PUT",
+                    body: JSON.stringify({ position: event.position, label: event.bookmark.label, url: event.bookmark.url })
                 });
+                this.fire("updateSync", { success: true, position: event.position });
+            } catch (error) {
+                this.#handleSyncFailure("update", error);
+            }
         }
 
-
-
+        // --- Private Utility Methods ---
 
         /**
          * handler for bookmark:valueChange events
-         * @method _handleValueChange
          * @private
-         * @param event {CustomEvent}
+         * @param {CustomEvent} event
          */
-        _handleValueChange(event) {
+        #handleValueChange = (event) => {
             this.updateBookmark(event.target);
         }
 
         /**
          * handler for bookmarks:addSync event, adds a bookmark to index 0 of the
          * backing Array, also fires a tracking event
-         * @method _handleAddSync
          * @private
-         * @param event {CustomEvent}
+         * @param {CustomEvent} event
          */
-        _handleAddSync(event) {
-            event.bookmark.after("valueChange", (e) => this._handleValueChange(e));
-            this._bookmarks.unshift(event.bookmark);
+        #handleAddSync = ({ bookmark }) => {
+            bookmark.after("valueChange", this.#handleValueChange);
+            this.#bookmarks.unshift(bookmark);
             L.fire("tracker:trackableEvent", {
                 category: "lane:bookmarkAdd",
                 action: Model.get(Model.AUTH),
-                label: event.bookmark.getLabel()
+                label: bookmark.label
             });
         }
 
         /**
          * handler from bookmarks:moveSync event, moves a bookmark.
-         * @method _handleMoveSync
          * @private
-         * @param event {CustomEvent}
+         * @param {CustomEvent} event
          */
-        _handleMoveSync(event) {
-            this._bookmarks.splice(event.to, 0, this._bookmarks.splice(event.from, 1)[0]);
+        #handleMoveSync = ({ to, from }) => {
+            this.#bookmarks.splice(to, 0, this.#bookmarks.splice(from, 1)[0]);
         }
 
         /**
          * handler for bookmarks:removeSync event, removes bookmarks from the
          * backing Array
-         * @method _handleRemoveSync
          * @private
-         * @param event {CustomEvent}
+         * @param {CustomEvent} event
          */
-        _handleRemoveSync(event) {
-            for (let i = event.positions.length - 1; i >= 0; --i) {
-                this._bookmarks.splice(event.positions[i], 1);
-            }
+        #handleRemoveSync = ({ positions }) => {
+            positions.reverse().forEach(pos => this.#bookmarks.splice(pos, 1));
         }
 
         /**
          * handler for sync failures, shows a message.
-         * @param message {String}
+         * @param {String} action - The action that failed (add, move, delete, update)
+         * @param {Error} error - The error that occurred
          */
-        _handleSyncFailure(message) {
-            L.showMessage("Sorry, " + message + " bookmark failed. Please reload the page and try again later.");
+        #handleSyncFailure = (action, error) => {
+            console.error(`Failed to ${action}.`, error);
+            L.showMessage(`Sorry, ${action} bookmark failed. Please reload the page and try again later.`);
+        }
+
+        /**
+         * A utility function to handle API requests
+         * @param {string} endpoint - The URL path for the request.
+         * @param {object} options - The options object for the fetch call (method, body, etc.).
+         * @returns {Promise<object>} A promise that resolves with the parsed JSON response.
+         * @private
+         */
+        #fetchAPI = async (endpoint, options = {}) => {
+            const url = `${BASE_PATH}${endpoint}`;
+            const defaultHeaders = { "Content-Type": "application/json" };
+
+            const response = await fetch(url, {
+                ...options, // merge passed options
+                headers: { ...defaultHeaders, ...options.headers }
+            });
+
+            if (!response.ok) {
+                throw new Error(`API request failed: ${response.status} ${response.statusText}`);
+            }
+
+            // Return JSON response if available
+            const contentType = response.headers.get("content-type");
+            if (contentType?.includes("application/json")) {
+                return response.json();
+            }
         }
 
     }
-
-
 
     //make the Bookmarks constructor globally accessible
     L.Bookmarks = Bookmarks;

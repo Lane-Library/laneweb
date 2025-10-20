@@ -12,8 +12,10 @@ describe('Lane Search Test Case', () => {
     });
 
     it('testSetGetQuery', () => {
-        cy.window().its('L.search').invoke('setQuery', 'query');
-        cy.window().its('L.search').invoke('getQuery').should('equal', 'query');
+        cy.window().its('L.search').then(search => {
+            search.query = 'query';
+            expect(search.query).to.equal('query');
+        });
         cy.get('@queryInput').should('have.value', 'query');
     });
 
@@ -22,9 +24,9 @@ describe('Lane Search Test Case', () => {
             let value;
             win.L.on("search:queryChange", function (event) {
                 win.L.on("search:queryChange", function (event) {
-                    value = this.search.getQuery();
+                    value = this.search.query;
                 });
-                win.L.search.setQuery('query');
+                win.L.search.query = 'query';
                 expect(value).to.equal('query');
             });
         });
@@ -38,7 +40,7 @@ describe('Lane Search Test Case', () => {
                     newVal = event.newVal;
                     oldVal = event.oldVal;
                 });
-                win.L.search.setQuery('query');
+                win.L.search.query = 'query';
                 expect(oldVal).to.equal('');
                 expect(newVal).to.equal('query');
             });
@@ -46,22 +48,28 @@ describe('Lane Search Test Case', () => {
     });
 
     it('testSetQueryNull', () => {
-        cy.window().its('L.search').invoke('setQuery', 'query');
-        cy.window().its('L.search').invoke('setQuery', null);
-        cy.window().its('L.search').invoke('getQuery').should('equal', 'query');
+        cy.window().its('L.search').then(search => {
+            search.query = 'query';
+            search.query = null;
+            expect(search.query).to.equal('query');
+        });
         cy.get('@queryInput').should('have.value', 'query');
     });
 
     it('testSetQueryUndefined', () => {
-        cy.window().its('L.search').invoke('setQuery', 'query');
-        cy.window().its('L.search').invoke('setQuery', undefined);
-        cy.window().its('L.search').invoke('getQuery').should('equal', 'query');
+        cy.window().its('L.search').then(search => {
+            search.query = 'query';
+            search.query = undefined;
+            expect(search.query).to.equal('query');
+        });
         cy.get('@queryInput').should('have.value', 'query');
     });
 
     it('testSetGetSource', () => {
-        cy.window().its('L.search').invoke('setSource', 'clinical-all');
-        cy.window().its('L.search').invoke('getSource').should('equal', 'clinical-all');
+        cy.window().its('L.search').then(search => {
+            search.source = 'clinical-all';
+            expect(search.source).to.equal('clinical-all');
+        });
         cy.get('@sourceInput').should('have.value', 'clinical-all');
     });
 
@@ -72,12 +80,11 @@ describe('Lane Search Test Case', () => {
                 win.L.on("search:sourceChange", function (event) {
                     value = event.newVal;
                 });
-                win.L.search.setSource('clinical-all');
+                win.L.search.source = 'clinical-all';
                 expect(value).to.equal('clinical-all');
             });
         });
     });
-
 
     it('testSourceChangeEventBubble', () => {
         cy.window().then(win => {
@@ -87,19 +94,20 @@ describe('Lane Search Test Case', () => {
                     newVal = event.newVal;
                     oldVal = event.oldVal;
                 });
-                win.L.search.setSource('clinical-all');
+                win.L.search.source = 'clinical-all';
                 expect(oldVal).to.equal('all-all');
                 expect(newVal).to.equal('clinical-all');
             });
         });
     });
+
     it('testSearch', () => {
         cy.window().then(win => {
             let searched = false;
             win.L.search.on('search', function (event) {
                 searched = true;
             });
-            win.L.search.setQuery('query');
+            win.L.search.query = 'query';
             win.L.search.search();
             expect(searched).to.be.true;
         });
@@ -126,7 +134,7 @@ describe('Lane Search Test Case', () => {
                 win.L.on('search:search', function (event) {
                     searched = true;
                 });
-                win.L.search.setQuery('query');
+                win.L.search.query = 'query';
                 win.L.search.search();
                 expect(searched).to.be.true;
             });
@@ -137,16 +145,16 @@ describe('Lane Search Test Case', () => {
     // });
 
     it('testCloseClick', () => {
-        cy.window().its('L.search').invoke('setQuery', 'query');
+        cy.get('@queryInput').type('query');
         cy.get('@closeButton').click();
-        cy.window().its('L.search').invoke('getQuery').should('equal', '');
+        cy.get('@queryInput').should('have.value', '');
     });
 
     it('testSubmit', () => {
         cy.intercept('/search.html?q=query&source=all-all').as('searched');
         cy.get('@searchForm').get('input[name=q]').type('query');
         cy.get('@searchForm').submit();
-        cy.wait('@searched')
+        cy.wait('@searched');
     });
 
 
@@ -157,7 +165,7 @@ describe('Lane Search Test Case', () => {
 
     it('testInputChange', () => {
         cy.get('@queryInput').type('query');
-        cy.window().its('L.search').invoke('getQuery').should('equal', 'query');
+        cy.window().its('L.search.query').should('equal', 'query');
     });
 
     it('test reset clears query', () => {
@@ -170,14 +178,13 @@ describe('Lane Search Test Case', () => {
 
     it('searchDropdown:change submits if query', () => {
         cy.window().then(win => {
-            win.L.search.setQuery('query');
+            win.L.search.query = 'query';
             let searched = false;
             win.L.search.on('search', function (event) {
                 searched = true;
             });
             win.L.fire('searchDropdown:change', {
                 newVal: {
-                    source: 'foo',
                     source: 'foo',
                     "foo": {
                         "placeholder": "foo"
@@ -190,23 +197,20 @@ describe('Lane Search Test Case', () => {
 
     it('searchDropdown:change doesn\'t submit if no query', () => {
         cy.window().then(win => {
-            win.L.search.setQuery('');
+            win.L.search.query = '';
             let searched = false;
             win.L.search.on('search:search', function (event) {
-                win.L.search.on('search:search', function (event) {
-                    searched = true;
-                });
-                win.L.fire('searchDropdown:change', {
-                    newVal: {
-                        source: 'foo',
-                        source: 'foo',
-                        "foo": {
-                            "placeholder": "foo"
-                        }
-                    }
-                });
-                expect(searched).to.be.false;
+                searched = true;
             });
+            win.L.fire('searchDropdown:change', {
+                newVal: {
+                    source: 'foo',
+                    "foo": {
+                        "placeholder": "foo"
+                    }
+                }
+            });
+            expect(searched).to.be.false;
         });
     });
 });

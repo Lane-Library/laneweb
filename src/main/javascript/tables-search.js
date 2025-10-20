@@ -1,36 +1,44 @@
-(function () {
+(() => {
 
-  "use strict";
+    "use strict";
 
-  /**
-   * Filter tables list by input query
-   */
-  let tables = document.querySelectorAll('.table-search-container'),
-    searchInput = document.querySelector('#table-search-input'),
-    filtertables = function () {
-      let filter = searchInput.value.toUpperCase();
-      for (let j = 0; j < tables.length; j++) {
-        let trs = tables[j].querySelectorAll("div [class='row']"), tds, txtValue;
-        for (let i = 0; i < trs.length; i++) {
-          tds = trs[i].querySelectorAll("div [class='cell']");
-          txtValue = "";
-          for (let y = 0; y < tds.length; y++) {
-            if (tds[y]) {
-              txtValue += tds[y].textContent || tds[y].innerText;
-            }
-          }
-          if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            trs[i].style.display = "";
-          } else {
-            trs[i].style.display = "none";
-          }
-        }
-      }
+    /**
+     * Filter table-like structures based on a user's text input.
+     * Used on course reserves, liaisons, and equipment tables.
+     */
+    const searchInput = document.querySelector('#table-search-input');
+    const tableContainers = document.querySelectorAll('.table-search-container');
+
+    // Do nothing if the search input or table containers are not found
+    if (!searchInput || tableContainers.length === 0) {
+        return;
+    }
+
+    const filterRows = () => {
+        const query = searchInput.value.toUpperCase();
+
+        tableContainers.forEach(container => {
+            const rows = container.querySelectorAll(".row");
+
+            rows.forEach(row => {
+                const cells = row.querySelectorAll(".cell");
+
+                // get textContent from all cells and join them into a single string
+                const rowText = Array.from(cells, cell => cell.textContent || "")
+                                     .join(" ")
+                                     .toUpperCase();
+
+                const isMatch = rowText.includes(query);
+                row.style.display = isMatch ? "" : "none";
+            });
+        });
     };
 
-  if (tables && searchInput) {
-    searchInput.addEventListener("keyup", filtertables);
-    L.on("searchReset:reset", filtertables);
-  }
+    searchInput.addEventListener("keyup", filterRows);
+
+    L.on("searchReset:reset", () => {
+        searchInput.value = "";
+        filterRows();
+    });
 
 })();

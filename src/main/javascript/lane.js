@@ -1,28 +1,48 @@
-
-(function () {
+(() => {
 
     "use strict";
 
-    window.L = {};
+    window.L = window.L || {};
 
     L.Cookie = {
-        get: function (name) {
-            const value = `; ${document.cookie}`;
-            const parts = value.split(`; ${name}=`);
-            if (parts.length === 2) {
-                return parts.pop().split(';').shift();
+
+        /**
+         * Gets a cookie value by name.
+         * @param {string} name - The name of the cookie.
+         * @returns {string|undefined} The cookie value or undefined if not found.
+         */
+        get(name) {
+            const cookie = document.cookie
+                .split(';')
+                .find(c => c.trim().startsWith(`${name}=`));
+
+            if (!cookie) {
+                return undefined;
             }
+            return cookie.split('=')[1];
         },
-        set: function (name, value, days) {
+
+        /**
+         * Sets a cookie.
+         * @param {string} name - The name of the cookie.
+         * @param {string} value - The value of the cookie.
+         * @param {number} [days] - The number of days until the cookie expires.
+         */
+        set(name, value, days) {
             let expires = "";
             if (days) {
                 const date = new Date();
                 date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                expires = "; expires=" + date.toUTCString();
+                expires = `; expires=${date.toUTCString()}`;
             }
-            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+            document.cookie = `${name}=${value || ""}${expires}; path=/`;
         },
-        remove: function (name) {
+
+        /**
+         * Removes a cookie by name.
+         * @param {string} name - The name of the cookie to remove.
+         */
+        remove(name) {
             this.set(name, '', -1);
         }
     };

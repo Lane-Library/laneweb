@@ -1,75 +1,64 @@
-
-
-(function () {
+{
 
     "use strict";
 
-    let form = document.querySelector(".search-form"),
-        sourceBase = '/apps/suggest/getSuggestionList?q={query}&l=';
-
+    const form = document.querySelector('.search-form');
     // table search inputs (e.g. course reserves, liaisons, equipment) should not get solr suggestions: LANEWEB-11444
-    if (form && form.querySelector("input[name=q]:not(#table-search-input)")) {
-        let queryInput = form.querySelector("input[name=q]"),
-            model = function (suggest, source) {
-                return {
-                    suggest: suggest,
-                    source: source
-                };
-            }(new L.Suggest(queryInput),
-                form.querySelector("input[name=source]").value),
+    const queryInput = form?.querySelector('input[name=q]:not(#table-search-input)');
 
-            view = function () {
+    if (form && queryInput) {
+        const sourceBase = '/apps/suggest/getSuggestionList?q={query}&l=';
 
-                return {
-                    search: function (query) {
-                        queryInput.value = query;
-                        queryInput.readOnly = true;
-                        L.searchIndicator.show();
-                        form.submit();
-                    }
-                };
+        // Model: Holds the application state
+        const model = {
+            suggest: new L.Suggest(queryInput),
+            source: form.querySelector('input[name=source]').value,
+        };
 
-            }(),
+        // View: Handles DOM updates and user-facing actions.
+        const view = {
+            search(query) {
+                queryInput.value = query;
+                queryInput.readOnly = true;
+                L.search.search();
+            },
+        };
 
-            controller = function () {
-                return {
-                    sourceChange: function (event) {
-                        let source = event.newVal,
-                            suggestLimitInput = form.querySelector("input[name=suggest-limit]"),
-                            suggestEndpoint;
-                        // suggest-limit overrides source
-                        if (suggestLimitInput) {
-                            suggestEndpoint = sourceBase + suggestLimitInput.value;
-                        }
-                        else if (source.match(/^(all|catalog)/)) {
-                            suggestEndpoint = sourceBase + "er-mesh";
-                        } else {
-                            suggestEndpoint = sourceBase + "mesh";
-                        }
-                        model.suggest.setSourceEndpoint(suggestEndpoint);
-                        model.source = source;
-                    },
-                    suggestion: function (event) {
-                        L.fire("tracker:trackableEvent", {
-                            category: "lane:suggestSelect",
-                            action: model.source,
-                            label: event.suggestion
-                        });
-                        view.search(event.suggestion);
-                    }
-                };
+        // Controller: Connects the model and view, handles logic.
+        const controller = {
+            sourceChange(event) {
+                const source = event.newVal;
+                const suggestLimitInput = form.querySelector('input[name=suggest-limit]');
+                let suggestEndpoint;
 
-            }();
+                if (suggestLimitInput) {
+                    suggestEndpoint = `${sourceBase}${suggestLimitInput.value}`;
+                } else if (source.match(/^(all|catalog)/)) {
+                    suggestEndpoint = `${sourceBase}er-mesh`;
+                } else {
+                    suggestEndpoint = `${sourceBase}mesh`;
+                }
 
-        controller.sourceChange({ newVal: model.source });
+                model.suggest.setSourceEndpoint(suggestEndpoint);
+                model.source = source;
+            },
 
+            suggestion(event) {
+                L.fire('tracker:trackableEvent', {
+                    category: 'lane:suggestSelect',
+                    action: model.source,
+                    label: event.suggestion,
+                });
+                view.search(event.suggestion);
+            },
+        };
+
+        // --- Initialization ---
         L.addEventTarget(model.suggest);
+        model.suggest.on('suggest:select', controller.suggestion);
+        L.on('search:sourceChange', controller.sourceChange);
 
-        model.suggest.on("suggest:select", controller.suggestion);
-
-        L.on("search:sourceChange", controller.sourceChange);
-
-
+        // Trigger the initial source setup.
+        controller.sourceChange({ newVal: model.source });
     }
-})();
-
+}

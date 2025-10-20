@@ -1,9 +1,8 @@
-(function() {
+{
+
     "use strict";
 
-    let toggle = document.querySelector(".clinical-toggle");
+    const clinicalToggle = document.querySelector(".clinical-toggle");
+    clinicalToggle?.addEventListener("click", L.searchIndicator.show);
 
-    if (toggle) {
-        toggle.addEventListener("click", L.searchIndicator.show);
-    }
-})();
+}

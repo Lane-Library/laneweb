@@ -1,0 +1,79 @@
+{
+    "bundles": [
+        {
+            "type": "css",
+            "name": "lane-all.css",
+            "files": [
+                "reset.css",
+                "pure-grids.css",
+                "googlefonts.css",
+                "fontawesome.css",
+                "main-body.css",
+                "bassett.css",
+                "fontawesome-local.css",
+                "header.css",
+                "search-form.css",
+                "dropdown.css",
+                "nav.css",
+                "lists.css",
+                "anchors.css",
+                "footer.css",
+                "headings.css",
+                "module.css",
+                "som-colors.css",
+                "guides.css",
+                "staff.css",
+                "search.css",
+                "popups.css",
+                "no-search-template.css",
+                "tooltips.css",
+                "miscellaneous.css",
+                "events.css",
+                "buttons.css",
+                "forms.css",
+                "discovery-login.css",
+                "tables.css",
+                "lightbox.css",
+                "popular.css",
+                "bookmarks.css",
+                "suggest.css",
+                "resource-list-pagination.css",
+                "classes.css",
+                "shc-portal.css",
+                "menu.css",
+                "gutters.css",
+                "back-to-top.css",
+                "solr-facets.css",
+                "clinical-search.css",
+                "newsfeed-item.css",
+                "calendar.css",
+                "password-table.css",
+                "portals.css",
+                "explore.css",
+                "subscription.css",
+                "contacts.css",
+                "use-lane.css",
+                "IE.css",
+                "responsive.css",
+                "altmetric.css",
+                "container.css",
+                "spacings.css"
+            ]
+        },
+        {
+            "type": "css",
+            "name": "lane-print.css",
+            "files": [
+                "print.css"
+            ]
+        },
+        {
+            "type": "css",
+            "name": "history/lane-history.css",
+            "files": [
+                "history/history.css",
+                "history/history-responsive.css"
+            ]
+        }
+    ]
+}

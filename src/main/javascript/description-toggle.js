@@ -1,59 +1,84 @@
-(function() {
+(() => {
 
     "use strict";
 
-    let initializeDescriptionToggles = function() {
-        let triggers = document.querySelectorAll(".descriptionTrigger");
-        triggers.forEach(function(node) {
-            if (node.classList.contains("eresource")) {
-                node.innerHTML = "<a href=\"#\">Read Full Description<i class=\"fa-regular fa-angle-down\"></i></a>";
-            } else if (node.classList.contains("searchContent")) {
-                node.innerHTML = "<a href=\"#\">Abstract<i class=\"fa-regular fa-angle-down\"></i></a>";
-            }
+    // exit early if not on search results page
+    const searchResultsContainer = document.querySelector("#searchResults");
+    if (!searchResultsContainer) {
+        return;
+    }
+
+    const LABELS = {
+        eresource: "Read Full Description",
+        searchContent: "Abstract"
+    };
+    const ICONS = {
+        up: "fa-regular fa-angle-up",
+        down: "fa-regular fa-angle-down"
+    };
+
+    /**
+     * Updates a trigger's inner HTML based on its type and whether it's active.
+     * @param {HTMLElement} trigger - The .descriptionTrigger element.
+     * @param {boolean} isActive - Whether the parent <li> is active.
+     */
+    const updateTriggerState = (trigger, isActive) => {
+        const isEresource = trigger.classList.contains("eresource");
+
+        // Determine the correct label and icon based on state.
+        const label = isEresource ? LABELS.eresource : LABELS.searchContent;
+        const iconClass = isActive ? ICONS.up : ICONS.down;
+
+        trigger.innerHTML = `<a href="#">${label}<i class="${iconClass}"></i></a>`;
+    };
+
+    /**
+     * Sets the initial state for all description toggles on the page.
+     */
+    const initializeDescriptionToggles = () => {
+        searchResultsContainer.querySelectorAll(".descriptionTrigger").forEach(trigger => {
+            // triggers start in the inactive (down) state
+            updateTriggerState(trigger, false);
         });
     };
 
-    //add trigger markup and delegate click events on class "descriptionTrigger"
-    if (document.querySelector("#searchResults")) {
+    /**
+     * Handles the click event on a description trigger.
+     * @param {HTMLElement} trigger - The clicked .descriptionTrigger element.
+     * @param {Event} event - The original click event.
+     */
+    const handleClick = (trigger, event) => {
+        event.preventDefault();
 
-        let handleClick = function(node, event) {
-            let eresource = node.classList.contains("eresource"),
-                searchContent = node.classList.contains("searchContent"),
-                ancestor = node.closest("li"),
-                active = ancestor.classList.contains("active");
+        const ancestor = trigger.closest("li");
+        const wasActive = ancestor.classList.contains("active");
 
-            event.preventDefault();
-            ancestor.classList.toggle("active");
-            if (active && eresource) {
-                node.innerHTML = "<a href=\"#\"> Read Full Description <i class=\"fa-regular fa-angle-down\"></i></a>";
-            } else if (active && searchContent) {
-                node.innerHTML = "<a href=\"#\">Abstract <i class=\"fa-regular fa-angle-down\"></i></a>";
-            } else if (!active && eresource) {
-                node.innerHTML = "<a href=\"#\"> Read Full Description <i class=\"fa-regular fa-angle-up\"></i></a>";
-            } else if (!active && searchContent) {
-                node.innerHTML = "<a href=\"#\">Abstract <i class=\"fa-regular fa-angle-up\"></i></a>";
-            } 
-            L.fire("tracker:trackableEvent", {
-                category: "lane:descriptionTrigger",
-                action: event.target.textContent,
-                label: ancestor.querySelector('.primaryLink').textContent
-            });
-        };
+        // toggle active on the parent `li`
+        ancestor.classList.toggle("active");
 
-        document.querySelector("#searchResults").addEventListener("click", function(event) {
-            let node = event.target.closest(".descriptionTrigger");
-            if (node) {
-                handleClick(node, event);
-            }
+        // update the trigger's HTML to reflect the new state (opposite of the old state)
+        updateTriggerState(trigger, !wasActive);
+
+        // fire the tracking event
+        L.fire("tracker:trackableEvent", {
+            category: "lane:descriptionTrigger",
+            action: trigger.textContent,
+            label: ancestor.querySelector('.primaryLink')?.textContent
         });
+    };
 
-        initializeDescriptionToggles();
+    // --- Event Listener Setup ---
 
-    }
-
-    //reinitialize when content has changed
-    L.on("lane:new-content", function() {
-        initializeDescriptionToggles();
+    // Use event delegation on the main container
+    searchResultsContainer.addEventListener("click", (event) => {
+        // find the closest trigger element that was clicked
+        const trigger = event.target.closest(".descriptionTrigger");
+        if (trigger) {
+            handleClick(trigger, event);
+        }
     });
+
+    // Run the initialization for the initial page load
+    initializeDescriptionToggles();
 
 })();

@@ -260,7 +260,7 @@
                     </xsl:variable>
                     <xsl:value-of select="$authorString" />
                     <span> ... </span>
-                    <span class="authorsTrigger active">
+                    <span class="authorsTrigger">
                         <a href="#"> Show More </a>
                         <i class="fa-regular fa-angles-down fa-xs"></i>
                     </span>

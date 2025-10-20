@@ -1,79 +1,57 @@
 if (document.querySelector("#main-search")) {
 
-	(function () {
+    (() => {
 
-		"use strict";
+        "use strict";
 
-		let CHANGE = "change",
-			SEARCH_DROPDOWN = "main-search",
-			dropdown = document.querySelector("#" + SEARCH_DROPDOWN),
-			options = dropdown.querySelectorAll("option"),
-			dropdown_label = document.querySelector('.search-form .general-dropdown-trigger span'),
-			model = function (source) {
+        const searchDropdown = document.querySelector("#main-search");
+        const options = searchDropdown.querySelectorAll("option");
+        const dropdownLabel = document.querySelector(".search-form .general-dropdown-trigger span");
 
-				let m = {
-					source: source
-				};
+        // --- Static Data Model ---
+        // Create a lookup object once from all <option> elements using their data attributes.
+        const searchOptionsData = Array.from(options).reduce((data, option) => {
+            data[option.value] = {
+                placeholder: option.dataset.placeholder,
+                help: option.dataset.help,
+                tip: option.title,
+                text: option.text,
+            };
+            return data;
+        }, {});
 
-				options.forEach(function (option) {
-					m[option.value] = {
-						placeholder: option.dataset.placeholder,
-						source: option.value,
-						help: option.dataset.help,
-						tip: option.title,
-						text: option.text
-					};
-				});
+        // --- State Management ---
+        // A function to create the full model object needed by the event listeners.
+        // Adds the current source to the static options data above.
+        const createModel = (source) => ({
+            source,
+            ...searchOptionsData
+        });
 
-				return m;
+        // Initialize the state with the dropdown's current value.
+        let currentModel = createModel(searchDropdown.value);
 
-			}(dropdown[dropdown.selectedIndex].value),
+        // --- Event Handling ---
+        const handleDropdownChange = () => {
+            const newSource = searchDropdown.value;
+            const newModel = createModel(newSource);
 
-			view = function () {
-				let v = {
-					change: function (label) {
-						dropdown_label.innerHTML = label;
-					},
-					click: function () {
-						view.fire(CHANGE, dropdown[dropdown.selectedIndex].value);
-					}
-				}
-				dropdown.addEventListener(CHANGE, v.click);
-				return v;
-			}(),
+            // Update the UI
+            dropdownLabel.textContent = newModel[newSource].text;
 
+            L.fire("tracker:trackableEvent", {
+                category: "lane:searchDropdownSelection",
+                action: newSource,
+                label: `from ${currentModel.source} to ${newSource}`
+            });
 
-			controller = function () {
+            L.fire("searchDropdown:change", { newVal: newModel, oldVal: currentModel });
 
-				return {
-					update: function (source) {
-						let prop, newVal = {};
-						for (prop in model) {
-							newVal[prop] = model[prop];
-						}
-						newVal.source = source;
-						view.change(newVal[source].text);
-						L.fire("tracker:trackableEvent", {
-							category: "lane:searchDropdownSelection",
-							action: source,
-							label: "from " + model.source + " to " + source
-						});
-						controller.fire(CHANGE, { newVal: newVal, oldVal: model });
-					}
-				};
+            // Update the state for the next change event.
+            currentModel = newModel;
+        };
 
-			}();
+        searchDropdown.addEventListener("change", handleDropdownChange);
 
-		L.addEventTarget(view);
-
-		L.addEventTarget(controller, {
-			prefix: "searchDropdown"
-		});
-
-		view.on(CHANGE, controller.update)
-
-
-
-	})();
-
+    })();
 }
