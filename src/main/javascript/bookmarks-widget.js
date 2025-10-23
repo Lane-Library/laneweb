@@ -156,7 +156,9 @@
 
             if (manageBookmarks) {
                 manageBookmarks.style.display = items.length === 0 || items.length > this.#displayLimit ? 'block' : 'none';
-                manageBookmarks.textContent = items.length === 0 ? 'Add a Bookmark' : '';
+                if (items.length === 0) {
+                    manageBookmarks.textContent = 'Add a Bookmark';
+                }
             }
         }
     }
