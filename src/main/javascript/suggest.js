@@ -65,6 +65,7 @@
             this.#input.autocomplete = 'off';
             this.#input.setAttribute('aria-controls', 'suggest-list');
             this.#input.setAttribute('aria-autocomplete', 'list');
+            this.#input.setAttribute('role', 'combobox');
 
             this.#container = document.createElement('div');
             this.#container.className = Suggest.CSS.suggestionContainer;
