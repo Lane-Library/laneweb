@@ -16,8 +16,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.laneweb.rest.BasicAuthRESTService;
-import edu.stanford.irt.laneweb.rest.OauthRESTService;
 import edu.stanford.irt.laneweb.rest.RESTException;
+import edu.stanford.irt.laneweb.rest.Oauth.OauthRESTService;
 import edu.stanford.irt.search.impl.Result;
 import edu.stanford.irt.status.ApplicationStatus;
 

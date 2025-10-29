@@ -5,8 +5,8 @@ import java.util.List;
 
 import edu.stanford.irt.coursereserves.Course;
 import edu.stanford.irt.coursereserves.CourseReservesItemList;
-import edu.stanford.irt.laneweb.rest.BasicAuthRESTService;
 import edu.stanford.irt.laneweb.rest.TypeReference;
+import edu.stanford.irt.laneweb.rest.Oauth.OauthRESTService;
 
 public class RESTCourseReservesService implements CourseReservesService {
 
@@ -21,9 +21,9 @@ public class RESTCourseReservesService implements CourseReservesService {
 
     private URI catalogServiceURI;
 
-    private BasicAuthRESTService restService;
+    private OauthRESTService restService;
 
-    public RESTCourseReservesService(final URI catalogServiceURI, final BasicAuthRESTService restService) {
+    public RESTCourseReservesService(final URI catalogServiceURI, final OauthRESTService restService) {
         this.catalogServiceURI = catalogServiceURI;
         this.restService = restService;
     }

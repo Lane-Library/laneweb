@@ -38,8 +38,8 @@ import edu.stanford.irt.laneweb.metasearch.ScoreStrategy;
 import edu.stanford.irt.laneweb.metasearch.SearchDirectoryTransformer;
 import edu.stanford.irt.laneweb.metasearch.SearchGenerator;
 import edu.stanford.irt.laneweb.metasearch.SearchResultSAXStrategy;
-import edu.stanford.irt.laneweb.rest.BasicAuthRESTService;
-import edu.stanford.irt.laneweb.rest.OauthRESTService;
+import edu.stanford.irt.laneweb.rest.Oauth.OauthRESTService;
+import edu.stanford.irt.laneweb.rest.Oauth.OauthTokenService;
 import edu.stanford.irt.search.impl.Result;
 
 @Configuration
@@ -152,7 +152,7 @@ public class MetasearchConfiguration {
 
     @Bean
     public MetaSearchService restMetaSearchService(
-            @Qualifier("oauthRestService/metasearch") final OauthRESTService restService,
+            @Qualifier("restService/metasearch") final OauthRESTService restService,
             @Value("${edu.stanford.irt.laneweb.metasearch.scheme}") final String scheme,
             @Value("${edu.stanford.irt.laneweb.metasearch.host}") final String host,
             @Value("${edu.stanford.irt.laneweb.metasearch.port}") final int port,
@@ -161,15 +161,13 @@ public class MetasearchConfiguration {
         return new RESTMetaSearchService(metaSearchURI, restService);
     }
 
-    @Bean("oauthRestService/metasearch")
+    @Bean("restService/metasearch")
     public OauthRESTService getMetasearchOauthRestService(RestClient restClient,
             @Value("${edu.stanford.irt.laneweb.metasearch.userInfo}") final String userInfo,
-            @Value("${edu.stanford.irt.laneweb.metasearch.scheme}") final String scheme,
-            @Value("${edu.stanford.irt.laneweb.metasearch.host}") final String host,
-            @Value("${edu.stanford.irt.laneweb.metasearch.port}") final int port,
-            @Value("${edu.stanford.irt.laneweb.metasearch.path}") final String path) throws URISyntaxException {
-        URI tokenEndpoint = new URI(scheme, null, host, port, path + "oauth2/token", null, null);
-        return new OauthRESTService(restClient, userInfo, tokenEndpoint);
+            @Qualifier("java.net.URI/oauth2-server") final URI oauthEndpoint) throws URISyntaxException {
+        URI tokenEndpoint = URI.create(oauthEndpoint.toString() + "oauth2/token");
+        OauthTokenService oauthTokenService = new OauthTokenService(restClient, tokenEndpoint, userInfo);
+        return new OauthRESTService(restClient, oauthTokenService);
     }
 
     @Bean(name = "edu.stanford.irt.cocoon.pipeline.Transformer/search-directory") @Scope("prototype")

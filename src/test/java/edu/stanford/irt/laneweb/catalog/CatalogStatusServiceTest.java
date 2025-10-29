@@ -14,13 +14,13 @@ import java.net.URISyntaxException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import edu.stanford.irt.laneweb.rest.BasicAuthRESTService;
 import edu.stanford.irt.laneweb.rest.RESTException;
+import edu.stanford.irt.laneweb.rest.Oauth.OauthRESTService;
 import edu.stanford.irt.status.ApplicationStatus;
 
 public class CatalogStatusServiceTest {
 
-    private BasicAuthRESTService restService;
+    private OauthRESTService restService;
 
     private CatalogStatusService service;
 
@@ -28,7 +28,7 @@ public class CatalogStatusServiceTest {
 
     @BeforeEach
     public void setUp() throws URISyntaxException {
-        this.restService = mock(BasicAuthRESTService.class);
+        this.restService = mock(OauthRESTService.class);
         this.service = new CatalogStatusService(new URI("/"), this.restService);
     }
 

@@ -17,14 +17,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import edu.stanford.irt.coursereserves.CourseReservesItemList;
-import edu.stanford.irt.laneweb.rest.BasicAuthRESTService;
 import edu.stanford.irt.laneweb.rest.TypeReference;
+import edu.stanford.irt.laneweb.rest.Oauth.OauthRESTService;
 
 public class RESTCourseReservesServiceTest {
 
     private CourseReservesItemList itemList;
 
-    private BasicAuthRESTService restService;
+    private OauthRESTService restService;
 
     private RESTCourseReservesService service;
 
@@ -33,7 +33,7 @@ public class RESTCourseReservesServiceTest {
     @BeforeEach
     public void setUp() throws URISyntaxException {
         this.uri = new URI("/");
-        this.restService = mock(BasicAuthRESTService.class);
+        this.restService = mock(OauthRESTService.class);
         this.service = new RESTCourseReservesService(this.uri, this.restService);
         this.itemList = mock(CourseReservesItemList.class);
     }

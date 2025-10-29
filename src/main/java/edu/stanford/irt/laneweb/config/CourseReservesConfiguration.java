@@ -20,7 +20,7 @@ import edu.stanford.irt.laneweb.catalog.coursereserves.CourseReservesItemSAXStra
 import edu.stanford.irt.laneweb.catalog.coursereserves.CourseReservesService;
 import edu.stanford.irt.laneweb.catalog.coursereserves.CoursesSAXStrategy;
 import edu.stanford.irt.laneweb.catalog.coursereserves.RESTCourseReservesService;
-import edu.stanford.irt.laneweb.rest.BasicAuthRESTService;
+import edu.stanford.irt.laneweb.rest.Oauth.OauthRESTService;
 
 @Configuration
 public class CourseReservesConfiguration {
@@ -33,7 +33,7 @@ public class CourseReservesConfiguration {
     @Bean
     public CourseReservesService courseReservesService(
             @Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI,
-            @Qualifier("restService/catalog-service") final BasicAuthRESTService restService) {
+            @Qualifier("restService/catalog-service") final OauthRESTService restService) {
         return new RESTCourseReservesService(catalogServiceURI, restService);
     }
 

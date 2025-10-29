@@ -7,12 +7,17 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.web.client.RestClient;
 
+import edu.stanford.irt.laneweb.rest.Oauth.OauthRESTService;
+import edu.stanford.irt.laneweb.rest.Oauth.OauthTokenService;
+
 @Configuration @Profile("test")
 public class OauthTestConfiguration {
 
     @Bean
     OauthRESTService oauthRESTService(final RestClient restClient) {
-        return new OauthRESTService(restClient, "lane.lane:LANE", URI.create("http://localhost:8080/oauth2/token"));
+        OauthTokenService oauthTokenService = new OauthTokenService(restClient,
+                URI.create("http://localhost:8080/oauth2/token"), "lane.lane:LANE");
+        return new OauthRESTService(restClient, oauthTokenService);
     }
 
     @Bean

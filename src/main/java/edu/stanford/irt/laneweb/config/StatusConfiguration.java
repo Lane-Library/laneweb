@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.config;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,6 +13,8 @@ import org.springframework.core.annotation.Order;
 import edu.stanford.irt.cocoon.sitemap.ComponentFactory;
 import edu.stanford.irt.cocoon.sitemap.Sitemap;
 import edu.stanford.irt.cocoon.source.SourceResolver;
+import edu.stanford.irt.laneweb.rest.RESTService;
+import edu.stanford.irt.laneweb.rest.Oauth.OauthServerStatusService;
 import edu.stanford.irt.laneweb.servlet.mvc.IndexDotHtmlStatusProvider;
 import edu.stanford.irt.laneweb.status.LanewebStatusService;
 import edu.stanford.irt.laneweb.suggest.SuggestStatusProvider;
@@ -28,8 +31,7 @@ public class StatusConfiguration {
 
     private static final int SLOW_SUGGESTION_TIME = 250;
 
-    @Bean
-    @Order(3)
+    @Bean @Order(3)
     public IndexDotHtmlStatusProvider indexDotHtmlStatusProvider(final ComponentFactory componentFactory,
             @Qualifier("edu.stanford.irt.cocoon.sitemap.Sitemap/sitemap") final Sitemap sitemap,
             final SourceResolver sourceResolver, @Value("${edu.stanford.irt.laneweb.live-base}") final URI contentBase,
@@ -38,8 +40,7 @@ public class StatusConfiguration {
                 contentBase, classesServiceURI);
     }
 
-    @Bean
-    @Order(1)
+    @Bean @Order(1)
     public RuntimeMXBeanStatusProvider jvmStatusProvider() {
         return new RuntimeMXBeanStatusProvider();
     }
@@ -55,9 +56,15 @@ public class StatusConfiguration {
         return new DefaultStatusService("laneweb", version, providers);
     }
 
-    @Bean
-    @Order(2)
+    @Bean @Order(2)
     public SuggestStatusProvider suggestStatusProvider(final SuggestionService suggestionService) {
         return new SuggestStatusProvider(suggestionService, SLOW_SUGGESTION_TIME, "cardio");
+    }
+
+    @Bean @Order(3)
+    public StatusService oauthServerStatusService(@Qualifier("java.net.URI/oauth2-server") final URI oauth2Endpoint,
+            final RESTService restClient) throws URISyntaxException {
+        URI statusEndpoint = URI.create(oauth2Endpoint.toString() + "status.json");
+        return new OauthServerStatusService(statusEndpoint, restClient);
     }
 }

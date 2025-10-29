@@ -6,11 +6,9 @@ import java.net.URI;
 
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
 
-@Service
 public class RESTService {
 
     private RestClient restClient;

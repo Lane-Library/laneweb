@@ -10,7 +10,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestClient;
 
 import edu.stanford.irt.laneweb.catalog.CatalogStatusService;
-import edu.stanford.irt.laneweb.rest.BasicAuthRESTService;
+import edu.stanford.irt.laneweb.rest.Oauth.OauthRESTService;
+import edu.stanford.irt.laneweb.rest.Oauth.OauthTokenService;
 import edu.stanford.irt.status.StatusService;
 
 @Configuration
@@ -26,13 +27,16 @@ public class CatalogServiceConfiguration {
 
     @Bean
     public StatusService catalogStatusService(@Qualifier("java.net.URI/catalog-service") final URI catalogServiceURI,
-            @Qualifier("restService/catalog-service") final BasicAuthRESTService restService) {
+            @Qualifier("restService/catalog-service") final OauthRESTService restService) {
         return new CatalogStatusService(catalogServiceURI, restService);
     }
 
     @Bean("restService/catalog-service")
-    public BasicAuthRESTService getBasicAuthRESTService(RestClient restClient,
-            @Value("${edu.stanford.irt.laneweb.catalog-service.userInfo}") final String userInfo) {
-        return new BasicAuthRESTService(restClient, userInfo);
+    public OauthRESTService getMetasearchOauthRestService(RestClient restClient,
+            @Value("${edu.stanford.irt.laneweb.catalog-service.userInfo}") final String userInfo,
+            @Qualifier("java.net.URI/oauth2-server") final URI oauth2Endpoint) throws URISyntaxException {
+        URI tokenEndpoint = URI.create(oauth2Endpoint.toString() + "oauth2/token");
+        OauthTokenService oauthTokenService = new OauthTokenService(restClient, tokenEndpoint, userInfo);
+        return new OauthRESTService(restClient, oauthTokenService);
     }
 }
