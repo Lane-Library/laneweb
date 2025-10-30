@@ -10,15 +10,19 @@ describe('Browzine', () => {
 
         cy.visit('/cypress-test/search.html?q=id%3Apubmed-33949201+OR+id%3Apubmed-33752427+OR+id%3Apubmed-33983849+OR+id%3Apubmed-36803290&source=all-all&sort=title_sort+asc,year+desc');
 
+        cy.get('li[data-index=1] .primaryLink').should('have.attr', 'href').and('match', /.*sfx.stanford.edu.*/);
         cy.get('li[data-index=1] .hldgsContainer a').should('have.attr', 'href').and('match', /.*sfx.stanford.edu.*/);
         cy.get('li[data-index=1] .hldgsContainer a').invoke('text').should('contain', 'Access Options');
 
+        cy.get('li[data-index=2] .primaryLink').should('have.attr', 'href').and('match', /.*libkey.io.*/);
         cy.get('li[data-index=2] .hldgsContainer a').should('have.attr', 'href').and('match', /.*libkey.io.*/);
         cy.get('li[data-index=2] .hldgsContainer a').invoke('text').should('contain', 'Direct to PDF');
 
+        cy.get('li[data-index=3] .primaryLink').should('have.attr', 'href').and('match', /.*sfx.stanford.edu.*/);
         cy.get('li[data-index=3] .hldgsContainer a').should('have.attr', 'href').and('match', /.*sfx.stanford.edu.*/);
         cy.get('li[data-index=3] .hldgsContainer a').invoke('text').should('contain', 'Access Options');
 
+        cy.get('li[data-index=4] .primaryLink').should('have.attr', 'href').and('match', /.*libkey.io.*/);
         cy.get('li[data-index=4] .hldgsContainer a').should('have.attr', 'href').and('match', /.*libkey.io.*/);
         cy.get('li[data-index=4] .hldgsContainer a').invoke('text').should('contain', 'Direct to Full Text');
     })

@@ -50,8 +50,10 @@
                     if (retractionNoticeUrl) {
                         addRetractedArticleLink(node, 'xmark', 'Retracted Article', retractionNoticeUrl);
                     } else if (fulltextUrl) {
+                        replacePrimaryLink(node, fulltextUrl);
                         addFulltextLink(node, 'Direct to PDF', fulltextUrl);
                     } else if (contentLocation) {
+                        replacePrimaryLink(node, contentLocation);
                         addFulltextLink(node, 'Direct to Full Text', contentLocation);
                     }
 
@@ -95,6 +97,14 @@
 
         div.append(link);
         node.querySelector('.sourceInfo')?.append(div);
+    };
+
+    // Helper function to replace the primaryLink href
+    const replacePrimaryLink = (node, url) => {
+        const link = node.querySelector('.primaryLink');
+        if (link) {
+            link.href = url;
+        }
     };
 
     // Service to communicate with the server to fetch article data for each DOI.
