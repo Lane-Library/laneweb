@@ -21,7 +21,7 @@ import edu.stanford.irt.laneweb.Laneweb;
 @SpringBootTest(classes = Laneweb.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class CypressEndToEndIT {
 
-    private static final String DOCKER_IMAGE = "cypress/included:13.17.0";
+    private static final String DOCKER_IMAGE = "cypress/included:15.5.0";
 
     private static final String INSTRUMENTED_FILES_DIR = "target/test-classes/e2e/coverage";
 

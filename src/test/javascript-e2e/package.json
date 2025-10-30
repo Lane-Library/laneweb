@@ -12,9 +12,9 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "@cypress/code-coverage": "^3.13.9",
+    "@cypress/code-coverage": "^3.14.7",
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
-    "cypress": "^13.17.0",
+    "cypress": "^15.5.0",
     "istanbul-lib-coverage": "^3.2.2",
     "nyc": "^17.1.0",
     "source-map-support": "^0.5.21",
