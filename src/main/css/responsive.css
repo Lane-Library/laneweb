@@ -50,12 +50,12 @@ img {
 
     html,
     .content,
-    section.content>div.centered {
+    main.content>div.centered {
         margin: 0;
     }
 
     section.header,
-    section.content {
+    main.content {
         min-width: 0;
     }
 
