@@ -129,7 +129,6 @@ public class MetasearchConfiguration {
         List<String> engines = new ArrayList<>(19);
         engines.add("aafp_patients");
         engines.add("aappatient");
-        engines.add("aapwebsite");
         engines.add("dynamed_pediatric");
         engines.add("pubmed_allchild");
         engines.add("pubmed_clinicaltrial_allchild");
