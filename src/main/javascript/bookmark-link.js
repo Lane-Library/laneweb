@@ -64,7 +64,7 @@
          */
         #bindEvents() {
             L.addEventTarget(this, { prefix: 'bookmarkLink' });
-            const links = document.querySelectorAll("section a");
+            const links = document.querySelectorAll("main a");
             links.forEach(link => {
                 link.addEventListener("mouseover", event => this.#handleTargetMouseover(event));
                 link.addEventListener("mouseout", event => this.#handleTargetMouseout(event));
