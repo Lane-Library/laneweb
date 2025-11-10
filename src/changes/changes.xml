@@ -4,6 +4,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2025-11-10" version="3.16.3" description="bug fix and update release">
+            <action date="2025-11-05" dev="ryanmax" issue="LANEWEB-11575" type="fix">
+                Persistent login not working
+            </action>
+        </release>
         <release date="2025-11-03" version="3.16.2" description="bug fix and update release">
             <action date="2025-09-22" dev="alainb" issue="LANEWEB-11574" type="update">
                 oauth2 server
