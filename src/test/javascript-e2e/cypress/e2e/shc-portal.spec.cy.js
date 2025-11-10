@@ -48,14 +48,15 @@ describe('Lane Search Test Case', () => {
     });
 
     it('check google analytics  url', () => {
-        // intercept the GA request and count the number of descriptionTrigger click events
-        cy.intercept('POST', 'https://www.google-analytics.com/g/collect*en=page_view*').as('gaCollect');
+        // intercept the GA request
+        cy.intercept('POST', 'https://www.google-analytics.com/g/collect*ONSITE*VerticalPico*').as('gaCollect');
         cy.get('@patientCondition').type('condition');
         cy.wait(100);
         cy.get('@patientCondition').click();
         cy.get('.verticalPico .btn').click();
         cy.wait('@gaCollect').then((interception) => {
-            expect(interception.request.url).to.include('dl=%2FONSITE%2FSHC-Epic%20VerticalPico%20Search%2F%2Fsearch.html');
+            const url = new URL(interception.request.url);
+            expect(url.searchParams.get('dl')).to.include('/ONSITE/SHC-Epic VerticalPico Search//search.html');
         });
     });
 
