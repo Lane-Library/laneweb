@@ -10,6 +10,8 @@
     const view = ((bookImageNodes) => {
         // a map of bookcover ids (bcids) to img nodes
         const imageMap = new Map();
+        // pattern to validate bcids; should match edu.stanford.irt.bookcovers.ResourceID
+        const bcidPattern = /^[a-z]{3,4}-[\dXx]+$/;
 
         // Initialize the imageMap.
         bookImageNodes.forEach(imageNode => {
@@ -34,7 +36,7 @@
             getImgsForUpdate(viewport) {
                 const imagesForUpdate = new Set();
                 for (const [bcid, nodes] of imageMap.entries()) {
-                    if (nodes.some(node => !node.dataset.requested && viewport.nearView(node, 3))) {
+                    if (bcidPattern.test(bcid) && nodes.some(node => !node.dataset.requested && viewport.nearView(node, 3))) {
                         imagesForUpdate.add(bcid);
                     }
                 }
@@ -85,7 +87,8 @@
              */
             async getBookCoverURLs(bcids) {
                 // Take only the first 20 bcids using slice().
-                const params = bcids.slice(0, 20)
+                const requestedBcids = bcids.slice(0, 20);
+                const params = requestedBcids
                     .map(bcid => `bcid=${encodeURIComponent(bcid)}`)
                     .join('&');
 
@@ -98,9 +101,11 @@
                     }
                     const data = await response.json();
                     // Fire event with both the returned covers and the list of bcids that were requested.
-                    service.fire("covers", { covers: data, bcids: bcids.slice(0, 20) });
+                    service.fire("covers:success", { covers: data, bcids: requestedBcids });
                 } catch (error) {
                     console.error("Failed to fetch book covers:", error);
+                    // Fire an error event so the view can still mark these as requested.
+                    service.fire("covers:error", { covers: {}, bcids: requestedBcids });
                 }
             }
         };
@@ -126,7 +131,8 @@
         }
     };
 
-    bookcoverService.on("covers", controller.covers);
+    bookcoverService.on("covers:success", controller.covers);
+    bookcoverService.on("covers:error", controller.covers);
 
     L.on("viewport:init", event => controller.update(event.viewport));
     L.on("viewport:scrolled", event => controller.update(event.viewport));
