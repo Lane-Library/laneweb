@@ -23,7 +23,8 @@ ul .nav-login {
     padding-left: 5%;
 }
 
-.nav-menu>span a {
+.nav-menu>span a,
+.nav-menu>span a label {
     color: black;
     cursor: pointer;
 }
