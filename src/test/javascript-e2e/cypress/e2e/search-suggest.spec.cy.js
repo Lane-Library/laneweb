@@ -41,11 +41,15 @@ describe('Suggest', () => {
         cy.wait('@suggest10Match');
         //Click on Skin
         cy.get('.aclist-item').first().click();
+
         //Check if request sent to google analytics
-        cy.wait('@gaCollect').then((interception) => {
-            expect(interception.request.url).to.include('ep.event_label=Skin');
-            expect(interception.request.url).to.include('ep.event_action=all-all');
+        cy.waitForInterceptions('@gaCollect', (interception) => {
+            const url = interception.request.url;
+            return url.includes('ep.event_label=Skin') && url.includes('ep.event_action=all-all');
+        }, 1).then((filteredInterceptions) => {
+            expect(filteredInterceptions).to.have.length(1);
         });
+
         //Check input value from the first suggestion
         cy.get('@input').should('have.value', 'Skin');
         //Check url after click

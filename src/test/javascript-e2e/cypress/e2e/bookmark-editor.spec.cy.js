@@ -10,8 +10,6 @@ describe('Bookmark editor', () => {
         cy.get('#bookmarks-editor [value=save]').first().as('saveButton');
     })
 
-
-
     it('displays bookmark editor', () => {
         cy.get('@editorButton').should('be.visible');
         cy.get('@editorButton').click();
@@ -41,7 +39,6 @@ describe('Bookmark editor', () => {
         cy.get('@bookmarkUrl').type('google.com');
         cy.get('@bookmarkUrl').should('have.value', 'https://google.com');
     })
-
 
     it('test a save empty label', () => {
         cy.get('.bookmark-editor-content .actions button[value=edit]').first().click();
@@ -80,8 +77,6 @@ describe('Bookmark editor', () => {
         })
     })
 
-
-
     it('test saved', () => {
         cy.intercept(
             'POST',
@@ -98,10 +93,12 @@ describe('Bookmark editor', () => {
         cy.get('@bookmarkUrl').type('google.com');
         cy.get('@saveButton').click();
         cy.wait('@addBookmark');
-        cy.wait('@gaCollect').then((interception) => {
+        cy.waitForInterceptions('@gaCollect', (interception) => {
             const url = new URL(interception.request.url);
-            expect(url.searchParams.get('en')).to.include('lane:bookmarkAdd');
-            expect(url.searchParams.get('ep.event_label')).to.include('Test bookmark');
+            return url.searchParams.get('en').includes('lane:bookmarkAdd') 
+                && url.searchParams.get('ep.event_label').includes('Test bookmark');
+        }, 1).then((filteredInterceptions) => {
+            expect(filteredInterceptions).to.have.length(1);
         });
         cy.get('#bookmarks-editor ul li').should('have.length', 8);
         cy.get('#bookmarks li').first().should('contain', 'Test bookmark');

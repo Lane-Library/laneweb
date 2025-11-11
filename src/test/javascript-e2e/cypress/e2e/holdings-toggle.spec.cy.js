@@ -9,25 +9,33 @@ describe('Holdings Toggle', () => {
             body: '{}'
         });
 
-        cy.intercept('https://www.google-analytics.com/g/collect*', (req) => {
-            const urlAndBody = req.url + req.body;
-            if (urlAndBody.match(/hldgsTrigger.*close/g)) {
-                req.alias = 'gaCollectClose';
-            }
-            if (urlAndBody.match(/hldgsTrigger.*open/g)) {
-                req.alias = 'gaCollectOpen';
-            }
-            req.reply('OK');
-        });
+        cy.intercept('https://www.google-analytics.com/g/collect*').as('gaCollect');
 
         cy.get('.hldgsTrigger').first().as('hldgsTrigger');
         cy.get('.table-main').first().as('tableMain');
-        expect(cy.get('@tableMain').should('be.visible'));
+        cy.get('@tableMain').should('be.visible');
         cy.get('@hldgsTrigger').click();
-        expect(cy.get('@tableMain').should('not.be.visible'));
-        cy.wait('@gaCollectClose');
+        cy.get('@tableMain').should('not.be.visible');
+
+        // wait for 'gaCollect'
+        // assert that one GA request was made containing a hldgsTrigger close event
+        cy.waitForInterceptions('@gaCollect', (interception) => {
+            const urlAndBody = interception.request.url + interception.request.body;
+            return urlAndBody.match(/hldgsTrigger.*close/g);
+        }, 1).then((filteredInterceptions) => {
+            expect(filteredInterceptions).to.have.length(1);
+        });
+
         cy.get('@hldgsTrigger').click();
-        expect(cy.get('@tableMain').should('be.visible'));
-        cy.wait('@gaCollectOpen');
+        cy.get('@tableMain').should('be.visible');
+
+        // wait for 'gaCollect'
+        // assert that one GA request was made containing a hldgsTrigger open event
+        cy.waitForInterceptions('@gaCollect', (interception) => {
+            const urlAndBody = interception.request.url + interception.request.body;
+            return urlAndBody.match(/hldgsTrigger.*open/g);
+        }, 1).then((filteredInterceptions) => {
+            expect(filteredInterceptions).to.have.length(1);
+        });
     })
 })

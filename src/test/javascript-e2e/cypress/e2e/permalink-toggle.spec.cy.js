@@ -15,13 +15,8 @@ describe('Permalink Toggle Test', () => {
             }
         });
 
-        // intercept the GA POST and make sure "permalinkCopied" is present in the body (below)
-        cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {
-            if (req.body.includes('permalinkCopied')) {
-                req.reply('OK');
-                req.alias = 'gaCollect';
-            }
-        });
+        // intercept the GA POST
+        cy.intercept('POST', 'https://www.google-analytics.com/g/collect*').as('gaCollect');
 
         cy.viewport(1101, 750);
 
@@ -42,7 +37,11 @@ describe('Permalink Toggle Test', () => {
 
         cy.get('@permalink').should('contain.text', 'Link copied');
 
-        cy.wait('@gaCollect').its('request.body').should('include', 'lane%3ApermalinkCopied');
+        cy.waitForInterceptions('@gaCollect', (interception) => {
+            return interception.request.body.includes('permalinkCopied');
+        }, 1).then((filteredInterceptions) => {
+            expect(filteredInterceptions).to.have.length(1);
+        });
 
         // Assert the text reverts
         cy.get('@permalink', { timeout: 2100 })

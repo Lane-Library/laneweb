@@ -2,6 +2,7 @@ describe('Tracking', () => {
 
     beforeEach(() => {
         cy.viewport(1101, 1500);
+        cy.intercept('POST', 'https://www.google-analytics.com/g/collect*').as('gaCollect');
     });
 
     it('click on search result should fire lane:searchResultClick event', () => {
@@ -20,16 +21,14 @@ describe('Tracking', () => {
             });
         });
 
-        cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {
-            if (req.body.includes('searchResultClick') && req.body.includes('ep.event_label=bib-12%20-%3E%20Journal%20-%3E%20Lancet')) {
-                req.reply('OK');
-                req.alias = 'gaCollect';
-            }
-        });
-
         cy.get('@primaryLink').click();
 
-        cy.wait('@gaCollect');
+        cy.waitForInterceptions('@gaCollect', (interception) => {
+            const body = interception.request.body;
+            return body.includes('searchResultClick') && body.includes('ep.event_label=bib-12%20-%3E%20Journal%20-%3E%20Lancet');
+        }, 1).then((filteredInterceptions) => {
+            expect(filteredInterceptions).to.have.length(1);
+        });
     })
 
     it('click on CME link reports correct host to GA', () => {
@@ -45,16 +44,13 @@ describe('Tracking', () => {
         cy.get('@cmeLink').invoke('attr', 'target', '_blank');
         cy.get('@cmeLink').invoke('attr', 'href', '/redirect/cme?url=https://reportable-host4GA.com/contents/');
 
-        cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {
-            if (req.body.includes('event_label=reportable-host4GA.com')) {
-                req.reply('OK');
-                req.alias = 'gaCollect';
-            }
-        });
-
         cy.get('@cmeLink').click();
 
-        cy.wait('@gaCollect');
+        cy.waitForInterceptions('@gaCollect', (interception) => {
+            return interception.request.body.includes('event_label=reportable-host4GA.com');
+        }, 1).then((filteredInterceptions) => {
+            expect(filteredInterceptions).to.have.length(1);
+        });
     })
 
     it('click on proxy link reports correct host to GA', () => {
@@ -68,16 +64,13 @@ describe('Tracking', () => {
         cy.get('@proxyLink').invoke('attr', 'target', '_blank');
         cy.get('@proxyLink').invoke('attr', 'href', 'https://login.laneproxy.stanford.edu/login?url=http://www.ncbi.nlm.nih.gov/sites/entrez?otool=stanford&holding=F1000%2CF1000M');
 
-        cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {
-            if (req.body.includes('event_label=www.ncbi.nlm.nih.gov')) {
-                req.reply('OK');
-                req.alias = 'gaCollect';
-            }
-        });
-
         cy.get('@proxyLink').click();
 
-        cy.wait('@gaCollect');
+        cy.waitForInterceptions('@gaCollect', (interception) => {
+            return interception.request.body.includes('event_label=www.ncbi.nlm.nih.gov');
+        }, 1).then((filteredInterceptions) => {
+            expect(filteredInterceptions).to.have.length(1);
+        });
     })
 
 })
