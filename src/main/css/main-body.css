@@ -29,7 +29,7 @@ footer section,
     max-width: none;
 }
 
-.su-design section.content>div.centered:first-of-type {
+.su-design main.content>div.centered:first-of-type {
     margin: 0;
     padding: 0;
 }
