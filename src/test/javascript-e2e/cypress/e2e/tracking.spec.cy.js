@@ -12,14 +12,8 @@ describe('Tracking', () => {
         // find first primaryLink
         cy.get('.primaryLink').filter(':visible').as('primaryLink');
 
-        // intercept link request
-        // this allows the test to continue without actually navigating to the external link
-        cy.get('@primaryLink').then(($link) => {
-            const primaryLinkHref = $link.attr('href');
-            cy.intercept(primaryLinkHref, {
-                statusCode: 200
-            });
-        });
+        // change the href to open in new window to avoid need to intercept
+        cy.get('@primaryLink').invoke('attr', 'target', '_blank');
 
         cy.get('@primaryLink').click();
 

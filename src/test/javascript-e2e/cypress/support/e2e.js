@@ -20,14 +20,8 @@ import '@cypress/code-coverage/support'
 // require('./commands')
 // cypress/support/e2e.js
 
-// run before each test to intercept all GA page_view requests
-// intercepting GA requests like this interferes with tests after Cypress upgrade from v13.17.0 to v15.5.0
-// commenting out for now
-// beforeEach(() => {
-//     cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', (req) => {
-//         if (req.url.includes('en=page_view&')) {
-//             console.log('GA page_view intercepted');
-//             req.reply('OK');
-//         }
-//     });
-// });
+// run before each test to intercept all GA requests
+// NOTE: intercepting GA requests like this interfered with tests after Cypress upgrade from v13.17.0 to v15.5.0
+beforeEach(() => {
+    cy.intercept('POST', 'https://www.google-analytics.com/g/collect*', {statusCode: 204}).as('gaBlocker');
+});
