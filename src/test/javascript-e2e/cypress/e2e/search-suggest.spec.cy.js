@@ -36,18 +36,19 @@ describe('Suggest', () => {
     //click on the suggest and check the input value
     it('click on suggestion', () => {
         cy.intercept('/apps/suggest/getSuggestionList*', { fixture: 'suggest/suggest.json' }).as('suggest10Match');
-        cy.intercept('POST', 'https://www.google-analytics.com/g/collect*en=lane%3AsuggestSelect*').as('gaCollect');
+        cy.window().then((win) => {
+            cy.spy(win.L, 'fire').as('lanewebSpy');
+        });
         cy.get('@input').type('skin');
         cy.wait('@suggest10Match');
         //Click on Skin
         cy.get('.aclist-item').first().click();
 
         //Check if request sent to google analytics
-        cy.waitForInterceptions('@gaCollect', (interception) => {
-            const url = interception.request.url;
-            return url.includes('ep.event_label=Skin') && url.includes('ep.event_action=all-all');
-        }, 1).then((filteredInterceptions) => {
-            expect(filteredInterceptions).to.have.length(1);
+        cy.get('@lanewebSpy').should('have.been.calledWith', 'tracker:trackableEvent', {
+            category: 'lane:suggestSelect',
+            action: 'all-all',
+            label: 'Skin'
         });
 
         //Check input value from the first suggestion

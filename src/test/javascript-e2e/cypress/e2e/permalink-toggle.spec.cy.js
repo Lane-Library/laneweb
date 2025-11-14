@@ -7,7 +7,7 @@ describe('Permalink Toggle Test', () => {
                 // so we need to create a mock object to stub if it doesn't exist.
                 if (!win.navigator.clipboard) {
                     win.navigator.clipboard = {
-                        writeText: () => {} // does nothing
+                        writeText: () => { } // does nothing
                     };
                 }
 
@@ -15,8 +15,9 @@ describe('Permalink Toggle Test', () => {
             }
         });
 
-        // intercept the GA POST
-        cy.intercept('POST', 'https://www.google-analytics.com/g/collect*').as('gaCollect');
+        cy.window().then((win) => {
+            cy.spy(win.L, 'fire').as('lanewebSpy');
+        });
 
         cy.viewport(1101, 750);
 
@@ -37,11 +38,14 @@ describe('Permalink Toggle Test', () => {
 
         cy.get('@permalink').should('contain.text', 'Link copied');
 
-        cy.waitForInterceptions('@gaCollect', (interception) => {
-            return interception.request.body.includes('permalinkCopied');
-        }, 1).then((filteredInterceptions) => {
-            expect(filteredInterceptions).to.have.length(1);
+        cy.get('@lanewebSpy').should('have.been.calledWith', 'tracker:trackableEvent', {
+            category: 'lane:permalinkCopied',
+            action: 'Get Shareable Link',
+            label: 'https://lane.stanford.edu/view/bib/12'
+
         });
+
+
 
         // Assert the text reverts
         cy.get('@permalink', { timeout: 2100 })

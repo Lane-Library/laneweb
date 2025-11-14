@@ -4,7 +4,9 @@ describe('Description Toggle', () => {
 
         cy.visit('/cypress-test/search.html?q=25195623&source=all-all');
 
-        cy.intercept('POST', 'https://www.google-analytics.com/g/collect*').as('gaCollect');
+        cy.window().then((win) => {
+            cy.spy(win.L, 'fire').as('lanewebSpy');
+        });
 
         cy.get('.descriptionTrigger').as('descriptionTrigger');
         cy.get('@descriptionTrigger').invoke('text').should('contain', 'Abstract');
@@ -13,17 +15,28 @@ describe('Description Toggle', () => {
 
         // Perform both clicks to trigger the events
         cy.get('@descriptionTrigger').click();
+
         cy.get('@descriptionTrigger').click();
 
-        // wait for 'gaCollect'
-        // assert that one GA request was made containing two descriptionTrigger events
-        cy.waitForInterceptions('@gaCollect', (interception) => {
-            return interception.request.body.includes('descriptionTrigger');
-        }, 1).then((filteredInterceptions) => {
-            expect(filteredInterceptions).to.have.length(1);
-            expect(filteredInterceptions[0].request.body.match(/descriptionTrigger/g)).to.have.length(2);
+
+        cy.get('@lanewebSpy').then((spy) => {
+
+            // Count calls with 'tracker:trackableEvent'
+            const trackableEventCallCount = spy.getCalls().reduce((count, call) => {
+                return call.args[0] === 'tracker:trackableEvent' ? count + 1 : count;
+            }, 0);
+
+            expect(trackableEventCallCount).to.equal(2);
+
+            // Verify it was called with the specific arguments
+            expect(spy).to.have.been.calledWith('tracker:trackableEvent', {
+                category: 'lane:descriptionTrigger',
+                action: 'Abstract',
+                label: 'Musical rhythm discrimination explains individual differences in grammar skills in children.'
+            });
         });
 
-    });
 
+
+    });
 });

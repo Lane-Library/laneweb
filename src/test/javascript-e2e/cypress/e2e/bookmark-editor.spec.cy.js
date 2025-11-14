@@ -86,19 +86,20 @@ describe('Bookmark editor', () => {
                 body: { id: 8, label: 'Test bookmark', url: 'google.com' }
             }
         ).as('addBookmark');
-        cy.intercept('POST', 'https://www.google-analytics.com/g/collect*en=lane%3AbookmarkAdd*').as('gaCollect');
+        cy.window().then((win) => {
+            cy.spy(win.L, 'fire').as('lanewebSpy');
+        });
         cy.get('#bookmarks-editor ul li').should('have.length', 7);
         cy.get('@editorButton').click();
         cy.get('@bookmarkLabel').type('Test bookmark');
         cy.get('@bookmarkUrl').type('google.com');
         cy.get('@saveButton').click();
         cy.wait('@addBookmark');
-        cy.waitForInterceptions('@gaCollect', (interception) => {
-            const url = new URL(interception.request.url);
-            return url.searchParams.get('en').includes('lane:bookmarkAdd') 
-                && url.searchParams.get('ep.event_label').includes('Test bookmark');
-        }, 1).then((filteredInterceptions) => {
-            expect(filteredInterceptions).to.have.length(1);
+
+        cy.get('@lanewebSpy').should('have.been.calledWith', 'tracker:trackableEvent', {
+            category: 'lane:bookmarkAdd',
+            action: undefined,
+            label: 'Test bookmark'
         });
         cy.get('#bookmarks-editor ul li').should('have.length', 8);
         cy.get('#bookmarks li').first().should('contain', 'Test bookmark');

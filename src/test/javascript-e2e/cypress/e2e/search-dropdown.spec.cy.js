@@ -13,14 +13,17 @@ describe('Search Dropdown TestCase', () => {
     });
 
     it('tracking', () => {
-        cy.intercept('POST', 'https://www.google-analytics.com/g/collect*').as('gaCollect');
+
+        cy.window().then((win) => {
+            cy.spy(win.L, 'fire').as('lanewebSpy');
+        });
 
         cy.get('#main-search').select('catalog-all', { force: true });
 
-        cy.waitForInterceptions('@gaCollect', (interception) => {
-            return interception.request.body.match(/searchDropdownSelection.*from%20all-all%20to%20catalog-all/g);
-        }, 1).then((filteredInterceptions) => {
-            expect(filteredInterceptions).to.have.length(1);
+        cy.get('@lanewebSpy').should('have.been.calledWith', 'tracker:trackableEvent', {
+            category: 'lane:searchDropdownSelection',
+            action: 'catalog-all',
+            label: 'from all-all to catalog-all'
         });
     });
 });
