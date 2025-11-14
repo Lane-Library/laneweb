@@ -22,5 +22,4 @@ describe('Lane Help Link Test Case', () => {
         cy.get('@searchHelp').should('be.visible');
     });
 
-
 });

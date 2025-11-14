@@ -1,8 +1,5 @@
 describe('Bookmark editor', () => {
 
-
-
-
     beforeEach(() => {
         cy.viewport(1101, 1050);
         cy.visit('/cypress-test/test/test-bookmarks.html');
@@ -15,14 +12,12 @@ describe('Bookmark editor', () => {
         cy.get('#bookmarks-editor ul li:nth(3) .editContainer').first().as('editorContainer');
     })
 
-
     it('displays Dynamed editor', () => {
         cy.get('@editorButton').click();
         cy.get('@editorContainer').should('be.visible');
         cy.get('@bookmarkLabel').should('have.value', 'DynaMed');
         cy.get('@bookmarkUrl').should('have.value', 'http://search.ebscohost.com/login.aspx?authtype=ip,uid&custid=ns260787&profile=dmp&groupid=main');
     })
-
 
     it('Undo label updates', () => {
         cy.get('@editorButton').click();
@@ -72,7 +67,6 @@ describe('Bookmark editor', () => {
             expect(str).to.equal(`Sorry, update bookmark failed. Please reload the page and try again later.`)
         })
     })
-
 
     it('test update bookmark', () => {
         cy.intercept(

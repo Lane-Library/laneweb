@@ -14,7 +14,6 @@ describe('History Photos', () => {
         })
     });
 
-
     it('should show embedded images after images load from server', () => {
         cy.intercept('GET', '/cypress-test/apps/getHistoryPhotoList', {
             fixture: 'history/history-photos.json'

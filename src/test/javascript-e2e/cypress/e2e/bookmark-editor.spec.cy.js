@@ -122,5 +122,4 @@ describe('Bookmark editor', () => {
         cy.get('#bookmarks-editor ul li').first().should('contain', 'To find out the word and character count of your writing, simply copy and paste text into the tool or write directly into the text...');
     })
 
-
 })

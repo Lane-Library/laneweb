@@ -36,7 +36,6 @@ describe('Date Solr Facet', () => {
         })
     });
 
-
     it('should get an error message because end date greater than 2030', () => {
         cy.get('.search-button').click();
         cy.get('@startYear').type('2020');
@@ -48,8 +47,6 @@ describe('Date Solr Facet', () => {
         })
     });
 
-
-
     it('should get an error message because end date is empty', () => {
         cy.get('.search-button').click();
         cy.get('@startYear').type('2020');
@@ -59,10 +56,5 @@ describe('Date Solr Facet', () => {
             expect($input[0].validationMessage).to.eq('Please fill out this field.')
         })
     });
-
-
-
-
-
 
 });

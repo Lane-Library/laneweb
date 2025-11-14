@@ -103,6 +103,4 @@ describe('Popup functionality', () => {
         });
     });
 
-
-
 });

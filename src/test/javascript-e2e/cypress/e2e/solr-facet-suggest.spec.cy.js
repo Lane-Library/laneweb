@@ -16,7 +16,6 @@ describe('Suggest', () => {
         cy.get('.aclist-item').should('exist');
     })
 
-
     it('suggestion should exist after typing 3 characters', () => {
         cy.get('@input').type('book');
         cy.get('.aclist-item').should('exist');
@@ -51,7 +50,5 @@ describe('Suggest', () => {
         cy.get('section a').first().trigger('mouseover');
         cy.get('.aclist-item').should('have.text', 'No match found');
     })
-
-
 
 })

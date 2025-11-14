@@ -47,7 +47,7 @@ describe('Lane Search Test Case', () => {
         cy.url().should('include', 'p=condition&i=intervention&c=comparison&o=outcome&q=%28condition%29+AND+%28intervention%29+AND+%28comparison%29+AND+%28outcome%29');
     });
 
-    it('check google analytics  url', () => {
+    it('check google analytics url', () => {
         // Spy on the internal event firing mechanism
         cy.window().then((win) => {
             cy.spy(win.L, 'fire').as('lanewebSpy');

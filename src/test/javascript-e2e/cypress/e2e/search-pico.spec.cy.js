@@ -7,8 +7,6 @@ describe('Search pico', () => {
         cy.get('.pico-on').click();
     })
 
-
-
     it('Check if the query field is set ', () => {
         cy.get('#main-search').select('clinical-all', { force: true });
         cy.get('input[name=p]').type('condition');
@@ -38,6 +36,5 @@ describe('Search pico', () => {
         cy.get('.aclist-list li').first().click();
         cy.get('input[name=p]').should('have.value', 'Skin');
     })
-
 
 })

@@ -4,7 +4,6 @@ describe('Bassett Pagination', () => {
         cy.visit('/cypress-test/biomed-resources/bassett/bassettsView.html?r=Head--Brain');
     })
 
-
     it('check next page button', () => {
         cy.intercept('get', '/plain/biomed-resources/bassett/raw/bassettsView.html?r=Head--Brain&page=2')
             .as('nextResult');
@@ -17,8 +16,7 @@ describe('Bassett Pagination', () => {
         cy.get('input[name=page]').should('have.value', '3');
     });
 
-
-    it('check set  page input to 8', () => {
+    it('check set page input to 8', () => {
         cy.intercept('get', '/biomed-resources/bassett/bassettsView.html?r=Head--Brain&page=8')
             .as('nextResult');
         cy.get('input[name=page]').first().type('{backspace}').type('8').type('{enter}');

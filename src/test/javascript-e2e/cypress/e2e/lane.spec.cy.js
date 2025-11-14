@@ -17,7 +17,6 @@ describe('Persistent Login Checkbox', () => {
         });
     });
 
-
     it('should remove cookie value', () => {
         cy.window().then(win => {
             win.L.Cookie.set('test', 'testValue');

@@ -5,14 +5,13 @@ describe('Search pico toogle', () => {
         cy.visit('/cypress-test/index.html');
     })
 
-
-    it('Pico should not appear by default on index  page', () => {
+    it('Pico should not appear by default on index page', () => {
         cy.get('.pico-on').should('be.not.visible');
         cy.get('.pico-off').should('be.not.visible');
         cy.get('.search-pico').should('be.not.visible');
     })
 
-    it('Pico Link should appear  after selecting "clinical Search', () => {
+    it('Pico Link should appear after selecting "clinical Search', () => {
         //select all-clinical
         cy.get('#main-search').select('clinical-all', { force: true });
         cy.get('.pico-on').should('be.visible');
@@ -20,8 +19,7 @@ describe('Search pico toogle', () => {
         cy.get('.search-pico').should('be.visible');
     })
 
-
-    it('Pico fields should appear  after selecting "clinical Search', () => {
+    it('Pico fields should appear after selecting "clinical Search', () => {
         //select all-clinical
         cy.get('#main-search').select('clinical-all', { force: true });
         //parameters

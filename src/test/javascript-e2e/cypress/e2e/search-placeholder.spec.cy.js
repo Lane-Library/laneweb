@@ -9,17 +9,17 @@ describe('Lane Search Place Holder Test Case', () => {
         cy.get('@queryInput').should('have.attr', 'placeholder', 'Search articles, books, journals, databases, our website, and more');
     });
 
-    it('test  placeholder for Clinical Search', () => {
+    it('test placeholder for Clinical Search', () => {
         cy.get('@searchDropdown').select('clinical-all', { force: true });
         cy.get('@queryInput').should('have.attr', 'placeholder', 'Search evidence-based resources by patient condition or intervention');
     });
 
-    it('test  placeholder for Catalog Search', () => {
+    it('test placeholder for Catalog Search', () => {
         cy.get('@searchDropdown').select('catalog-all', { force: true });
         cy.get('@queryInput').should('have.attr', 'placeholder', 'Search books, journals, databases including print at Lane');
     });
 
-    it('test  placeholder from Catalog Search to All Search', () => {
+    it('test placeholder from Catalog Search to All Search', () => {
         cy.get('@searchDropdown').select('catalog-all', { force: true });
         cy.get('@searchDropdown').select('all-all', { force: true });
         cy.get('@queryInput').should('have.attr', 'placeholder', 'Search articles, books, journals, databases, our website, and more');
