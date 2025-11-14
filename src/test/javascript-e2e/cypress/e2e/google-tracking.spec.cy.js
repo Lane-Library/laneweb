@@ -107,4 +107,13 @@ describe('Google Analytics Tracking', () => {
         });
     });
 
+    it('test L.on("tracker:trackableEvent" by testing search form reset', () => {
+        cy.get('input[name=q]').type('test');
+        cy.get('.search-reset.search-reset-active').click();
+        cy.waitForInterceptions('@gaCollect', (interception) => {
+            return interception.request.url.includes('en=lane%3AsearchFormReset');
+        }, 1).then((filteredInterceptions) => {
+            expect(filteredInterceptions).to.have.length(1);
+        });
+    });
 })
