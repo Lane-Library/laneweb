@@ -10,7 +10,7 @@ describe('Google Analytics Tracking', () => {
 
     it('external click should send tracking event data to GA', () => {
 
-        //     // find first visible external link
+        // find first visible external link
         cy.get('.content a[href^="http"]').filter(':visible').first().as('externalLink');
 
         // intercept external link request
@@ -32,7 +32,7 @@ describe('Google Analytics Tracking', () => {
         });
     })
 
-    it('internal click should  send tracking event data to GA', () => {
+    it('internal click should send tracking event data to GA', () => {
         // find first visible internal link
         cy.visit('/cypress-test/help/searchtools.html')
         cy.get('.btn.alt').first().as('popup');

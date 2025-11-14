@@ -1,8 +1,5 @@
 describe('Test contact sfp-form', () => {
 
-
-
-
     beforeEach(() => {
         cy.viewport(1101, 1050);
         cy.visit('/cypress-test/contacts/sfp.html');
@@ -18,7 +15,6 @@ describe('Test contact sfp-form', () => {
         cy.get('input[name=publisher]').should("be.visible");
     })
 
-
     it('Check after cliking on journal config', () => {
         cy.get('input[name="requestedBy.fullName"]').as('fullName').type('alain');
         cy.get('#journal').click();
@@ -31,7 +27,6 @@ describe('Test contact sfp-form', () => {
         cy.get('@fullName').should('have.value', 'alain');
     })
 
-
     it('Check after cliking on other config', () => {
         cy.get('input[name="requestedBy.fullName"]').as('fullName').type('alain');
         cy.get('#other').click();
@@ -43,7 +38,6 @@ describe('Test contact sfp-form', () => {
         cy.get('input[name=author]').should("not.visible");
         cy.get('@fullName').should('have.value', 'alain');
     })
-
 
     it('Check submit config', () => {
         cy.intercept('POST', 'https://www.google-analytics.com/g/collect*',

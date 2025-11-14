@@ -16,7 +16,6 @@ describe('lightbox', () => {
         cy.get('.lightboxbg').should('have.css', 'opacity', '0.75');
     })
 
-
     it('should hide lightbox', () => {
         cy.window().its('L.Lightbox').invoke('setContent', 'test');
         cy.window().its('L.Lightbox').invoke('show');
@@ -24,7 +23,6 @@ describe('lightbox', () => {
         cy.get('.lightbox').should('be.not.visible');
         cy.get('.lightboxbg').should('be.not.visible');
     })
-
 
     it('should show lightbox content', () => {
         cy.window().its('L.Lightbox').invoke('setContent', 'Here is the content');

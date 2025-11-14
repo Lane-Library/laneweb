@@ -1,6 +1,6 @@
 describe('Menu', () => {
 
-    it('test the mobile  menu', () => {
+    it('test the mobile menu', () => {
         cy.viewport(801, 600);
         cy.visit('/cypress-test/index.html');
 

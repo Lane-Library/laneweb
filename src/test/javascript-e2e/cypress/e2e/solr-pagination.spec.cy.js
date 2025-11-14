@@ -12,12 +12,10 @@ describe('Solr Pagination', () => {
         cy.get('.s-pagination .error').should('have.text', 'ERROR: page out of range');
     });
 
-
-    it('should not  have a error message', () => {
+    it('should not have a error message', () => {
         cy.get('@page').should('have.value', '1');
         cy.get('@page').type('{backspace}').type('3').type('{enter}');
         cy.get('.s-pagination .error').should('not.exist');
     });
-
 
 })

@@ -10,7 +10,6 @@ describe('Lane Tooltip Test Case', () => {
         });
     });
 
-
     it('mouseover an element with tooltip content shows the tooltip within the viewport', () => {
 
         cy.get('.tooltip').should('be.not.exist');

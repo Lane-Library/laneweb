@@ -20,7 +20,6 @@ describe('Guide Menus', () => {
         cy.get('@eventGuidesLink').should('have.class', 'menuitem-active');
         cy.get('@allGuidesLink').should('have.not.class', 'menuitem-active');
 
-
         // Check if the link to close menu  is displayed
         cy.get('@hideMenu').should('be.visible');
         cy.get('@showMenu').should('be.not.visible');
@@ -51,7 +50,6 @@ describe('Guide Menus', () => {
 
     });
 
-
     it('test if menu seleted after a guide is clicked on', () => {
         cy.get('#event-guides a[href="#off"]').as('hideMenu');
         cy.get('.guide-container a[href="#event-guides"]').as('guideHeader');
@@ -76,7 +74,6 @@ describe('Guide Menus', () => {
         cy.get('@allGuidesLink').should('have.class', 'menuitem-active');
         cy.get('@eventGuidesLink').should('have.not.class', 'menuitem-active');
 
-
         // Check if the link to close menu  is displayed
         cy.get('@hideMenu').should('be.visible');
         cy.get('@showMenu').should('be.not.visible');
@@ -84,6 +81,5 @@ describe('Guide Menus', () => {
         cy.get('@eventGuidesContainer').should('be.not.visible');
 
     })
-
 
 })

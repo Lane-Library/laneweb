@@ -18,7 +18,6 @@ describe('Suggest', () => {
         cy.get('.aclist-item').should('not.exist');
     })
 
-
     it('suggestion should exist after typing 3 characters', () => {
         cy.get('@input').type('ski');
         cy.get('.aclist-item').should('exist');
@@ -58,7 +57,6 @@ describe('Suggest', () => {
 
     })
 
-
     it('check keyboard selection for suggestion ', () => {
         cy.get('@input').type('skin');
         cy.wait(300);
@@ -68,8 +66,6 @@ describe('Suggest', () => {
         cy.get('@input').type('{upArrow}');
         cy.get('ul .aclist-item').last().should('have.class', 'aclist-item-active');
     })
-
-
 
     //Test suggestion after the search input loosing the focus
     it('suggestion should not exist after loosing focus', () => {

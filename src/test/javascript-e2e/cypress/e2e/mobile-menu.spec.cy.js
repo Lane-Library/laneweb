@@ -14,7 +14,7 @@ describe('Mobile Menu', () => {
 
     })
 
-    it('Test initial  hamburger status the menu', () => {
+    it('Test initial hamburger status the menu', () => {
         cy.get('@hamburger').should('be.visible');
         cy.get('@offButton').should('be.not.visible');
         cy.get('@menu1').should('be.not.visible');
@@ -28,7 +28,6 @@ describe('Mobile Menu', () => {
         cy.get('@menu1').should('be.visible');
         cy.get('@menu2').should('be.visible');
     })
-
 
     it('Test click on OFF icon', () => {
         cy.get('@hamburger').click();
@@ -51,7 +50,7 @@ describe('Mobile Menu', () => {
         cy.get('@menuContent2').should('be.not.visible');
     })
 
-    it('Test click on  two menus', () => {
+    it('Test click on two menus', () => {
         cy.get('@hamburger').click();
         cy.get('@menu1').click();
         cy.get('@menu1').should('be.visible');
@@ -62,7 +61,6 @@ describe('Mobile Menu', () => {
         cy.get('@menuContent1').should('be.visible');
         cy.get('@menuContent2').should('be.visible');
     })
-
 
     it('Test Blur effect on click on hamburger icon', () => {
         cy.get('@hamburger').click();

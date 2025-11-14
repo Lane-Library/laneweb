@@ -157,7 +157,6 @@ describe('Lane Search Test Case', () => {
         cy.wait('@searched');
     });
 
-
     it('testSubmitNoQuery', () => {
         cy.get('@searchForm').submit();
         cy.url().should('not.include', '/search.html');

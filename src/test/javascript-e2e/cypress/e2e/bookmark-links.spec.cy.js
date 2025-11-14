@@ -20,7 +20,7 @@ describe('Bookmark Links', () => {
         cy.get('.bookmark-link').should('be.not.exist');
     })
 
-    it('mouse over #div-bookmarking  link icon to be active', () => {
+    it('mouse over #div-bookmarking link icon to be active', () => {
         cy.get('@div-bookmarking').trigger('mouseover');
         cy.get('@div-bookmarking').trigger('mouseout');
         cy.get('@div-bookmarking').trigger('mouseout');
@@ -30,7 +30,7 @@ describe('Bookmark Links', () => {
         cy.get('.bookmark-link').should('have.class', 'active');
     })
 
-    it('mouse over #link-bookmarking  link icon to be active', () => {
+    it('mouse over #link-bookmarking link icon to be active', () => {
         cy.get('@link-bookmarking').trigger('mouseover');
         cy.get('@link-bookmarking').trigger('mouseout');
         cy.get('@link-bookmarking').trigger('mouseout');
@@ -52,7 +52,7 @@ describe('Bookmark Links', () => {
         cy.get('.bookmark-link.active').should('be.not.exist');
     })
 
-    it('test leave icon and after leaving  link ', () => {
+    it('test leave icon and after leaving link ', () => {
         cy.get('@link-bookmarking').trigger('mouseover');
         cy.get('@link-bookmarking').trigger('mouseout');
         cy.get('@link-bookmarking').trigger('mouseout');
@@ -102,7 +102,6 @@ describe('Bookmark Links', () => {
             expect(str).to.equal('You must log in in order to create bookmarks.')
         })
     })
-
 
     it('test add bookmark login', () => {
         cy.visit('/cypress-test/index.html');
