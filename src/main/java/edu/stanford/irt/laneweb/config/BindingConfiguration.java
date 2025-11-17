@@ -169,7 +169,6 @@ public class BindingConfiguration {
         Set<String> templateNames = new HashSet<>();
         templateNames.add("template");
         templateNames.add("no-search");
-        templateNames.add("bassettLargerView");
         templateNames.add("none");
         templateNames.add("history");
         Map<String, String> templateMap = new HashMap<>();
@@ -177,7 +176,7 @@ public class BindingConfiguration {
         templateMap.put("^/contacts/liaisons.html", "no-search");
         templateMap.put("^/samples/redesign-2025/resource-page.html", "no-search");
         templateMap.put("^/using-lib/equipment.html", "no-search");
-        templateMap.put("^/biomed-resources/bassett/raw/bassettLargerView.html", "none");
+        templateMap.put("^/bassett/bassettLargerView.html", "none");
         templateMap.put("^/discoveryLoginPage.html", "none");
         templateMap.put("^/devDiscoveryLoginPage.html", "none");
         templateMap.put("^/beemap/beemap.html", "none");

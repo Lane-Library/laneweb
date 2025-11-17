@@ -5,11 +5,11 @@ describe('Bassett Pagination', () => {
     })
 
     it('check next page button', () => {
-        cy.intercept('get', '/plain/biomed-resources/bassett/raw/bassettsView.html?r=Head--Brain&page=2')
+        cy.intercept('get', '/plain/bassett/bassettsView.html?r=Head--Brain&page=2')
             .as('nextResult');
         cy.get('#next-page').click();
         cy.wait('@nextResult');
-        cy.intercept('get', '/plain/biomed-resources/bassett/raw/bassettsView.html?r=Head--Brain&page=3')
+        cy.intercept('get', '/plain/bassett/bassettsView.html?r=Head--Brain&page=3')
             .as('nextResult');
         cy.get('#next-page').click();
         cy.wait('@nextResult');

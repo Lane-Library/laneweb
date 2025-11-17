@@ -232,7 +232,7 @@
 	<!-- to get the Href for all links that will open a new window for the bassettLargerView.html -->
 	<xsl:template match="h:a[starts-with(@rel,'popup')]/@href">
 		<xsl:attribute name="href">
-        <xsl:text>/biomed-resources/bassett/raw/bassettLargerView.html?t=largerView&amp;bn=</xsl:text>
+        <xsl:text>/bassett/bassettLargerView.html?t=largerView&amp;bn=</xsl:text>
         <xsl:value-of select="/doc/b:bassetts/b:bassett/@b:bassett_number" />
     </xsl:attribute>
 	</xsl:template>

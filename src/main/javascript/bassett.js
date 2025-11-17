@@ -20,7 +20,7 @@
 
     // --- Core Functions ---
     const formatAjaxUrl = (hrefString) => {
-        const url = new URL(hrefString.replace("search.html", "/biomed-resources/bassett/bassettsView.html"));
+        const url = new URL(hrefString.replace("search.html", "/bassett/bassettsView.html"));
         let path = url.pathname.substring(url.pathname.indexOf('/bassett/') + 8) + url.search;
 
         if (diagramDisplay && !path.includes('t=diagram')) {
@@ -42,7 +42,7 @@
     };
 
     const loadContent = async (pathSegment) => {
-        const url = `${basePath}/plain/biomed-resources/bassett/raw${pathSegment}`;
+        const url = `${basePath}/plain/bassett/${pathSegment}`;
         try {
             const response = await fetch(url);
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status} ${response.statusText}`);
