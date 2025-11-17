@@ -4,6 +4,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2025-11-10" version="3.16.4" description="bug fix and update release">
+            <action date="2025-11-11" dev="alainb" issue="LANEWEB-11578" type="fix">
+                Mouse over "Medical History Center" doesn't get pointer cursor
+            </action>
+            <action date="2025-11-11" dev="ryanmax" issue="LANEWEB-11580" type="fix">
+                Bad bookcover data causes repeated errors
+            </action>
+            <action date="2025-11-11" dev="alainb" issue="LANEWEB-11581" type="fix">
+                The "ankle-footer" div should be 100% wide
+            </action>
+        </release>
         <release date="2025-11-10" version="3.16.3" description="bug fix and update release">
             <action date="2025-11-05" dev="ryanmax" issue="LANEWEB-11575" type="fix">
                 Persistent login not working
