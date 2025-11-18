@@ -2,9 +2,8 @@ package edu.stanford.irt.laneweb.servlet.mvc;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
-
-import jakarta.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +21,7 @@ import edu.stanford.irt.laneweb.folio.UserService;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.UnividDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping(value = "/patron-registration/")
@@ -131,16 +131,6 @@ public class PatronRegistrationController {
         return ERROR_PAGE;
     }
 
-    private Map<String, Object> prepMapForEmail(final Model model) {
-        Map<String, Object> map = model.asMap();
-        map.put("recipient", ASKUS_ADDRESS);
-        for (String field : STRIP_FROM_EMAIL) {
-            map.remove(field);
-        }
-        map.put(EMAIL, nameAndEmail(model));
-        return map;
-    }
-
     private String getValueOrDefault(final Model model, final HttpServletRequest request, final String key,
             final String defaultValue) {
         String value = (request.getParameter(key) == null) ? defaultValue : request.getParameter(key);
@@ -149,19 +139,33 @@ public class PatronRegistrationController {
     }
 
     private String nameAndEmail(final Model model) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(model.getAttribute(USER_INPUT_FIRST_NAME));
-        String middle = (String) model.getAttribute(USER_INPUT_MIDDLE_NAME);
-        sb.append(" ");
-        if (null != middle && !middle.isBlank()) {
-            sb.append(middle);
-            sb.append(" ");
+        String firstName = (String) model.getAttribute(USER_INPUT_FIRST_NAME);
+        String middleName = (String) model.getAttribute(USER_INPUT_MIDDLE_NAME);
+        String lastName = (String) model.getAttribute(USER_INPUT_LAST_NAME);
+        String email = (String) model.getAttribute(USER_INPUT_EMAIL);
+        String fullName = (middleName != null && !middleName.isBlank())
+                ? String.join(" ", firstName, middleName, lastName)
+                : String.join(" ", firstName, lastName);
+        return String.format("%s <%s>", fullName, email);
+    }
+
+    private Map<String, Object> prepMapForEmail(final Model model) {
+        Map<String, Object> mapCopySoEmailIsFirst = new LinkedHashMap<>();
+        Map<String, Object> originalMap = model.asMap();
+        String userSuppliedEmail = (String) originalMap.get(USER_INPUT_EMAIL);
+        String nameAndEmail = "Lane Library Patron Registration <noreply@stanford.edu>";
+        if (userSuppliedEmail != null && userSuppliedEmail.toLowerCase().endsWith("@stanford.edu")) {
+            nameAndEmail = nameAndEmail(model);
+        } else {
+            mapCopySoEmailIsFirst.put("user-supplied-email", userSuppliedEmail);
         }
-        sb.append(model.getAttribute(USER_INPUT_LAST_NAME));
-        sb.append(" <");
-        sb.append(model.getAttribute(EMAIL));
-        sb.append(">");
-        return sb.toString();
+        for (String field : STRIP_FROM_EMAIL) {
+            originalMap.remove(field);
+        }
+        mapCopySoEmailIsFirst.putAll(originalMap);
+        mapCopySoEmailIsFirst.put("recipient", ASKUS_ADDRESS);
+        mapCopySoEmailIsFirst.put(EMAIL, nameAndEmail);
+        return mapCopySoEmailIsFirst;
     }
 
     @ModelAttribute

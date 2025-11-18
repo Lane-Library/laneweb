@@ -10,11 +10,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import jakarta.servlet.http.HttpServletRequest;
-
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.ui.Model;
@@ -26,12 +24,9 @@ import edu.stanford.irt.laneweb.rest.RESTException;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.UnividDataBinder;
 import edu.stanford.irt.laneweb.servlet.binding.UserDataBinder;
+import jakarta.servlet.http.HttpServletRequest;
 
 public class PatronRegistrationControllerTest {
-
-    @AfterAll
-    public static void tearDownAfterClass() throws Exception {
-    }
 
     private PatronRegistrationController controller;
 
@@ -54,7 +49,7 @@ public class PatronRegistrationControllerTest {
     private UserDataBinder userDataBinder;
 
     @BeforeEach
-    public void setUp() throws Exception {
+    public void setUp() {
         this.folioUserService = mock(UserService.class);
         this.sender = mock(EMailSender.class);
         this.userDataBinder = mock(UserDataBinder.class);
@@ -68,26 +63,20 @@ public class PatronRegistrationControllerTest {
     }
 
     @Test
-    public final void testFormSubmitUserRegistration() {
-        expect(this.model.asMap()).andReturn(this.map).times(2);
+    public final void testFormSubmitUserRegistrationAlreadyRegistered() {
+        List<Map<String, Object>> list = Collections.singletonList(Collections.emptyMap());
+        Map<String, Object> originalMap = new HashMap<>();
+        originalMap.put("email", "test@example.com");
+        expect(this.model.asMap()).andReturn(originalMap).times(2);
         expect(this.map.get("username")).andReturn("username");
         expect(this.map.get("externalSystemId")).andReturn("externalSystemId");
-        expect(this.model.getAttribute("email")).andReturn("email");
-        expect(this.model.getAttribute("firstName")).andReturn("firstName");
-        expect(this.model.getAttribute("middleName")).andReturn("middleName");
-        expect(this.model.getAttribute("lastName")).andReturn("lastName");
-        expect(this.model.getAttribute("email")).andReturn("email");
-        expect(this.map.put("email", "firstName middleName lastName <email>")).andReturn(true);
-        expect(this.folioUserService.getUser("username", "externalSystemId", "email"))
-                .andReturn(Collections.emptyList());
-        expect(this.map.put("recipient", "LaneAskUs@stanford.edu")).andReturn(null);
-        expect(this.map.remove(isA(String.class))).andReturn(null).times(4);
-        expect(this.folioUserService.addUser(isA(Map.class))).andReturn(true);
-        this.sender.sendEmail(this.map);
-        replay(this.folioUserService, this.userDataBinder, this.sender, this.model, this.map);
+        expect(this.model.getAttribute("email")).andReturn("test@example.com");
+        expect(this.folioUserService.getUser("username", "externalSystemId", "test@example.com")).andReturn(list);
+        this.sender.sendEmail(isA(Map.class));
+        replay(this.folioUserService, this.sender, this.model, this.map);
         String redirect = this.controller.formSubmitUserRegistration(this.map, this.model, this.reqAttributes);
-        assertTrue(redirect.contains("confirmation"));
-        verify(this.folioUserService, this.userDataBinder, this.sender, this.model, this.map);
+        assertTrue(redirect.contains("error-user-exists"));
+        verify(this.folioUserService, this.sender, this.model, this.map);
     }
 
     @Test
@@ -117,6 +106,57 @@ public class PatronRegistrationControllerTest {
         String redirect = this.controller.formSubmitUserRegistration(this.map, this.model, this.reqAttributes);
         assertTrue(redirect.contains("error"));
         verify(this.folioUserService, this.userDataBinder, this.unividDataBinder, this.sender, this.model, this.map);
+    }
+
+    @Test
+    public final void testFormSubmitUserRegistrationNonStanfordUser() {
+        Map<String, Object> user = new HashMap<>();
+        user.put("username", "username");
+        user.put("externalSystemId", "externalSystemId");
+        Map<String, Object> originalMap = new HashMap<>();
+        originalMap.put("email", "test@example.com");
+        originalMap.put("firstName", "firstName");
+        originalMap.put("middleName", "middleName");
+        originalMap.put("lastName", "lastName");
+        expect(this.model.asMap()).andReturn(originalMap).times(2);
+        expect(this.model.getAttribute("email")).andReturn("test@example.com");
+        expect(this.folioUserService.getUser("username", "externalSystemId", "test@example.com"))
+                .andReturn(Collections.emptyList());
+        expect(this.folioUserService.addUser(user)).andReturn(true);
+        this.sender.sendEmail(isA(Map.class));
+        replay(this.folioUserService, this.sender, this.model);
+        String redirect = this.controller.formSubmitUserRegistration(user, this.model, this.reqAttributes);
+        assertTrue(redirect.contains("confirmation"));
+        verify(this.folioUserService, this.sender, this.model);
+    }
+
+    @Test
+    public final void testFormSubmitUserRegistrationStanfordUser() {
+        Map<String, Object> user = new HashMap<>();
+        user.put("username", "username");
+        user.put("externalSystemId", "externalSystemId");
+        Map<String, Object> originalMap = new HashMap<>();
+        originalMap.put("email", "test@stanford.edu");
+        originalMap.put("firstName", "firstName");
+        originalMap.put("middleName", "middleName");
+        originalMap.put("lastName", "lastName");
+        expect(this.model.asMap()).andReturn(originalMap).times(2);
+        expect(this.map.get("username")).andReturn("username");
+        expect(this.map.get("externalSystemId")).andReturn("externalSystemId");
+        expect(this.model.getAttribute("email")).andReturn("test@stanford.edu");
+        expect(this.model.getAttribute("firstName")).andReturn("firstName");
+        expect(this.model.getAttribute("middleName")).andReturn("middleName");
+        expect(this.model.getAttribute("lastName")).andReturn("lastName");
+        expect(this.map.put("email", "firstName middleName lastName <email>")).andReturn(true);
+        expect(this.model.getAttribute("email")).andReturn("test@stanford.edu");
+        expect(this.folioUserService.getUser("username", "externalSystemId", "test@stanford.edu"))
+                .andReturn(Collections.emptyList());
+        expect(this.folioUserService.addUser(user)).andReturn(true);
+        this.sender.sendEmail(isA(Map.class));
+        replay(this.folioUserService, this.sender, this.model);
+        String redirect = this.controller.formSubmitUserRegistration(user, this.model, this.reqAttributes);
+        assertTrue(redirect.contains("confirmation"));
+        verify(this.folioUserService, this.sender, this.model);
     }
 
     @Test
