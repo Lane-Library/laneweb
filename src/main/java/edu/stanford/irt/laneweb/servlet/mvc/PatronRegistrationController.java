@@ -111,18 +111,14 @@ public class PatronRegistrationController {
     @PostMapping(value = "register", consumes = FORM_MIME_TYPE)
     public String formSubmitUserRegistration(final @ModelAttribute(FOLIO_USER) Map<String, Object> user,
             final Model model, final RedirectAttributes atts) {
-        Map<String, Object> map = model.asMap();
         try {
             if (!this.folioUserService.getUser((String) user.get(USERNAME), (String) user.get(EXTERNAL_SYSTEM_ID),
                     (String) model.getAttribute(USER_INPUT_EMAIL)).isEmpty()) {
-                map = prepMapForEmail(model);
-                map.put(ASKUS_EMAIL_SUBJECT, "folio patron registration attempt");
-                this.sender.sendEmail(map);
+                sendRegistrationEmail(model, "folio patron registration attempt");
                 return ERROR_USER_EXISTS_PAGE;
             }
             if (this.folioUserService.addUser(user)) {
-                map = prepMapForEmail(model);
-                this.sender.sendEmail(map);
+                sendRegistrationEmail(model, (String) model.getAttribute(ASKUS_EMAIL_SUBJECT));
                 return CONFIRMATION_PAGE;
             }
         } catch (LanewebException e) {
@@ -166,6 +162,12 @@ public class PatronRegistrationController {
         mapCopySoEmailIsFirst.put("recipient", ASKUS_ADDRESS);
         mapCopySoEmailIsFirst.put(EMAIL, nameAndEmail);
         return mapCopySoEmailIsFirst;
+    }
+
+    private void sendRegistrationEmail(final Model model, final String subject) {
+        Map<String, Object> map = prepMapForEmail(model);
+        map.put(ASKUS_EMAIL_SUBJECT, subject);
+        this.sender.sendEmail(map);
     }
 
     @ModelAttribute

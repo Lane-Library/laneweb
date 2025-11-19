@@ -67,7 +67,7 @@ public class PatronRegistrationControllerTest {
         List<Map<String, Object>> list = Collections.singletonList(Collections.emptyMap());
         Map<String, Object> originalMap = new HashMap<>();
         originalMap.put("email", "test@example.com");
-        expect(this.model.asMap()).andReturn(originalMap).times(2);
+        expect(this.model.asMap()).andReturn(originalMap);
         expect(this.map.get("username")).andReturn("username");
         expect(this.map.get("externalSystemId")).andReturn("externalSystemId");
         expect(this.model.getAttribute("email")).andReturn("test@example.com");
@@ -81,7 +81,6 @@ public class PatronRegistrationControllerTest {
 
     @Test
     public final void testFormSubmitUserRegistrationError() {
-        expect(this.model.asMap()).andReturn(this.map);
         expect(this.map.get("username")).andReturn("username");
         expect(this.map.get("externalSystemId")).andReturn("externalSystemId");
         expect(this.model.getAttribute("email")).andReturn("email");
@@ -96,7 +95,6 @@ public class PatronRegistrationControllerTest {
 
     @Test
     public final void testFormSubmitUserRegistrationException() {
-        expect(this.model.asMap()).andReturn(this.map);
         expect(this.map.get("username")).andReturn("username");
         expect(this.map.get("externalSystemId")).andReturn("externalSystemId");
         expect(this.model.getAttribute("email")).andReturn("email");
@@ -118,8 +116,9 @@ public class PatronRegistrationControllerTest {
         originalMap.put("firstName", "firstName");
         originalMap.put("middleName", "middleName");
         originalMap.put("lastName", "lastName");
-        expect(this.model.asMap()).andReturn(originalMap).times(2);
+        expect(this.model.asMap()).andReturn(originalMap);
         expect(this.model.getAttribute("email")).andReturn("test@example.com");
+        expect(this.model.getAttribute("subject")).andReturn("subject");
         expect(this.folioUserService.getUser("username", "externalSystemId", "test@example.com"))
                 .andReturn(Collections.emptyList());
         expect(this.folioUserService.addUser(user)).andReturn(true);
@@ -140,15 +139,16 @@ public class PatronRegistrationControllerTest {
         originalMap.put("firstName", "firstName");
         originalMap.put("middleName", "middleName");
         originalMap.put("lastName", "lastName");
-        expect(this.model.asMap()).andReturn(originalMap).times(2);
+        expect(this.model.asMap()).andReturn(originalMap);
         expect(this.map.get("username")).andReturn("username");
         expect(this.map.get("externalSystemId")).andReturn("externalSystemId");
         expect(this.model.getAttribute("email")).andReturn("test@stanford.edu");
         expect(this.model.getAttribute("firstName")).andReturn("firstName");
         expect(this.model.getAttribute("middleName")).andReturn("middleName");
         expect(this.model.getAttribute("lastName")).andReturn("lastName");
-        expect(this.map.put("email", "firstName middleName lastName <email>")).andReturn(true);
+        expect(this.model.getAttribute("subject")).andReturn("subject");
         expect(this.model.getAttribute("email")).andReturn("test@stanford.edu");
+        expect(this.map.put("email", "firstName middleName lastName <email>")).andReturn(true);
         expect(this.folioUserService.getUser("username", "externalSystemId", "test@stanford.edu"))
                 .andReturn(Collections.emptyList());
         expect(this.folioUserService.addUser(user)).andReturn(true);
