@@ -33,7 +33,7 @@
         }
         if (auth) {
             dimensions.set(AUTHENTICATED_SESSION_DIMENSION, 'auth');
-            if (L.BookmarksWidget?.bookmarks?.length > 0) {
+            if (L.BookmarksWidget?.bookmarks?.size() > 0) {
                 dimensions.set(BOOKMARK_ENABLED_SESSION_DIMENSION, 'bookmark');
                 bookmark = auth;
             }
