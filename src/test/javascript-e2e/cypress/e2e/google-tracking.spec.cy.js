@@ -1,4 +1,50 @@
-describe('Google Analytics Tracking', () => {
+describe('Google Analytics Tracking I', () => {
+
+    // run this as a separate describe block to avoid interference from the beforeEach in the other describe block
+    it('should send auth and bookmark dimensions for authenticated user with bookmarks', () => {
+        // Intercept the initial HTML request to inject model data
+        cy.intercept('/cypress-test/index.html', (req) => {
+            req.reply((res) => {
+                // Modify the response body to include the auth property
+                const body = res.body.replace(
+                    'var model = {',
+                    'var model = { "auth": "123456789", '
+                );
+                res.send(body);
+            });
+        }).as('html');
+
+        cy.intercept('POST', 'https://www.google-analytics.com/g/collect*').as('gaCollect');
+
+        // Visit the page and stub the BookmarksWidget before any scripts run
+        cy.visit('/cypress-test/index.html', {
+            onBeforeLoad(win) {
+                win.L = win.L || {};
+                // Stub L.BookmarksWidget to simulate a user with bookmarks.
+                // The 'on' method is required by bookmark-link.js.
+                win.L.BookmarksWidget = {
+                    bookmarks: {
+                        size: () => 1,
+                        on: () => { },
+                        hasURL: () => true
+                    }
+                };
+            }
+        });
+
+        cy.wait('@html');
+
+        cy.waitForInterceptions('@gaCollect', (interception) => {
+            const data = interception.request.url;
+            return data.includes('en=laneweb_dimensions') && data.includes('ep.auth=123456789') && data.includes('ep.bookmark=123456789');
+        }, 1).then((filteredInterceptions) => {
+            expect(filteredInterceptions).to.have.length(1);
+        });
+    });
+
+});
+
+describe('Google Analytics Tracking II', () => {
 
     beforeEach(() => {
         cy.viewport(1101, 1500);
