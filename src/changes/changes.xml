@@ -4,6 +4,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2025-11-24" version="3.16.5" description="bug fix and update release">
+            <action date="2025-11-19" dev="alainb" issue="LANEWEB-11587" type="update">
+                Clean basset URL
+            </action>
+            <action date="2025-11-19" dev="ryanmax" issue="LANEWEB-11598" type="fix">
+                Patron registration emails failing to appear in LibAnswers
+            </action>
+            <action date="2025-11-18" dev="alainb" issue="LANEWEB-11602" type="fix">
+                Bad display from the classes when a area is indicated
+            </action>
+            <action date="2025-11-20" dev="ryanmax" issue="LANEWEB-11603" type="fix">
+                Analytics: bookmark-enabled sessions not recorded
+            </action>
+        </release>
         <release date="2025-11-10" version="3.16.4" description="bug fix and update release">
             <action date="2025-11-11" dev="alainb" issue="LANEWEB-11578" type="fix">
                 Mouse over "Medical History Center" doesn't get pointer cursor
