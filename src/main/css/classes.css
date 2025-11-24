@@ -38,23 +38,33 @@
     margin: 12px 0;
 }
 
+.class .pure-u-7-24 {
+    position: relative;
+}
+
 .location {
-    text-align: right;
+    position: relative;
 }
 
 .location i {
-    margin-right: 4%;
-    margin-left: 3px;
+    margin-top: 13px;
+    margin-right: 6px;
 }
 
-.location, .location a, .location .fa-solid {
+.location,
+.location a,
+.location .fa-solid {
     color: white;
 }
 
 .venue {
-    position: relative;
-    margin-top: 60px;
-    font-size: 0.8125em;
+    position: absolute;
+    margin: auto 12px 4% 9px;
+    font-size: .8125em;
+    bottom: 0;
+    right: 0;
+    text-align: right;
+    width: 91%;
 }
 
 .venue-link {
@@ -93,39 +103,58 @@
 
 
 
-@media ( max-width :1100px) {
+@media (max-width :1100px) {
     .class {
         margin: 12px 0 51px;
     }
+
     .class .pure-g {
         background-color: #eee;
     }
+
     .class .pure-g .pure-u-17-24 {
-        padding: 6px;
+        padding: 12px;
     }
+
     .class .pure-u-7-24 {
         padding: 0;
         margin-bottom: 12px;
     }
+
     .class .date {
         background-color: #009abb;
     }
+
     .class .venue {
         margin-top: 0px;
+        position: relative;
     }
+
     .register {
         position: relative;
         margin-bottom: 15px;
     }
-    .register i, .location {
+
+    .register i {
         display: none;
     }
+
+    .location {
+        display: block;
+        text-align: left;
+    }
+
     .instructor {
         margin-top: -17px;
         display: inline-flex;
         line-height: 3.6em;
     }
+
     .instructor div {
         padding-left: 6px;
+    }
+
+    .class .pure-g {
+        gap: 0;
     }
 }
