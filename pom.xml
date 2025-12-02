@@ -4,7 +4,7 @@
     <parent>
         <artifactId>lane-parent</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>188</version>
+        <version>189</version>
     </parent>
     <artifactId>laneweb</artifactId>
     <version>3.16.6-SNAPSHOT</version>
@@ -434,7 +434,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.4.2</version>
+                <version>3.5.0</version>
                 <configuration>
                     <archive>
                         <manifestEntries>
