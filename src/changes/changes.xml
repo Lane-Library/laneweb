@@ -4,6 +4,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2026-01-05" version="3.16.6" description="bug fix and update release">
+            <action date="2025-11-18" dev="alainb" issue="LANEWEB-11608" type="fix">
+                HEAD request method return a 200 http code even if page not found
+            </action>
+            <action date="2025-11-18" dev="ryanmax" issue="LANEWEB-11607" type="fix">
+                Reduce error log noise for /biomed-resources/bassett/raw/bassettLargerView.html
+            </action>
+        </release>
         <release date="2025-11-24" version="3.16.5" description="bug fix and update release">
             <action date="2025-11-19" dev="alainb" issue="LANEWEB-11587" type="update">
                 Clean basset URL
