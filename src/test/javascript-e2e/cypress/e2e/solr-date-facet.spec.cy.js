@@ -36,7 +36,7 @@ describe('Date Solr Facet', () => {
         })
     });
 
-    it('should get an error message because end date greater than 2030', () => {
+    it('should get an error message because end date greater than five years from today', () => {
         const maxYear = new Date().getFullYear() + 5;
         const invalidYear = maxYear + 1;
         cy.get('.search-button').click();
