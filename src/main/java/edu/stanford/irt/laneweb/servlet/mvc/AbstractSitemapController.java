@@ -37,7 +37,6 @@ public abstract class AbstractSitemapController {
 
     protected void doHandleRequest(final HttpServletRequest request, final HttpServletResponse response,
             final String prefix) throws IOException {
-        String method = request.getMethod();
         String sitemapURI = getSitemapURI(request, prefix);
         Map<String, Object> model = this.componentFactory.getComponent("edu.stanford.irt.cocoon.Model", Map.class);
         this.dataBinder.bind(model, request);
@@ -46,10 +45,7 @@ public abstract class AbstractSitemapController {
         Pipeline pipeline = this.sitemap
                 .buildPipeline(new SitemapContextImpl(model, this.componentFactory, this.sourceResolver));
         response.setContentType(pipeline.getMimeType());
-        if ("GET".equals(method)) {
-            // only process GET requests
-            pipeline.process(response.getOutputStream());
-        }
+        pipeline.process(response.getOutputStream());
     }
 
     protected String getSitemapURI(final HttpServletRequest request, final String prefix) {
