@@ -87,22 +87,7 @@ public class AbstractSitemapControllerTest {
     }
 
     @Test
-    public void testHandleHEADRequest() throws Exception {
-        expect(this.request.getMethod()).andReturn("HEAD");
-        expect(this.request.getServletPath()).andReturn("/index.html");
-        expect(this.componentFactory.getComponent("edu.stanford.irt.cocoon.Model", Map.class)).andReturn(this.model);
-        this.dataBinder.bind(this.model, this.request);
-        expect(this.processor.buildPipeline(isA(SitemapContext.class))).andReturn(this.pipeline);
-        expect(this.pipeline.getMimeType()).andReturn("mime/type");
-        this.response.setContentType("mime/type");
-        replay(this.componentFactory, this.request, this.processor, this.pipeline, this.response, this.dataBinder);
-        this.handler.handleRequest(this.request, this.response);
-        verify(this.componentFactory, this.request, this.processor, this.pipeline, this.response, this.dataBinder);
-    }
-
-    @Test
     public void testHandleRequest() throws Exception {
-        expect(this.request.getMethod()).andReturn("GET");
         expect(this.request.getServletPath()).andReturn("/index.html");
         expect(this.componentFactory.getComponent("edu.stanford.irt.cocoon.Model", Map.class)).andReturn(this.model);
         this.dataBinder.bind(this.model, this.request);
