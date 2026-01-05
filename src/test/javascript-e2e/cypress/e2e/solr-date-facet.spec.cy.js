@@ -37,13 +37,15 @@ describe('Date Solr Facet', () => {
     });
 
     it('should get an error message because end date greater than 2030', () => {
+        const maxYear = new Date().getFullYear() + 5;
+        const invalidYear = maxYear + 1;
         cy.get('.search-button').click();
         cy.get('@startYear').type('2020');
-        cy.get('@endYear').type('2031');
+        cy.get('@endYear').type(invalidYear);
         cy.get('@filtering').click();
         cy.get('input[name=end-year]:invalid').should('have.length', 1)
         cy.get('input[name=end-year]').then(($input) => {
-            expect($input[0].validationMessage).to.eq('Value must be less than or equal to 2030.')
+            expect($input[0].validationMessage).to.eq(`Value must be less than or equal to ${maxYear}.`)
         })
     });
 
