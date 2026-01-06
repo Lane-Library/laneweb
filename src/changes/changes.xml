@@ -8,7 +8,7 @@
             <action date="2025-11-18" dev="alainb" issue="LANEWEB-11608" type="fix">
                 HEAD request method return a 200 http code even if page not found
             </action>
-            <action date="2025-11-18" dev="ryanmax" issue="LANEWEB-11607" type="fix">
+            <action date="2025-11-18" dev="alainb" issue="LANEWEB-11607" type="fix">
                 Reduce error log noise for /biomed-resources/bassett/raw/bassettLargerView.html
             </action>
         </release>
