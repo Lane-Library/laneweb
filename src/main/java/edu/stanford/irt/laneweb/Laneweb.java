@@ -4,16 +4,11 @@ import org.apache.catalina.connector.Connector;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
-import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
-import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
-import org.springframework.boot.web.servlet.ServletComponentScan;
-import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
+import org.springframework.boot.tomcat.servlet.TomcatServletWebServerFactory;
+import org.springframework.boot.web.server.servlet.ConfigurableServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 
-
-@SpringBootApplication(exclude = { RedisAutoConfiguration.class,ErrorMvcAutoConfiguration.class })
-@ServletComponentScan
+@SpringBootApplication
 public class Laneweb {
 
     public static void main(final String[] args) {
@@ -33,7 +28,7 @@ public class Laneweb {
         ajpConnector.setProperty("URIEncoding", "UTF-8");
         // LANEWEB-10567: packetSize must match ProxyIOBufferSize value set in httpd conf
         ajpConnector.setProperty("packetSize", "16384");
-        tomcat.addAdditionalTomcatConnectors(ajpConnector);
+        tomcat.addAdditionalConnectors(ajpConnector);
         return tomcat;
     }
 }
