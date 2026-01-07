@@ -38,7 +38,7 @@ public class RESTClientConfiguration {
         CloseableHttpClient httpClient = HttpClientBuilder.create().setDefaultRequestConfig(requestConfig).build();
         HttpComponentsClientHttpRequestFactory hcchrf = new HttpComponentsClientHttpRequestFactory(httpClient);
         hcchrf.setConnectionRequestTimeout(Duration.ofSeconds(HTTP_CONNECT_TIMEOUT));
-        hcchrf.setConnectTimeout(Duration.ofSeconds(HTTP_CONNECT_TIMEOUT));
+        hcchrf.setReadTimeout(Duration.ofSeconds(HTTP_READ_TIMEOUT));
         return hcchrf;
     }
 
