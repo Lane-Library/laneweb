@@ -6,10 +6,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.tomcat.servlet.TomcatServletWebServerFactory;
 import org.springframework.boot.web.server.servlet.ConfigurableServletWebServerFactory;
+import org.springframework.boot.web.server.servlet.context.ServletComponentScan;
 import org.springframework.boot.webmvc.autoconfigure.error.ErrorMvcAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication(exclude = { ErrorMvcAutoConfiguration.class })
+@ServletComponentScan
 public class Laneweb {
 
     public static void main(final String[] args) {
