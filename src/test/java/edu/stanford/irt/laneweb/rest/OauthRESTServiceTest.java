@@ -12,7 +12,7 @@ import java.net.URI;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
+import org.springframework.boot.restclient.test.autoconfigure.RestClientTest;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -24,7 +24,9 @@ import org.springframework.test.web.client.response.MockRestResponseCreators;
 
 import edu.stanford.irt.laneweb.rest.Oauth.OauthRESTService;
 
-@ActiveProfiles(profiles = "test") @ContextConfiguration(classes = { OauthTestConfiguration.class }) @RestClientTest({
+@ActiveProfiles(profiles = "test")
+@ContextConfiguration(classes = { OauthTestConfiguration.class })
+@RestClientTest({
         OauthRESTService.class })
 class OauthRESTServiceTest {
     private static final String JSON = "{\"boolean\": true, \"color\": \"gold\"}";

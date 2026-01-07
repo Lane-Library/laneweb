@@ -13,7 +13,7 @@ import java.net.URISyntaxException;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
+import org.springframework.boot.restclient.test.autoconfigure.RestClientTest;
 import org.springframework.http.HttpMethod;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
@@ -21,8 +21,10 @@ import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.test.web.client.match.MockRestRequestMatchers;
 import org.springframework.test.web.client.response.MockRestResponseCreators;
 
-@ActiveProfiles(profiles = "test") @ContextConfiguration(classes = {
-        BasicAuthTestConfiguration.class }) @RestClientTest({ BasicAuthRESTService.class })
+@ActiveProfiles(profiles = "test")
+@ContextConfiguration(classes = {
+        BasicAuthTestConfiguration.class })
+@RestClientTest({ BasicAuthRESTService.class })
 class BasicAuthRESTServiceTest {
 
     private String json = "{\"boolean\": true, \"color\": \"gold\"}";

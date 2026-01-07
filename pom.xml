@@ -28,7 +28,7 @@
     </developers>
     <scm>
         <developerConnection>scm:git:git@gitlab.med.stanford.edu:lane/laneweb.git</developerConnection>
-        <tag>laneweb-3.15.14</tag>
+        <tag>HEAD</tag>
     </scm>
     <properties>
         <sonar.sources>src/main/java,src/main/javascript,src/main/css</sonar.sources>
@@ -64,6 +64,11 @@
             <version>${org.springframework.boot.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-restclient-test</artifactId>
+            <version>${org.springframework.boot.version}</version>
+        </dependency>
+        <dependency>
             <groupId>net.bull.javamelody</groupId>
             <artifactId>javamelody-spring-boot4-starter</artifactId>
             <version>2.6.0</version>
@@ -71,8 +76,7 @@
         <dependency>
             <groupId>org.springframework.session</groupId>
             <artifactId>spring-session-data-redis</artifactId>
-            <version>3.5.4</version>
-            <!--<version>${org.springframework.boot.version}</version>-->
+            <version>${org.springframework.boot.version}</version>
         </dependency>
         <dependency>
             <groupId>jakarta.annotation</groupId>
