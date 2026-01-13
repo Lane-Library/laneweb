@@ -27,7 +27,7 @@ class RESTClientConfigurationTest {
     @Test
     void testRestClientCustomizer() {
         assertNotNull(
-                this.configuration.restClientCustomizer(Collections.singletonList(new StringHttpMessageConverter()),
+                this.configuration.restTemplate(Collections.singletonList(new StringHttpMessageConverter()),
                         new HttpComponentsClientHttpRequestFactory()));
     }
 
