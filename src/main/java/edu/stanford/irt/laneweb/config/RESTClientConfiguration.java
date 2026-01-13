@@ -19,6 +19,7 @@ import org.springframework.http.converter.ResourceHttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.JacksonJsonHttpMessageConverter;
 import org.springframework.web.client.RestClient;
+import org.springframework.web.client.RestTemplate;
 
 import tools.jackson.databind.json.JsonMapper;
 import edu.stanford.irt.laneweb.rest.RESTService;
@@ -53,10 +54,16 @@ public class RESTClientConfiguration {
     }
 
     @Bean
-    RestClient restClientCustomizer(final List<HttpMessageConverter<?>> messageConverters,
+    RestTemplate restTemplate(final List<HttpMessageConverter<?>> messageConverters,
             final HttpComponentsClientHttpRequestFactory httpComponentsClientHttpRequestFactory) {
-        return RestClient.builder().requestFactory(httpComponentsClientHttpRequestFactory)
-                .messageConverters(converters -> converters.addAll(0, messageConverters)).build();
+        RestTemplate restTemplate = new RestTemplate(httpComponentsClientHttpRequestFactory);
+        restTemplate.setMessageConverters(messageConverters);
+        return restTemplate;
+    }
+
+    @Bean
+    RestClient restClientCustomizer(final RestTemplate restTemplate) {
+        return RestClient.builder(restTemplate).build();
     }
 
     @Bean
