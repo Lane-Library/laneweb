@@ -20,7 +20,7 @@ public class ApplicationStatusDeserializer extends ValueDeserializer<Application
     private static List<StatusItem> getItems(final JsonNode node) {
         List<StatusItem> items = new ArrayList<>();
         node.forEach((final JsonNode n) -> items
-                .add(new StatusItem(Status.valueOf(n.get("status").asString()), n.get("message").asText())));
+                .add(new StatusItem(Status.valueOf(n.get("status").asString()), n.get("message").asString())));
         return items;
     }
 
@@ -28,8 +28,8 @@ public class ApplicationStatusDeserializer extends ValueDeserializer<Application
     public ApplicationStatus deserialize(final JsonParser p, final DeserializationContext ctxt)
             throws JacksonException {
         JsonNode node = p.readValueAsTree();
-        String jvmVersion = null != node.get("jvmVersion") ? node.get("jvmVersion").asText() : "?";
-        return new ApplicationStatus(node.get("name").asString(), node.get("version").asText(),
+        String jvmVersion = null != node.get("jvmVersion") ? node.get("jvmVersion").asString() : "?";
+        return new ApplicationStatus(node.get("name").asString(), node.get("version").asString(),
                 node.get("host").asString(),
                 jvmVersion, node.get("pid").asInt(),
                 ZonedDateTime.parse(node.get("time").asString(), DateTimeFormatter.ISO_ZONED_DATE_TIME),
