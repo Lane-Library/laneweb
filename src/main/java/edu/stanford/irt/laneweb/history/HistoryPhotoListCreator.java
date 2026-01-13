@@ -3,14 +3,14 @@ package edu.stanford.irt.laneweb.history;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.net.URL;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import tools.jackson.databind.ObjectMapper;
-
+import tools.jackson.core.type.TypeReference;
+import tools.jackson.databind.json.JsonMapper;
 import edu.stanford.irt.laneweb.LanewebException;
 
 public class HistoryPhotoListCreator {
@@ -30,36 +30,39 @@ public class HistoryPhotoListCreator {
         }
     }
 
-    private ObjectMapper objectMapper;
+    private JsonMapper objectMapper;
 
     String baseUrl;
 
     public HistoryPhotoListCreator(final String baseUrl) {
         this.baseUrl = baseUrl;
-        this.objectMapper = new ObjectMapper();
+        this.objectMapper = new JsonMapper();
     }
 
     public void printList(final PrintStream out) throws IOException {
-        Collection<Map<String, ?>> photos = new ArrayList<>();
+        Collection<Map<String, Object>> photos = new ArrayList<>();
         String next = this.baseUrl;
         while (null != next) {
-            InputStream input = new URL(next).openStream();
-            Map<String, ?> map = this.objectMapper.readValue(input, Map.class);
-            photos.addAll(getPhotosFromMap(map));
-            next = (String) ((Map<String, ?>) map.get("links")).get("next");
+            try (InputStream input = URI.create(next).toURL().openStream()) {
+                Map<String, Object> map = this.objectMapper.readValue(input, new TypeReference<Map<String, Object>>() {
+                });
+                photos.addAll(getPhotosFromMap(map));
+                next = (String) ((Map<String, Object>) map.get("links")).get("next");
+            }
         }
         List<String> photoList = photos.stream().map(this::buildString).toList();
         photoList.stream().forEach(out::println);
     }
 
-    private String buildString(final Map<String, ?> m) {
-        Map<String, ?> attributes = (Map<String, ?>) m.get("attributes");
+    private String buildString(final Map<String, Object> m) {
+        Map<String, Object> attributes = (Map<String, Object>) m.get("attributes");
         String title = ((String) attributes.get("title")).replace("\n", " ");
         return new StringBuilder(String.format(PAGE, m.get("id"))).append('\t')
                 .append(String.format(THUMBNAIL, m.get("id"))).append('\t').append(title).toString();
     }
 
-    private Collection<Map<String, Object>> getPhotosFromMap(final Map result) {
+    @SuppressWarnings("unchecked")
+    private Collection<Map<String, Object>> getPhotosFromMap(final Map<String, Object> result) {
         return (List<Map<String, Object>>) result.get("data");
     }
 }
