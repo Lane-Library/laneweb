@@ -25,7 +25,7 @@ public class OauthRESTService {
         this.oauthTokenService = oauthTokenService;
     }
 
-    @Retryable(value = { RESTException.class }, maxAttempts = 2)
+    @Retryable(retryFor = { RESTException.class }, maxAttempts = 2)
     public InputStream getInputStream(final URI uri) throws RESTException {
         String token = this.oauthTokenService.getAccessToken();
         try {
@@ -37,7 +37,7 @@ public class OauthRESTService {
         }
     }
 
-    @Retryable(value = { RESTException.class }, maxAttempts = 2)
+    @Retryable(retryFor = { RESTException.class }, maxAttempts = 2)
     public <T> T getObject(final URI uri, final Class<T> type) throws RESTException {
         String token = this.oauthTokenService.getAccessToken();
         try {
@@ -49,7 +49,7 @@ public class OauthRESTService {
         }
     }
 
-    @Retryable(value = { RESTException.class }, maxAttempts = 2)
+    @Retryable(retryFor = { RESTException.class }, maxAttempts = 2)
     public <T> T getObject(final URI uri, final TypeReference<T> type) throws RESTException {
         String token = this.oauthTokenService.getAccessToken();
         try {
@@ -61,7 +61,7 @@ public class OauthRESTService {
         }
     }
 
-    @Retryable(value = { RESTException.class }, maxAttempts = 2)
+    @Retryable(retryFor = { RESTException.class }, maxAttempts = 2)
     public <T> T postObject(final URI uri, final Object object, final Class<T> responseType) throws RESTException {
         String token = this.oauthTokenService.getAccessToken();
         try {
