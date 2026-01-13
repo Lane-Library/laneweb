@@ -58,7 +58,7 @@ public class OauthTokenService {
         JsonNode jsonResponse;
         try {
             jsonResponse = mapper.readTree(response.getBody());
-            this.accessToken = jsonResponse.get("access_token").asText();
+            this.accessToken = jsonResponse.get("access_token").asString();
             this.expirationTime = Instant.now().plusSeconds(jsonResponse.get("expires_in").asLong());
         } catch (Exception e) {
             throw new LanewebException(e);
