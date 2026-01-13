@@ -5,8 +5,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
+
+import jakarta.annotation.Nullable;
 
 public class HighlightEntry<T> implements Serializable {
 
