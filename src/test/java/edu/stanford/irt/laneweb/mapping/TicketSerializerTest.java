@@ -1,8 +1,7 @@
 package edu.stanford.irt.laneweb.mapping;
 
-import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.expectLastCall;
+import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -12,10 +11,9 @@ import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import edu.stanford.irt.laneweb.proxy.Ticket;
 import tools.jackson.core.JsonGenerator;
 import tools.jackson.databind.SerializationContext;
-
-import edu.stanford.irt.laneweb.proxy.Ticket;
 
 public class TicketSerializerTest {
 
