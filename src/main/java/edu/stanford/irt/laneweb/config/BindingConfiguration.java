@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.json.JsonMapper;
 
 import edu.stanford.irt.laneweb.codec.UserCookieCodec;
 import edu.stanford.irt.laneweb.ipgroup.CIDRRange;
@@ -121,7 +121,7 @@ public class BindingConfiguration {
     }
 
     @Bean
-    public ModelDataBinder modelDataBinder(final ObjectMapper objectMapper) {
+    public ModelDataBinder modelDataBinder(final JsonMapper objectMapper) {
         Set<String> keys = new HashSet<>();
         keys.add("auth");
         keys.add("base-path");

@@ -1,13 +1,13 @@
 package edu.stanford.irt.laneweb.mapping;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.JsonNode;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.JsonParser;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ValueDeserializer;
 
 import edu.stanford.irt.search.Query;
 import edu.stanford.irt.search.SearchStatus;
@@ -17,7 +17,7 @@ import edu.stanford.irt.search.impl.Result.ResultBuilder;
 import edu.stanford.irt.search.impl.SimpleQuery;
 import edu.stanford.irt.search.impl.ContentResult.ContentResultBuilder;
 
-public class ResultDeserializer extends JsonDeserializer<Result> {
+public class ResultDeserializer extends ValueDeserializer<Result> {
 
     private static final String SEARCH_ID_NODE_NAME = "searchId";
     private static final String SERVICE_INFO_NODE_NAME = "serviceInfo";
@@ -45,23 +45,42 @@ public class ResultDeserializer extends JsonDeserializer<Result> {
     private static final String CONTENT_PUBLICATION_ISSUE_NODE_NAME = "issue";
     private static final String CONTENT_TITLE_NODE_NAME = "title";
 
+    private static String nullIfEmpty(final JsonNode node) {
+        if (node == null || node.isNull()) {
+            return null;
+        }
+        String value = node.asString();
+        return value == null || value.isEmpty() ? null : value;
+    }
+
+    private static Long longMinusOneIfEmpty(final JsonNode node) {
+        return node == null || node.isNull() ? -1L : node.asLong();
+    }
+
+    private static String stringMinusOneIfEmpty(final JsonNode node) {
+        return node == null || node.isNull() ? "-1" : node.asString();
+    }
+
     private static Result getEngines(final JsonNode jsonNode) {
         Collection<Result> results = new ArrayList<>();
         Query query = getQuery(jsonNode.get(QUERY_NODE_NAME));
         JsonNode enginesNode = jsonNode.get(ENGINES_NODE_NAME);
         for (JsonNode engineNode : enginesNode) {
+
             String executionTime = String.valueOf(engineNode.get(TIME_NODE_NAME).asInt(-1));
-            ResultBuilder builder = Result.newResultBuilder().id(engineNode.get(ENGINE_ID_NODE_NAME).textValue())
-                    .description(engineNode.get(ENGINE_NAME_NODE_NAME).textValue()).query(query)
-                    .status(getStatus(engineNode.get(STATUS_NODE_NAME))).time(executionTime)
-                    .url(engineNode.get(REQUEST_URL_NODE_NAME).textValue())
-                    .hits(engineNode.get(TOTAL_HITS_NODE_NAME).asLong(-1))
+
+            ResultBuilder builder = Result.newResultBuilder().id(engineNode.get(ENGINE_ID_NODE_NAME).asString())
+                    .description(engineNode.get(ENGINE_NAME_NODE_NAME).asString()).query(query)
+                    .status(getStatus(engineNode.get(STATUS_NODE_NAME)))
+                    .time(stringMinusOneIfEmpty(engineNode.get(TIME_NODE_NAME)))
+                    .url(engineNode.get(REQUEST_URL_NODE_NAME).asString())
+                    .hits(longMinusOneIfEmpty(engineNode.get(TOTAL_HITS_NODE_NAME)))
                     .children(getResources(engineNode.get(RESOURCES_NODE_NAME), query, executionTime));
             results.add(builder.build());
         }
 
-        Result searchResult = Result.newResultBuilder().id(jsonNode.get(SEARCH_ID_NODE_NAME).asText())
-                .description(jsonNode.get(SERVICE_INFO_NODE_NAME).asText()).query(query)
+        Result searchResult = Result.newResultBuilder().id(jsonNode.get(SEARCH_ID_NODE_NAME).asString())
+                .description(jsonNode.get(SERVICE_INFO_NODE_NAME).asString()).query(query)
                 .status(getStatus(jsonNode.get(STATUS_NODE_NAME))).children(results).build();
         return searchResult;
     }
@@ -70,15 +89,14 @@ public class ResultDeserializer extends JsonDeserializer<Result> {
             String parentExecutionTime) {
         Collection<Result> results = new ArrayList<>();
         for (JsonNode node : nodes) {
-            ResultBuilder builder = Result.newResultBuilder().description(node.get(RESOURCE_NAME_NODE_NAME).textValue())
-                    .id(node.get(RESOURCE_ID_NODE_NAME).textValue()).query(query)
+            ResultBuilder builder = Result.newResultBuilder().description(node.get(RESOURCE_NAME_NODE_NAME).asString())
+                    .id(node.get(RESOURCE_ID_NODE_NAME).asString()).query(query)
                     .status(getStatus(node.get(STATUS_NODE_NAME))).time(parentExecutionTime)
-                    .url(node.get(RESOURCE_URL_NODE_NAME).textValue())
+                    .url(node.get(RESOURCE_URL_NODE_NAME).asString())
                     .children(getContentResultFromNode(node.get(RESULTS_NODE_NAME)));
-            long hits = node.get(RESOURCE_HITS_NODE_NAME).asLong();
-            if (hits != -1) {
-                builder.hits(hits);
-            }
+
+            builder.hits(node.get(RESOURCE_HITS_NODE_NAME).asLong(0L));
+
             results.add(builder.build());
         }
         return results;
@@ -90,16 +108,16 @@ public class ResultDeserializer extends JsonDeserializer<Result> {
         for (JsonNode node : nodes) {
             JsonNode publicationNode = node.get(CONTENT_PUBLICATION_NODE_NAME);
             ContentResultBuilder contentResultBuilder = ContentResult.newContentResultBuilder()
-                    .author(node.get(CONTENT_AUTHOR_NODE_NAME).asText(null))
-                    .contentId(node.get(CONTENT_ID_NODE_NAME).asText(null))
-                    .url(node.get(RESOURCE_URL_NODE_NAME).asText(null))
-                    .description(node.get(CONTENT_DESCRIPTION_NODE_NAME).asText(null))
-                    .title(node.get(CONTENT_TITLE_NODE_NAME).asText(null)).id("content-" + idx++);
+                    .author(nullIfEmpty(node.get(CONTENT_AUTHOR_NODE_NAME)))
+                    .contentId(nullIfEmpty(node.get(CONTENT_ID_NODE_NAME)))
+                    .url(node.get(RESOURCE_URL_NODE_NAME).asString(null))
+                    .description(node.get(CONTENT_DESCRIPTION_NODE_NAME).asString(null))
+                    .title(node.get(CONTENT_TITLE_NODE_NAME).asString(null)).id("content-" + idx++);
             if (!publicationNode.isNull()) {
-                contentResultBuilder.date(publicationNode.get(CONTENT_PUBLICATION_DATE_NODE_NAME).asText(null))
-                        .issue(publicationNode.get(CONTENT_PUBLICATION_ISSUE_NODE_NAME).asText(null))
-                        .pubTitle(publicationNode.get(CONTENT_PUBLICATION_TITLE_NODE_NAME).asText(null))
-                        .volume(publicationNode.get(CONTENT_PUBLICATION_VOLUME_NODE_NAME).asText(null));
+                contentResultBuilder.date(publicationNode.get(CONTENT_PUBLICATION_DATE_NODE_NAME).asString(null))
+                        .issue(publicationNode.get(CONTENT_PUBLICATION_ISSUE_NODE_NAME).asString(null))
+                        .pubTitle(publicationNode.get(CONTENT_PUBLICATION_TITLE_NODE_NAME).asString(null))
+                        .volume(publicationNode.get(CONTENT_PUBLICATION_VOLUME_NODE_NAME).asString(null));
             }
             results.add(contentResultBuilder.build());
         }
@@ -109,7 +127,7 @@ public class ResultDeserializer extends JsonDeserializer<Result> {
     private static Query getQuery(final JsonNode node) {
         Query query = null;
         if (!node.isNull()) {
-            query = new SimpleQuery(node.textValue());
+            query = new SimpleQuery(node.asString());
         }
         return query;
     }
@@ -117,13 +135,14 @@ public class ResultDeserializer extends JsonDeserializer<Result> {
     private static SearchStatus getStatus(final JsonNode node) {
         SearchStatus status = null;
         if (!node.isNull()) {
-            status = SearchStatus.valueOf(node.asText());
+            status = SearchStatus.valueOf(node.asString());
         }
         return status;
     }
 
     @Override
-    public Result deserialize(final JsonParser p, final DeserializationContext ctxt) throws IOException {
-        return getEngines(p.getCodec().readTree(p));
+    public Result deserialize(final JsonParser p, final DeserializationContext ctxt) throws JacksonException {
+        JsonNode root = p.readValueAsTree();
+        return getEngines(root);
     }
 }

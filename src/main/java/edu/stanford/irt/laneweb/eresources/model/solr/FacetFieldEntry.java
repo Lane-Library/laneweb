@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.eresources.model.solr;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class FacetFieldEntry implements Serializable {
@@ -52,5 +53,10 @@ public class FacetFieldEntry implements Serializable {
 
     public void setValueCount(final int valueCount) {
         this.valueCount = valueCount;
+    }
+
+    @JsonAlias("count")
+    public void setCount(final int count) {
+        this.valueCount = count;
     }
 }

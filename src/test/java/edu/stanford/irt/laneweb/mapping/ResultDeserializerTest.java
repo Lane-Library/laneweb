@@ -9,9 +9,9 @@ import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.fasterxml.jackson.core.Version;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
+import tools.jackson.core.Version;
+import tools.jackson.databind.json.JsonMapper;
+import tools.jackson.databind.module.SimpleModule;
 
 import edu.stanford.irt.search.SearchStatus;
 import edu.stanford.irt.search.impl.ContentResult;
@@ -19,20 +19,20 @@ import edu.stanford.irt.search.impl.Result;
 
 public class ResultDeserializerTest {
 
-    private ObjectMapper objectMapper;
+    private JsonMapper objectMapper;
 
     @BeforeEach
     public void setUp() {
-        this.objectMapper = new ObjectMapper();
         SimpleModule module = new SimpleModule("lane model", new Version(1, 0, 0, null, null, null));
         module.addDeserializer(Result.class, new ResultDeserializer());
-        this.objectMapper.registerModule(module);
+        this.objectMapper = JsonMapper.builder().addModule(module).build();
     }
 
     @Test
     public void testDescribePubMedDeserialize() throws IOException {
         Result result = this.objectMapper.readValue(getClass().getResourceAsStream("describe-pubmed.json"),
                 Result.class);
+
         assertNotNull(result);
         assertEquals("631585061", result.getId());
         assertEquals("Lane Metasearch - Version:1.2.92-SNAPSHOT", result.getDescription());

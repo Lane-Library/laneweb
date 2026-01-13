@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.mapping;
 
+import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.mock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
@@ -10,10 +11,9 @@ import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.SerializerProvider;
-
 import edu.stanford.irt.laneweb.ipgroup.IPGroup;
+import tools.jackson.core.JsonGenerator;
+import tools.jackson.databind.SerializationContext;
 
 public class IPGroupSerializerTest {
 
@@ -21,7 +21,7 @@ public class IPGroupSerializerTest {
 
     private JsonGenerator jgen;
 
-    private SerializerProvider provider;
+    private SerializationContext context;
 
     private IPGroupSerializer serializer;
 
@@ -30,7 +30,7 @@ public class IPGroupSerializerTest {
         this.serializer = new IPGroupSerializer();
         this.ipgroup = IPGroup.OTHER;
         this.jgen = mock(JsonGenerator.class);
-        this.provider = mock(SerializerProvider.class);
+        this.context = mock(SerializationContext.class);
     }
 
     @Test
@@ -40,9 +40,9 @@ public class IPGroupSerializerTest {
 
     @Test
     public void testSerializeIPGroupJsonGeneratorSerializerProvider() throws IOException {
-        this.jgen.writeString("OTHER");
-        replay(this.jgen, this.provider);
-        this.serializer.serialize(this.ipgroup, this.jgen, this.provider);
-        verify(this.jgen, this.provider);
+        expect(this.jgen.writeString("OTHER")).andReturn(this.jgen);
+        replay(this.jgen, this.context);
+        this.serializer.serialize(this.ipgroup, this.jgen, this.context);
+        verify(this.jgen, this.context);
     }
 }

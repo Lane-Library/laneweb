@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.converter.StringHttpMessageConverter;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.json.JsonMapper;
 
 class RESTClientConfigurationTest {
 
@@ -21,7 +21,7 @@ class RESTClientConfigurationTest {
 
     @Test
     void testMessageConverters() {
-        assertNotNull(this.configuration.getMessageConverters(new ObjectMapper()));
+        assertNotNull(this.configuration.getMessageConverters(JsonMapper.builder().build()));
     }
 
     @Test

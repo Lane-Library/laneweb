@@ -1,20 +1,19 @@
 package edu.stanford.irt.laneweb.mapping;
 
-import java.io.IOException;
-
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.JsonNode;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.JsonParser;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ValueDeserializer;
 
 import edu.stanford.irt.coursereserves.Course;
 
-public class CourseDeserializer extends JsonDeserializer<Course> {
+public class CourseDeserializer extends ValueDeserializer<Course> {
 
     @Override
-    public Course deserialize(final JsonParser p, final DeserializationContext ctxt) throws IOException {
-        JsonNode node = p.getCodec().readTree(p);
-        return new Course(node.get("id").asText(), node.get("name").asText(), node.get("number").asText(),
-                node.get("instructor").asText(), node.get("department").asText());
+    public Course deserialize(final JsonParser p, final DeserializationContext ctxt) throws JacksonException {
+        JsonNode node = p.readValueAsTree();
+        return new Course(node.get("id").asString(), node.get("name").asString(), node.get("number").asString(),
+                node.get("instructor").asString(), node.get("department").asString());
     }
 }

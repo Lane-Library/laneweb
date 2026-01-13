@@ -17,11 +17,10 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.ResourceHttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.http.converter.json.JacksonJsonHttpMessageConverter;
 import org.springframework.web.client.RestClient;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
+import tools.jackson.databind.json.JsonMapper;
 import edu.stanford.irt.laneweb.rest.RESTService;
 
 @Configuration
@@ -43,12 +42,12 @@ public class RESTClientConfiguration {
     }
 
     @Bean
-    List<HttpMessageConverter<?>> getMessageConverters(final ObjectMapper objectMapper) {
+    List<HttpMessageConverter<?>> getMessageConverters(final JsonMapper objectMapper) {
         List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
         StringHttpMessageConverter stringConverter = new StringHttpMessageConverter();
         stringConverter.setWriteAcceptCharset(false);
         messageConverters.add(stringConverter);
-        messageConverters.add(new MappingJackson2HttpMessageConverter(objectMapper));
+        messageConverters.add(new JacksonJsonHttpMessageConverter(objectMapper));
         messageConverters.add(new ResourceHttpMessageConverter());
         return messageConverters;
     }

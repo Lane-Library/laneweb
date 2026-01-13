@@ -1,32 +1,32 @@
 package edu.stanford.irt.laneweb.mapping;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.JsonNode;
+import tools.jackson.core.JacksonException;
+import tools.jackson.core.JsonParser;
+import tools.jackson.databind.DeserializationContext;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ValueDeserializer;
 
 import edu.stanford.irt.coursereserves.Course;
 import edu.stanford.irt.coursereserves.CourseReservesItem;
 import edu.stanford.irt.coursereserves.CourseReservesItemList;
 import edu.stanford.irt.coursereserves.ItemType;
 
-public class CourseReservesItemListDeserializer extends JsonDeserializer<CourseReservesItemList> {
+public class CourseReservesItemListDeserializer extends ValueDeserializer<CourseReservesItemList> {
 
     @Override
     public CourseReservesItemList deserialize(final JsonParser p, final DeserializationContext ctxt)
-            throws IOException {
-        JsonNode node = p.getCodec().readTree(p);
+            throws JacksonException {
+        JsonNode node = p.readValueAsTree();
         JsonNode itemsNode = node.get("items");
         List<CourseReservesItem> itemList = new ArrayList<>();
         itemsNode.forEach((final JsonNode n) -> itemList.add(new CourseReservesItem(
                 getTextFromNode(n.get("author")),
                 getTextFromNode(n.get("callNumber")),
                 // strip leading L, a, or in chars from FOLIO hrid
-                n.get("id").asText().replaceFirst("^(L|a|in)", ""),
+                n.get("id").asString().replaceFirst("^(L|a|in)", ""),
                 n.get("availableCount").asInt(),
                 getTextFromNode(n.get("title")),
                 getTextFromNode(n.get("url")),
@@ -35,11 +35,11 @@ public class CourseReservesItemListDeserializer extends JsonDeserializer<CourseR
         if (node.hasNonNull("course")) {
             JsonNode n = node.get("course");
             Course course = new Course(
-                    n.get("id").asText(),
-                    n.get("name").asText(),
-                    n.get("number").asText(),
-                    n.get("instructor").asText(),
-                    n.get("department").asText());
+                    n.get("id").asString(),
+                    n.get("name").asString(),
+                    n.get("number").asString(),
+                    n.get("instructor").asString(),
+                    n.get("department").asString());
             return new CourseReservesItemList(course, itemList);
         } else {
             return new CourseReservesItemList(itemList);
@@ -50,7 +50,7 @@ public class CourseReservesItemListDeserializer extends JsonDeserializer<CourseR
         if (node.isNull()) {
             return null;
         } else {
-            return node.asText();
+            return node.asString();
         }
     }
 }

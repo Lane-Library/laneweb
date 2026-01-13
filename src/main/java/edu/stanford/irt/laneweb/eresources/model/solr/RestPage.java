@@ -11,7 +11,8 @@ import org.springframework.data.domain.Pageable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.JsonNode;
+
+import tools.jackson.databind.JsonNode;
 
 @JsonIgnoreProperties(ignoreUnknown = true, value = { "pageable" })
 public class RestPage<T> extends PageImpl<T> {

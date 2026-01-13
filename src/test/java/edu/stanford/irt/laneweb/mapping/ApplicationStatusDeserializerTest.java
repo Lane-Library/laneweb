@@ -7,22 +7,21 @@ import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.fasterxml.jackson.core.Version;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
+import tools.jackson.core.Version;
+import tools.jackson.databind.json.JsonMapper;
+import tools.jackson.databind.module.SimpleModule;
 
 import edu.stanford.irt.status.ApplicationStatus;
 
 public class ApplicationStatusDeserializerTest {
 
-    private ObjectMapper objectMapper;
+    private JsonMapper objectMapper;
 
     @BeforeEach
     public void setUp() {
-        this.objectMapper = new ObjectMapper();
         SimpleModule module = new SimpleModule("lane model", new Version(1, 0, 0, null, null, null));
         module.addDeserializer(ApplicationStatus.class, new ApplicationStatusDeserializer());
-        this.objectMapper.registerModule(module);
+        this.objectMapper = JsonMapper.builder().addModule(module).build();
     }
 
     @Test

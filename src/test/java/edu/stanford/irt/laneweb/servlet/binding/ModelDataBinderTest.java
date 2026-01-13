@@ -19,9 +19,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.core.JsonGenerator;
+import tools.jackson.core.exc.StreamWriteException;
+import tools.jackson.databind.json.JsonMapper;
 
 import edu.stanford.irt.laneweb.LanewebException;
 
@@ -29,11 +29,9 @@ public class ModelDataBinderTest {
 
     private ModelDataBinder binder;
 
-    private JsonFactory factory;
-
     private JsonGenerator generator;
 
-    private ObjectMapper mapper;
+    private JsonMapper mapper;
 
     private Map<String, Object> model;
 
@@ -41,41 +39,37 @@ public class ModelDataBinderTest {
 
     @BeforeEach
     public void setUp() {
-        this.mapper = mock(ObjectMapper.class);
+        this.mapper = mock(JsonMapper.class);
         this.binder = new ModelDataBinder(Collections.singleton("foo"), this.mapper);
         this.model = new HashMap<>();
         this.request = mock(HttpServletRequest.class);
-        this.factory = mock(JsonFactory.class);
         this.generator = mock(JsonGenerator.class);
     }
 
     @Test
     public void testBind() throws IOException {
         this.model.put("foo", "bar");
-        expect(this.mapper.getFactory()).andReturn(this.factory);
-        expect(this.factory.createGenerator(isA(StringWriter.class))).andReturn(this.generator);
+        expect(this.mapper.createGenerator(isA(StringWriter.class))).andReturn(this.generator);
         this.mapper.writeValue(eq(this.generator), eq(Collections.singletonMap("foo", "bar")));
-        replay(this.request, this.mapper, this.factory, this.generator);
+        replay(this.request, this.mapper, this.generator);
         this.binder.bind(this.model, this.request);
-        verify(this.request, this.mapper, this.factory, this.generator);
+        verify(this.request, this.mapper, this.generator);
     }
 
     @Test
     public void testBindEmpty() throws IOException {
         this.model.put("bar", "baz");
-        expect(this.mapper.getFactory()).andReturn(this.factory);
-        expect(this.factory.createGenerator(isA(StringWriter.class))).andReturn(this.generator);
+        expect(this.mapper.createGenerator(isA(StringWriter.class))).andReturn(this.generator);
         this.mapper.writeValue(eq(this.generator), eq(Collections.emptyMap()));
-        replay(this.request, this.mapper, this.factory, this.generator);
+        replay(this.request, this.mapper, this.generator);
         this.binder.bind(this.model, this.request);
-        verify(this.request, this.mapper, this.factory, this.generator);
+        verify(this.request, this.mapper, this.generator);
     }
 
     @Test
     public void testBindThrowsException() throws IOException {
-        expect(this.mapper.getFactory()).andReturn(this.factory);
-        expect(this.factory.createGenerator(isA(StringWriter.class))).andThrow(new IOException());
-        replay(this.request, this.mapper, this.factory, this.generator);
+        expect(this.mapper.createGenerator(isA(StringWriter.class))).andThrow(new StreamWriteException(null, "boom"));
+        replay(this.request, this.mapper, this.generator);
         assertThrows(LanewebException.class, () -> {
             this.binder.bind(this.model, this.request);
         });

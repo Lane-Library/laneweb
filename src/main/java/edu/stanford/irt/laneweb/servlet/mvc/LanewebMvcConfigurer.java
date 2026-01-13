@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.http.converter.json.JacksonJsonHttpMessageConverter;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -24,7 +24,7 @@ import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.json.JsonMapper;
 
 import edu.stanford.irt.laneweb.servlet.redirect.RedirectProcessor;
 
@@ -34,11 +34,11 @@ public class LanewebMvcConfigurer implements WebMvcConfigurer {
 
     private static final Integer ONE_YEAR_IN_SECONDS = Integer.valueOf(31_536_000);
 
-    private ObjectMapper objectMapper;
+    private JsonMapper objectMapper;
 
     private RedirectProcessor redirectProcessor;
 
-    public LanewebMvcConfigurer(final ObjectMapper objectMapper, final RedirectProcessor redirectProcessor) {
+    public LanewebMvcConfigurer(final JsonMapper objectMapper, final RedirectProcessor redirectProcessor) {
         this.objectMapper = objectMapper;
         this.redirectProcessor = redirectProcessor;
     }
@@ -55,7 +55,7 @@ public class LanewebMvcConfigurer implements WebMvcConfigurer {
         StringHttpMessageConverter stringConverter = new StringHttpMessageConverter(StandardCharsets.UTF_8);
         stringConverter.setWriteAcceptCharset(false);
         converters.add(stringConverter);
-        converters.add(new MappingJackson2HttpMessageConverter(this.objectMapper));
+        converters.add(new JacksonJsonHttpMessageConverter(this.objectMapper));
     }
 
     // 'spring.mvc.pathmatch.matching-strategy=ant_path_matcher or ant-path-matcher doesn't work from the properties
