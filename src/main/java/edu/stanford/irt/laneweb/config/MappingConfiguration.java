@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import tools.jackson.core.Version;
 import tools.jackson.databind.DeserializationFeature;
 import tools.jackson.databind.SerializationConfig;
+import tools.jackson.databind.cfg.DateTimeFeature;
 import tools.jackson.databind.json.JsonMapper;
 import tools.jackson.databind.module.SimpleModule;
 
@@ -42,6 +43,7 @@ public class MappingConfiguration {
         return JsonMapper.builder()
                 .addModule(module)
                 .configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, false)
+                .configure(DateTimeFeature.WRITE_DATES_AS_TIMESTAMPS, false)
                 .build();
     }
 }
