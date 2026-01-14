@@ -14,19 +14,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.JacksonJsonHttpMessageConverter;
-import org.springframework.util.AntPathMatcher;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.handler.SimpleUrlHandlerMapping;
 import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
-import tools.jackson.databind.json.JsonMapper;
-
 import edu.stanford.irt.laneweb.servlet.redirect.RedirectProcessor;
+import tools.jackson.databind.json.JsonMapper;
 
 @Configuration
 @EnableWebMvc
@@ -56,13 +53,6 @@ public class LanewebMvcConfigurer implements WebMvcConfigurer {
         stringConverter.setWriteAcceptCharset(false);
         converters.add(stringConverter);
         converters.add(new JacksonJsonHttpMessageConverter(this.objectMapper));
-    }
-
-    // 'spring.mvc.pathmatch.matching-strategy=ant_path_matcher or ant-path-matcher doesn't work from the properties
-    // file and by Using AntPathMatcher as the path matching strategy to allow /**/*.html
-    @Override
-    public void configurePathMatch(final PathMatchConfigurer configurer) {
-        configurer.setPathMatcher(new AntPathMatcher());
     }
 
     @Bean
