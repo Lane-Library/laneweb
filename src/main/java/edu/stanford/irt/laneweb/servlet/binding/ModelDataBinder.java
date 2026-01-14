@@ -18,11 +18,11 @@ public class ModelDataBinder implements DataBinder {
 
     private Set<String> keys;
 
-    private JsonMapper objectMapper;
+    private JsonMapper jsonMapper;
 
-    public ModelDataBinder(final Set<String> keys, final JsonMapper objectMapper) {
+    public ModelDataBinder(final Set<String> keys, final JsonMapper jsonMapper) {
         this.keys = new HashSet<>(keys);
-        this.objectMapper = objectMapper;
+        this.jsonMapper = jsonMapper;
     }
 
     @Override
@@ -36,8 +36,8 @@ public class ModelDataBinder implements DataBinder {
         }
         StringWriter stringWriter = new StringWriter();
         try {
-            JsonGenerator jsonGenerator = this.objectMapper.createGenerator(stringWriter);
-            this.objectMapper.writeValue(jsonGenerator, jsonModel);
+            JsonGenerator jsonGenerator = this.jsonMapper.createGenerator(stringWriter);
+            this.jsonMapper.writeValue(jsonGenerator, jsonModel);
             model.put(Model.MODEL, stringWriter.toString());
         } catch (JacksonException e) {
             throw new LanewebException(e);

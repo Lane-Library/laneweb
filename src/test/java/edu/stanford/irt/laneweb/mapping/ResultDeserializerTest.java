@@ -19,18 +19,18 @@ import edu.stanford.irt.search.impl.Result;
 
 public class ResultDeserializerTest {
 
-    private JsonMapper objectMapper;
+    private JsonMapper jsonMapper;
 
     @BeforeEach
     public void setUp() {
         SimpleModule module = new SimpleModule("lane model", new Version(1, 0, 0, null, null, null));
         module.addDeserializer(Result.class, new ResultDeserializer());
-        this.objectMapper = JsonMapper.builder().addModule(module).build();
+        this.jsonMapper = JsonMapper.builder().addModule(module).build();
     }
 
     @Test
     public void testDescribePubMedDeserialize() throws IOException {
-        Result result = this.objectMapper.readValue(getClass().getResourceAsStream("describe-pubmed.json"),
+        Result result = this.jsonMapper.readValue(getClass().getResourceAsStream("describe-pubmed.json"),
                 Result.class);
 
         assertNotNull(result);
@@ -71,7 +71,7 @@ public class ResultDeserializerTest {
 
     @Test
     public void testSearchAAFPSuccessfulDeserialize() throws IOException {
-        Result result = this.objectMapper.readValue(getClass().getResourceAsStream("search-aafp_patients.json"),
+        Result result = this.jsonMapper.readValue(getClass().getResourceAsStream("search-aafp_patients.json"),
                 Result.class);
         assertNotNull(result);
         assertEquals("631585061", result.getId());
@@ -115,7 +115,7 @@ public class ResultDeserializerTest {
 
     @Test
     public void testSearchMMBIDDeserialize() throws IOException {
-        Result result = this.objectMapper.readValue(getClass().getResourceAsStream("search-mmbid.json"), Result.class);
+        Result result = this.jsonMapper.readValue(getClass().getResourceAsStream("search-mmbid.json"), Result.class);
         assertNotNull(result);
         assertEquals("631585061", result.getId());
         assertEquals("Lane Metasearch - Version:1.2.92-SNAPSHOT", result.getDescription());
@@ -150,7 +150,7 @@ public class ResultDeserializerTest {
 
     @Test
     public void testSearchPubMedRunningDeserialize() throws IOException {
-        Result result = this.objectMapper.readValue(getClass().getResourceAsStream("search-pubmed-running.json"),
+        Result result = this.jsonMapper.readValue(getClass().getResourceAsStream("search-pubmed-running.json"),
                 Result.class);
         assertNotNull(result);
         assertEquals("631585061", result.getId());
@@ -177,7 +177,7 @@ public class ResultDeserializerTest {
 
     @Test
     public void testSearchPubMedSuccessfulDeserialize() throws IOException {
-        Result result = this.objectMapper.readValue(getClass().getResourceAsStream("search-pubmed-successful.json"),
+        Result result = this.jsonMapper.readValue(getClass().getResourceAsStream("search-pubmed-successful.json"),
                 Result.class);
         assertNotNull(result);
         assertEquals("1363428449", result.getId());

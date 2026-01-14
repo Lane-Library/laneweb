@@ -15,18 +15,18 @@ import edu.stanford.irt.status.ApplicationStatus;
 
 public class ApplicationStatusDeserializerTest {
 
-    private JsonMapper objectMapper;
+    private JsonMapper jsonMapper;
 
     @BeforeEach
     public void setUp() {
         SimpleModule module = new SimpleModule("lane model", new Version(1, 0, 0, null, null, null));
         module.addDeserializer(ApplicationStatus.class, new ApplicationStatusDeserializer());
-        this.objectMapper = JsonMapper.builder().addModule(module).build();
+        this.jsonMapper = JsonMapper.builder().addModule(module).build();
     }
 
     @Test
     public void testDeserialize() throws IOException {
-        ApplicationStatus status = this.objectMapper.readValue(getClass().getResourceAsStream("bookcovers-status.json"),
+        ApplicationStatus status = this.jsonMapper.readValue(getClass().getResourceAsStream("bookcovers-status.json"),
                 ApplicationStatus.class);
         assertEquals("indlovu.local", status.getHost());
         assertEquals("bookcovers", status.getName());

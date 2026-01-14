@@ -43,12 +43,12 @@ public class RESTClientConfiguration {
     }
 
     @Bean
-    List<HttpMessageConverter<?>> getMessageConverters(final JsonMapper objectMapper) {
+    List<HttpMessageConverter<?>> getMessageConverters(final JsonMapper jsonMapper) {
         List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
         StringHttpMessageConverter stringConverter = new StringHttpMessageConverter();
         stringConverter.setWriteAcceptCharset(false);
         messageConverters.add(stringConverter);
-        messageConverters.add(new JacksonJsonHttpMessageConverter(objectMapper));
+        messageConverters.add(new JacksonJsonHttpMessageConverter(jsonMapper));
         messageConverters.add(new ResourceHttpMessageConverter());
         return messageConverters;
     }

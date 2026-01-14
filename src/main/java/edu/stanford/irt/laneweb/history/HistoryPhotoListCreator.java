@@ -30,13 +30,13 @@ public class HistoryPhotoListCreator {
         }
     }
 
-    private JsonMapper objectMapper;
+    private JsonMapper jsonMapper;
 
     String baseUrl;
 
     public HistoryPhotoListCreator(final String baseUrl) {
         this.baseUrl = baseUrl;
-        this.objectMapper = new JsonMapper();
+        this.jsonMapper = new JsonMapper();
     }
 
     public void printList(final PrintStream out) throws IOException {
@@ -44,7 +44,7 @@ public class HistoryPhotoListCreator {
         String next = this.baseUrl;
         while (null != next) {
             try (InputStream input = URI.create(next).toURL().openStream()) {
-                Map<String, Object> map = this.objectMapper.readValue(input, new TypeReference<Map<String, Object>>() {
+                Map<String, Object> map = this.jsonMapper.readValue(input, new TypeReference<Map<String, Object>>() {
                 });
                 photos.addAll(getPhotosFromMap(map));
                 next = (String) ((Map<String, Object>) map.get("links")).get("next");

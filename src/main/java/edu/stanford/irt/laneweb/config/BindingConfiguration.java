@@ -121,7 +121,7 @@ public class BindingConfiguration {
     }
 
     @Bean
-    public ModelDataBinder modelDataBinder(final JsonMapper objectMapper) {
+    public ModelDataBinder modelDataBinder(final JsonMapper jsonMapper) {
         Set<String> keys = new HashSet<>();
         keys.add("auth");
         keys.add("base-path");
@@ -133,7 +133,7 @@ public class BindingConfiguration {
         keys.add("proxy-links");
         keys.add("url-encoded-query");
         keys.add("url-encoded-source");
-        return new ModelDataBinder(keys, objectMapper);
+        return new ModelDataBinder(keys, jsonMapper);
     }
 
     @Bean

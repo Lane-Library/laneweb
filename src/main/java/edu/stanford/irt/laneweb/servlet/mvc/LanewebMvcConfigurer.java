@@ -31,12 +31,12 @@ public class LanewebMvcConfigurer implements WebMvcConfigurer {
 
     private static final Integer ONE_YEAR_IN_SECONDS = Integer.valueOf(31_536_000);
 
-    private JsonMapper objectMapper;
+    private JsonMapper jsonMapper;
 
     private RedirectProcessor redirectProcessor;
 
-    public LanewebMvcConfigurer(final JsonMapper objectMapper, final RedirectProcessor redirectProcessor) {
-        this.objectMapper = objectMapper;
+    public LanewebMvcConfigurer(final JsonMapper jsonMapper, final RedirectProcessor redirectProcessor) {
+        this.jsonMapper = jsonMapper;
         this.redirectProcessor = redirectProcessor;
     }
 
@@ -52,7 +52,7 @@ public class LanewebMvcConfigurer implements WebMvcConfigurer {
         StringHttpMessageConverter stringConverter = new StringHttpMessageConverter(StandardCharsets.UTF_8);
         stringConverter.setWriteAcceptCharset(false);
         converters.add(stringConverter);
-        converters.add(new JacksonJsonHttpMessageConverter(this.objectMapper));
+        converters.add(new JacksonJsonHttpMessageConverter(this.jsonMapper));
     }
 
     @Bean
