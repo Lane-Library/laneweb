@@ -29,7 +29,7 @@ public class RESTClientConfiguration {
 
     private static final int HTTP_CONNECT_TIMEOUT = 5;
 
-    private static final int HTTP_READ_TIMEOUT = 15;
+    private static final int HTTP_READ_TIMEOUT = 30;
 
     @Bean
     HttpComponentsClientHttpRequestFactory getRequestFactory() {

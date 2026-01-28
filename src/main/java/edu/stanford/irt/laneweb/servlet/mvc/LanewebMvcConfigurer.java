@@ -16,6 +16,7 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.JacksonJsonHttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.handler.SimpleUrlHandlerMapping;
 import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
@@ -53,6 +54,12 @@ public class LanewebMvcConfigurer implements WebMvcConfigurer {
         stringConverter.setWriteAcceptCharset(false);
         converters.add(stringConverter);
         converters.add(new JacksonJsonHttpMessageConverter(this.jsonMapper));
+    }
+
+    @Override
+    public void configurePathMatch(final PathMatchConfigurer configurer) {
+        // Use legacy Ant-style path matching instead of PathPatternParser.
+        configurer.setPatternParser(null);
     }
 
     @Bean
