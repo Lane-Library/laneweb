@@ -7,7 +7,7 @@
         <version>192-spring7</version>
     </parent>
     <artifactId>laneweb</artifactId>
-    <version>3.16.7-SNAPSHOT</version>
+    <version>3.16.7-spring7-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Lane Library Website</name>
     <description>The Lane Library web application built with Cocoon</description>
@@ -126,7 +126,7 @@
         <dependency>
             <artifactId>search-core</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>4.0.2</version>
+            <version>4.0.3-spring7-SNAPSHOT</version>
         </dependency>
         <dependency>
             <artifactId>slf4j-api</artifactId>
