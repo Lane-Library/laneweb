@@ -1,12 +1,12 @@
 describe('Popup functionality', () => {
 
     it('should open a local popup from HTML found on page', () => {
-        cy.visit('/cypress-test/patron-registration/index.html');
+        cy.visit('/cypress-test/help/searchtools.html');
 
         // popup should not be present on the page initially
         cy.get('.popup').should('not.exist');
 
-        cy.get('a[rel="popup local popup-id-shc"]').click();
+        cy.get('a[rel="popup local otherPopup"]').first().click();
 
         cy.get('.popup').should('exist');
 
@@ -40,9 +40,9 @@ describe('Popup functionality', () => {
     it('should move the popup when dragged and dropped', () => {
         cy.viewport(1101, 1000);
 
-        cy.visit('/cypress-test/patron-registration/index.html');
+        cy.visit('/cypress-test/help/searchtools.html');
 
-        cy.get('a[rel="popup local popup-id-shc"]').click();
+        cy.get('a[rel="popup local otherPopup"]').first().click();
 
         cy.get('.popup').should('be.visible').invoke('position').then((initialPosition) => {
             // `initialPosition` will be an object like { top: 123, left: 456 }
