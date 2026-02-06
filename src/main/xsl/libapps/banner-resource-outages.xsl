@@ -6,7 +6,7 @@
         <xsl:if test="//span[contains( @class, 'label-danger')]">
             <span>
                 <xsl:text>Resource Outages: </xsl:text>
-                <a href="/contacts/resource-outages.html">
+                <a href="/resource-outages.html">
                     <xsl:apply-templates select="//span[contains( @class, 'label-danger')]" />
                 </a>
             </span>
