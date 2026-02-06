@@ -39,8 +39,9 @@ public class BannerResourceOutageConfiguration {
     public URI libanswerOutageServiceURI(
             @Value("${edu.stanford.irt.laneweb.libanswer-outages.scheme}") final String scheme,
             @Value("${edu.stanford.irt.laneweb.libanswer-outages.host}") final String host,
+            @Value("${edu.stanford.irt.laneweb.libanswer-outages.port}") final int port,
             @Value("${edu.stanford.irt.laneweb.libanswer-outages.path}") final String path)
             throws URISyntaxException {
-        return new URI(scheme, null, host, -1, path, null, null);
+        return new URI(scheme, null, host, port, path, null, null);
     }
 }
