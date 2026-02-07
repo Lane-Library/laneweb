@@ -39,7 +39,7 @@ footer section,
 }
 
 
-header:first-of-type {
+header section:first-of-type {
     background-color: #8c1515;
     color: white;
 }
