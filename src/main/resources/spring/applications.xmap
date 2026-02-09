@@ -163,12 +163,5 @@
             <map:generate type="history-photo" />
             <map:serialize type="xml" />
         </map:match>
-        <map:match pattern="resource-outages.html" type="regexp">
-            <map:generate type="resource-outages" />
-            <!-- <map:transform type="saxon" src="classpath:/xsl/libapps/lane-links.xsl"/>
-         <map:transform type="namespace-filter"/> -->
-            <map:serialize type="html5" />
-        </map:match>
-
     </map:pipeline>
 </map:sitemap>
