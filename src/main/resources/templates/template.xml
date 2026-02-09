@@ -22,11 +22,11 @@
         </xi:include>
 
 
-        <!-- <main class="content">
+        <main class="content">
             <div class="centered">
                 <?laneweb content?>
             </div>
-        </main> -->
+        </main>
 
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/footer.html">
             <xi:fallback></xi:fallback>
