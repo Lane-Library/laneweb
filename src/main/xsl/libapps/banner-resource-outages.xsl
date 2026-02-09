@@ -6,19 +6,23 @@
         <xsl:if test="//span[contains( @class, 'label-danger')]">
             <span>
                 <xsl:text>Resource Outages: </xsl:text>
-                <a href="/resource-outages.html">
-                    <xsl:apply-templates select="//span[contains( @class, 'label-danger')]" />
-                </a>
+                <xsl:apply-templates select="//span[contains( @class, 'label-danger')]" />
             </span>
         </xsl:if>
     </xsl:template>
 
 
     <xsl:template match="span">
-        <xsl:apply-templates select="../../../h4" />
-        <xsl:if test="last() > 1  and position() != last()">
-            <xsl:text>, </xsl:text>
-        </xsl:if>
+        <a>
+            <xsl:attribute name="href">
+                <xsl:value-of select="concat( '/resource-outages.html', '#', substring-after(../../../@id, 's-la-post-'))" />
+            </xsl:attribute>
+            <xsl:apply-templates select="../../../h4" />
+
+            <xsl:if test="last() > 1  and position() != last()">
+                <xsl:text>, </xsl:text>
+            </xsl:if>
+        </a>
     </xsl:template>
 
 </xsl:stylesheet>

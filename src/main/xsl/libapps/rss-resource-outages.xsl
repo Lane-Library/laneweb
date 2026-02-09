@@ -13,7 +13,11 @@
     </xsl:template>
 
     <xsl:template match="item">
-        <div class="module">
+        <div>
+            <xsl:attribute name="class">module</xsl:attribute>
+            <xsl:attribute name="id">
+                <xsl:value-of select="substring-after(link, '=')" />
+            </xsl:attribute>
             <h2 class="level4 border-thin border-thick">
                 <xsl:value-of select="title"></xsl:value-of>
             </h2>
@@ -24,17 +28,6 @@
                 <xsl:copy-of select="parse-xml-fragment(./description)" />
             </div>
         </div>
-    </xsl:template>
-
-
-    <xsl:template match="node()">
-        <xsl:copy>
-            <xsl:apply-templates select="node()|@*" />
-        </xsl:copy>
-    </xsl:template>
-
-    <xsl:template match="@*">
-        <xsl:copy-of select="." />
     </xsl:template>
 
 
