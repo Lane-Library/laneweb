@@ -10,7 +10,8 @@ footer section,
 }
 
 
-header section,
+header section div.header,
+header section div.lane-header,
 footer section,
 .content,
 .content div.centered div.service-page {
@@ -44,7 +45,7 @@ header section:first-of-type {
     color: white;
 }
 
-header:nth-of-type(2) {
+header section:nth-of-type(2) {
     background: white;
 }
 
