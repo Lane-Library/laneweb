@@ -14,7 +14,7 @@
 
     <xsl:template match="item">
         <div>
-            <xsl:attribute name="class">module</xsl:attribute>
+            <xsl:attribute name="class">module scroll-margin-lg</xsl:attribute>
             <xsl:attribute name="id">
                 <xsl:value-of select="substring-after(link, '=')" />
             </xsl:attribute>
