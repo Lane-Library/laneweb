@@ -178,11 +178,6 @@ img {
 }
 
 @media (max-width : 812px) {
-    header section {
-        padding-left: 12px;
-        padding-right: 12px;
-    }
-
     .font-size-xl {
         font-size: 1em;
     }
