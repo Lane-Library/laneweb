@@ -15,10 +15,10 @@
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/navigation.html">
                 <xi:fallback></xi:fallback>
             </xi:include>
-            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/search-container.html">
-                <xi:fallback></xi:fallback>
-            </xi:include>
         </header>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/template/search-container.html">
+            <xi:fallback></xi:fallback>
+        </xi:include>
 
         <main class="content">
             <div class="centered">
