@@ -18,11 +18,11 @@
                 <xsl:value-of select="concat( '/resource-outages.html', '#', substring-after(../../../@id, 's-la-post-'))" />
             </xsl:attribute>
             <xsl:apply-templates select="../../../h4" />
-
-            <xsl:if test="last() > 1  and position() != last()">
-                <xsl:text>, </xsl:text>
-            </xsl:if>
         </a>
+        <xsl:if test="last() > 1  and position() != last()">
+            <xsl:text>, </xsl:text>
+        </xsl:if>
+
     </xsl:template>
 
 </xsl:stylesheet>
