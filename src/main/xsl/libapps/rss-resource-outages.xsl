@@ -2,14 +2,14 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:rss="http://purl.org/rss/1.0/" xmlns:h="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml" version="2.0">
 
     <xsl:template match="/rss/channel">
-        <xsl:choose>
-            <xsl:when test="count(//item) > 0">
-                <xsl:apply-templates select="item" />
-            </xsl:when>
-            <xsl:otherwise>
-                <div class="module font-size-2xl">No resource outages at this time.</div>
-            </xsl:otherwise>
-        </xsl:choose>
+        <xsl:if test="count(//item) > 0">
+            <xsl:apply-templates select="item" />
+            <style>
+                #no-outages-message {
+                  display: none;
+                }
+            </style>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match="item">
