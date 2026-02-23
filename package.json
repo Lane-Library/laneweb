@@ -6,6 +6,6 @@
     "devDependencies": {
         "jest": "^29.7.0",
         "jest-environment-jsdom": "^29.7.0",
-        "terser": "5.43.1"
+        "terser": "5.46.0"
     }
 }

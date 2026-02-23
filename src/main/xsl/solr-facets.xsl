@@ -223,6 +223,7 @@
             <xsl:when test="$name = 'dnlm'">
                 <span class="tooltip-trigger" title="A small subset of open access journals from the National Library of Medicine">PMC Journals</span>
             </xsl:when>
+            <xsl:when test="$name = 'outage'">Resource Outages</xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="$name" />
             </xsl:otherwise>
