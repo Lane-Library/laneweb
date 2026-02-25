@@ -71,7 +71,7 @@
         <dependency>
             <groupId>org.springframework.session</groupId>
             <artifactId>spring-session-data-redis</artifactId>
-            <version>3.5.4</version>
+            <version>3.5.5</version>
             <!--<version>${org.springframework.boot.version}</version>-->
         </dependency>
         <dependency>
