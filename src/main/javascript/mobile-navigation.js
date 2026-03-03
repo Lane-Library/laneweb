@@ -5,7 +5,7 @@
     const navMenus = document.querySelectorAll(".nav-menu");
     const openButton = document.querySelector("#nav-toggle-on");
     const closeElements = document.querySelectorAll(".menu-overlay, #nav-toggle-off");
-    const superHeader = document.querySelector("header:first-of-type");
+    const superHeader = document.querySelector("header section:first-of-type");
     const blurableNodes = document.querySelectorAll(".content, footer, .mobile-screen-menu.lrg-screen-hide");
 
     // exit if core navigation elements don't exist

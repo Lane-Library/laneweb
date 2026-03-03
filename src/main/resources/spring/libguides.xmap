@@ -1,62 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map:sitemap xmlns:map="http://lane.stanford.edu/irt-cocoon/sitemap/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="http://lane.stanford.edu/irt-cocoon/sitemap/1.0 http://lane.stanford.edu/xsd/irt-cocoon-sitemap-1.0.xsd"
->
-   <map:pipeline type="caching">
-   
-      <!-- ********* navigation headers for libcal and libguide ********** -->
-     
-      <map:match pattern="headers.html" type="wildcard">
-         <map:aggregate type="default" element="doc">
-            <map:generate type="file" src="cocoon://content/includes/template/header.html"/>
-            <map:generate type="file" src="cocoon://content/includes/template/navigation.html"/>
-            <map:generate type="file" src="cocoon://content/includes/template/search-container.html"/>
-         </map:aggregate>
-         <map:transform type="saxon" src="classpath:/xsl/laneweb.xsl"/>
-         <map:transform type="saxon" src="classpath:/xsl/libapps/headers.xsl"/>
-         <map:serialize type="html5"/>
-      </map:match>
-      
-      <!-- Footer and navigation to display in https://laneguides.stanford.edu and lanecal.stanford.edu -->
+<map:sitemap xmlns:map="http://lane.stanford.edu/irt-cocoon/sitemap/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://lane.stanford.edu/irt-cocoon/sitemap/1.0 http://lane.stanford.edu/xsd/irt-cocoon-sitemap-1.0.xsd">
+
+    <map:pipeline type="noncaching">
+        <map:match pattern="resource-outage.html" type="wildcard">
+            <map:generate type="file" src="https://lanestanford.libanswers.com/rss?m=statusposts&amp;iid=3193" />
+            <map:transform type="saxon" src="classpath:/xsl/libapps/rss-resource-outages.xsl" />
+            <map:serialize type="html5" />
+        </map:match>
+    </map:pipeline>
+    <map:pipeline type="caching">
+
+        <!-- ********* navigation headers for libcal and libguide ********** -->
+
+        <map:match pattern="headers.html" type="wildcard">
+            <map:aggregate type="default" element="doc">
+                <map:generate type="file" src="cocoon://content/includes/template/header.html" />
+                <map:generate type="file" src="cocoon://content/includes/template/navigation.html" />
+                <map:generate type="file" src="cocoon://content/includes/template/search-container.html" />
+            </map:aggregate>
+            <map:transform type="saxon" src="classpath:/xsl/laneweb.xsl" />
+            <map:transform type="saxon" src="classpath:/xsl/libapps/headers.xsl" />
+            <map:serialize type="html5" />
+        </map:match>
+
+        <!-- Footer and navigation to display in https://laneguides.stanford.edu and lanecal.stanford.edu -->
         <map:match pattern="includes/template/footer.html" type="regexp">
-         <map:generate type="file" src="cocoon://content/{0}"/>
-         <map:transform type="saxon" src="classpath:/xsl/libapps/lane-links.xsl"/>
-         <map:transform type="namespace-filter"/>
-         <map:serialize type="html5"/>
-      </map:match>     
-     
-     
-     <!-- To generate the guide page /help/guides/index.html -->
-     
-     <map:match pattern="all-guides" type="regexp">
-        <map:generate type="file" src="cache:60:https://lgapi-us.libapps.com/widgets.php?site_id=18925&amp;widget_type=1&amp;search_terms=&amp;search_match=2&amp;sort_by=name&amp;list_format=1&amp;drop_text=Select+a+Guide...&amp;output_format=1&amp;load_type=2&amp;enable_description=1&amp;enable_group_search_limit=0&amp;enable_subject_search_limit=0&amp;guide_types[0]=1&amp;guide_types[1]=4&amp;guide_types[2]=3&amp;widget_embed_type=2&amp;num_results=0&amp;enable_more_results=0&amp;window_target=2&amp;config_id=1652467900068"/>
-        <map:transform type="saxon" src="classpath:/xsl/libapps/libguide.xsl">
-            <map:parameter name="type" value="all"/>
-        </map:transform>
-        <map:serialize type="html5"/>
-     </map:match>
-     
-     <map:match pattern="research-guide" type="wildcard">
-           <map:generate type="file" src="cache:60:https://lgapi-us.libapps.com/widgets.php?site_id=18925&amp;widget_type=1&amp;search_terms=&amp;search_match=2&amp;sort_by=name&amp;list_format=1&amp;drop_text=Select+a+Guide...&amp;output_format=1&amp;load_type=2&amp;enable_description=1&amp;enable_group_search_limit=0&amp;enable_subject_search_limit=0&amp;guide_types=4&amp;widget_embed_type=2&amp;num_results=0&amp;enable_more_results=0&amp;window_target=2&amp;config_id=1651797474964"/>
-            <map:transform type="saxon" src="classpath:/xsl/libapps/libguide.xsl">
-                <map:parameter name="type" value="research"/>
-            </map:transform>
-           <map:serialize type="html5"/>
+            <map:generate type="file" src="cocoon://content/{0}" />
+            <map:transform type="saxon" src="classpath:/xsl/libapps/lane-links.xsl" />
+            <map:transform type="namespace-filter" />
+            <map:serialize type="html5" />
         </map:match>
-      <map:match pattern="event-guide" type="wildcard">
-           <map:generate type="file" src="cache:60:https://lgapi-us.libapps.com/widgets.php?site_id=18925&amp;widget_type=1&amp;search_terms=&amp;search_match=2&amp;sort_by=name&amp;list_format=1&amp;drop_text=Select+a+Guide...&amp;output_format=1&amp;load_type=2&amp;enable_description=1&amp;enable_group_search_limit=0&amp;enable_subject_search_limit=0&amp;guide_types=1&amp;widget_embed_type=2&amp;num_results=0&amp;enable_more_results=0&amp;window_target=2&amp;config_id=1651797474964"/>
+
+
+        <!-- To generate the guide page /help/guides/index.html -->
+
+        <map:match pattern="all-guides" type="regexp">
+            <map:generate type="file" src="cache:60:https://lgapi-us.libapps.com/widgets.php?site_id=18925&amp;widget_type=1&amp;search_terms=&amp;search_match=2&amp;sort_by=name&amp;list_format=1&amp;drop_text=Select+a+Guide...&amp;output_format=1&amp;load_type=2&amp;enable_description=1&amp;enable_group_search_limit=0&amp;enable_subject_search_limit=0&amp;guide_types[0]=1&amp;guide_types[1]=4&amp;guide_types[2]=3&amp;widget_embed_type=2&amp;num_results=0&amp;enable_more_results=0&amp;window_target=2&amp;config_id=1652467900068" />
             <map:transform type="saxon" src="classpath:/xsl/libapps/libguide.xsl">
-                <map:parameter name="type" value="event"/>
+                <map:parameter name="type" value="all" />
             </map:transform>
-           <map:serialize type="html5"/>
+            <map:serialize type="html5" />
         </map:match>
-         <map:match pattern="speciality-guide" type="wildcard">
-           <map:generate type="file" src="cache:60:https://lgapi-us.libapps.com/widgets.php?site_id=18925&amp;widget_type=1&amp;search_terms=&amp;search_match=2&amp;sort_by=name&amp;list_format=1&amp;drop_text=Select+a+Guide...&amp;output_format=1&amp;load_type=2&amp;enable_description=1&amp;enable_group_search_limit=0&amp;enable_subject_search_limit=0&amp;guide_types=3&amp;widget_embed_type=2&amp;num_results=0&amp;enable_more_results=0&amp;window_target=2&amp;config_id=1651797474964"/>
+
+        <map:match pattern="research-guide" type="wildcard">
+            <map:generate type="file" src="cache:60:https://lgapi-us.libapps.com/widgets.php?site_id=18925&amp;widget_type=1&amp;search_terms=&amp;search_match=2&amp;sort_by=name&amp;list_format=1&amp;drop_text=Select+a+Guide...&amp;output_format=1&amp;load_type=2&amp;enable_description=1&amp;enable_group_search_limit=0&amp;enable_subject_search_limit=0&amp;guide_types=4&amp;widget_embed_type=2&amp;num_results=0&amp;enable_more_results=0&amp;window_target=2&amp;config_id=1651797474964" />
             <map:transform type="saxon" src="classpath:/xsl/libapps/libguide.xsl">
-                <map:parameter name="type" value="speciality"/>
+                <map:parameter name="type" value="research" />
             </map:transform>
-           <map:serialize type="html5"/>
+            <map:serialize type="html5" />
         </map:match>
-   </map:pipeline>
-     
+        <map:match pattern="event-guide" type="wildcard">
+            <map:generate type="file" src="cache:60:https://lgapi-us.libapps.com/widgets.php?site_id=18925&amp;widget_type=1&amp;search_terms=&amp;search_match=2&amp;sort_by=name&amp;list_format=1&amp;drop_text=Select+a+Guide...&amp;output_format=1&amp;load_type=2&amp;enable_description=1&amp;enable_group_search_limit=0&amp;enable_subject_search_limit=0&amp;guide_types=1&amp;widget_embed_type=2&amp;num_results=0&amp;enable_more_results=0&amp;window_target=2&amp;config_id=1651797474964" />
+            <map:transform type="saxon" src="classpath:/xsl/libapps/libguide.xsl">
+                <map:parameter name="type" value="event" />
+            </map:transform>
+            <map:serialize type="html5" />
+        </map:match>
+        <map:match pattern="speciality-guide" type="wildcard">
+            <map:generate type="file" src="cache:60:https://lgapi-us.libapps.com/widgets.php?site_id=18925&amp;widget_type=1&amp;search_terms=&amp;search_match=2&amp;sort_by=name&amp;list_format=1&amp;drop_text=Select+a+Guide...&amp;output_format=1&amp;load_type=2&amp;enable_description=1&amp;enable_group_search_limit=0&amp;enable_subject_search_limit=0&amp;guide_types=3&amp;widget_embed_type=2&amp;num_results=0&amp;enable_more_results=0&amp;window_target=2&amp;config_id=1651797474964" />
+            <map:transform type="saxon" src="classpath:/xsl/libapps/libguide.xsl">
+                <map:parameter name="type" value="speciality" />
+            </map:transform>
+            <map:serialize type="html5" />
+        </map:match>
+    </map:pipeline>
+
 </map:sitemap>

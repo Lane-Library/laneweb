@@ -19,13 +19,13 @@ describe('Bassett Pagination', () => {
     it('check set page input to 8', () => {
         cy.intercept('get', '/biomed-resources/bassett/bassettsView.html?r=Head--Brain&page=8')
             .as('nextResult');
-        cy.get('input[name=page]').first().type('{backspace}').type('8').type('{enter}');
+        cy.get('input[name=page]').last().type('{backspace}').type('8').type('{enter}');
         cy.wait('@nextResult');
         cy.get('input[name=page]').should('have.value', '8');
     });
 
     it('check error message if the page input greatest than the page limit', () => {
-        cy.get('input[name=page]').first().type('{backspace}').type('18').type('{enter}');
-        cy.get('.bassett-error').first().should('have.text', 'ERROR: page out of range');
+        cy.get('input[name=page]').last().type('{backspace}').type('18').type('{enter}');
+        cy.get('.bassett-error').last().should('have.text', 'ERROR: page out of range');
     });
 });
