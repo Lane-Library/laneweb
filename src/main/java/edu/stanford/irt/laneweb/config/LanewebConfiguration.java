@@ -15,7 +15,6 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.Scope;
 import org.springframework.oxm.Marshaller;
 import org.springframework.oxm.xstream.XStreamMarshaller;
-import org.springframework.retry.annotation.EnableRetry;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -26,9 +25,10 @@ import edu.stanford.irt.laneweb.cocoon.CacheFactoryBean;
 import edu.stanford.irt.laneweb.model.Model;
 import jakarta.servlet.ServletContext;
 
-@Configuration @ImportResource({ "classpath:/spring/applications.xmap", "classpath:/spring/bookmarks.xmap",
+@Configuration
+@ImportResource({ "classpath:/spring/applications.xmap", "classpath:/spring/bookmarks.xmap",
         "classpath:/spring/libcals.xmap", "classpath:/spring/content.xmap", "classpath:/spring/eresources.xmap",
-        "classpath:/spring/libguides.xmap", "classpath:/spring/sitemap.xmap" }) @EnableRetry
+        "classpath:/spring/libguides.xmap", "classpath:/spring/sitemap.xmap" })
 public class LanewebConfiguration {
 
     private Map<String, Object> constants;
@@ -78,7 +78,8 @@ public class LanewebConfiguration {
         return marshaller;
     }
 
-    @Bean(name = "edu.stanford.irt.cocoon.Model") @Scope("request")
+    @Bean(name = "edu.stanford.irt.cocoon.Model")
+    @Scope("request")
     Map<String, Object> model() {
         return new HashMap<>(this.constants);
     }

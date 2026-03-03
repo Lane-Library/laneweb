@@ -7,7 +7,7 @@ import java.net.URI;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.retry.annotation.Retryable;
+import org.springframework.resilience.annotation.Retryable;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
 
@@ -25,7 +25,7 @@ public class OauthRESTService {
         this.oauthTokenService = oauthTokenService;
     }
 
-    @Retryable(retryFor = { RESTException.class }, maxAttempts = 2)
+    @Retryable(maxRetries = 2, value = { RESTException.class })
     public InputStream getInputStream(final URI uri) throws RESTException {
         String token = this.oauthTokenService.getAccessToken();
         try {
@@ -37,7 +37,7 @@ public class OauthRESTService {
         }
     }
 
-    @Retryable(retryFor = { RESTException.class }, maxAttempts = 2)
+    @Retryable(maxRetries = 2, value = { RESTException.class })
     public <T> T getObject(final URI uri, final Class<T> type) throws RESTException {
         String token = this.oauthTokenService.getAccessToken();
         try {
@@ -49,7 +49,7 @@ public class OauthRESTService {
         }
     }
 
-    @Retryable(retryFor = { RESTException.class }, maxAttempts = 2)
+    @Retryable(maxRetries = 2, value = { RESTException.class })
     public <T> T getObject(final URI uri, final TypeReference<T> type) throws RESTException {
         String token = this.oauthTokenService.getAccessToken();
         try {
@@ -61,7 +61,7 @@ public class OauthRESTService {
         }
     }
 
-    @Retryable(retryFor = { RESTException.class }, maxAttempts = 2)
+    @Retryable(maxRetries = 2, value = { RESTException.class })
     public <T> T postObject(final URI uri, final Object object, final Class<T> responseType) throws RESTException {
         String token = this.oauthTokenService.getAccessToken();
         try {
