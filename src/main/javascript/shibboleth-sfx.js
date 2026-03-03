@@ -23,9 +23,8 @@
     }
 
     function applyShibbolethSfx(doc, win) {
-        const d = doc || (typeof document !== 'undefined' ? document : null);
-        const w = win || (typeof window !== 'undefined' ? window : null);
-        const idpHostPattern = /idp\.stanford|adfs\.stanfordmed|fs\.stanfordchildrens|sch-sts/;
+        const d = doc ?? document;
+        const w = win ?? window;
         if (!d || !w) return;
 
         if (!isInIFrame(w)) return;
@@ -33,12 +32,16 @@
         const container = d.querySelector('#shibboleth-links');
         if (!container) return;
 
+        updateIdpLinks(container);
+    }
+
+    function updateIdpLinks(container) {
+        const idpHostPattern = /idp\.stanford|adfs\.stanfordmed|fs\.stanfordchildrens|sch-sts/;
         container.querySelectorAll('a').forEach(link => {
             if (idpHostPattern.test(link.href)) {
                 link.target = '_blank';
             }
         });
-
     }
 
     applyShibbolethSfx(document, window);
