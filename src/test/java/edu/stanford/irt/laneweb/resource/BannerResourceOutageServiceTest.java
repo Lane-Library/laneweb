@@ -8,7 +8,7 @@ import static org.easymock.EasyMock.same;
 import static org.easymock.EasyMock.verify;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.ByteArrayInputStream;
 import java.net.URI;
@@ -50,13 +50,45 @@ public class BannerResourceOutageServiceTest {
     }
 
     @Test
-    public void testGetHtmlResourceOutagesInvalidJsonReturnsNull() throws Exception {
+    public void testGetHtmlResourceOutagesMissingMainReturnsEmptyStream() throws Exception {
+        String json = "{\"other\":\"value\"}";
+
         URI expected = new URI(BASE_URI.toString() + "?m=statusposts");
-        expect(this.restService.getObject(eq(expected), same(String.class))).andReturn("not-json");
+        expect(this.restService.getObject(eq(expected), same(String.class))).andReturn(json);
         replay(this.restService);
 
-        assertNull(this.service.getHtmlResourceOutages());
+        ByteArrayInputStream inputStream = this.service.getHtmlResourceOutages();
+        assertNotNull(inputStream);
+        assertEquals("", new String(inputStream.readAllBytes(), StandardCharsets.UTF_8));
 
         verify(this.restService);
     }
+
+    @Test
+    public void testGetHtmlResourceOutagesNullJsonReturnsEmptyStream() throws Exception {
+        String json = "null";
+
+        URI expected = new URI(BASE_URI.toString() + "?m=statusposts");
+        expect(this.restService.getObject(eq(expected), same(String.class))).andReturn(json);
+        replay(this.restService);
+        ByteArrayInputStream inputStream = this.service.getHtmlResourceOutages();
+        assertNotNull(inputStream);
+        assertEquals("", new String(inputStream.readAllBytes(), StandardCharsets.UTF_8));
+
+        verify(this.restService);
+    }
+
+    @Test
+    public void testGetHtmlResourceOutagesInvalidJsonThrows() throws Exception {
+        String json = "{not valid json";
+
+        URI expected = new URI(BASE_URI.toString() + "?m=statusposts");
+        expect(this.restService.getObject(eq(expected), same(String.class))).andReturn(json);
+        replay(this.restService);
+
+        assertThrows(RuntimeException.class, () -> this.service.getHtmlResourceOutages());
+
+        verify(this.restService);
+    }
+
 }

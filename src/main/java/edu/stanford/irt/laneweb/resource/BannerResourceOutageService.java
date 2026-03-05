@@ -1,16 +1,13 @@
 package edu.stanford.irt.laneweb.resource;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import edu.stanford.irt.laneweb.LanewebException;
 import edu.stanford.irt.laneweb.rest.RESTService;
+import tools.jackson.databind.json.JsonMapper;
 
 public class BannerResourceOutageService {
 
@@ -29,12 +26,15 @@ public class BannerResourceOutageService {
         try {
             URI libanswerOutageURI = new URI(this.uri.toString().concat(resourceOutageRequest));
             String content = this.restService.getObject(libanswerOutageURI, String.class);
-            ObjectMapper mapper = new ObjectMapper();
+            JsonMapper mapper = new JsonMapper();
 
-            JsonNode json = mapper.readTree(content.getBytes(Charset.forName("UTF-8")));
-            return new ByteArrayInputStream(json.get("main").textValue().getBytes(Charset.forName("UTF-8")));
+            tools.jackson.databind.JsonNode json = mapper.readTree(content);
+            if (json != null && json.get("main") != null) {
+                return new ByteArrayInputStream(json.get("main").stringValue().getBytes(Charset.forName("UTF-8")));
+            }
+            return new ByteArrayInputStream("".getBytes(Charset.forName("UTF-8")));
 
-        } catch (IOException | URISyntaxException e) {
+        } catch (URISyntaxException e) {
             new LanewebException(e);
         }
         return null;

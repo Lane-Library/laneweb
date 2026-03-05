@@ -31,11 +31,6 @@ public class LanewebConfigurationTest {
     }
 
     @Test
-    public void testJCacheManagerFactoryBean() throws URISyntaxException {
-        assertNotNull(this.configuration.jCacheManagerFactoryBean());
-    }
-
-    @Test
     public void testModel() {
         Map<String, Object> model = this.configuration.model();
         assertEquals("version", model.get(Model.VERSION));

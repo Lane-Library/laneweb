@@ -1,14 +1,12 @@
 package edu.stanford.irt.laneweb.config;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cache.jcache.JCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
@@ -21,7 +19,6 @@ import com.thoughtworks.xstream.XStream;
 import edu.stanford.irt.cocoon.sitemap.ComponentFactory;
 import edu.stanford.irt.cocoon.spring.SpringComponentFactory;
 import edu.stanford.irt.laneweb.bookmarks.Bookmark;
-import edu.stanford.irt.laneweb.cocoon.CacheFactoryBean;
 import edu.stanford.irt.laneweb.model.Model;
 import jakarta.servlet.ServletContext;
 
@@ -52,20 +49,8 @@ public class LanewebConfiguration {
     }
 
     @Bean
-    CacheFactoryBean cache() throws URISyntaxException {
-        return new CacheFactoryBean(jCacheManagerFactoryBean().getObject());
-    }
-
-    @Bean
     ComponentFactory componentFactory(BeanFactory beanFactory) {
         return new SpringComponentFactory(beanFactory);
-    }
-
-    @Bean
-    JCacheManagerFactoryBean jCacheManagerFactoryBean() throws URISyntaxException {
-        JCacheManagerFactoryBean factoryBean = new JCacheManagerFactoryBean();
-        factoryBean.setCacheManagerUri(getClass().getResource("/ehcache.xml").toURI());
-        return factoryBean;
     }
 
     @Bean

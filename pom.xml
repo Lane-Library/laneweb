@@ -41,36 +41,34 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>${org.springframework.boot.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
-            <version>${org.springframework.boot.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
-            <version>${org.springframework.boot.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
-            <version>${org.springframework.boot.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <version>${org.springframework.boot.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-restclient-test</artifactId>
-            <version>${org.springframework.boot.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.session</groupId>
             <artifactId>spring-session-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-oxm</artifactId>
         </dependency>
         <dependency>
             <artifactId>commons-codec</artifactId>
@@ -109,36 +107,12 @@
             <artifactId>jakarta.annotation-api</artifactId>
         </dependency>
         <dependency>
-            <artifactId>slf4j-api</artifactId>
-            <groupId>org.slf4j</groupId>
-        </dependency>
-        <dependency>
-            <groupId>net.bull.javamelody</groupId>
-            <artifactId>javamelody-spring-boot4-starter</artifactId>
-            <version>2.6.0</version>
-        </dependency>
-        <dependency>
-            <artifactId>joost</artifactId>
-            <groupId>net.sf.joost</groupId>
-            <scope>runtime</scope>
-            <version>0.9.1</version>
-        </dependency>
-        <dependency>
             <artifactId>nekohtml</artifactId>
             <groupId>net.sourceforge.nekohtml</groupId>
-            <version>1.9.22</version>
         </dependency>
         <dependency>
-            <artifactId>Saxon-HE</artifactId>
-            <groupId>net.sf.saxon</groupId>
-            <scope>runtime</scope>
-            <version>12.9</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>xml-apis</groupId>
-                    <artifactId>xml-apis</artifactId>
-                </exclusion>
-            </exclusions>
+            <artifactId>slf4j-api</artifactId>
+            <groupId>org.slf4j</groupId>
         </dependency>
         <dependency>
             <artifactId>search-core</artifactId>
@@ -166,15 +140,6 @@
             <version>1.2.1</version>
         </dependency>
         <dependency>
-            <artifactId>xstream</artifactId>
-            <groupId>com.thoughtworks.xstream</groupId>
-            <version>1.4.21</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-oxm</artifactId>
-        </dependency>
-        <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>irt-cocoon</artifactId>
             <version>1.14.1</version>
@@ -183,6 +148,44 @@
             <groupId>edu.stanford.irt</groupId>
             <artifactId>irt-cocoon-spring</artifactId>
             <version>1.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>edu.stanford.irt</groupId>
+            <artifactId>coursereserves</artifactId>
+            <version>4.0.3</version>
+        </dependency>
+        <dependency>
+            <groupId>edu.stanford.irt</groupId>
+            <artifactId>status</artifactId>
+            <version>3.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>net.bull.javamelody</groupId>
+            <artifactId>javamelody-spring-boot4-starter</artifactId>
+            <version>2.6.0</version>
+        </dependency>
+        <dependency>
+            <artifactId>joost</artifactId>
+            <groupId>net.sf.joost</groupId>
+            <scope>runtime</scope>
+            <version>0.9.1</version>
+        </dependency>
+        <dependency>
+            <artifactId>Saxon-HE</artifactId>
+            <groupId>net.sf.saxon</groupId>
+            <scope>runtime</scope>
+            <version>12.9</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>xml-apis</groupId>
+                    <artifactId>xml-apis</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <artifactId>xstream</artifactId>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <version>1.4.21</version>
         </dependency>
         <dependency>
             <groupId>xerces</groupId>
@@ -198,16 +201,6 @@
                     <artifactId>xml-apis</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>edu.stanford.irt</groupId>
-            <artifactId>coursereserves</artifactId>
-            <version>4.0.3</version>
-        </dependency>
-        <dependency>
-            <groupId>edu.stanford.irt</groupId>
-            <artifactId>status</artifactId>
-            <version>3.3.0</version>
         </dependency>
         <dependency>
             <groupId>guru.nidi</groupId>
