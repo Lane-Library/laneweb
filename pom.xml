@@ -209,18 +209,6 @@
             <artifactId>ehcache</artifactId>
             <classifier>jakarta</classifier>
             <scope>runtime</scope>
-            <!-- Added exclusion because there was some warning during the mvn package  -->
-            <exclusions>
-                <exclusion>
-                    <groupId>org.glassfish.jaxb</groupId>
-                    <artifactId>jaxb-runtime</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jaxb</groupId>
-            <artifactId>jaxb-runtime</artifactId>
-            <version>4.0.7</version>
         </dependency>
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
