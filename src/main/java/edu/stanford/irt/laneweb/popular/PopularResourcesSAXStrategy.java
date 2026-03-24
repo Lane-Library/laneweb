@@ -3,7 +3,7 @@ package edu.stanford.irt.laneweb.popular;
 import java.util.List;
 import java.util.Map;
 
-import org.glassfish.jaxb.runtime.util.AttributesImpl;
+import org.xml.sax.helpers.AttributesImpl;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.cocoon.xml.XMLConsumer;
