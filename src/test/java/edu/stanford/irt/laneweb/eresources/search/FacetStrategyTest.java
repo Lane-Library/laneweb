@@ -17,7 +17,6 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.TestXMLConsumer;
 import edu.stanford.irt.laneweb.eresources.model.solr.FacetFieldEntry;
-import edu.stanford.irt.laneweb.eresources.model.solr.Field;
 
 public class FacetStrategyTest {
 
@@ -31,14 +30,14 @@ public class FacetStrategyTest {
     public void setUp() {
         solrResult = new HashedMap<String, Collection<FacetFieldEntry>>();
         Collection<FacetFieldEntry> typeResult = new ArrayList<FacetFieldEntry>();
-        Field fieldType = new Field("type");
+        String fieldType = "type";
         typeResult.add(new FacetFieldEntry(fieldType, "index", 10));
-        solrResult.put(fieldType.getName(), typeResult);
+        solrResult.put(fieldType, typeResult);
         Collection<FacetFieldEntry> publicationTypeResult = new ArrayList<FacetFieldEntry>();
-        Field fieldPublicationType = new Field("publicationType");
+        String fieldPublicationType = "publicationType";
         publicationTypeResult.add(new FacetFieldEntry(fieldPublicationType, "requiredIndex", 100));
         publicationTypeResult.add(new FacetFieldEntry(fieldPublicationType, "requiredIndex2", 10));
-        solrResult.put(fieldPublicationType.getName(), publicationTypeResult);
+        solrResult.put(fieldPublicationType, publicationTypeResult);
         Collection<String> facets = Arrays.asList("type", "publicationType", "test");
         this.strategy = new FacetSAXStrategy(facets);
         this.xmlConsumer = new TestXMLConsumer();

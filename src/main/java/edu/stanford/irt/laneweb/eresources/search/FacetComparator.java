@@ -71,7 +71,7 @@ public class FacetComparator implements Comparator<FacetFieldEntry> {
     }
 
     private String getFacetNameAndValue(final FacetFieldEntry facet) {
-        return new StringBuilder(facet.getKey().getName()).append(':').append(facet.getValue()).toString();
+        return new StringBuilder(facet.getFieldName()).append(':').append(facet.getValue()).toString();
     }
 
     private int getPosition(final FacetFieldEntry facet1, final FacetFieldEntry facet2) {

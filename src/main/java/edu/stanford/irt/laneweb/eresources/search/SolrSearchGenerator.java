@@ -110,8 +110,8 @@ public class SolrSearchGenerator extends AbstractSearchGenerator<RestResult<Eres
             solrPage.getHighlighted().stream().forEach((final HighlightEntry<Eresource> hightlight) -> {
                 Eresource er = hightlight.getEntity();
                 hightlight.getHighlights().forEach((final Highlight h) -> {
-                    String field = h.getField().getName();
-                    String highlightedData = h.getSnipplets().get(0);
+                    String field = h.getFieldName();
+                    String highlightedData = h.getSnippets().get(0);
                     if ("title".equals(field)) {
                         er.setTitle(highlightedData);
                     } else if ("description".equals(field)) {

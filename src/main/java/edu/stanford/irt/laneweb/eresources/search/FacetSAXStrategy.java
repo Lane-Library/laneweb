@@ -46,7 +46,7 @@ public class FacetSAXStrategy implements SAXStrategy<Map<String, Collection<Face
 
     private void saxFacet(final FacetFieldEntry facet, final XMLConsumer xmlConsumer) throws SAXException {
         AttributesImpl attributes = new AttributesImpl();
-        attributes.addAttribute(Resource.NAMESPACE, "key", "key", CDATA, facet.getKey().getName());
+        attributes.addAttribute(Resource.NAMESPACE, "key", "key", CDATA, facet.getFieldName());
         attributes.addAttribute(Resource.NAMESPACE, "name", "name", CDATA, facet.getValue());
         attributes.addAttribute(Resource.NAMESPACE, "value", "value", CDATA, String.valueOf(facet.getValueCount()));
         XMLUtils.startElement(xmlConsumer, Resource.NAMESPACE, "facet", attributes);
