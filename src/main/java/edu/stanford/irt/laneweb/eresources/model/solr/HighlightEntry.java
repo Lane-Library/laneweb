@@ -27,7 +27,7 @@ public class HighlightEntry<T> implements Serializable {
         }
 
         /**
-         * @param field
+         * @param fieldName
          *            must not be null
          * @param snippets
          */
@@ -72,7 +72,7 @@ public class HighlightEntry<T> implements Serializable {
     }
 
     /**
-     * @param field
+     * @param fieldName
      * @param snippets
      */
     public void addSnippets(final String fieldName, final List<String> snippets) {
