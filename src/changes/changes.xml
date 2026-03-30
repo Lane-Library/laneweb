@@ -4,6 +4,19 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2026-03-30" version="3.16.8" description="bug fix and update release">
+            <action date="2026-03-24" dev="alainb" issue="LANEWEB-11640" type="update">
+                Remove spring-data-solr library from eresource-service                
+            </action>
+            <action date="2026-03-30" dev="alainb" issue="" type="update">
+                update lane-parent to 193, solr-solrj to 10.0.26, log4j-slf4j-impl to 2.25.3
+            </action>
+        </release>
+        <release date="2026-02-23" version="3.16.7" description="bug fix and update release">
+            <action date="2026-01-23" dev="alainb" issue="LANEWEB-11617" type="fix">
+                Create Resource Outages Webpage
+            </action>
+        </release>
         <release date="2026-01-05" version="3.16.6" description="bug fix and update release">
             <action date="2025-11-18" dev="alainb" issue="LANEWEB-11608" type="fix">
                 HEAD request method return a 200 http code even if page not found

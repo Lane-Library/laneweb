@@ -20,7 +20,6 @@ import edu.stanford.irt.cocoon.xml.SAXStrategy;
 import edu.stanford.irt.laneweb.eresources.EresourceFacetService;
 import edu.stanford.irt.laneweb.eresources.model.solr.FacetFieldEntry;
 import edu.stanford.irt.laneweb.eresources.model.solr.FacetSort;
-import edu.stanford.irt.laneweb.eresources.model.solr.Field;
 import edu.stanford.irt.laneweb.model.Model;
 
 public class SolrSearchFacetsGeneratorTest {
@@ -72,9 +71,9 @@ public class SolrSearchFacetsGeneratorTest {
         this.generator.setFacet(facets);
         this.generator.setModel(model);
 
-        List<FacetFieldEntry> typeFacetList = Arrays.asList(new FacetFieldEntry(new Field("type"), "index", 10));
+        List<FacetFieldEntry> typeFacetList = Arrays.asList(new FacetFieldEntry("type", "index", 10));
         List<FacetFieldEntry> publicationTypeFacetList = Arrays
-                .asList(new FacetFieldEntry(new Field("publicationType"), "Required1", 100));
+                .asList(new FacetFieldEntry("publicationType", "Required1", 100));
 
         expect(this.eresourcesPage.get("type")).andReturn(typeFacetList);
         expect(this.eresourcesPage.get("publicationType")).andReturn(publicationTypeFacetList);

@@ -10,7 +10,6 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.junit.jupiter.api.Test;
-import edu.stanford.irt.laneweb.eresources.model.solr.Field;
 import edu.stanford.irt.laneweb.eresources.model.solr.FacetFieldEntry;
 
 public class FacetComparatorTest {
@@ -26,7 +25,7 @@ public class FacetComparatorTest {
         Set<FacetFieldEntry> set = new TreeSet<>(comparator);
         Iterator<FacetFieldEntry> i;
         // // basic order by count
-        Field fieldName = new Field("fieldName");
+        String fieldName = "fieldName";
         set.add(new FacetFieldEntry(fieldName, "value", 1));
         set.add(new FacetFieldEntry(fieldName, "value", 0));
         i = set.iterator();
@@ -42,7 +41,7 @@ public class FacetComparatorTest {
         set.clear();
         //// // case 110125: Have article type display 3 items at all times (even if
         //// results are 0)
-        Field publicationType = new Field("publicationType");
+        String publicationType = "publicationType";
         set.add(new FacetFieldEntry(fieldName, "foo", 10));
         set.add(new FacetFieldEntry(publicationType, "Req Pub 2", 0));
         set.add(new FacetFieldEntry(publicationType, "Req Pub 3", 0));
@@ -64,7 +63,7 @@ public class FacetComparatorTest {
         assertEquals("foo", i.next().getValue());
 
         set.clear();
-        Field topPriority = new Field("topPriority");
+        String topPriority = "topPriority";
         set.add(new FacetFieldEntry(fieldName, "foo", 100));
         set.add(new FacetFieldEntry(publicationType, "Req Pub 1", 10));
         set.add(new FacetFieldEntry(topPriority, "Number One", 1));
@@ -80,8 +79,8 @@ public class FacetComparatorTest {
         comparator.addTopPrioritiesFromFacets("type:\"Book\"::type:\"Pictorial\"");
         Set<FacetFieldEntry> set = new TreeSet<>(comparator);
         Iterator<FacetFieldEntry> i;
-        Field fieldName = new Field("fieldName");
-        Field fieldType = new Field("type");
+        String fieldName = "fieldName";
+        String fieldType = "type";
         set.add(new FacetFieldEntry(fieldName, "value1", 1));
         set.add(new FacetFieldEntry(fieldName, "value2", 100));
         set.add(new FacetFieldEntry(fieldType, "Pictorial", 10));
@@ -96,7 +95,7 @@ public class FacetComparatorTest {
     @Test
     public final void testException() {
         Set<FacetFieldEntry> set = new TreeSet<>(new FacetComparator(PUB_TYPES));
-        Field fieldName = new Field("fieldName");
+        String fieldName = "fieldName";
         set.add(new FacetFieldEntry(fieldName, "value", 1));
         assertThrows(IllegalArgumentException.class, () -> {
             set.add(null);

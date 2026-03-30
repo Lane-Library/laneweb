@@ -4,8 +4,8 @@
         "build": "node minify-javascript.js"
     },
     "devDependencies": {
-        "jest": "^29.7.0",
-        "jest-environment-jsdom": "^29.7.0",
-        "terser": "5.46.0"
+        "jest": "^30.3.0",
+        "jest-environment-jsdom": "^30.3.0",
+        "terser": "5.46.1"
     }
 }

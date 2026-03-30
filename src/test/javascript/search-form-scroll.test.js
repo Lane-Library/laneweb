@@ -1,3 +1,8 @@
+/**
+ * @jest-environment jsdom
+ * @jest-environment-options {"url": "https://test.com/search.html"}
+ */
+
 require('@/lane.js');
 require('@/util.js');
 
@@ -10,12 +15,6 @@ beforeEach(() => {
       <form id="search">form element required by search-form-scroll.js</form>
     `;
     document.body.appendChild(div);
-
-    // mock window.location.pathname
-    delete window.location;
-    window.location = {
-        pathname: "/search.html"
-    };
 
     // Mock form offsetTop ... jsdom doesn't support element offsets
     // https://github.com/jsdom/jsdom/issues/135

@@ -3,12 +3,12 @@
 
 
     <xsl:template match="/">
-        <xsl:if test="//span[contains( @class, 'label-danger')]">
-            <span>
+        <span>
+            <xsl:if test="//span[contains( @class, 'label-danger')]">
                 <xsl:text>Resource Outages: </xsl:text>
                 <xsl:apply-templates select="//span[contains( @class, 'label-danger')]" />
-            </span>
-        </xsl:if>
+            </xsl:if>
+        </span>
     </xsl:template>
 
 

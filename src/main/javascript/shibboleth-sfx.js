@@ -8,33 +8,47 @@
      * This script detects when the page is in a frame and forces specific IdP
      * links to open in a new tab/window.
      */
-    const shibbolethLinksContainer = document.querySelector('#shibboleth-links');
 
     /**
      * Determine if the current window is inside an iframe.
      * @returns {boolean} True if the page is in a frame, false otherwise.
      */
-    const isInsideFrame = () => {
+    function isInIFrame(win) {
         try {
-            return window.self !== window.top;
+            return !!win && win.self !== win.top;
         } catch (e) {
             // if an error, it likely means we can't access window.top and are in a cross-origin iframe
             return true;
         }
-    };
-
-    // guardian clase to exit early if the link container doesn't exist
-    // or if it does exist but we're not inside a frame
-    if (!shibbolethLinksContainer || !isInsideFrame()) {
-        return;
     }
 
-    const idpHostPattern = /idp\.stanford|adfs\.stanfordmed|fs\.stanfordchildrens|sch-sts/;
+    function applyShibbolethSfx(doc, win) {
+        const d = doc ?? document;
+        const w = win ?? window;
+        if (!d || !w) return;
 
-    shibbolethLinksContainer.querySelectorAll('a').forEach(link => {
-        if (idpHostPattern.test(link.href)) {
-            link.target = '_blank';
-        }
-    });
+        if (!isInIFrame(w)) return;
+
+        const container = d.querySelector('#shibboleth-links');
+        if (!container) return;
+
+        updateIdpLinks(container);
+    }
+
+    function updateIdpLinks(container) {
+        const idpHostPattern = /idp\.stanford|adfs\.stanfordmed|fs\.stanfordchildrens|sch-sts/;
+        container.querySelectorAll('a').forEach(link => {
+            if (idpHostPattern.test(link.href)) {
+                link.target = '_blank';
+            }
+        });
+    }
+
+    applyShibbolethSfx(document, window);
+
+    // Expose for Jest testing (Node/CommonJS only)
+    if (typeof module !== 'undefined' && module.exports) {
+        module.exports = { applyShibbolethSfx, isInIFrame };
+    }
 
 })();

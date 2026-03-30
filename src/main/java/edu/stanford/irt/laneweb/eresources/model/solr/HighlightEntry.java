@@ -11,48 +11,44 @@ import org.springframework.util.Assert;
 public class HighlightEntry<T> implements Serializable {
 
     /**
-     * Highlight holds reference to the field highlighting was applied to, as well as the snipplets
+     * Highlight holds reference to the field highlighting was applied to, as well as the snippets
      *
      * @author Christoph Strobl
      */
     public static class Highlight {
 
-        private final Field field;
+        private final String fieldName;
 
-        private final List<String> snipplets;
+        private final List<String> snippets;
 
         Highlight() {
-            this.field = null;
-            this.snipplets = null;
+            this.fieldName = null;
+            this.snippets = null;
         }
 
         /**
-         * @param field
+         * @param fieldName
          *            must not be null
-         * @param snipplets
+         * @param snippets
          */
-        Highlight(final Field field, @Nullable final List<String> snipplets) {
-            Assert.notNull(field, "Field must not be null!");
-            this.field = field;
-            this.snipplets = snipplets != null ? snipplets : Collections.emptyList();
-        }
-
-        Highlight(final String fieldname, final List<String> snipplets) {
-            this(new Field(fieldname), snipplets);
+        Highlight(final String fieldName, @Nullable final List<String> snippets) {
+            Assert.notNull(fieldName, "fieldName must not be null!");
+            this.fieldName = fieldName;
+            this.snippets = snippets != null ? snippets : Collections.emptyList();
         }
 
         /**
          * @return
          */
-        public Field getField() {
-            return this.field;
+        public String getFieldName() {
+            return this.fieldName;
         }
 
         /**
          * @return empty list none available
          */
-        public List<String> getSnipplets() {
-            return this.snipplets;
+        public List<String> getSnippets() {
+            return this.snippets;
         }
     }
 
@@ -76,19 +72,11 @@ public class HighlightEntry<T> implements Serializable {
     }
 
     /**
-     * @param field
-     * @param snipplets
+     * @param fieldName
+     * @param snippets
      */
-    public void addSnipplets(final Field field, final List<String> snipplets) {
-        this.highlights.add(new Highlight(field, snipplets));
-    }
-
-    /**
-     * @param fieldname
-     * @param snipplets
-     */
-    public void addSnipplets(final String fieldname, final List<String> snipplets) {
-        addSnipplets(new Field(fieldname), snipplets);
+    public void addSnippets(final String fieldName, final List<String> snippets) {
+        this.highlights.add(new Highlight(fieldName, snippets));
     }
 
     /**

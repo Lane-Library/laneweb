@@ -2,13 +2,11 @@ package edu.stanford.irt.laneweb.eresources.model.solr;
 
 import java.io.Serializable;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 public class FacetFieldEntry implements Serializable {
 
     private static final long serialVersionUID = 5119677721013317629L;
 
-    private Field field;
+    private String fieldName;
 
     private String value;
 
@@ -19,19 +17,14 @@ public class FacetFieldEntry implements Serializable {
         this.valueCount = 0;
     }
 
-    public FacetFieldEntry(final Field field, final String value, final int count) {
+    public FacetFieldEntry(final String fieldName, final String value, final int count) {
+        this.fieldName = fieldName;
         this.value = value;
         this.valueCount = count;
-        setField(field);
     }
 
-    public Field getField() {
-        return this.field;
-    }
-
-    @JsonIgnore
-    public Field getKey() {
-        return getField();
+    public String getFieldName() {
+        return this.fieldName;
     }
 
     public String getValue() {
@@ -42,8 +35,8 @@ public class FacetFieldEntry implements Serializable {
         return this.valueCount;
     }
 
-    public void setField(final Field field) {
-        this.field = field;
+    public void setFieldName(final String fieldName) {
+        this.fieldName = fieldName;
     }
 
     public void setValue(final String value) {

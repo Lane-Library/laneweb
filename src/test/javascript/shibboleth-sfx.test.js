@@ -1,5 +1,6 @@
 describe('Shibboleth/SFX', () => {
-    let html, document = window.document;
+    let html;
+    const document = window.document;
 
     beforeEach(() => {
         jest.resetModules();
@@ -16,12 +17,12 @@ describe('Shibboleth/SFX', () => {
     });
 
     it('should set target="_blank" for matching links when in an iframe', () => {
+        jest.isolateModules(() => {
+            const { applyShibbolethSfx } = require('@/shibboleth-sfx.js');
 
-        // Mock window.self and window.top to simulate iframe
-        Object.defineProperty(window, 'self', { value: 1 });
-        Object.defineProperty(window, 'top', { value: 2 });
-
-        require('@/shibboleth-sfx.js');
+            // Simulate iframe: self !== top
+            applyShibbolethSfx(document, { self: {}, top: {} });
+        });
 
         const links = document.querySelectorAll('#shibboleth-links a');
         expect(links[0].target).toBe('_blank');
@@ -31,18 +32,16 @@ describe('Shibboleth/SFX', () => {
     });
 
     it('should not set target="_blank" for matching links when not in an iframe', () => {
+        jest.isolateModules(() => {
+            const { applyShibbolethSfx } = require('@/shibboleth-sfx.js');
 
-        // set self and top properties to be equal to simulate not being in an iframe
-        Object.defineProperty(window, 'self', { value: null });
-        Object.defineProperty(window, 'top', { value: null });
-
-        require('@/shibboleth-sfx.js');
+            // Not in iframe: self === top
+            const same = {};
+            applyShibbolethSfx(document, { self: same, top: same });
+        });
 
         document.querySelectorAll('#shibboleth-links a').forEach(link => {
             expect(link.target).toBe('');
         });
-
     });
-
 });
-
